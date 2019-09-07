@@ -954,8 +954,17 @@ namespace Palatium.Menú
             llenarArregloMaximo();
             ingresaBoton(btnFacturasSri);
 
-            Facturacion_Electronica.frmSincronizarFacturas facturas = new Facturacion_Electronica.frmSincronizarFacturas("01");
-            facturas.ShowDialog();
+            if (Program.iPuedeCobrar == 1)
+            {
+                Facturacion_Electronica.frmSincronizarFacturas facturas = new Facturacion_Electronica.frmSincronizarFacturas("01");
+                facturas.ShowDialog();
+            }
+
+            else
+            {
+                ok.LblMensaje.Text = "No tiene permisos para ingresar en esta opción.";
+                ok.ShowDialog();
+            }
         }
 
         private void btnReabrirCaja_Click(object sender, EventArgs e)
