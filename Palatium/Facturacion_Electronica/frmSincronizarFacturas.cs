@@ -558,12 +558,12 @@ namespace Palatium.Facturacion_Electronica
 
                 if (chkEnviarCorreos.Checked == false)
                 {
-                    sSql += "and F.autorizacion is null" + Environment.NewLine;
+                    sSql += "and isnull(F.autorizacion, '') = ''" + Environment.NewLine;
                 }
 
                 else
                 {
-                    sSql += "and F.autorizacion is not null" + Environment.NewLine;
+                    sSql += "and isnull(F.autorizacion, '') <> ''" + Environment.NewLine;
                 }
 
                 sSql += "and F.id_tipo_emision = " + sIdTipoEmision + Environment.NewLine;
@@ -735,7 +735,7 @@ namespace Palatium.Facturacion_Electronica
         {
             try
             {
-                generar.GSub_GenerarFacturaXML(iIdFactura_P, 1, sIdTipoAmbiente, sIdTipoEmision, sDirGenerados, "FACTURA", 2, sCorreoConsumidorFinal, sCorreoAmbientePruebas);
+                generar.GSub_GenerarFacturaXML(iIdFactura_P, 1, sIdTipoEmision, sIdTipoAmbiente, sDirGenerados, "FACTURA", 2, sCorreoConsumidorFinal, sCorreoAmbientePruebas);
                 return true;
             }
 
@@ -957,7 +957,7 @@ namespace Palatium.Facturacion_Electronica
         {
             try
             {
-                if (sFecha_P != "")
+                if ((sFecha_P != "") && (sNumeroAutorizacion_P != ""))
                 {
                     //SE INICIA UNA TRANSACCION
                     if (!conexion.GFun_Lo_Maneja_Transaccion(Program.G_INICIA_TRANSACCION))
@@ -1044,14 +1044,16 @@ namespace Palatium.Facturacion_Electronica
 
                 else
                 {
+                    //conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION);
                     ok.LblMensaje.Text = "No ha ingresado el nombre del archivo autorizado";
-                    ok.ShowDialog();
+                    ok.ShowDialog();                    
                     return false;
                 }
             }
 
             catch (Exception ex)
             {
+                conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION);
                 catchMensaje.LblMensaje.Text = ex.ToString();
                 catchMensaje.ShowDialog();
                 return false;
@@ -1449,6 +1451,8 @@ namespace Palatium.Facturacion_Electronica
                                         dgvDatos.Rows[i].Cells["colEstado"].Style.BackColor = Color.Red;
                                         goto retorna;
                                     }
+
+                                    dgvDatos.Rows[i].Cells["colMarca"].Value = false;
                                 }
 
                             retorna: { }

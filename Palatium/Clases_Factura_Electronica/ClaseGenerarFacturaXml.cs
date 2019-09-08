@@ -720,22 +720,22 @@ namespace Palatium.Clases_Factura_Electronica
                     goto reversa;
                 }
 
-                if (P_St_Tipo_Ambiente == "2")
-                {
-                    sSql = "";
-                    sSql = sSql + "update cel_contingencia set" + Environment.NewLine;
-                    sSql = sSql + "usado = 1" + Environment.NewLine;
-                    sSql = sSql + "where id_contingencia = " + lIdContingencia;
+                //if (P_St_Tipo_Ambiente == "2")
+                //{
+                //    sSql = "";
+                //    sSql = sSql + "update cel_contingencia set" + Environment.NewLine;
+                //    sSql = sSql + "usado = 1" + Environment.NewLine;
+                //    sSql = sSql + "where id_contingencia = " + lIdContingencia;
 
-                    //EJECUTA INSTRUCCIÓN SQL
-                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                    {
-                        ok.LblMensaje.Text = "No se pudo grabar el registro de contingencia como ocupado.";
-                        ok.ShowInTaskbar = false;
-                        ok.ShowDialog();
-                        goto reversa;
-                    }
-                }
+                //    //EJECUTA INSTRUCCIÓN SQL
+                //    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                //    {
+                //        ok.LblMensaje.Text = "No se pudo grabar el registro de contingencia como ocupado.";
+                //        ok.ShowInTaskbar = false;
+                //        ok.ShowDialog();
+                //        goto reversa;
+                //    }
+                //}
 
                 //EJECUTA EL COMMIT SI NO HUBO INCONVENIENTES AL INSERTAR EN LA BASE DE DATOS
                 conexion.GFun_Lo_Maneja_Transaccion(Program.G_TERMINA_TRANSACCION);
@@ -1133,7 +1133,8 @@ namespace Palatium.Clases_Factura_Electronica
 
                                 //T_dValorNeto = (T_dValorUnidad - T_dDescuento) * T_dCantidad;
                                 T_dValorNeto = (T_dValorUnidad - T_dDescuento);
-                                T_sPrecioTotalSinImpuesto = T_dValorNeto.ToString("N2");
+                                //T_sPrecioTotalSinImpuesto = T_dValorNeto.ToString("N2");
+                                T_sPrecioTotalSinImpuesto = (T_dCantidad * T_dValorNeto).ToString("N2");
 
                                 detalle.Add(new XElement("precioTotalSinImpuesto", T_sPrecioTotalSinImpuesto));
 

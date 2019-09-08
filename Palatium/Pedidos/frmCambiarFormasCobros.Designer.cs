@@ -318,6 +318,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmCambiarFormasCobros";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Módulo par Cambiar las Formas de Cobros";
             this.Load += new System.EventHandler(this.frmCambiarFormasCobros_Load);

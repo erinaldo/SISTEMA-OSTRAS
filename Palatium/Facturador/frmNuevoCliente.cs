@@ -327,50 +327,39 @@ namespace Palatium.Facturador
                     goto fin;
                 }
 
-                if (chkPasaporte.Checked == false)
+                if (txtIdentificacion.Text.Trim().Length == 13)
                 {
-                    if (txtIdentificacion.Text.Length == 10)
+                    int iTercero = Convert.ToInt32(txtIdentificacion.Text.Trim().Substring(2, 1));
+
+                    iIdTipoIdentificacion = 179;
+
+                    if (iTercero == 9)
+                    {
+                        iIdTipoPersona = 2448;
+                    }
+
+                    else if (iTercero == 6)
+                    {
+                        iIdTipoPersona = 2448;
+                    }
+
+                    else if (iTercero < 6)
                     {
                         iIdTipoPersona = 2447;
-                        iIdTipoIdentificacion = 178;
                     }
+                }
 
-                    else if (txtIdentificacion.Text.Length == 13)
-                    {
-                        iTercerDigito = Convert.ToInt32(txtIdentificacion.Text.Substring(2, 1));
-
-                        if (iTercerDigito == 9)
-                        {
-                            iIdTipoPersona = 2448;
-                            iIdTipoIdentificacion = 179;
-                        }
-
-                        else if (iTercerDigito == 6)
-                        {
-                            iIdTipoPersona = 2448;
-                            iIdTipoIdentificacion = 179;
-                        }
-
-                        else if ((iTercerDigito >= 0) || (iTercerDigito <= 5))
-                        {
-                            iIdTipoPersona = 2447;
-                            iIdTipoIdentificacion = 178;
-                        }
-
-                        else
-                        {
-                            iIdTipoPersona = 2447;
-                            iIdTipoIdentificacion = 180;
-                        }
-                    }
+                else if (txtIdentificacion.Text.Trim().Length == 10)
+                {
+                    iIdTipoIdentificacion = 178;
+                    iIdTipoPersona = 2447;
                 }
 
                 else
                 {
-                    iIdTipoPersona = 2447;
                     iIdTipoIdentificacion = 180;
+                    iIdTipoPersona = 2447;
                 }
-
 
                 //INSTRUCCION PARA INSERTAR UN NUEVO CLIENTE EN  LA TABLA TP_PERSONAS
                 sSql = "";
@@ -512,6 +501,40 @@ namespace Palatium.Facturador
                     ok.LblMensaje.Text = "Error al abrir transacción,";
                     ok.ShowDialog();
                     goto fin;
+                }
+
+                if (txtIdentificacion.Text.Trim().Length == 13)
+                {
+                    int iTercero = Convert.ToInt32(txtIdentificacion.Text.Trim().Substring(2, 1));
+
+                    iIdTipoIdentificacion = 179;
+
+                    if (iTercero == 9)
+                    {
+                        iIdTipoPersona = 2448;
+                    }
+
+                    else if (iTercero == 6)
+                    {
+                        iIdTipoPersona = 2448;
+                    }
+
+                    else if (iTercero < 6)
+                    {
+                        iIdTipoPersona = 2447;
+                    }
+                }
+
+                else if (txtIdentificacion.Text.Trim().Length == 10)
+                {
+                    iIdTipoIdentificacion = 178;
+                    iIdTipoPersona = 2447;
+                }
+
+                else
+                {
+                    iIdTipoIdentificacion = 180;
+                    iIdTipoPersona = 2447;
                 }
 
                 //INSTRUCCION PARA ACTUALIZAR LA TABLA TP_PERSONAS
