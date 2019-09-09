@@ -521,5 +521,40 @@ namespace Palatium.Clases
                 catchMensaje.ShowDialog();
             }
         }
+
+        //OBTENER EL IDENTIFICADOR CG_LOCALIDAD
+        public void obtenerCgLocalidad()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select cg_localidad" + Environment.NewLine;
+                sSql += "from tp_localidades" + Environment.NewLine;
+                sSql += "where id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and estado = 'A'" + Environment.NewLine;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    Program.iCgLocalidadRecuperado = Convert.ToInt32(dtConsulta.Rows[0]["cg_localidad"].ToString());
+                }
+
+                else
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+            }
+        }
     }
 }

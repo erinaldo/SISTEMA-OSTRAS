@@ -88,6 +88,7 @@ namespace Palatium
 
                     parametros.cargarDatosImpresion();
                     parametros.cargarDatosEmpresa();
+                    parametros.obtenerCgLocalidad();
                     monedas.llenarMonedas();
 
                     redimension.extraerPixelado();
@@ -327,6 +328,7 @@ namespace Palatium
         public static int iIdPersona;
         public static int iIdLocalidad;
         public static int iCgMotivoDespacho;
+        public static int iCgLocalidadRecuperado;
         public static string sPuntoPartida = "Matriz Quito";
         public static int iCgCiudadEntrega = 0;
         public static string sDireccionEntrega = "Matriz Quito";

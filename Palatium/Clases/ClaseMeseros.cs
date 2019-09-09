@@ -68,18 +68,19 @@ namespace Palatium.Clases
 
         }
 
-        public string ventasMesero( string sFecha)
+        public string ventasMesero(string sFecha_P, int iIdLocalidad_P)
         {
             try
             {
                 dSuma = 0;
 
                 sSql = "";
-                sSql = sSql + "select mesero, ltrim(str(sum(cantidad * (precio_unitario - valor_dscto + valor_iva + valor_otro)), 10,2)) suma" + Environment.NewLine;
-                sSql = sSql + "from pos_vw_factura" + Environment.NewLine;
-                sSql = sSql + "where fecha_factura = '" + sFecha + "'" + Environment.NewLine;
-                sSql = sSql + "and id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
-                sSql = sSql + "group by mesero" + Environment.NewLine;
+                sSql += "select mesero, ltrim(str(sum(cantidad * (precio_unitario - valor_dscto + valor_iva + valor_otro)), 10,2)) suma" + Environment.NewLine;
+                sSql += "from pos_vw_factura" + Environment.NewLine;
+                sSql += "where fecha_factura = '" + sFecha_P + "'" + Environment.NewLine;
+                sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                sSql += "and id_localidad = " + iIdLocalidad_P + Environment.NewLine;
+                sSql += "group by mesero" + Environment.NewLine;
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -108,7 +109,7 @@ namespace Palatium.Clases
                         sTexto = sTexto + "".PadRight(40, '=') + Environment.NewLine;
                         sTexto = sTexto + "".PadLeft(12, ' ') + "VENTAS POR MESERO" + Environment.NewLine + Environment.NewLine;
                        
-                        sTexto = sTexto + "Fecha  : " + sFecha + Environment.NewLine + Environment.NewLine;
+                        sTexto = sTexto + "Fecha  : " + sFecha_P + Environment.NewLine + Environment.NewLine;
 
                         sTexto = sTexto + "".PadRight(40, '-') + Environment.NewLine;
                         sTexto = sTexto + "MESERO".PadRight(30, ' ') + "  VALOR" + Environment.NewLine;

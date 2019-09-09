@@ -19,13 +19,14 @@ namespace Palatium.Oficina
         string sSql;
         bool bRespuesta = false;
 
-        int iOp;
+        int iIdLocalidad;
         string sFecha;
         Double dSuma;
 
-        public frmVentasPorMesero(string sFecha)
+        public frmVentasPorMesero(string sFecha, int iIdLocalidad_P)
         {   
             this.sFecha = sFecha;
+            this.iIdLocalidad = iIdLocalidad_P;
             InitializeComponent();
         }
 
@@ -38,12 +39,13 @@ namespace Palatium.Oficina
                 dSuma = 0;
 
                 sSql = "";
-                sSql = sSql + "select mesero MESERO, " + Environment.NewLine;
-                sSql = sSql + "ltrim(str(sum(cantidad * (precio_unitario - valor_dscto + valor_iva + valor_otro)), 10,2)) TOTAL" + Environment.NewLine;
-                sSql = sSql + "from pos_vw_factura" + Environment.NewLine;
-                sSql = sSql + "where fecha_factura = '" + sFecha + "'" + Environment.NewLine;
-                sSql = sSql + "and id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
-                sSql = sSql + "group by mesero" + Environment.NewLine;
+                sSql += "select mesero MESERO, " + Environment.NewLine;
+                sSql += "ltrim(str(sum(cantidad * (precio_unitario - valor_dscto + valor_iva + valor_otro)), 10,2)) TOTAL" + Environment.NewLine;
+                sSql += "from pos_vw_factura" + Environment.NewLine;
+                sSql += "where fecha_factura = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                sSql += "and id_localidad = " + iIdLocalidad + Environment.NewLine;
+                sSql += "group by mesero" + Environment.NewLine;
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -95,7 +97,7 @@ namespace Palatium.Oficina
 
             else
             {
-                ReportesTextbox.frmVentasMesero mesero = new ReportesTextbox.frmVentasMesero(sFecha, 1);
+                ReportesTextbox.frmVentasMesero mesero = new ReportesTextbox.frmVentasMesero(sFecha, 1, iIdLocalidad);
                 mesero.ShowDialog();
             }
         }

@@ -25,8 +25,12 @@ namespace Palatium.ReportesTextBox
         DataTable dtConsulta;
         DataTable dtImprimir;
 
+        Decimal dbAhorroEmergencia;
+
         string sFecha;
         string sRetorno;
+
+        int iIdLocalidad;
         int iCerrar;
         int iCortarPapel;
         int iAbrirCajon;
@@ -38,10 +42,12 @@ namespace Palatium.ReportesTextBox
         string sIpImpresora;
         string sDescripcionImpresora;
 
-        public frmReporteVendido(string sFecha, int iCerrar)
+        public frmReporteVendido(string sFecha, int iCerrar, int iIdLocalidad_P, Decimal dbAhorroEmergencia_P)
         {
             this.sFecha = sFecha;
             this.iCerrar = iCerrar;
+            this.iIdLocalidad = iIdLocalidad_P;
+            this.dbAhorroEmergencia = dbAhorroEmergencia_P;
             InitializeComponent();
         }
 
@@ -113,7 +119,7 @@ namespace Palatium.ReportesTextBox
         {
             try
             {
-                sRetorno = reporte.llenarReporteVentas(sFecha);
+                sRetorno = reporte.llenarReporteVentas(sFecha, iIdLocalidad, dbAhorroEmergencia);
 
                 if (sRetorno == "")
                 {

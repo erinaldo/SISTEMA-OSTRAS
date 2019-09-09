@@ -24,9 +24,11 @@ namespace Palatium.Clases
         string sNombreEmpresa;
         string sValorEmpresa;
         string sRetorno_P;
+        string sValorAhorroProductos;
 
         int iIdTipoVenta;
         int iContador;
+        int iIdLocalidad;
         
         object iCuentaRegistros;
 
@@ -42,6 +44,7 @@ namespace Palatium.Clases
 
         Decimal dbTotalCuentasPorCobrar;
         Decimal dbValorEmpresa_P;
+        Decimal dbAhorroEmergencia;
 
         #region FUNCIONES DEL USUARIO PARA COMPLETAR EL CIERRE DE CAJERO
 
@@ -92,13 +95,13 @@ namespace Palatium.Clases
                 sSql += "from cv403_cab_pedidos CP, cv403_numero_cab_pedido NP," + Environment.NewLine;
                 sSql += "pos_vw_pedido_forma_pago FP" + Environment.NewLine;
                 sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
-                //sSql += "and CP.id_pos_jornada = " + Program.iJORNADA + Environment.NewLine;
                 sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
                 sSql += "and CP.id_pedido = NP.id_pedido" + Environment.NewLine;
                 sSql += "and CP.id_pedido = FP.id_pedido" + Environment.NewLine;
                 sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
                 sSql += "and CP.estado = 'A'" + Environment.NewLine;
                 sSql += "and NP.estado = 'A'" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "group by FP.descripcion, FP.cg_estado_dcto," + Environment.NewLine;
                 sSql += "FP.cg_tipo_documento, FP.id_pos_tipo_venta," + Environment.NewLine;
                 sSql += "FP.descripcion_venta" + Environment.NewLine;
@@ -196,7 +199,8 @@ namespace Palatium.Clases
                         sSql += "and estado = 'A'" + Environment.NewLine;
                         sSql += "and estado_orden = 'Pagada'" + Environment.NewLine;
                         sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
-                        sSql += "and id_pos_origen_orden = " + Convert.ToInt32(dtConsulta.Rows[i][0].ToString());
+                        sSql += "and id_pos_origen_orden = " + Convert.ToInt32(dtConsulta.Rows[i][0].ToString()) + Environment.NewLine;
+                        sSql += "and id_localidad = " + iIdLocalidad;
 
                         dtContar = new DataTable();
                         dtContar.Clear();
@@ -214,7 +218,8 @@ namespace Palatium.Clases
                             sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
                             sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                             sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
-                            sSql += "and CP.id_pos_origen_orden = " + Convert.ToInt32(dtConsulta.Rows[i][0].ToString());
+                            sSql += "and CP.id_pos_origen_orden = " + Convert.ToInt32(dtConsulta.Rows[i][0].ToString()) + Environment.NewLine;
+                            sSql += "and CP.id_localidad = " + iIdLocalidad;
 
                             dtSumaDetalle = new DataTable();
                             dtSumaDetalle.Clear();
@@ -258,7 +263,7 @@ namespace Palatium.Clases
         }
 
         //Función para calcular el total de personas que ocupan las mesas
-        private double calcularTotalPersonas(int iIdPosOrigenOrden)
+        private double calcularTotalPersonas(string sCodigo_P)
         {
             try
             {
@@ -270,7 +275,8 @@ namespace Palatium.Clases
                 sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
                 sSql += "and CP.id_pedido = NP.id_pedido" + Environment.NewLine;
                 sSql += "and ORI.id_pos_origen_orden = CP.id_pos_origen_orden" + Environment.NewLine;
-                sSql += "and ORI.id_pos_origen_orden = " + iIdPosOrigenOrden;
+                sSql += "and ORI.codigo = '" + sCodigo_P + "'" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad;
 
                 DataTable dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -303,19 +309,20 @@ namespace Palatium.Clases
         }        
 
         //Función para calcular el valor de formas de pago
-        private double calcularTotalPago(int iFormaPago)
+        private double calcularTotalPago(string sCodigo_P)
         {
             try
             {
                 sSql = "";
-                sSql += "select FP.descripcion,sum(FP.valor) valor" + Environment.NewLine;
+                sSql += "select FP.descripcion, ltrim(str(isnull(sum(FP.valor), 0), 10, 2)) valor" + Environment.NewLine;
                 sSql += "from cv403_cab_pedidos CP, cv403_numero_cab_pedido NP, pos_vw_pedido_forma_pago FP" + Environment.NewLine;
                 sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
                 sSql += "and CP.id_pedido = NP.id_pedido" + Environment.NewLine;
                 sSql += "and CP.id_pedido = FP.id_pedido" + Environment.NewLine;
-                sSql += "and FP.id_pos_tipo_forma_cobro = " + iFormaPago + Environment.NewLine;
+                sSql += "and FP.codigo = '" + sCodigo_P + "'" + Environment.NewLine;
                 sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "group by FP.descripcion";
 
                 DataTable dtConsulta = new DataTable();
@@ -348,8 +355,7 @@ namespace Palatium.Clases
                 return 0;
             }
         }
-
-
+        
         //Función para calcular las propinas
         private double calcularPropinas()
         {
@@ -365,6 +371,7 @@ namespace Palatium.Clases
                 sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
                 sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "and CP.estado = 'A'";
 
                 DataTable dtConsulta = new DataTable();
@@ -415,6 +422,7 @@ namespace Palatium.Clases
                 sSql += "and CP.estado = 'A'" + Environment.NewLine;
                 sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
                 sSql += "and DP.valor_dscto <> 0" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad;
 
                 DataTable dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -467,7 +475,8 @@ namespace Palatium.Clases
                 sSql += "and CP.estado_orden = 'Cancelada'" + Environment.NewLine;
                 sSql += "and CP.estado = 'N'" + Environment.NewLine;
                 sSql += "and CP.fecha_orden = '" + sFecha + "'" + Environment.NewLine;
-                sSql += "and CP.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                //sSql += "and CP.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada;
 
                 DataTable dtConsulta = new DataTable();
@@ -523,7 +532,8 @@ namespace Palatium.Clases
                 sSql += "cv401_nombre_productos NP ON DP.id_producto = NP.id_producto" + Environment.NewLine;
                 sSql += "and NP.estado = 'A'" + Environment.NewLine;
                 sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
-                sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada;
+                sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad;
 
                 DataTable dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -578,7 +588,8 @@ namespace Palatium.Clases
                 sSql += "and CORT.estado ='A'" + Environment.NewLine;
                 sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
-                sSql += "and CP.estado_orden = 'Pagada'";
+                sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad;
 
                 DataTable dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -623,7 +634,7 @@ namespace Palatium.Clases
             {
                 double sumaTarjetas = 0;
                 sSql = "";
-                sSql += "select FP.descripcion,sum(FP.valor) valor" + Environment.NewLine;
+                sSql += "select FP.descripcion, ltrim(str(isnull(sum(FP.valor), 0), 10, 2)) valor" + Environment.NewLine;
                 sSql += "from cv403_cab_pedidos CP, cv403_numero_cab_pedido NP," + Environment.NewLine;
                 sSql += "pos_vw_pedido_forma_pago FP" + Environment.NewLine;
                 sSql += "where CP.fecha_pedido ='" + sFecha + "'" + Environment.NewLine;
@@ -632,6 +643,7 @@ namespace Palatium.Clases
                 sSql += "and CP.id_pedido = FP.id_pedido" + Environment.NewLine;
                 sSql += "and FP.codigo in ('TC', 'TD')" + Environment.NewLine;
                 sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "group by FP.descripcion";
 
                 DataTable dtConsulta = new DataTable();
@@ -689,7 +701,8 @@ namespace Palatium.Clases
             sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
             sSql += "and CP.estado_orden = 'Cerrada'" + Environment.NewLine;
             sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
-            sSql += "and CP.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+            //sSql += "and CP.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+            sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
             sSql += "group by TP.nombres, TP.apellidos";
 
             dtConsulta = new DataTable();
@@ -728,17 +741,141 @@ namespace Palatium.Clases
                 sTextoCuentas += "".PadLeft(40, '-') + Environment.NewLine;
                 sTextoCuentas += "TOTAL CUENTAS POR COBRAR" + dbTotalCuentasPorCobrar.ToString("N2").PadLeft(16, ' ') + Environment.NewLine;
             }
+
             return sTextoCuentas;
+        }
+
+        //FUNCION PARA CARGAR EL VALOR COBRADO EN PRODUCTOS DE EMERGENCIA
+        private void consultaProductosAhorro()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select ltrim(str(isnull(sum(DP.cantidad * (DP.precio_unitario - DP.valor_dscto)), 0), 10, 2)) suma_ahorro" + Environment.NewLine;
+                sSql += "from cv403_cab_pedidos CP INNER JOIN" + Environment.NewLine;
+                sSql += "cv403_det_pedidos DP ON CP.id_pedido = DP.id_pedido" + Environment.NewLine;
+                sSql += "and CP.estado = 'A'" + Environment.NewLine;
+                sSql += "and DP.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "cv401_productos P ON P.id_producto = DP.id_producto" + Environment.NewLine;
+                sSql += "and P.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "cv401_nombre_productos NP ON P.id_producto = NP.id_producto" + Environment.NewLine;
+                sSql += "and NP.estado = 'A'" + Environment.NewLine;
+                sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and P.ahorro_emergencia = 1" + Environment.NewLine;
+                sSql += "and CP.estado_orden in ('Pagada', 'Cerrada')" + Environment.NewLine;
+                sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                //sSql += "and CP.id_localidad = " + Program.iIdLocalidad;
+                sSql += "and CP.id_localidad = " + iIdLocalidad;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    sValorAhorroProductos= dtConsulta.Rows[0][0].ToString();
+                }
+                else
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+            }
+        }
+
+        //FUNCION PARA CARGAR LAS CUENTA SPOR COBRAR DE CLIENTE EMPRESARIAL
+        private string cuentasClienteEmpresarial()
+        {
+            try
+            {
+                string sCliente_P = "";
+                string sNombreEmpresa;
+                string sPrecioEmpresa;
+                Decimal dbTotalEmpresa = 0;
+
+                sSql = "";
+                sSql += "select ltrim(isnull(nombres, '') + ' ' + apellidos) cliente," + Environment.NewLine;
+                sSql += "ltrim(str(isnull(sum(DP.cantidad * (DP.precio_unitario + DP.valor_iva + DP.valor_otro - DP.valor_dscto)), 0), 10, 2)) total" + Environment.NewLine;
+                sSql += "from cv403_cab_pedidos CP INNER JOIN" + Environment.NewLine;
+                sSql += "pos_origen_orden O ON O.id_pos_origen_orden = CP.id_pos_origen_orden" + Environment.NewLine;
+                sSql += "and CP.estado = 'A'" + Environment.NewLine;
+                sSql += "and O.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "cv403_det_pedidos DP ON CP.id_pedido = DP.id_pedido" + Environment.NewLine;
+                sSql += "and DP.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "tp_personas TP ON TP.id_persona = CP.id_persona" + Environment.NewLine;
+                sSql += "and TP.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "cv403_dctos_por_cobrar XC ON CP.id_pedido = XC.id_pedido" + Environment.NewLine;
+                sSql += "and XC.estado = 'A'" + Environment.NewLine;
+                sSql += "where O.cuenta_por_cobrar = 1" + Environment.NewLine;
+                sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and XC.cg_estado_dcto = 7460" + Environment.NewLine;
+                sSql += "and CP.estado_orden = 'Cerrada'" + Environment.NewLine;
+                sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
+                sSql += "group by TP.nombres, TP.apellidos" + Environment.NewLine;
+                sSql += "order by TP.apellidos" + Environment.NewLine;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    return "ERROR";
+                }
+
+                if (dtConsulta.Rows.Count > 0)
+                {
+                    sCliente_P += "".PadLeft(40, '-') + Environment.NewLine;
+                    sCliente_P += " CUENTAS POR COBRAR CLIENTE EMPRESARIAL" + Environment.NewLine;
+                    sCliente_P += "".PadLeft(40, '-') + Environment.NewLine;
+
+                    for (int i = 0; i < dtConsulta.Rows.Count; i++)
+                    {
+                        sNombreEmpresa = dtConsulta.Rows[i]["cliente"].ToString().Trim().ToUpper();
+                        sPrecioEmpresa = dtConsulta.Rows[i]["total"].ToString().Trim().ToUpper();
+                        dbTotalEmpresa += Convert.ToDecimal(sPrecioEmpresa);
+
+                        if (sNombreEmpresa.Length > 30)
+                        {
+                            sNombreEmpresa = sNombreEmpresa.Substring(0, 30);
+                        }
+
+                        sCliente_P += sNombreEmpresa.PadRight(30, ' ') + sPrecioEmpresa.PadLeft(10, ' ') + Environment.NewLine;
+                    }
+
+                    sCliente_P += Environment.NewLine + "TOTAL CUENTAS POR COBRAR:" + dbTotalEmpresa.ToString("N2").PadLeft(15, ' ') + Environment.NewLine;
+                    sCliente_P += "".PadLeft(40, '-') + Environment.NewLine;
+                }
+
+                return sCliente_P;
+            }
+
+            catch (Exception)
+            {
+                return "ERROR";
+            }
         }
 
         #endregion
 
 
-        public string llenarCierreCajero(string sFecha)
+        public string llenarCierreCajero(string sFecha_P, int iIdLocalidad_P, Decimal dbAhorroEmergencia_R)
         {
             try
             {
-                this.sFecha = sFecha;
+                this.sFecha = sFecha_P;
+                this.iIdLocalidad = iIdLocalidad_P;
+                this.dbAhorroEmergencia = dbAhorroEmergencia_R;
+
                 sTexto = "";
                 sTexto += Environment.NewLine;
                 sTexto += ("INFORME DEL CIERRE DEL CAJERO".PadLeft(34, ' ')) + Environment.NewLine;
@@ -761,7 +898,7 @@ namespace Palatium.Clases
                 sTexto += Environment.NewLine;
                 sTexto += "TOTALES" + Environment.NewLine;
                 sTexto += Environment.NewLine;
-                sTexto += "NUMERO DE PERSONAS ATENDIDADS:".PadRight(30, ' ') + calcularTotalPersonas(1).ToString().PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
+                sTexto += "NUMERO DE PERSONAS ATENDIDADS:".PadRight(30, ' ') + calcularTotalPersonas("01").ToString().PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
                 sTexto += "TIPOS DE ORDENES DEL SISTEMA:" + Environment.NewLine + Environment.NewLine;
                 llenarOrdenes();
                 sTexto += "".PadLeft(40, '=') + Environment.NewLine;
@@ -791,11 +928,12 @@ namespace Palatium.Clases
                 sTexto += Environment.NewLine;
                 //sTexto += "".PadLeft(40, '-') + Environment.NewLine;
                 sTexto += "RESUMEN DE PAGOS PRIORITARIOS" + Environment.NewLine + Environment.NewLine;
-                sTexto += ("TOTAL EFECTIVO:".PadRight(26, ' ') + calcularTotalPago(1).ToString("N2").PadLeft(14, ' ')) + Environment.NewLine;
-                sTexto += ("TOTAL CHEQUES:".PadRight(26, ' ') + calcularTotalPago(2).ToString("N2").PadLeft(14, ' ')) + Environment.NewLine;
+                sTexto += ("TOTAL EFECTIVO:".PadRight(26, ' ') + calcularTotalPago("EF").ToString("N2").PadLeft(14, ' ')) + Environment.NewLine;
+                sTexto += ("TOTAL TRANSFERENCIAS:".PadRight(26, ' ') + calcularTotalPago("TR").ToString("N2").PadLeft(14, ' ')) + Environment.NewLine;
+                
+                sTexto += ("TOTAL CHEQUES:".PadRight(26, ' ') + calcularTotalPago("CH").ToString("N2").PadLeft(14, ' ')) + Environment.NewLine;
                 sTexto += ("TOTAL TARJETAS:".PadRight(26, ' ') + calcularTotalPagoTarjetas().ToString("N2").PadLeft(14, ' ')) + Environment.NewLine;
-
-
+                
                 sSql = "";
                 sSql += "select NP.nombre, PC.motivo_cortesia," + Environment.NewLine;
                 sSql += "ltrim(str(DP.precio_unitario, 10, 2)) precio_unitario," + Environment.NewLine;
@@ -807,7 +945,8 @@ namespace Palatium.Clases
                 sSql += "pos_cortesia PC ON (DP.id_det_pedido = PC.id_det_pedido and PC.estado='A')" + Environment.NewLine;
                 sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and DP.estado = 'A'" + Environment.NewLine;
-                sSql += "and CP.id_pos_jornada = " + Program.iJORNADA;
+                sSql += "and CP.id_pos_jornada = " + Program.iJORNADA + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad;
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -866,7 +1005,8 @@ namespace Palatium.Clases
                 sSql += "cv401_nombre_productos NP ON DP.id_producto = NP.id_producto" + Environment.NewLine;
                 sSql += "and NP.estado = 'A'" + Environment.NewLine;
                 sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;                
-                sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada;
+                sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad;
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -924,6 +1064,7 @@ namespace Palatium.Clases
                 sSql += "and NCP.id_pedido = CP.id_pedido" + Environment.NewLine;
                 sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and C.estado = 'A'" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "order by NCP.numero_pedido";
 
 
@@ -957,6 +1098,25 @@ namespace Palatium.Clases
                 sTexto += ("TOTAL DESCUENTOS: ".PadRight(31, ' ') + calcularDescuentos().ToString("N2").PadLeft(9, ' ')) + Environment.NewLine;
                 llenarCuentasCanceladas();
                 sTexto += ("TOTAL CUENTAS CANCELADAS: ".PadRight(31, ' ') + dSumaTotalCuentasAnuladas.ToString("N2").PadLeft(9, ' ')) + Environment.NewLine;
+
+                //AQUI CUENTAS CLIENTE EMPRESARIAL
+                sTexto += Environment.NewLine;
+                string sCuentaCliente = cuentasClienteEmpresarial();
+
+                if ((sCuentaCliente != "ERROR") && (sCuentaCliente != ""))
+                {
+                    sTexto += sCuentaCliente;
+                }
+
+                //AQUI AHORRO DE EMERGENCIA
+                sTexto += Environment.NewLine;
+                consultaProductosAhorro();    
+                sTexto += "".PadLeft(40, '-') + Environment.NewLine;
+                sTexto += "AHORRO DE EMERGENCIA".PadLeft(30, ' ') + Environment.NewLine;
+                sTexto += "".PadLeft(40, '-') + Environment.NewLine;
+                sTexto += "AHORRO TOTAL EN PRODUCTOS:".PadRight(30, ' ') + sValorAhorroProductos.PadLeft(10, ' ') + Environment.NewLine;
+                sTexto += "AHORRO INGRESO MANUAL    :".PadRight(30, ' ') + dbAhorroEmergencia.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                sTexto += "".PadLeft(40, '-') + Environment.NewLine;
                 sTexto += Environment.NewLine + Environment.NewLine + Environment.NewLine + ".";
 
                 return sTexto;

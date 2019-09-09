@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 
-namespace Palatium.Pedidos
+namespace Palatium.ReportesTextBox
 {
     public partial class frmVerCierreCajero : Form
     {
@@ -22,6 +22,8 @@ namespace Palatium.Pedidos
         VentanasMensajes.frmMensajeCatch catchMensaje = new VentanasMensajes.frmMensajeCatch();
 
         int iOp;
+        int iIdLocalidad;
+
         string sTexto;
         string sFecha;
         string sSql;
@@ -39,10 +41,11 @@ namespace Palatium.Pedidos
         string sIpImpresora;
         string sDescripcionImpresora;
 
-        public frmVerCierreCajero(int iOp, string sFecha)
+        public frmVerCierreCajero(int iOp, string sFecha, int iIdLocalidad_P)
         {
             this.iOp = iOp;
             this.sFecha = sFecha;
+            this.iIdLocalidad = iIdLocalidad_P;
             InitializeComponent();
         }
 
@@ -117,7 +120,7 @@ namespace Palatium.Pedidos
             {
                 sTexto = "";
                 //sTexto = arqueo.llenarCierreCajero(sFecha);
-                sTexto = arqueo.llenarInforme(sFecha);
+                sTexto = arqueo.llenarInforme(sFecha, iIdLocalidad);
 
                 if (sTexto == "")
                 {

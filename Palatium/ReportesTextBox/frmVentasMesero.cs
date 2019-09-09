@@ -27,6 +27,8 @@ namespace Palatium.ReportesTextbox
 
         string sFecha;
         string sRetorno;
+
+        int iIdLocalidad;
         int iCerrar;
         int iCortarPapel;
         int iAbrirCajon;
@@ -38,10 +40,11 @@ namespace Palatium.ReportesTextbox
         string sIpImpresora;
         string sDescripcionImpresora;
 
-        public frmVentasMesero(string sFecha, int iCerrar)
+        public frmVentasMesero(string sFecha, int iCerrar, int iIdLocalidad_P)
         {
             this.sFecha = sFecha;
             this.iCerrar = iCerrar;
+            this.iIdLocalidad = iIdLocalidad_P;
             InitializeComponent();
         }
 
@@ -113,7 +116,7 @@ namespace Palatium.ReportesTextbox
         {
             try
             {
-                sRetorno = mesero.ventasMesero(sFecha);
+                sRetorno = mesero.ventasMesero(sFecha, iIdLocalidad);
 
                 if (sRetorno == "")
                 {

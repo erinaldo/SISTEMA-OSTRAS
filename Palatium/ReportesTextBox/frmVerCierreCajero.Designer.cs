@@ -1,4 +1,4 @@
-﻿namespace Palatium.Pedidos
+﻿namespace Palatium.ReportesTextBox
 {
     partial class frmVerCierreCajero
     {
