@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbLocalidades = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.lblFechaCaja = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.LblFecha = new System.Windows.Forms.Label();
@@ -105,8 +107,6 @@
             this.BtnAbrirCaja = new System.Windows.Forms.Button();
             this.TimerHora = new System.Windows.Forms.Timer(this.components);
             this.ttMensaje = new System.Windows.Forms.ToolTip(this.components);
-            this.label22 = new System.Windows.Forms.Label();
-            this.cmbLocalidades = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarjetas)).BeginInit();
@@ -130,21 +130,43 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // cmbLocalidades
+            // 
+            this.cmbLocalidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLocalidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbLocalidades.FormattingEnabled = true;
+            this.cmbLocalidades.Location = new System.Drawing.Point(93, 13);
+            this.cmbLocalidades.Name = "cmbLocalidades";
+            this.cmbLocalidades.Size = new System.Drawing.Size(171, 23);
+            this.cmbLocalidades.TabIndex = 3;
+            this.cmbLocalidades.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidades_SelectedIndexChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(6, 16);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(81, 16);
+            this.label22.TabIndex = 7;
+            this.label22.Text = "Localidad:";
+            // 
             // lblFechaCaja
             // 
             this.lblFechaCaja.AutoSize = true;
             this.lblFechaCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaCaja.Location = new System.Drawing.Point(615, 16);
+            this.lblFechaCaja.Location = new System.Drawing.Point(618, 16);
             this.lblFechaCaja.Name = "lblFechaCaja";
             this.lblFechaCaja.Size = new System.Drawing.Size(45, 16);
             this.lblFechaCaja.TabIndex = 6;
             this.lblFechaCaja.Text = "label1";
+            this.lblFechaCaja.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(511, 16);
+            this.label21.Location = new System.Drawing.Point(527, 16);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(91, 16);
             this.label21.TabIndex = 5;
@@ -330,8 +352,8 @@
             // 
             // txtValorPagoGrid
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.txtValorPagoGrid.Frozen = true;
             this.txtValorPagoGrid.HeaderText = "VALOR";
             this.txtValorPagoGrid.Name = "txtValorPagoGrid";
@@ -551,10 +573,10 @@
             // 
             // dataGridViewCheckBoxColumn1
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.NullValue = false;
-            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.NullValue = false;
+            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewCheckBoxColumn1.HeaderText = "";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.Width = 50;
@@ -568,8 +590,8 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTextBoxColumn2.HeaderText = "VALOR";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -1004,27 +1026,6 @@
             this.TimerHora.Enabled = true;
             this.TimerHora.Interval = 1000;
             this.TimerHora.Tick += new System.EventHandler(this.TimerHora_Tick);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(6, 16);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(81, 16);
-            this.label22.TabIndex = 7;
-            this.label22.Text = "Localidad:";
-            // 
-            // cmbLocalidades
-            // 
-            this.cmbLocalidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLocalidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbLocalidades.FormattingEnabled = true;
-            this.cmbLocalidades.Location = new System.Drawing.Point(93, 13);
-            this.cmbLocalidades.Name = "cmbLocalidades";
-            this.cmbLocalidades.Size = new System.Drawing.Size(171, 23);
-            this.cmbLocalidades.TabIndex = 3;
-            this.cmbLocalidades.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidades_SelectedIndexChanged);
             // 
             // frmResumenCaja
             // 
