@@ -308,6 +308,9 @@ namespace Palatium.Áreas
                             botonMesas[i, j].Text = dFila[0][1].ToString();
                             botonMesas[i, j].AccessibleName = dFila[0][4].ToString();
                             botonMesas[i, j].BackColor = Color.Lime;
+                            //botonMesas[i, j].BackColor = Color.White;
+                            //botonMesas[i, j].FlatStyle = FlatStyle.Flat;
+                            //botonMesas[i, j].FlatAppearance.BorderSize = 2;
                             botonMesas[i, j].Click += boton_clic_Mesa;
                             botonMesas[i, j].Width = 97;//90
                             botonMesas[i, j].Height = 87;//80

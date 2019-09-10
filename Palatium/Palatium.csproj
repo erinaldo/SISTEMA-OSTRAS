@@ -474,6 +474,12 @@
     <Compile Include="Pedidos\frmEfectivoPagoCompleto.Designer.cs">
       <DependentUpon>frmEfectivoPagoCompleto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pedidos\frmNuevaComanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pedidos\frmNuevaComanda.Designer.cs">
+      <DependentUpon>frmNuevaComanda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Personal\frmPromotores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2176,6 +2182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pedidos\frmEfectivoPagoCompleto.resx">
       <DependentUpon>frmEfectivoPagoCompleto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pedidos\frmNuevaComanda.resx">
+      <DependentUpon>frmNuevaComanda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Personal\frmPromotores.resx">
       <DependentUpon>frmPromotores.cs</DependentUpon>
