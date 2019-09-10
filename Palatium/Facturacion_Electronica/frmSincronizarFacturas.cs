@@ -652,7 +652,8 @@ namespace Palatium.Facturacion_Electronica
                 sMensajeEnviar = sMensajeEnviar + Environment.NewLine + Environment.NewLine;
 
                 //ARMANDO LOS PARAMETROS NECESARIOS PARA ENVIAR EL MAIL
-                sCorreoCliente = "elvis.geovanni@hotmail.com";
+                //sCorreoCliente = "elvis.geovanni@hotmail.com";
+                sCorreoCliente = Program.sCorreoElectronicoDefault;
                 sAsuntoMail = P_St_nombre_comercial + " - REPORTE DE SINCRONIZACIÓN DE COMPROBANTES ELECTRÓNICOS";
                 sRutaAdjuntos = "";
 

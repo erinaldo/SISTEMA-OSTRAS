@@ -62,6 +62,22 @@ namespace Palatium.Cajero
             InitializeComponent();            
         }
 
+        #region ANIMACION DE BOTONES
+
+        //INGRESAR EL CURSOR AL BOTON
+        private void ingresaBoton(Button btnProceso)
+        {
+            btnProceso.BackColor = Color.LightSkyBlue;
+        }
+
+        //SALIR EL CURSOR DEL BOTON
+        private void salidaBoton(Button btnProceso)
+        {
+            btnProceso.BackColor = Color.White;
+        }
+
+        #endregion
+
         #region FUNCIONES DEL USUARIO
 
         //FUNCION PARA CONSULTAR LOS DATOS DEL CORREO DEL EMISOR
@@ -238,7 +254,7 @@ namespace Palatium.Cajero
                 sSql = "";
                 sSql += "select estado_cierre_cajero, isnull(ahorro_emergencia, '0.00') ahorro_emergencia" + Environment.NewLine;
                 sSql += "from pos_cierre_cajero" + Environment.NewLine;
-                sSql += "where fecha_cierre = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "where fecha_apertura = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and estado = 'A'" + Environment.NewLine;
                 sSql += "and id_jornada = " + iJornada + Environment.NewLine;
                 sSql += "and id_localidad = " + cmbLocalidades.SelectedValue;
@@ -252,22 +268,12 @@ namespace Palatium.Cajero
                 {
                     if (dtConsulta.Rows.Count > 0)
                     {
-                        if (dtConsulta.Rows[0]["estado_cierre_cajero"].ToString() == "Cerrada")
-                        {
-                            btnEnviarInforme.Visible = true;
-                        }
-
-                        else
-                        {
-                            btnEnviarInforme.Visible = false;
-                        }
-
                         txtAhorroManual.Text = Convert.ToDecimal(dtConsulta.Rows[0]["ahorro_emergencia"].ToString()).ToString("N2");
                     }
 
                     else
                     {
-                        btnEnviarInforme.Visible = false;
+                        txtAhorroManual.Text = "0.00";
                     }
                 }
 
@@ -275,7 +281,6 @@ namespace Palatium.Cajero
                 {
                     catchMensaje.LblMensaje.Text = sSql;
                     catchMensaje.ShowDialog();
-                    btnEnviarInforme.Visible = false;
                 }
 
                 //if (iOp == 1)
@@ -1205,7 +1210,6 @@ namespace Palatium.Cajero
                             if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                             {
                                 catchMensaje.LblMensaje.Text = sSql;
-                                catchMensaje.ShowInTaskbar = false;
                                 catchMensaje.ShowDialog();
                                 goto reversa;
                             }
@@ -1215,8 +1219,8 @@ namespace Palatium.Cajero
                             ReportesTextBox.frmVerResumenCaja resumen = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
                             resumen.ShowDialog();
 
-                            ReportesTextBox.frmReporteVendido vendido = new ReportesTextBox.frmReporteVendido(sFecha, 1, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
-                            vendido.ShowDialog();
+                            //ReportesTextBox.frmReporteVendido vendido = new ReportesTextBox.frmReporteVendido(sFecha, 1, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
+                            //vendido.ShowDialog();
 
                             if (iOp == 1)
                             {
@@ -1325,27 +1329,8 @@ namespace Palatium.Cajero
 
         private void btnEnviarInforme_Click(object sender, EventArgs e)
         {
-            SiNo.LblMensaje.Text = "¿Desea reenviar el informe de cajero de la fecha " + sFecha + " ?";
-            SiNo.ShowDialog();
-
-            if (SiNo.DialogResult == DialogResult.OK)
-            {
-                this.Cursor = Cursors.WaitCursor;
-
-                if (enviarMail() == true)
-                {
-                    ok.LblMensaje.Text = "El informe de ventas se ha enviado con éxito.";
-                }
-
-                else
-                {
-                    ok.LblMensaje.Text = "No se pudo enviar el informe al administrador.";
-
-                }
-
-                this.Cursor = Cursors.Default;
-                ok.ShowDialog();
-            }
+            ReportesTextBox.frmVerReportePropietario reporte = new ReportesTextBox.frmVerReportePropietario(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue));
+            reporte.ShowDialog();
         }
 
         private void btnListarVentas_Click(object sender, EventArgs e)
@@ -1398,6 +1383,116 @@ namespace Palatium.Cajero
             iJornada = Program.iJORNADA;
             consultarEstadoCaja();
             cargarValores();            
+        }
+
+        private void btnAbrirCaja_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnAbrirCaja);
+        }
+
+        private void btnAbrirCaja_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnAbrirCaja);
+        }
+
+        private void BtnGuardar_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(BtnGuardar);
+        }
+
+        private void BtnGuardar_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(BtnGuardar);
+        }
+
+        private void btnVentasMesero_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnVentasMesero);
+        }
+
+        private void btnVentasMesero_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnVentasMesero);
+        }
+
+        private void btnReimpresionTickets_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnReimpresionTickets);
+        }
+
+        private void btnReimpresionTickets_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnReimpresionTickets);
+        }
+
+        private void btnReporteVendido_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnReporteVendido);
+        }
+
+        private void btnReporteVendido_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnReporteVendido);
+        }
+
+        private void BtnVistaArqueo_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(BtnVistaArqueo);
+        }
+
+        private void BtnVistaArqueo_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(BtnVistaArqueo);
+        }
+
+        private void btnListarVentas_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnListarVentas);
+        }
+
+        private void btnListarVentas_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnListarVentas);
+        }
+
+        private void btnDetallarVentas_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnDetallarVentas);
+        }
+
+        private void btnDetallarVentas_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnDetallarVentas);
+        }
+
+        private void btnEnviarInforme_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnEnviarInforme);
+        }
+
+        private void btnEnviarInforme_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnEnviarInforme);
+        }
+
+        private void btnListarMateriaPrima_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnListarMateriaPrima);
+        }
+
+        private void btnListarMateriaPrima_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnListarMateriaPrima);
+        }
+
+        private void btnContarDinero_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnContarDinero);
+        }
+
+        private void btnContarDinero_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnContarDinero);
         }
     }
 }

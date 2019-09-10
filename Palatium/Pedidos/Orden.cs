@@ -2268,7 +2268,9 @@ namespace Palatium
                     sSql += "id_pos_mesa = " + iIdMesa + "," + Environment.NewLine;
                     sSql += "numero_personas = " + iNumeroPersonas + "," + Environment.NewLine;
                 }
-             
+
+                sSql += "recargo_tarjeta = 0," + Environment.NewLine;
+                sSql += "remover_iva = 0," + Environment.NewLine;
                 sSql += "estado_orden = 'Abierta'," + Environment.NewLine;
                 sSql += "consumo_alimentos = " + iConsumoAlimentos + Environment.NewLine;
                 sSql += "where id_pedido = " + iIdPedido;

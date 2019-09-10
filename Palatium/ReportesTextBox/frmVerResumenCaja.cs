@@ -14,8 +14,6 @@ namespace Palatium.ReportesTextBox
     {
         ConexionBD.ConexionBD conexion = new ConexionBD.ConexionBD();
         Clases.ClaseCierreCajero arqueo = new Clases.ClaseCierreCajero();
-        //Clases.ClaseArqueoCaja2 arqueo = new Clases.ClaseArqueoCaja2();
-        //Clases.ClaseReporteVendido vendido = new Clases.ClaseReporteVendido();
         Clases.ClaseCrearImpresion imprimir = new Clases.ClaseCrearImpresion();
 
         VentanasMensajes.frmMensajeOK ok = new VentanasMensajes.frmMensajeOK();

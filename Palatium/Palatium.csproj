@@ -293,6 +293,7 @@
     <Compile Include="Clases\ClaseNotaVentaFacturador.cs" />
     <Compile Include="Clases\ClasePrecuentaEmpresa.cs" />
     <Compile Include="Clases\ClaseReporteMateriaPrima.cs" />
+    <Compile Include="Clases\ClaseReportePropietario.cs" />
     <Compile Include="Clases_Factura_Electronica\ClaseImprimirFacturaElectronica.cs" />
     <Compile Include="Clases_Factura_Electronica\ClaseRIDE.cs" />
     <Compile Include="Comida_Rapida\frmComandaComidaRapida.cs">
@@ -825,6 +826,12 @@
     </Compile>
     <Compile Include="ReportesTextBox\frmVerReporteMateriaPrima.Designer.cs">
       <DependentUpon>frmVerReporteMateriaPrima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportesTextBox\frmVerReportePropietario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportesTextBox\frmVerReportePropietario.Designer.cs">
+      <DependentUpon>frmVerReportePropietario.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportesTextBox\frmVistaFactura.cs">
       <SubType>Form</SubType>
@@ -2745,6 +2752,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportesTextBox\frmVerReporteMateriaPrima.resx">
       <DependentUpon>frmVerReporteMateriaPrima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportesTextBox\frmVerReportePropietario.resx">
+      <DependentUpon>frmVerReportePropietario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportesTextBox\frmVerResumenCaja.resx">
       <DependentUpon>frmVerResumenCaja.cs</DependentUpon>

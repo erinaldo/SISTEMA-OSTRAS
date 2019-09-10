@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbLocalidades = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -104,7 +104,7 @@
             this.BtnVistaArqueo = new System.Windows.Forms.Button();
             this.btnReporteVendido = new System.Windows.Forms.Button();
             this.btnReimpresionTickets = new System.Windows.Forms.Button();
-            this.BtnAbrirCaja = new System.Windows.Forms.Button();
+            this.btnAbrirCaja = new System.Windows.Forms.Button();
             this.TimerHora = new System.Windows.Forms.Timer(this.components);
             this.ttMensaje = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
@@ -118,12 +118,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.groupBox1.Controls.Add(this.cmbLocalidades);
             this.groupBox1.Controls.Add(this.label22);
             this.groupBox1.Controls.Add(this.lblFechaCaja);
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.LblFecha);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Desktop;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(715, 45);
@@ -194,6 +196,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.groupBox2.Controls.Add(this.btnSalidas);
             this.groupBox2.Controls.Add(this.txtCobradoTransferencia);
             this.groupBox2.Controls.Add(this.label1);
@@ -224,7 +227,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
             this.groupBox2.Location = new System.Drawing.Point(12, 57);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(715, 478);
@@ -235,7 +238,8 @@
             // 
             this.btnSalidas.AutoSize = true;
             this.btnSalidas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.btnSalidas.LinkColor = System.Drawing.Color.White;
+            this.btnSalidas.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.btnSalidas.LinkColor = System.Drawing.Color.Black;
             this.btnSalidas.Location = new System.Drawing.Point(362, 154);
             this.btnSalidas.Name = "btnSalidas";
             this.btnSalidas.Size = new System.Drawing.Size(126, 16);
@@ -260,7 +264,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label1.Location = new System.Drawing.Point(9, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 16);
@@ -283,7 +287,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label11.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label11.Location = new System.Drawing.Point(362, 243);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(130, 16);
@@ -294,7 +298,8 @@
             // 
             this.btnEntradas.AutoSize = true;
             this.btnEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.btnEntradas.LinkColor = System.Drawing.Color.White;
+            this.btnEntradas.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.btnEntradas.LinkColor = System.Drawing.Color.Black;
             this.btnEntradas.Location = new System.Drawing.Point(362, 131);
             this.btnEntradas.Name = "btnEntradas";
             this.btnEntradas.Size = new System.Drawing.Size(137, 16);
@@ -307,7 +312,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label13.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label13.Location = new System.Drawing.Point(362, 265);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(120, 16);
@@ -352,8 +357,8 @@
             // 
             // txtValorPagoGrid
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle4;
             this.txtValorPagoGrid.Frozen = true;
             this.txtValorPagoGrid.HeaderText = "VALOR";
             this.txtValorPagoGrid.Name = "txtValorPagoGrid";
@@ -376,6 +381,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.groupBox5.Controls.Add(this.txtTotalPersonas);
             this.groupBox5.Controls.Add(this.label14);
             this.groupBox5.Controls.Add(this.label20);
@@ -390,7 +396,7 @@
             this.groupBox5.Controls.Add(this.txtParaMesa);
             this.groupBox5.Controls.Add(this.label16);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox5.ForeColor = System.Drawing.SystemColors.Desktop;
             this.groupBox5.Location = new System.Drawing.Point(361, 326);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(330, 143);
@@ -413,7 +419,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label14.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label14.Location = new System.Drawing.Point(65, 116);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(103, 16);
@@ -424,7 +430,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label20.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label20.Location = new System.Drawing.Point(209, 26);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(94, 16);
@@ -435,7 +441,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label19.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label19.Location = new System.Drawing.Point(137, 26);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(38, 16);
@@ -490,7 +496,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label18.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label18.Location = new System.Drawing.Point(16, 90);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(79, 16);
@@ -512,7 +518,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label17.Location = new System.Drawing.Point(16, 68);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(76, 16);
@@ -534,7 +540,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label16.Location = new System.Drawing.Point(16, 46);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(91, 16);
@@ -545,7 +551,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label12.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label12.Location = new System.Drawing.Point(362, 287);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(135, 16);
@@ -573,10 +579,10 @@
             // 
             // dataGridViewCheckBoxColumn1
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.NullValue = false;
-            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.NullValue = false;
+            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewCheckBoxColumn1.HeaderText = "";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.Width = 50;
@@ -590,8 +596,8 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn2.HeaderText = "VALOR";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -627,7 +633,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label15.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label15.Location = new System.Drawing.Point(362, 221);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(88, 16);
@@ -636,12 +642,13 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.groupBox3.Controls.Add(this.txtAhorroManual);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.txtAhorroProductos);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox3.ForeColor = System.Drawing.SystemColors.Desktop;
             this.groupBox3.Location = new System.Drawing.Point(367, 13);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(330, 85);
@@ -666,7 +673,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label9.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label9.Location = new System.Drawing.Point(16, 27);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(153, 16);
@@ -677,7 +684,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label8.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label8.Location = new System.Drawing.Point(16, 49);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(165, 16);
@@ -712,7 +719,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label10.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label10.Location = new System.Drawing.Point(362, 177);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(128, 16);
@@ -759,7 +766,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label6.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label6.Location = new System.Drawing.Point(9, 298);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(121, 16);
@@ -770,7 +777,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label7.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label7.Location = new System.Drawing.Point(362, 108);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(111, 16);
@@ -829,7 +836,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label5.Location = new System.Drawing.Point(9, 105);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(117, 16);
@@ -840,7 +847,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label4.Location = new System.Drawing.Point(9, 41);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 16);
@@ -851,7 +858,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label3.Location = new System.Drawing.Point(9, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(96, 16);
@@ -860,6 +867,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.groupBox4.Controls.Add(this.btnListarVentas);
             this.groupBox4.Controls.Add(this.btnDetallarVentas);
             this.groupBox4.Controls.Add(this.btnVentasMesero);
@@ -870,7 +878,7 @@
             this.groupBox4.Controls.Add(this.BtnVistaArqueo);
             this.groupBox4.Controls.Add(this.btnReporteVendido);
             this.groupBox4.Controls.Add(this.btnReimpresionTickets);
-            this.groupBox4.Controls.Add(this.BtnAbrirCaja);
+            this.groupBox4.Controls.Add(this.btnAbrirCaja);
             this.groupBox4.Location = new System.Drawing.Point(733, 12);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(161, 523);
@@ -879,33 +887,43 @@
             // 
             // btnListarVentas
             // 
-            this.btnListarVentas.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnListarVentas.BackColor = System.Drawing.Color.White;
+            this.btnListarVentas.FlatAppearance.BorderSize = 2;
+            this.btnListarVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListarVentas.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnListarVentas.Location = new System.Drawing.Point(10, 274);
             this.btnListarVentas.Name = "btnListarVentas";
             this.btnListarVentas.Size = new System.Drawing.Size(140, 44);
             this.btnListarVentas.TabIndex = 10;
-            this.btnListarVentas.Text = "Listar Ventas \r\ndel día";
+            this.btnListarVentas.Text = "Listar Productos \r\ndel día";
             this.btnListarVentas.UseVisualStyleBackColor = false;
             this.btnListarVentas.Click += new System.EventHandler(this.btnListarVentas_Click);
+            this.btnListarVentas.MouseEnter += new System.EventHandler(this.btnListarVentas_MouseEnter);
+            this.btnListarVentas.MouseLeave += new System.EventHandler(this.btnListarVentas_MouseLeave);
             // 
             // btnDetallarVentas
             // 
-            this.btnDetallarVentas.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnDetallarVentas.BackColor = System.Drawing.Color.White;
+            this.btnDetallarVentas.FlatAppearance.BorderSize = 2;
+            this.btnDetallarVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDetallarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetallarVentas.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDetallarVentas.Location = new System.Drawing.Point(10, 406);
+            this.btnDetallarVentas.Location = new System.Drawing.Point(10, 318);
             this.btnDetallarVentas.Name = "btnDetallarVentas";
             this.btnDetallarVentas.Size = new System.Drawing.Size(140, 44);
             this.btnDetallarVentas.TabIndex = 9;
             this.btnDetallarVentas.Text = "Detallar las Ventas";
             this.btnDetallarVentas.UseVisualStyleBackColor = false;
             this.btnDetallarVentas.Click += new System.EventHandler(this.btnDetallarVentas_Click);
+            this.btnDetallarVentas.MouseEnter += new System.EventHandler(this.btnDetallarVentas_MouseEnter);
+            this.btnDetallarVentas.MouseLeave += new System.EventHandler(this.btnDetallarVentas_MouseLeave);
             // 
             // btnVentasMesero
             // 
-            this.btnVentasMesero.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnVentasMesero.BackColor = System.Drawing.Color.White;
+            this.btnVentasMesero.FlatAppearance.BorderSize = 2;
+            this.btnVentasMesero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVentasMesero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVentasMesero.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnVentasMesero.Location = new System.Drawing.Point(10, 98);
@@ -915,10 +933,14 @@
             this.btnVentasMesero.Text = "Ventas por Mesero";
             this.btnVentasMesero.UseVisualStyleBackColor = false;
             this.btnVentasMesero.Click += new System.EventHandler(this.btnVentasMesero_Click);
+            this.btnVentasMesero.MouseEnter += new System.EventHandler(this.btnVentasMesero_MouseEnter);
+            this.btnVentasMesero.MouseLeave += new System.EventHandler(this.btnVentasMesero_MouseLeave);
             // 
             // BtnGuardar
             // 
-            this.BtnGuardar.BackColor = System.Drawing.Color.SpringGreen;
+            this.BtnGuardar.BackColor = System.Drawing.Color.White;
+            this.BtnGuardar.FlatAppearance.BorderSize = 2;
+            this.BtnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnGuardar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.BtnGuardar.Location = new System.Drawing.Point(10, 54);
@@ -928,37 +950,49 @@
             this.BtnGuardar.Text = "Guardar";
             this.BtnGuardar.UseVisualStyleBackColor = false;
             this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
+            this.BtnGuardar.MouseEnter += new System.EventHandler(this.BtnGuardar_MouseEnter);
+            this.BtnGuardar.MouseLeave += new System.EventHandler(this.BtnGuardar_MouseLeave);
             // 
             // btnListarMateriaPrima
             // 
-            this.btnListarMateriaPrima.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnListarMateriaPrima.BackColor = System.Drawing.Color.White;
+            this.btnListarMateriaPrima.FlatAppearance.BorderSize = 2;
+            this.btnListarMateriaPrima.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListarMateriaPrima.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListarMateriaPrima.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnListarMateriaPrima.Location = new System.Drawing.Point(10, 318);
+            this.btnListarMateriaPrima.Location = new System.Drawing.Point(10, 406);
             this.btnListarMateriaPrima.Name = "btnListarMateriaPrima";
             this.btnListarMateriaPrima.Size = new System.Drawing.Size(140, 44);
             this.btnListarMateriaPrima.TabIndex = 6;
             this.btnListarMateriaPrima.Text = "Materia Prima\r\nusada en el día";
             this.btnListarMateriaPrima.UseVisualStyleBackColor = false;
             this.btnListarMateriaPrima.Click += new System.EventHandler(this.btnListarMateriaPrima_Click);
+            this.btnListarMateriaPrima.MouseEnter += new System.EventHandler(this.btnListarMateriaPrima_MouseEnter);
+            this.btnListarMateriaPrima.MouseLeave += new System.EventHandler(this.btnListarMateriaPrima_MouseLeave);
             // 
             // btnEnviarInforme
             // 
-            this.btnEnviarInforme.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnEnviarInforme.BackColor = System.Drawing.Color.White;
+            this.btnEnviarInforme.FlatAppearance.BorderSize = 2;
+            this.btnEnviarInforme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEnviarInforme.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnviarInforme.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnEnviarInforme.Location = new System.Drawing.Point(10, 362);
             this.btnEnviarInforme.Name = "btnEnviarInforme";
             this.btnEnviarInforme.Size = new System.Drawing.Size(140, 44);
             this.btnEnviarInforme.TabIndex = 5;
-            this.btnEnviarInforme.Text = "Enviar Informe por Correo Electrónico";
+            this.btnEnviarInforme.Text = "Reporte para el Propietario";
+            this.ttMensaje.SetToolTip(this.btnEnviarInforme, "Clic aquí para imprimir el reporte del propietario");
             this.btnEnviarInforme.UseVisualStyleBackColor = false;
-            this.btnEnviarInforme.Visible = false;
             this.btnEnviarInforme.Click += new System.EventHandler(this.btnEnviarInforme_Click);
+            this.btnEnviarInforme.MouseEnter += new System.EventHandler(this.btnEnviarInforme_MouseEnter);
+            this.btnEnviarInforme.MouseLeave += new System.EventHandler(this.btnEnviarInforme_MouseLeave);
             // 
             // btnContarDinero
             // 
-            this.btnContarDinero.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnContarDinero.BackColor = System.Drawing.Color.White;
+            this.btnContarDinero.FlatAppearance.BorderSize = 2;
+            this.btnContarDinero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContarDinero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnContarDinero.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnContarDinero.Location = new System.Drawing.Point(10, 470);
@@ -968,10 +1002,14 @@
             this.btnContarDinero.Text = "Contar Dinero";
             this.btnContarDinero.UseVisualStyleBackColor = false;
             this.btnContarDinero.Click += new System.EventHandler(this.btnContarDinero_Click);
+            this.btnContarDinero.MouseEnter += new System.EventHandler(this.btnContarDinero_MouseEnter);
+            this.btnContarDinero.MouseLeave += new System.EventHandler(this.btnContarDinero_MouseLeave);
             // 
             // BtnVistaArqueo
             // 
-            this.BtnVistaArqueo.BackColor = System.Drawing.Color.SpringGreen;
+            this.BtnVistaArqueo.BackColor = System.Drawing.Color.White;
+            this.BtnVistaArqueo.FlatAppearance.BorderSize = 2;
+            this.BtnVistaArqueo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnVistaArqueo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnVistaArqueo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.BtnVistaArqueo.Location = new System.Drawing.Point(10, 230);
@@ -981,10 +1019,14 @@
             this.BtnVistaArqueo.Text = "Vista Previa\r\nArqueo de Caja";
             this.BtnVistaArqueo.UseVisualStyleBackColor = false;
             this.BtnVistaArqueo.Click += new System.EventHandler(this.BtnVistaArqueo_Click);
+            this.BtnVistaArqueo.MouseEnter += new System.EventHandler(this.BtnVistaArqueo_MouseEnter);
+            this.BtnVistaArqueo.MouseLeave += new System.EventHandler(this.BtnVistaArqueo_MouseLeave);
             // 
             // btnReporteVendido
             // 
-            this.btnReporteVendido.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnReporteVendido.BackColor = System.Drawing.Color.White;
+            this.btnReporteVendido.FlatAppearance.BorderSize = 2;
+            this.btnReporteVendido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporteVendido.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReporteVendido.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnReporteVendido.Location = new System.Drawing.Point(10, 186);
@@ -994,10 +1036,14 @@
             this.btnReporteVendido.Text = "Reporte de lo Vendido";
             this.btnReporteVendido.UseVisualStyleBackColor = false;
             this.btnReporteVendido.Click += new System.EventHandler(this.btnReporteVendido_Click);
+            this.btnReporteVendido.MouseEnter += new System.EventHandler(this.btnReporteVendido_MouseEnter);
+            this.btnReporteVendido.MouseLeave += new System.EventHandler(this.btnReporteVendido_MouseLeave);
             // 
             // btnReimpresionTickets
             // 
-            this.btnReimpresionTickets.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnReimpresionTickets.BackColor = System.Drawing.Color.White;
+            this.btnReimpresionTickets.FlatAppearance.BorderSize = 2;
+            this.btnReimpresionTickets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReimpresionTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReimpresionTickets.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnReimpresionTickets.Location = new System.Drawing.Point(10, 142);
@@ -1007,19 +1053,25 @@
             this.btnReimpresionTickets.Text = "Resumen de Caja\r\nCIerre de Cajero";
             this.btnReimpresionTickets.UseVisualStyleBackColor = false;
             this.btnReimpresionTickets.Click += new System.EventHandler(this.btnReimpresionTickets_Click);
+            this.btnReimpresionTickets.MouseEnter += new System.EventHandler(this.btnReimpresionTickets_MouseEnter);
+            this.btnReimpresionTickets.MouseLeave += new System.EventHandler(this.btnReimpresionTickets_MouseLeave);
             // 
-            // BtnAbrirCaja
+            // btnAbrirCaja
             // 
-            this.BtnAbrirCaja.BackColor = System.Drawing.Color.SpringGreen;
-            this.BtnAbrirCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAbrirCaja.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.BtnAbrirCaja.Location = new System.Drawing.Point(10, 10);
-            this.BtnAbrirCaja.Name = "BtnAbrirCaja";
-            this.BtnAbrirCaja.Size = new System.Drawing.Size(140, 44);
-            this.BtnAbrirCaja.TabIndex = 0;
-            this.BtnAbrirCaja.Text = "Abrir Caja";
-            this.BtnAbrirCaja.UseVisualStyleBackColor = false;
-            this.BtnAbrirCaja.Click += new System.EventHandler(this.BtnAbrirCaja_Click);
+            this.btnAbrirCaja.BackColor = System.Drawing.Color.White;
+            this.btnAbrirCaja.FlatAppearance.BorderSize = 2;
+            this.btnAbrirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAbrirCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAbrirCaja.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAbrirCaja.Location = new System.Drawing.Point(10, 10);
+            this.btnAbrirCaja.Name = "btnAbrirCaja";
+            this.btnAbrirCaja.Size = new System.Drawing.Size(140, 44);
+            this.btnAbrirCaja.TabIndex = 0;
+            this.btnAbrirCaja.Text = "Abrir Caja";
+            this.btnAbrirCaja.UseVisualStyleBackColor = false;
+            this.btnAbrirCaja.Click += new System.EventHandler(this.BtnAbrirCaja_Click);
+            this.btnAbrirCaja.MouseEnter += new System.EventHandler(this.btnAbrirCaja_MouseEnter);
+            this.btnAbrirCaja.MouseLeave += new System.EventHandler(this.btnAbrirCaja_MouseLeave);
             // 
             // TimerHora
             // 
@@ -1032,7 +1084,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.Olive;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(904, 547);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -1103,7 +1155,7 @@
         private System.Windows.Forms.Button BtnVistaArqueo;
         private System.Windows.Forms.Button btnReporteVendido;
         private System.Windows.Forms.Button btnReimpresionTickets;
-        private System.Windows.Forms.Button BtnAbrirCaja;
+        private System.Windows.Forms.Button btnAbrirCaja;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox txtParaDomicilio;
         private System.Windows.Forms.Label label18;

@@ -360,7 +360,6 @@ namespace Palatium
                 if (iMaximo == -1)
                 {
                     ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                    ok.ShowInTaskbar = false;
                     ok.ShowDialog();
                     goto reversa;
                 }
@@ -404,7 +403,6 @@ namespace Palatium
                 if (iMaximo == -1)
                 {
                     ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                    ok.ShowInTaskbar = false;
                     ok.ShowDialog();
                     goto reversa;
                 }
@@ -442,7 +440,6 @@ namespace Palatium
                 if (iMaximo == -1)
                 {
                     ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                    ok.ShowInTaskbar = false;
                     ok.ShowDialog();
                     goto reversa;
                 }
@@ -479,7 +476,6 @@ namespace Palatium
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
                     catchMensaje.LblMensaje.Text = sSql;
-                    catchMensaje.ShowInTaskbar = false;
                     catchMensaje.ShowDialog();
                     goto reversa;
                 }
@@ -547,7 +543,6 @@ namespace Palatium
                 if (iMaximo == -1)
                 {
                     ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                    ok.ShowInTaskbar = false;
                     ok.ShowDialog();
                     goto reversa;
                 }
@@ -667,7 +662,9 @@ namespace Palatium
                 //INSTRUCCION PARA CAMBIAR EL ESTADO A ABIERTA DE LA ORDEN
                 sSql = "";
                 sSql += "update cv403_cab_pedidos set" + Environment.NewLine;
-                sSql += "estado_orden = 'Abierta'" + Environment.NewLine;
+                sSql += "estado_orden = 'Abierta'," + Environment.NewLine;
+                sSql += "recargo_tarjeta = 0," + Environment.NewLine;
+                sSql += "remover_iva = 0" + Environment.NewLine; 
                 sSql += "where id_pedido = " + Convert.ToInt32(sIdOrden);
 
                 //EJECUTA INSTRUCCION SQL
@@ -703,7 +700,6 @@ namespace Palatium
             catch (Exception ex)
             {
                 catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowInTaskbar = false;
                 catchMensaje.ShowDialog();
             }
 
@@ -909,7 +905,6 @@ namespace Palatium
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
                         catchMensaje.LblMensaje.Text = sSql;
-                        catchMensaje.ShowInTaskbar = false;
                         catchMensaje.ShowDialog();
                         return false;
                     }
@@ -927,7 +922,6 @@ namespace Palatium
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
                         catchMensaje.LblMensaje.Text = sSql;
-                        catchMensaje.ShowInTaskbar = false;
                         catchMensaje.ShowDialog();
                         return false;
                     }
