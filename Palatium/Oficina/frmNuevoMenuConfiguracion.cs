@@ -692,5 +692,17 @@ namespace Palatium.Oficina
             verificarFormularios(movimiento, this);
             //this.verificarFormularios((Form)new frmRegistrarMovimientos(0), (Form)this);
         }
+
+        private void submenuCrearEmpresa_Click(object sender, EventArgs e)
+        {
+            Empresa.frmClienteEmpresarial clienteEmpresarial = new Empresa.frmClienteEmpresarial();
+            verificarFormularios(clienteEmpresarial, this);
+        }
+
+        private void submenuCrearEmpleados_Click(object sender, EventArgs e)
+        {
+            Empresa.frmEmpleadosEmpresas empleadosEmpresas = new Empresa.frmEmpleadosEmpresas();
+            verificarFormularios(empleadosEmpresas, this);
+        }
     }
 }

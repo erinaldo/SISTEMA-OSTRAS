@@ -78,27 +78,34 @@ namespace Palatium.Clases
                 dbTotalEntradasManuales = sumarEntradasSalidasManuales(1);
                 dbTotalSalidasManuales = sumarEntradasSalidasManuales(0);
 
-                dbIvaCobrado = extraerIva();
+                //dbIvaCobrado = extraerIva();
                 dbAhorroEmergencia = consultaProductosAhorro();
 
                 dbTotalVendido = dbTotalCobradoEfectivo + dbTotalCobradoTransferencias + dbTotalCobradoCheques + dbTotalCobradoTarjetas;
-                dbTotalEntrega = dbTotalVendido + dbTotalEntradasManuales - (dbTotalCobradoTransferencias + 
-                                 dbTotalCobradoCheques + dbTotalCobradoTarjetas + dbTotalSalidasManuales + 
-                                 dbIvaCobrado + dbAhorroEmergencia + dbAhorroEmergenciaManual);
+
+                dbTotalEntrega = dbTotalVendido + dbTotalEntradasManuales - dbTotalSalidasManuales -
+                                 dbAhorroEmergencia - dbAhorroEmergenciaManual;
+
+                //dbTotalEntrega = dbTotalVendido + dbTotalEntradasManuales - (dbTotalCobradoTransferencias + 
+                //                 dbTotalCobradoCheques + dbTotalCobradoTarjetas + dbTotalSalidasManuales + 
+                //                 dbAhorroEmergencia + dbAhorroEmergenciaManual);
                 //------------------------------------------------------------------------------
 
-                sTexto += "TOTAL VENDIDO :" + dbTotalVendido.ToString("N2").PadLeft(25, ' ') + Environment.NewLine;
+                sTexto += "COBROS REALIZADOS".PadLeft(28, ' ') + Environment.NewLine;
                 sTexto += "".PadLeft(40, '-') + Environment.NewLine;
                 sTexto += "* TOTAL EFECTIVO".PadRight(30, '_') + dbTotalCobradoEfectivo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
-                sTexto += "- TOTAL CHEQUES".PadRight(30, '_') + dbTotalCobradoCheques.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
-                sTexto += "- TOTAL TRANSFERENCIA".PadRight(30, '_') + dbTotalCobradoTransferencias.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
-                sTexto += "- TOTAL TARJETAS".PadRight(30, '_') + dbTotalCobradoTarjetas.ToString("N2").PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
-
+                sTexto += "* TOTAL CHEQUES".PadRight(30, '_') + dbTotalCobradoCheques.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                sTexto += "* TOTAL TRANSFERENCIA".PadRight(30, '_') + dbTotalCobradoTransferencias.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                sTexto += "* TOTAL TARJETAS".PadRight(30, '_') + dbTotalCobradoTarjetas.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                sTexto += "".PadLeft(40, '-') + Environment.NewLine;
+                sTexto += "TOTAL VENDIDO :" + dbTotalVendido.ToString("N2").PadLeft(25, ' ') + Environment.NewLine;
+                sTexto += "".PadLeft(40, '-') + Environment.NewLine;
+                
                 sTexto += "+ INGRESOS MANUALES".PadRight(30, '_') + dbTotalEntradasManuales.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
                 sTexto += "- SALIDAS MANUALES".PadRight(30, '_') + dbTotalSalidasManuales.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
-                sTexto += "- IVA REPORTADO".PadRight(30, '_') + dbIvaCobrado.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                //sTexto += "- IVA REPORTADO".PadRight(30, '_') + dbIvaCobrado.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
                 sTexto += "- PRODUCTOS AHORRO EMERGENCIA".PadRight(30, '_') + dbAhorroEmergencia.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
-                sTexto += "- AHORRO EMERGENCIA CAJA".PadRight(30, '_') + dbAhorroEmergencia.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                sTexto += "- AHORRO EMERGENCIA CAJA".PadRight(30, '_') + dbAhorroEmergenciaManual.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
                 sTexto += "".PadLeft(40, '-') + Environment.NewLine;
                 sTexto += "TOTAL A ENTREGAR:" + dbTotalEntrega.ToString("N2").PadLeft(23, ' ') + Environment.NewLine;
                 sTexto += "".PadLeft(40, '=') + Environment.NewLine;
@@ -173,7 +180,7 @@ namespace Palatium.Clases
                 sRetorno += "CAJERO        : " + dtConsulta.Rows[0]["cajero"].ToString() + Environment.NewLine;
                 sRetorno += "JORNADA       : " + dtConsulta.Rows[0]["jornada"].ToString() + Environment.NewLine;
 
-                dbAhorroEmergencia = Convert.ToDecimal(dtConsulta.Rows[0]["ahorro_emergencia"].ToString());
+                dbAhorroEmergenciaManual = Convert.ToDecimal(dtConsulta.Rows[0]["ahorro_emergencia"].ToString());
 
                 return sRetorno;
             }

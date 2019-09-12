@@ -325,6 +325,9 @@
   <data name="tipo_ambiente_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tipo_ambiente_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icono_menu_empleado" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icono_menu_empleado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="salir_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\salir_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -382,8 +385,8 @@
   <data name="icono_cliemtes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icono_cliemtes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="localidades_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\localidades_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="boton_mesas_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boton_mesas_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="comanda_anular" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\comanda_anular.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -520,6 +523,9 @@
   <data name="aceptar_peque_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\aceptar_peque_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="localidades_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\localidades_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="tarjeta_de_credito" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tarjeta-de-credito.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -651,9 +657,6 @@
   </data>
   <data name="cash_register_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cash_register_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="boton_mesas_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\boton_mesas_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="destino_impresion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\destino_impresion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -829,8 +832,8 @@
   <data name="icono_limpiar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icono_limpiar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arriba" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arriba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icono_anular_factura" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icono_anular_factura.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icono_login" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icono_login.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -891,6 +894,9 @@
   </data>
   <data name="guardar_ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\guardar_ico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icono_menu_empresa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icono_menu_empresa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="facturar_png1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\facturar_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1027,11 +1033,11 @@
   <data name="icono_funcionarios_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icono_funcionarios_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="mail_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mail_default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="registro_clientes_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\registro_clientes_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icono_anular_factura" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icono_anular_factura.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dolar_dashboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dolar_dashboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1050,6 +1056,9 @@
   </data>
   <data name="porcion_receta_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\porcion_receta_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arriba" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arriba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icono_boton_empleado" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icono_boton_empleado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1141,7 +1150,7 @@
   <data name="silla" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\silla.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mail_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mail_default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icono_menu_cliente_empresarial" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icono_menu_cliente_empresarial.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

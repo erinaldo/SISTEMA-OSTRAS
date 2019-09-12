@@ -781,7 +781,7 @@
             this.panel1.Location = new System.Drawing.Point(614, 20);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(733, 632);
+            this.panel1.Size = new System.Drawing.Size(729, 632);
             this.panel1.TabIndex = 8;
             // 
             // pictureBox1
@@ -858,7 +858,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1370, 668);
+            this.ClientSize = new System.Drawing.Size(1355, 668);
             this.ControlBox = false;
             this.Controls.Add(this.grupoAccesos);
             this.Controls.Add(this.btnAcerca);

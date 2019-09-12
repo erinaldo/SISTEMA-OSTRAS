@@ -94,6 +94,7 @@ namespace Palatium.Formularios
             txtX.Clear();
             txtY.Clear();
             cmbEstado.Text = "ACTIVO";
+            btnNuevo.Text = "Nuevo";
             //cmbSeccionMesa.SelectedIndex = 0;
             iIdMesa = 0;
             chkEditar.Visible = false;

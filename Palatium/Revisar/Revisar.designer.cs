@@ -515,7 +515,7 @@
             this.MinimizeBox = false;
             this.Name = "Revisar";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Revisar";
             this.Load += new System.EventHandler(this.Revisar_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Revisar_KeyDown);

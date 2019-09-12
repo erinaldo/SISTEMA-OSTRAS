@@ -263,7 +263,7 @@ namespace Palatium
                     ctlMDI = (MdiClient)ctl;
 
                     // Set the BackColor of the MdiClient control.
-                    ctlMDI.BackColor = this.BackColor;
+                    ctlMDI.BackColor = Color.FromArgb(192, 192, 255);
                 }
                 catch (InvalidCastException exc)
                 {

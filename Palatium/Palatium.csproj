@@ -3173,6 +3173,9 @@
     <None Include="Resources\icono_cambio_orden.png" />
     <None Include="Resources\icono_cliente_empresarial.png" />
     <None Include="Resources\icono_mesa_menu_2.png" />
+    <None Include="Resources\icono_menu_empleado.png" />
+    <None Include="Resources\icono_menu_empresa.png" />
+    <None Include="Resources\icono_menu_cliente_empresarial.png" />
     <Content Include="Resources\icono_sri_2.png" />
     <None Include="Resources\impresoras_menu.png" />
     <None Include="Resources\impresiones_nuevo.png" />

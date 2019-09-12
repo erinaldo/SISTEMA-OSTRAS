@@ -76,7 +76,8 @@ namespace Palatium.Cajero
                 sSql += "pos_mesa MESA ON MESA.id_pos_mesa = CP.id_pos_mesa" + Environment.NewLine;
                 sSql += "and MESA.estado = 'A'" + Environment.NewLine;
                 sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
-                sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
+                //sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
+                sSql += "and CP.estado_orden in ('Pagada', 'Cerrada')" + Environment.NewLine;
                 sSql += "and DP.id_producto = " + iIdProducto;
 
                 dtConsulta = new DataTable();

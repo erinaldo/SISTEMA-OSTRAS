@@ -1307,8 +1307,8 @@ namespace Palatium.Áreas
 
         private void frmAreasMesas_Load(object sender, EventArgs e)
         {
-            Clases.ClaseRedimension redimension = new Clases.ClaseRedimension();
-            redimension.ResizeForm(this, Program.iLargoPantalla, Program.iAnchoPantalla);
+            //Clases.ClaseRedimension redimension = new Clases.ClaseRedimension();
+            //redimension.ResizeForm(this, Program.iLargoPantalla, Program.iAnchoPantalla);
 
             Program.iIDMESA = 0;
             Program.iIdPersonaFacturador = 0;

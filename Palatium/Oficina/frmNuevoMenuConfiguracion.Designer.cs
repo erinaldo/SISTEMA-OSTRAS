@@ -48,6 +48,9 @@
             this.configuracionDeImpresorasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuImpresoras = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuDestinoImpresion = new System.Windows.Forms.ToolStripMenuItem();
+            this.clienteEmpresarialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.submenuCrearEmpresa = new System.Windows.Forms.ToolStripMenuItem();
+            this.submenuCrearEmpleados = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ddlMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.categoríasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -211,7 +214,8 @@
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
             this.formasDePagoToolStripMenuItem,
-            this.configuracionDeImpresorasToolStripMenuItem});
+            this.configuracionDeImpresorasToolStripMenuItem,
+            this.clienteEmpresarialToolStripMenuItem});
             this.ddlConfiguracion.Image = global::Palatium.Properties.Resources.ajustes_nuevo;
             this.ddlConfiguracion.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ddlConfiguracion.Name = "ddlConfiguracion";
@@ -231,7 +235,7 @@
             this.toolStripMenuItem1.Image = global::Palatium.Properties.Resources.configuraciones_generales_nuevo;
             this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(241, 36);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(250, 36);
             this.toolStripMenuItem1.Text = "Configuraciones Generales";
             // 
             // submenuJornadas
@@ -289,7 +293,7 @@
             this.toolStripMenuItem2.Image = global::Palatium.Properties.Resources.empleados_nuevo;
             this.toolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(241, 36);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(250, 36);
             this.toolStripMenuItem2.Text = "Empleados";
             // 
             // submenuCajeros
@@ -337,7 +341,7 @@
             this.formasDePagoToolStripMenuItem.Image = global::Palatium.Properties.Resources.formas_pago_nuevo;
             this.formasDePagoToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.formasDePagoToolStripMenuItem.Name = "formasDePagoToolStripMenuItem";
-            this.formasDePagoToolStripMenuItem.Size = new System.Drawing.Size(241, 36);
+            this.formasDePagoToolStripMenuItem.Size = new System.Drawing.Size(250, 36);
             this.formasDePagoToolStripMenuItem.Text = "Formas de Pago";
             // 
             // submenuMetodosPagos
@@ -375,7 +379,7 @@
             this.configuracionDeImpresorasToolStripMenuItem.Image = global::Palatium.Properties.Resources.configuracion_impresoras_nuevo;
             this.configuracionDeImpresorasToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.configuracionDeImpresorasToolStripMenuItem.Name = "configuracionDeImpresorasToolStripMenuItem";
-            this.configuracionDeImpresorasToolStripMenuItem.Size = new System.Drawing.Size(241, 36);
+            this.configuracionDeImpresorasToolStripMenuItem.Size = new System.Drawing.Size(250, 36);
             this.configuracionDeImpresorasToolStripMenuItem.Text = "Configuracion de Impresoras";
             // 
             // submenuImpresoras
@@ -395,6 +399,35 @@
             this.submenuDestinoImpresion.Size = new System.Drawing.Size(212, 36);
             this.submenuDestinoImpresion.Text = "Destinos de Impresión";
             this.submenuDestinoImpresion.Click += new System.EventHandler(this.submenuDestinoImpresion_Click);
+            // 
+            // clienteEmpresarialToolStripMenuItem
+            // 
+            this.clienteEmpresarialToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.submenuCrearEmpresa,
+            this.submenuCrearEmpleados});
+            this.clienteEmpresarialToolStripMenuItem.Image = global::Palatium.Properties.Resources.icono_menu_cliente_empresarial;
+            this.clienteEmpresarialToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.clienteEmpresarialToolStripMenuItem.Name = "clienteEmpresarialToolStripMenuItem";
+            this.clienteEmpresarialToolStripMenuItem.Size = new System.Drawing.Size(250, 36);
+            this.clienteEmpresarialToolStripMenuItem.Text = "Cliente Empresarial";
+            // 
+            // submenuCrearEmpresa
+            // 
+            this.submenuCrearEmpresa.Image = global::Palatium.Properties.Resources.icono_menu_empresa;
+            this.submenuCrearEmpresa.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.submenuCrearEmpresa.Name = "submenuCrearEmpresa";
+            this.submenuCrearEmpresa.Size = new System.Drawing.Size(177, 36);
+            this.submenuCrearEmpresa.Text = "Crear Empresa";
+            this.submenuCrearEmpresa.Click += new System.EventHandler(this.submenuCrearEmpresa_Click);
+            // 
+            // submenuCrearEmpleados
+            // 
+            this.submenuCrearEmpleados.Image = global::Palatium.Properties.Resources.icono_menu_empleado;
+            this.submenuCrearEmpleados.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.submenuCrearEmpleados.Name = "submenuCrearEmpleados";
+            this.submenuCrearEmpleados.Size = new System.Drawing.Size(177, 36);
+            this.submenuCrearEmpleados.Text = "Crear Empleados";
+            this.submenuCrearEmpleados.Click += new System.EventHandler(this.submenuCrearEmpleados_Click);
             // 
             // toolStripSeparator1
             // 
@@ -945,7 +978,7 @@
             this.submenuReporteTipoOrden.Image = global::Palatium.Properties.Resources.ventas_tipo_orden_menu;
             this.submenuReporteTipoOrden.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuReporteTipoOrden.Name = "submenuReporteTipoOrden";
-            this.submenuReporteTipoOrden.Size = new System.Drawing.Size(218, 38);
+            this.submenuReporteTipoOrden.Size = new System.Drawing.Size(217, 38);
             this.submenuReporteTipoOrden.Text = "Tipo de Orden";
             this.submenuReporteTipoOrden.Click += new System.EventHandler(this.submenuReporteTipoOrden_Click);
             // 
@@ -954,7 +987,7 @@
             this.submenuReportePorProducto.Image = global::Palatium.Properties.Resources.ventas_productos_menu;
             this.submenuReportePorProducto.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuReportePorProducto.Name = "submenuReportePorProducto";
-            this.submenuReportePorProducto.Size = new System.Drawing.Size(218, 38);
+            this.submenuReportePorProducto.Size = new System.Drawing.Size(217, 38);
             this.submenuReportePorProducto.Text = "Por Producto";
             this.submenuReportePorProducto.Click += new System.EventHandler(this.submenuReportePorProducto_Click);
             // 
@@ -963,7 +996,7 @@
             this.submenuReportePorCategoria.Image = global::Palatium.Properties.Resources.ventas_categoria_menu;
             this.submenuReportePorCategoria.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuReportePorCategoria.Name = "submenuReportePorCategoria";
-            this.submenuReportePorCategoria.Size = new System.Drawing.Size(218, 38);
+            this.submenuReportePorCategoria.Size = new System.Drawing.Size(217, 38);
             this.submenuReportePorCategoria.Text = "Por Categoría";
             this.submenuReportePorCategoria.Click += new System.EventHandler(this.submenuReportePorCategoria_Click);
             // 
@@ -972,7 +1005,7 @@
             this.submenuReportePorCliente.Image = global::Palatium.Properties.Resources.ventas_clientes_menu;
             this.submenuReportePorCliente.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuReportePorCliente.Name = "submenuReportePorCliente";
-            this.submenuReportePorCliente.Size = new System.Drawing.Size(218, 38);
+            this.submenuReportePorCliente.Size = new System.Drawing.Size(217, 38);
             this.submenuReportePorCliente.Text = "Por Cliente";
             this.submenuReportePorCliente.Click += new System.EventHandler(this.submenuReportePorCliente_Click);
             // 
@@ -981,7 +1014,7 @@
             this.submenuReporteResumenVentas.Image = global::Palatium.Properties.Resources.ventas_resumen_ventas_menu;
             this.submenuReporteResumenVentas.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuReporteResumenVentas.Name = "submenuReporteResumenVentas";
-            this.submenuReporteResumenVentas.Size = new System.Drawing.Size(218, 38);
+            this.submenuReporteResumenVentas.Size = new System.Drawing.Size(217, 38);
             this.submenuReporteResumenVentas.Text = "Resumen de Ventas";
             this.submenuReporteResumenVentas.Click += new System.EventHandler(this.submenuReporteResumenVentas_Click);
             // 
@@ -990,7 +1023,7 @@
             this.submenuReporteTipoOrdenDetallado.Image = global::Palatium.Properties.Resources.ventas_orden_detallada_menu;
             this.submenuReporteTipoOrdenDetallado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuReporteTipoOrdenDetallado.Name = "submenuReporteTipoOrdenDetallado";
-            this.submenuReporteTipoOrdenDetallado.Size = new System.Drawing.Size(218, 38);
+            this.submenuReporteTipoOrdenDetallado.Size = new System.Drawing.Size(217, 38);
             this.submenuReporteTipoOrdenDetallado.Text = "Tipo de Orden Detallado";
             this.submenuReporteTipoOrdenDetallado.Click += new System.EventHandler(this.submenuReporteTipoOrdenDetallado_Click);
             // 
@@ -999,7 +1032,7 @@
             this.submenuReporteFormasPago.Image = global::Palatium.Properties.Resources.ventas_formas_pago_menu;
             this.submenuReporteFormasPago.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuReporteFormasPago.Name = "submenuReporteFormasPago";
-            this.submenuReporteFormasPago.Size = new System.Drawing.Size(218, 38);
+            this.submenuReporteFormasPago.Size = new System.Drawing.Size(217, 38);
             this.submenuReporteFormasPago.Text = "Formas de Pago";
             this.submenuReporteFormasPago.Click += new System.EventHandler(this.submenuReporteFormasPago_Click);
             // 
@@ -1008,7 +1041,7 @@
             this.submenuDashboard.Image = global::Palatium.Properties.Resources.dashboard_menu;
             this.submenuDashboard.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuDashboard.Name = "submenuDashboard";
-            this.submenuDashboard.Size = new System.Drawing.Size(218, 38);
+            this.submenuDashboard.Size = new System.Drawing.Size(217, 38);
             this.submenuDashboard.Text = "DashBoard";
             this.submenuDashboard.Click += new System.EventHandler(this.submenuDashboard_Click);
             // 
@@ -1087,7 +1120,7 @@
             this.bodegasToolStripMenuItem.Image = global::Palatium.Properties.Resources.bodegas_nuevo;
             this.bodegasToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.bodegasToolStripMenuItem.Name = "bodegasToolStripMenuItem";
-            this.bodegasToolStripMenuItem.Size = new System.Drawing.Size(163, 36);
+            this.bodegasToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
             this.bodegasToolStripMenuItem.Text = "Bodegas";
             // 
             // submenuDefinicionCorta
@@ -1116,7 +1149,7 @@
             this.materiaPrimaToolStripMenuItem.Image = global::Palatium.Properties.Resources.materia_prima_nuevo;
             this.materiaPrimaToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.materiaPrimaToolStripMenuItem.Name = "materiaPrimaToolStripMenuItem";
-            this.materiaPrimaToolStripMenuItem.Size = new System.Drawing.Size(163, 36);
+            this.materiaPrimaToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
             this.materiaPrimaToolStripMenuItem.Text = "Materia Prima";
             // 
             // submenuIngresoBodega
@@ -1144,7 +1177,7 @@
             this.transferenciasToolStripMenuItem.Image = global::Palatium.Properties.Resources.transferencias_nuevo;
             this.transferenciasToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.transferenciasToolStripMenuItem.Name = "transferenciasToolStripMenuItem";
-            this.transferenciasToolStripMenuItem.Size = new System.Drawing.Size(163, 36);
+            this.transferenciasToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
             this.transferenciasToolStripMenuItem.Text = "Transferencias";
             // 
             // submenuDespachoEntreBodegas
@@ -1169,7 +1202,7 @@
             this.reportesToolStripMenuItem.Image = global::Palatium.Properties.Resources.informe_bodega_nuevo;
             this.reportesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(163, 36);
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
             this.reportesToolStripMenuItem.Text = "Reportes";
             // 
             // submenuReporteMovimientosBodega
@@ -1301,7 +1334,7 @@
             this.submenuClasificacionReceta.Image = global::Palatium.Properties.Resources.clasificacion_receta_menu;
             this.submenuClasificacionReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuClasificacionReceta.Name = "submenuClasificacionReceta";
-            this.submenuClasificacionReceta.Size = new System.Drawing.Size(215, 36);
+            this.submenuClasificacionReceta.Size = new System.Drawing.Size(214, 36);
             this.submenuClasificacionReceta.Text = "Clasificación de Recetas";
             this.submenuClasificacionReceta.Click += new System.EventHandler(this.submenuClasificacionReceta_Click);
             // 
@@ -1310,7 +1343,7 @@
             this.submenuTipoReceta.Image = global::Palatium.Properties.Resources.tipo_receta_menu;
             this.submenuTipoReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuTipoReceta.Name = "submenuTipoReceta";
-            this.submenuTipoReceta.Size = new System.Drawing.Size(215, 36);
+            this.submenuTipoReceta.Size = new System.Drawing.Size(214, 36);
             this.submenuTipoReceta.Text = "Tipos de Recetas";
             this.submenuTipoReceta.Click += new System.EventHandler(this.submenuTipoReceta_Click);
             // 
@@ -1319,7 +1352,7 @@
             this.submenuOrigenReceta.Image = global::Palatium.Properties.Resources.origen_receta_menu;
             this.submenuOrigenReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuOrigenReceta.Name = "submenuOrigenReceta";
-            this.submenuOrigenReceta.Size = new System.Drawing.Size(215, 36);
+            this.submenuOrigenReceta.Size = new System.Drawing.Size(214, 36);
             this.submenuOrigenReceta.Text = "Origen de Recetas";
             this.submenuOrigenReceta.Click += new System.EventHandler(this.submenuOrigenReceta_Click);
             // 
@@ -1328,7 +1361,7 @@
             this.submenuTemperaturaServicio.Image = global::Palatium.Properties.Resources.temperatura_menu;
             this.submenuTemperaturaServicio.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuTemperaturaServicio.Name = "submenuTemperaturaServicio";
-            this.submenuTemperaturaServicio.Size = new System.Drawing.Size(215, 36);
+            this.submenuTemperaturaServicio.Size = new System.Drawing.Size(214, 36);
             this.submenuTemperaturaServicio.Text = "Temperatura de Servicio";
             this.submenuTemperaturaServicio.Click += new System.EventHandler(this.submenuTemperaturaServicio_Click);
             // 
@@ -1337,7 +1370,7 @@
             this.submenuPorcionReceta.Image = global::Palatium.Properties.Resources.porcion_receta_menu;
             this.submenuPorcionReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuPorcionReceta.Name = "submenuPorcionReceta";
-            this.submenuPorcionReceta.Size = new System.Drawing.Size(215, 36);
+            this.submenuPorcionReceta.Size = new System.Drawing.Size(214, 36);
             this.submenuPorcionReceta.Text = "Porción de Recetas";
             this.submenuPorcionReceta.Click += new System.EventHandler(this.submenuPorcionReceta_Click);
             // 
@@ -1517,7 +1550,7 @@
             this.submenuFEEmisor.Image = global::Palatium.Properties.Resources.emisor_fe_nuevo;
             this.submenuFEEmisor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFEEmisor.Name = "submenuFEEmisor";
-            this.submenuFEEmisor.Size = new System.Drawing.Size(227, 40);
+            this.submenuFEEmisor.Size = new System.Drawing.Size(226, 40);
             this.submenuFEEmisor.Text = "Emisor";
             this.submenuFEEmisor.Click += new System.EventHandler(this.submenuFEEmisor_Click);
             // 
@@ -1526,7 +1559,7 @@
             this.submenuFEEstablecimientos.Image = global::Palatium.Properties.Resources.establecimiento_fe_menu;
             this.submenuFEEstablecimientos.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFEEstablecimientos.Name = "submenuFEEstablecimientos";
-            this.submenuFEEstablecimientos.Size = new System.Drawing.Size(227, 40);
+            this.submenuFEEstablecimientos.Size = new System.Drawing.Size(226, 40);
             this.submenuFEEstablecimientos.Text = "Establecimientos";
             this.submenuFEEstablecimientos.Click += new System.EventHandler(this.submenuFEEstablecimientos_Click);
             // 
@@ -1535,7 +1568,7 @@
             this.submenuFEDirectorios.Image = global::Palatium.Properties.Resources.directorios_fe_menu;
             this.submenuFEDirectorios.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFEDirectorios.Name = "submenuFEDirectorios";
-            this.submenuFEDirectorios.Size = new System.Drawing.Size(227, 40);
+            this.submenuFEDirectorios.Size = new System.Drawing.Size(226, 40);
             this.submenuFEDirectorios.Text = "Directorios";
             this.submenuFEDirectorios.Click += new System.EventHandler(this.submenuFEDirectorios_Click);
             // 
@@ -1544,7 +1577,7 @@
             this.submenuFEParametros.Image = global::Palatium.Properties.Resources.configuraciones_menu;
             this.submenuFEParametros.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFEParametros.Name = "submenuFEParametros";
-            this.submenuFEParametros.Size = new System.Drawing.Size(227, 40);
+            this.submenuFEParametros.Size = new System.Drawing.Size(226, 40);
             this.submenuFEParametros.Text = "Parámetros";
             this.submenuFEParametros.Click += new System.EventHandler(this.submenuFEParametros_Click);
             // 
@@ -1553,7 +1586,7 @@
             this.submenuFETipoEmision.Image = global::Palatium.Properties.Resources.emision_menu;
             this.submenuFETipoEmision.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFETipoEmision.Name = "submenuFETipoEmision";
-            this.submenuFETipoEmision.Size = new System.Drawing.Size(227, 40);
+            this.submenuFETipoEmision.Size = new System.Drawing.Size(226, 40);
             this.submenuFETipoEmision.Text = "Tipo de Emisión";
             this.submenuFETipoEmision.Click += new System.EventHandler(this.submenuFETipoEmision_Click);
             // 
@@ -1562,7 +1595,7 @@
             this.submenuFETipoAmbiente.Image = global::Palatium.Properties.Resources.tipo_ambiente_menu;
             this.submenuFETipoAmbiente.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFETipoAmbiente.Name = "submenuFETipoAmbiente";
-            this.submenuFETipoAmbiente.Size = new System.Drawing.Size(227, 40);
+            this.submenuFETipoAmbiente.Size = new System.Drawing.Size(226, 40);
             this.submenuFETipoAmbiente.Text = "Tipo de Ambiente";
             this.submenuFETipoAmbiente.Click += new System.EventHandler(this.submenuFETipoAmbiente_Click);
             // 
@@ -1571,7 +1604,7 @@
             this.submenuFETipoCertificado.Image = global::Palatium.Properties.Resources.tipo_certificado_menu;
             this.submenuFETipoCertificado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFETipoCertificado.Name = "submenuFETipoCertificado";
-            this.submenuFETipoCertificado.Size = new System.Drawing.Size(227, 40);
+            this.submenuFETipoCertificado.Size = new System.Drawing.Size(226, 40);
             this.submenuFETipoCertificado.Text = "Tipo de Certificado Digital";
             this.submenuFETipoCertificado.Click += new System.EventHandler(this.submenuFETipoCertificado_Click);
             // 
@@ -1766,6 +1799,9 @@
         private System.Windows.Forms.ToolStripDropDownButton ddPalatiumContable;
         private System.Windows.Forms.ToolStripMenuItem subMenuCargos;
         private System.Windows.Forms.ToolStripMenuItem submenuMovimientoCaja;
+        private System.Windows.Forms.ToolStripMenuItem clienteEmpresarialToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem submenuCrearEmpresa;
+        private System.Windows.Forms.ToolStripMenuItem submenuCrearEmpleados;
 
     }
 }

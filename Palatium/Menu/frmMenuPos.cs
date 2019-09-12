@@ -1278,8 +1278,8 @@ namespace Palatium.Menú
 
         private void frmMenuPos_Load(object sender, EventArgs e)
         {
-            Clases.ClaseRedimension redimension = new Clases.ClaseRedimension();
-            redimension.ResizeForm(this, Program.iLargoPantalla, Program.iAnchoPantalla);
+            //Clases.ClaseRedimension redimension = new Clases.ClaseRedimension();
+            //redimension.ResizeForm(this, Program.iLargoPantalla, Program.iAnchoPantalla);
 
             extraerContactos();           
 

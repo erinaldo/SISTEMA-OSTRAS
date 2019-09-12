@@ -1031,7 +1031,7 @@ namespace Palatium.Cajero
             txtTotalCortesias.Text = dTotalPagadoCortesiaP.ToString("N2");
             consultaProductosAhorro();
             extraerIva();
-
+            cargarCuentasPorCobrar();
             recalcularValores();
 
             //txtTotalCaja.Text = (Convert.ToDouble(txtTotalVendido.Text) + Convert.ToDouble(txtEntradasManuales.Text) - Convert.ToDouble(txtSalidasManuales.Text)).ToString("N2");
@@ -1204,6 +1204,7 @@ namespace Palatium.Cajero
                             sSql += "update pos_cierre_cajero set" + Environment.NewLine;
                             sSql += "fecha_cierre = '" + sFechaCierre.Substring(0, 10) + "'," + Environment.NewLine;
                             sSql += "hora_cierre = '" + sHoraCierre + "'," + Environment.NewLine;
+                            sSql += "ahorro_emergencia = " + Convert.ToDecimal(txtAhorroManual.Text.Trim()) + "," + Environment.NewLine;
                             sSql += "estado_cierre_cajero = 'Cerrada' " + Environment.NewLine;
                             sSql += "where id_pos_cierre_cajero = " + Program.iIdPosCierreCajero;
 
@@ -1218,6 +1219,9 @@ namespace Palatium.Cajero
 
                             ReportesTextBox.frmVerResumenCaja resumen = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
                             resumen.ShowDialog();
+
+                            ReportesTextBox.frmVerReportePropietario reporte = new ReportesTextBox.frmVerReportePropietario(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue));
+                            reporte.ShowDialog();
 
                             //ReportesTextBox.frmReporteVendido vendido = new ReportesTextBox.frmReporteVendido(sFecha, 1, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
                             //vendido.ShowDialog();

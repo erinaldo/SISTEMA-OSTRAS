@@ -679,8 +679,8 @@ namespace Palatium
 
         private void VerificarCuentaMesa_Load(object sender, EventArgs e)
         {
-            Clases.ClaseRedimension redimension = new Clases.ClaseRedimension();
-            redimension.ResizeForm(this, Program.iLargoPantalla, Program.iAnchoPantalla);
+            //Clases.ClaseRedimension redimension = new Clases.ClaseRedimension();
+            //redimension.ResizeForm(this, Program.iLargoPantalla, Program.iAnchoPantalla);
         }
 
         private void VerificarCuentaMesa_KeyDown(object sender, KeyEventArgs e)

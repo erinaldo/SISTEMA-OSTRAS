@@ -505,6 +505,8 @@ namespace Palatium.Empresa
          {
              Decimal dSubtotalConIva = 0;
              Decimal dSubtotalCero = 0;
+             Decimal dbValorIva;
+             Decimal dbSumaIva = 0;
              dTotalDebido = 0;
 
              for (int i = 0; i < dgvPedido.Rows.Count; ++i)
@@ -517,11 +519,13 @@ namespace Palatium.Empresa
                  else
                  {
                      dSubtotalConIva += Convert.ToDecimal(dgvPedido.Rows[i].Cells["cantidad"].Value.ToString()) * Convert.ToDecimal(dgvPedido.Rows[i].Cells["valuni"].Value.ToString());
+                     dbValorIva = Convert.ToDecimal(dgvPedido.Rows[i].Cells["cantidad"].Value.ToString()) * Convert.ToDecimal(dgvPedido.Rows[i].Cells["valuni"].Value.ToString()) * Convert.ToDecimal(Program.iva);
+                     dbSumaIva += dbValorIva;
                  }
              }
 
              //dTotalDebido = num1 + num2 - num3 - num4 + (num1 - num3) * Convert.ToDecimal(Program.iva) + num7;
-             dTotalDebido = dSubtotalConIva + dSubtotalCero;
+             dTotalDebido = dSubtotalConIva + dSubtotalCero + dbSumaIva;
              lblTotal.Text = "$ " + dTotalDebido.ToString("N2");
          }
 
@@ -808,11 +812,11 @@ namespace Palatium.Empresa
 
                  if (Program.iImprimirCocina == 1)
                  {
-                     if (Program.iEjecutarImpresion == 1)
-                     {
-                         Pedidos.frmVerReporteCocinaTextBox cocina = new Pedidos.frmVerReporteCocinaTextBox(iIdPedido.ToString(), 1);
-                         cocina.ShowDialog();
-                     }
+                     //if (Program.iEjecutarImpresion == 1)
+                     //{
+                     //    Pedidos.frmVerReporteCocinaTextBox cocina = new Pedidos.frmVerReporteCocinaTextBox(iIdPedido.ToString(), 1);
+                     //    cocina.ShowDialog();
+                     //}
 
                      ReportesTextBox.frmVerPrecuentaEmpresaTextBox precuenta = new ReportesTextBox.frmVerPrecuentaEmpresaTextBox(iIdPedido.ToString(), 1);
                      precuenta.ShowDialog();

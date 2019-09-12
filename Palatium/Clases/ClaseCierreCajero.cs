@@ -1099,14 +1099,14 @@ namespace Palatium.Clases
                 llenarCuentasCanceladas();
                 sTexto += ("TOTAL CUENTAS CANCELADAS: ".PadRight(31, ' ') + dSumaTotalCuentasAnuladas.ToString("N2").PadLeft(9, ' ')) + Environment.NewLine;
 
-                //AQUI CUENTAS CLIENTE EMPRESARIAL
-                sTexto += Environment.NewLine;
-                string sCuentaCliente = cuentasClienteEmpresarial();
+                ////AQUI CUENTAS CLIENTE EMPRESARIAL
+                //sTexto += Environment.NewLine;
+                //string sCuentaCliente = cuentasClienteEmpresarial();
 
-                if ((sCuentaCliente != "ERROR") && (sCuentaCliente != ""))
-                {
-                    sTexto += sCuentaCliente;
-                }
+                //if ((sCuentaCliente != "ERROR") && (sCuentaCliente != ""))
+                //{
+                //    sTexto += sCuentaCliente;
+                //}
 
                 //AQUI AHORRO DE EMERGENCIA
                 sTexto += Environment.NewLine;

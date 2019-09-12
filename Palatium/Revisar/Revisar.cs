@@ -796,8 +796,8 @@ namespace Palatium.Revisar
 
         private void Revisar_Load(object sender, EventArgs e)
         {
-            Clases.ClaseRedimension redimension = new Clases.ClaseRedimension();
-            redimension.ResizeForm(this, Program.iLargoPantalla, Program.iAnchoPantalla);
+            //Clases.ClaseRedimension redimension = new Clases.ClaseRedimension();
+            //redimension.ResizeForm(this, Program.iLargoPantalla, Program.iAnchoPantalla);
 
             cmbLocalidades.SelectedIndexChanged -= new EventHandler(cmbLocalidades_SelectedIndexChanged);
             llenarComboLocalidades();

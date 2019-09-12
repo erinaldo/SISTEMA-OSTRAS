@@ -68,7 +68,7 @@
             // 
             this.btnSiguienteEmpleado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnSiguienteEmpleado.Image = global::Palatium.Properties.Resources.derecha;
-            this.btnSiguienteEmpleado.Location = new System.Drawing.Point(748, 618);
+            this.btnSiguienteEmpleado.Location = new System.Drawing.Point(549, 618);
             this.btnSiguienteEmpleado.Name = "btnSiguienteEmpleado";
             this.btnSiguienteEmpleado.Size = new System.Drawing.Size(82, 71);
             this.btnSiguienteEmpleado.TabIndex = 115;
@@ -81,7 +81,7 @@
             this.btnAnteriorEmpleado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnAnteriorEmpleado.Enabled = false;
             this.btnAnteriorEmpleado.Image = global::Palatium.Properties.Resources.izquierda;
-            this.btnAnteriorEmpleado.Location = new System.Drawing.Point(666, 618);
+            this.btnAnteriorEmpleado.Location = new System.Drawing.Point(467, 618);
             this.btnAnteriorEmpleado.Name = "btnAnteriorEmpleado";
             this.btnAnteriorEmpleado.Size = new System.Drawing.Size(82, 71);
             this.btnAnteriorEmpleado.TabIndex = 114;
@@ -93,7 +93,7 @@
             // 
             this.btnSiguienteEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnSiguienteEmpresa.Image = global::Palatium.Properties.Resources.derecha;
-            this.btnSiguienteEmpresa.Location = new System.Drawing.Point(292, 618);
+            this.btnSiguienteEmpresa.Location = new System.Drawing.Point(93, 618);
             this.btnSiguienteEmpresa.Name = "btnSiguienteEmpresa";
             this.btnSiguienteEmpresa.Size = new System.Drawing.Size(82, 71);
             this.btnSiguienteEmpresa.TabIndex = 113;
@@ -105,7 +105,7 @@
             this.btnAnteriorEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnAnteriorEmpresa.Enabled = false;
             this.btnAnteriorEmpresa.Image = global::Palatium.Properties.Resources.izquierda;
-            this.btnAnteriorEmpresa.Location = new System.Drawing.Point(211, 618);
+            this.btnAnteriorEmpresa.Location = new System.Drawing.Point(12, 618);
             this.btnAnteriorEmpresa.Name = "btnAnteriorEmpresa";
             this.btnAnteriorEmpresa.Size = new System.Drawing.Size(82, 71);
             this.btnAnteriorEmpresa.TabIndex = 112;
@@ -137,13 +137,14 @@
             this.btnAgregarEmpleado.Font = new System.Drawing.Font("Maiandra GD", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarEmpleado.Image = global::Palatium.Properties.Resources.icono_boton_empleado;
             this.btnAgregarEmpleado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregarEmpleado.Location = new System.Drawing.Point(467, 618);
+            this.btnAgregarEmpleado.Location = new System.Drawing.Point(648, 618);
             this.btnAgregarEmpleado.Name = "btnAgregarEmpleado";
             this.btnAgregarEmpleado.Size = new System.Drawing.Size(168, 71);
             this.btnAgregarEmpleado.TabIndex = 121;
             this.btnAgregarEmpleado.Text = "Agregar\r\nEmpleado";
             this.btnAgregarEmpleado.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregarEmpleado.UseVisualStyleBackColor = false;
+            this.btnAgregarEmpleado.Visible = false;
             this.btnAgregarEmpleado.Click += new System.EventHandler(this.btnAgregarEmpleado_Click);
             // 
             // btnAgregarEmpresa
@@ -152,13 +153,14 @@
             this.btnAgregarEmpresa.Font = new System.Drawing.Font("Maiandra GD", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarEmpresa.Image = global::Palatium.Properties.Resources.icono_boton_empresa;
             this.btnAgregarEmpresa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregarEmpresa.Location = new System.Drawing.Point(12, 618);
+            this.btnAgregarEmpresa.Location = new System.Drawing.Point(206, 618);
             this.btnAgregarEmpresa.Name = "btnAgregarEmpresa";
             this.btnAgregarEmpresa.Size = new System.Drawing.Size(168, 71);
             this.btnAgregarEmpresa.TabIndex = 120;
             this.btnAgregarEmpresa.Text = "Agregar\r\nEmpresas";
             this.btnAgregarEmpresa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregarEmpresa.UseVisualStyleBackColor = false;
+            this.btnAgregarEmpresa.Visible = false;
             this.btnAgregarEmpresa.Click += new System.EventHandler(this.btnAgregarEmpresa_Click);
             // 
             // pnlEmpleados

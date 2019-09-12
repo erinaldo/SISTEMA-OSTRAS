@@ -71,7 +71,8 @@ namespace Palatium.Cajero
 
                 sSql = "";
                 sSql += "select DET.id_producto, sum(DET.cantidad) CANTIDAD, NOM.nombre," + Environment.NewLine;
-                sSql += "sum(DET.cantidad *(((DET.precio_unitario + valor_iva+ valor_otro)-valor_dscto))) TOTAL" + Environment.NewLine;
+                //sSql += "sum(DET.cantidad *(((DET.precio_unitario + valor_iva+ valor_otro)-valor_dscto))) TOTAL" + Environment.NewLine;
+                sSql += "ltrim(str(isnull(sum(DET.cantidad *(((DET.precio_unitario + valor_iva+ valor_otro)-valor_dscto))), 0),10, 2)) TOTAL" + Environment.NewLine;
                 sSql += "from cv403_det_pedidos DET inner join" + Environment.NewLine;
                 sSql += "cv401_nombre_productos NOM on DET.id_producto = NOM.id_producto" + Environment.NewLine;
                 sSql += "and NOM.estado = 'A' inner join" + Environment.NewLine;
@@ -82,7 +83,8 @@ namespace Palatium.Cajero
                 sSql += "and PROD.estado = 'A'" + Environment.NewLine;
                 sSql += "where CAB.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and CAB.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
-                sSql += "and CAB.estado_orden = 'Pagada'" + Environment.NewLine;
+                //sSql += "and CAB.estado_orden = 'Pagada'" + Environment.NewLine;
+                sSql += "and CAB.estado_orden in ('Pagada', 'Cerrada')" + Environment.NewLine;
 
                 if (Convert.ToInt32(cmbTipoProducto.SelectedValue) != 0)
                 {
