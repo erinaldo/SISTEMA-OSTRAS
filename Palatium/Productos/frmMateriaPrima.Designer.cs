@@ -35,11 +35,9 @@
             this.grupoPrecio = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.cmbCompra = new MisControles.ComboDatos();
             this.label20 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.cmbConsumo = new MisControles.ComboDatos();
             this.label14 = new System.Windows.Forms.Label();
             this.txtPrecioMinorista = new System.Windows.Forms.TextBox();
             this.lblUnidadCompra = new System.Windows.Forms.Label();
@@ -95,6 +93,8 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.cmbCompra = new System.Windows.Forms.ComboBox();
+            this.cmbConsumo = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.grupoPrecio.SuspendLayout();
             this.grupoDatos.SuspendLayout();
@@ -158,13 +158,13 @@
             // 
             // grupoPrecio
             // 
+            this.grupoPrecio.Controls.Add(this.cmbConsumo);
+            this.grupoPrecio.Controls.Add(this.cmbCompra);
             this.grupoPrecio.Controls.Add(this.label10);
             this.grupoPrecio.Controls.Add(this.label19);
-            this.grupoPrecio.Controls.Add(this.cmbCompra);
             this.grupoPrecio.Controls.Add(this.label20);
             this.grupoPrecio.Controls.Add(this.label11);
             this.grupoPrecio.Controls.Add(this.label13);
-            this.grupoPrecio.Controls.Add(this.cmbConsumo);
             this.grupoPrecio.Controls.Add(this.label14);
             this.grupoPrecio.Controls.Add(this.txtPrecioMinorista);
             this.grupoPrecio.Controls.Add(this.lblUnidadCompra);
@@ -211,22 +211,13 @@
             this.label19.TabIndex = 77;
             this.label19.Text = "*";
             // 
-            // cmbCompra
-            // 
-            this.cmbCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.cmbCompra.FormattingEnabled = true;
-            this.cmbCompra.Location = new System.Drawing.Point(133, 180);
-            this.cmbCompra.Name = "cmbCompra";
-            this.cmbCompra.Size = new System.Drawing.Size(111, 21);
-            this.cmbCompra.TabIndex = 44;
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.BackColor = System.Drawing.Color.Transparent;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.Red;
-            this.label20.Location = new System.Drawing.Point(120, 185);
+            this.label20.Location = new System.Drawing.Point(120, 182);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(14, 18);
             this.label20.TabIndex = 76;
@@ -256,15 +247,6 @@
             this.label13.TabIndex = 74;
             this.label13.Text = "*";
             // 
-            // cmbConsumo
-            // 
-            this.cmbConsumo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.cmbConsumo.FormattingEnabled = true;
-            this.cmbConsumo.Location = new System.Drawing.Point(133, 202);
-            this.cmbConsumo.Name = "cmbConsumo";
-            this.cmbConsumo.Size = new System.Drawing.Size(111, 21);
-            this.cmbConsumo.TabIndex = 45;
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -293,7 +275,7 @@
             this.lblUnidadCompra.BackColor = System.Drawing.Color.Transparent;
             this.lblUnidadCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnidadCompra.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblUnidadCompra.Location = new System.Drawing.Point(17, 184);
+            this.lblUnidadCompra.Location = new System.Drawing.Point(17, 181);
             this.lblUnidadCompra.Name = "lblUnidadCompra";
             this.lblUnidadCompra.Size = new System.Drawing.Size(100, 15);
             this.lblUnidadCompra.TabIndex = 46;
@@ -927,6 +909,24 @@
             this.dgvProductos.TabIndex = 28;
             this.dgvProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellDoubleClick);
             // 
+            // cmbCompra
+            // 
+            this.cmbCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCompra.FormattingEnabled = true;
+            this.cmbCompra.Location = new System.Drawing.Point(133, 178);
+            this.cmbCompra.Name = "cmbCompra";
+            this.cmbCompra.Size = new System.Drawing.Size(111, 21);
+            this.cmbCompra.TabIndex = 73;
+            // 
+            // cmbConsumo
+            // 
+            this.cmbConsumo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConsumo.FormattingEnabled = true;
+            this.cmbConsumo.Location = new System.Drawing.Point(133, 204);
+            this.cmbConsumo.Name = "cmbConsumo";
+            this.cmbConsumo.Size = new System.Drawing.Size(111, 21);
+            this.cmbConsumo.TabIndex = 78;
+            // 
             // frmMateriaPrima
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1002,8 +1002,6 @@
         private System.Windows.Forms.CheckBox chkExpiraProductos;
         private System.Windows.Forms.TextBox txtPrecioMinorista;
         private System.Windows.Forms.Label label6;
-        private MisControles.ComboDatos cmbCompra;
-        private MisControles.ComboDatos cmbConsumo;
         private System.Windows.Forms.Label lblUnidadCompra;
         private System.Windows.Forms.Label lblUniConsumo;
         private System.Windows.Forms.RadioButton rdbReferenciaInsumos;
@@ -1034,5 +1032,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox cmbCompra;
+        private System.Windows.Forms.ComboBox cmbConsumo;
     }
 }

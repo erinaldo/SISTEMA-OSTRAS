@@ -181,8 +181,25 @@ namespace Palatium.Productos
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
 
-                cmbCompra.llenar(dtConsulta, sSql);
-                cmbCompra.SelectedIndex = 24;
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    cmbCompra.DisplayMember = "valor_texto";
+                    cmbCompra.ValueMember = "correlativo";
+                    cmbCompra.DataSource = dtConsulta;
+
+                    //if (cmbCompra.Items.Count > 22)
+                    //{
+                    //    cmbCompra.SelectedIndex = 22;
+                    //}
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
             }
 
             catch (Exception ex)
@@ -205,8 +222,25 @@ namespace Palatium.Productos
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
 
-                cmbConsumo.llenar(dtConsulta, sSql);
-                cmbConsumo.SelectedIndex = 24;
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    cmbConsumo.DisplayMember = "valor_texto";
+                    cmbConsumo.ValueMember = "correlativo";
+                    cmbConsumo.DataSource = dtConsulta;
+
+                    //if (cmbConsumo.Items.Count > 22)
+                    //{
+                    //    cmbConsumo.SelectedIndex = 22;
+                    //}
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
             }
 
             catch (Exception ex)

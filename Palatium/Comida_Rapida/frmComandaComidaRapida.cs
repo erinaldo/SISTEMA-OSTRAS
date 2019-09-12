@@ -199,7 +199,7 @@ namespace Palatium.Comida_Rapida
                         }
                     }
 
-                    pnlComanda.Controls.Add(pnlFamilias[iPosicionX, iPosicionY]);
+                    //pnlComanda.Controls.Add(pnlFamilias[iPosicionX, iPosicionY]);
 
                     iPosicionX++;
                     iCoordenadaXPanel += 306;
