@@ -314,7 +314,6 @@ namespace Palatium.Oficina
                 if (!conexion.GFun_Lo_Maneja_Transaccion(Program.G_INICIA_TRANSACCION))
                 {
                     ok.LblMensaje.Text = "Error al abrir transacción.";
-                    ok.ShowInTaskbar = false;
                     ok.ShowDialog();
                     limpiar();
                     goto fin;
@@ -505,8 +504,8 @@ namespace Palatium.Oficina
                         dgvDatos.Columns[0].Visible = false;
                         dgvDatos.Columns[9].Visible = false;
                         //dgvDatos.Columns[10].Visible = false;
-                        dgvDatos.Rows[0].Selected = true;
-                        dgvDatos.CurrentCell = dgvDatos.Rows[0].Cells[1];
+                        //dgvDatos.Rows[0].Selected = true;
+                        //dgvDatos.CurrentCell = dgvDatos.Rows[0].Cells[1];
                     }
 
                     else
@@ -526,12 +525,13 @@ namespace Palatium.Oficina
                         dgvDatos.Columns[9].Visible = false;
                         //dgvDatos.Columns[10].Visible = false;
                     }
+
+                    dgvDatos.ClearSelection();
                 }
 
                 else
                 {
                     catchMensaje.LblMensaje.Text = sSql;
-                    catchMensaje.ShowInTaskbar = false;
                     catchMensaje.ShowDialog();
                 }
             }
@@ -639,7 +639,6 @@ namespace Palatium.Oficina
             catch (Exception ex)
             {
                 catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowInTaskbar = false;
                 catchMensaje.ShowDialog();
             }
         }
@@ -653,6 +652,10 @@ namespace Palatium.Oficina
 
         private void frmRegistrarMovimientos_Load(object sender, EventArgs e)
         {
+            sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
+
+            LblFecha.Text = sFecha;
+
             if (iOp == 1)
             {
                 cmbFiltrar.Text = "Entradas";
@@ -869,7 +872,6 @@ namespace Palatium.Oficina
                 if (dgvDatos.Rows.Count == 0)
                 {
                     ok.LblMensaje.Text = "No hay ítems para imprimir.";
-                    ok.ShowInTaskbar = false;
                     ok.ShowDialog();
                 }
 

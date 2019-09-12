@@ -86,7 +86,7 @@
             this.groupBox2.Controls.Add(this.txtIdentificacion);
             this.groupBox2.Controls.Add(this.txtNombres);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox2.Location = new System.Drawing.Point(24, 16);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(509, 205);
@@ -113,6 +113,7 @@
             // 
             this.chkPasaporte.AutoSize = true;
             this.chkPasaporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkPasaporte.ForeColor = System.Drawing.SystemColors.Desktop;
             this.chkPasaporte.Location = new System.Drawing.Point(324, 35);
             this.chkPasaporte.Name = "chkPasaporte";
             this.chkPasaporte.Size = new System.Drawing.Size(163, 22);
@@ -125,7 +126,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label5.Location = new System.Drawing.Point(118, 66);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 16);
@@ -136,7 +137,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label10.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label10.Location = new System.Drawing.Point(19, 163);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(56, 16);
@@ -147,7 +148,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label7.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label7.Location = new System.Drawing.Point(118, 135);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 16);
@@ -158,6 +159,7 @@
             // 
             this.txtMail.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMail.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtMail.Location = new System.Drawing.Point(135, 160);
             this.txtMail.MaxLength = 50;
             this.txtMail.Name = "txtMail";
@@ -168,7 +170,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label8.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label8.Location = new System.Drawing.Point(118, 38);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 16);
@@ -179,7 +181,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label1.Location = new System.Drawing.Point(19, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 32);
@@ -190,6 +192,7 @@
             // 
             this.txtApellidos.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtApellidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtApellidos.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtApellidos.Location = new System.Drawing.Point(135, 63);
             this.txtApellidos.MaxLength = 50;
             this.txtApellidos.Name = "txtApellidos";
@@ -200,7 +203,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label6.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label6.Location = new System.Drawing.Point(19, 135);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 16);
@@ -211,7 +214,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label3.Location = new System.Drawing.Point(19, 38);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 16);
@@ -222,7 +225,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label2.Location = new System.Drawing.Point(19, 107);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 16);
@@ -232,6 +235,7 @@
             // txtTelefono
             // 
             this.txtTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTelefono.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtTelefono.Location = new System.Drawing.Point(135, 132);
             this.txtTelefono.MaxLength = 10;
             this.txtTelefono.Name = "txtTelefono";
@@ -243,6 +247,7 @@
             // 
             this.txtIdentificacion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtIdentificacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIdentificacion.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtIdentificacion.Location = new System.Drawing.Point(135, 35);
             this.txtIdentificacion.MaxLength = 13;
             this.txtIdentificacion.Name = "txtIdentificacion";
@@ -254,6 +259,7 @@
             // 
             this.txtNombres.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNombres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombres.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtNombres.Location = new System.Drawing.Point(135, 104);
             this.txtNombres.MaxLength = 50;
             this.txtNombres.Name = "txtNombres";
@@ -274,7 +280,7 @@
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.txtSector);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox1.Location = new System.Drawing.Point(24, 223);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(509, 222);
@@ -286,7 +292,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label12.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label12.Location = new System.Drawing.Point(15, 144);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(88, 16);
@@ -297,6 +303,7 @@
             // 
             this.txtReferencia.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtReferencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReferencia.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtReferencia.Location = new System.Drawing.Point(163, 141);
             this.txtReferencia.MaxLength = 50;
             this.txtReferencia.Multiline = true;
@@ -308,7 +315,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label16.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label16.Location = new System.Drawing.Point(149, 32);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(14, 16);
@@ -319,7 +326,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label13.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label13.Location = new System.Drawing.Point(15, 116);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(131, 16);
@@ -330,6 +337,7 @@
             // 
             this.txtCalleSecundaria.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCalleSecundaria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCalleSecundaria.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtCalleSecundaria.Location = new System.Drawing.Point(163, 113);
             this.txtCalleSecundaria.MaxLength = 50;
             this.txtCalleSecundaria.Name = "txtCalleSecundaria";
@@ -340,7 +348,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label14.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label14.Location = new System.Drawing.Point(15, 88);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(95, 16);
@@ -351,6 +359,7 @@
             // 
             this.txtNumeracion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNumeracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNumeracion.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtNumeracion.Location = new System.Drawing.Point(163, 85);
             this.txtNumeracion.MaxLength = 10;
             this.txtNumeracion.Name = "txtNumeracion";
@@ -361,7 +370,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label15.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label15.Location = new System.Drawing.Point(15, 60);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(113, 16);
@@ -372,6 +381,7 @@
             // 
             this.txtCallePrincipal.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCallePrincipal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCallePrincipal.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtCallePrincipal.Location = new System.Drawing.Point(163, 57);
             this.txtCallePrincipal.MaxLength = 50;
             this.txtCallePrincipal.Name = "txtCallePrincipal";
@@ -382,7 +392,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label18.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label18.Location = new System.Drawing.Point(15, 32);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(57, 16);
@@ -393,6 +403,7 @@
             // 
             this.txtSector.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtSector.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSector.ForeColor = System.Drawing.SystemColors.Desktop;
             this.txtSector.Location = new System.Drawing.Point(163, 29);
             this.txtSector.MaxLength = 50;
             this.txtSector.Name = "txtSector";
@@ -456,7 +467,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Green;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.ClientSize = new System.Drawing.Size(552, 583);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);

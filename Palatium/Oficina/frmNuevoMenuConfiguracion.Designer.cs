@@ -51,6 +51,7 @@
             this.clienteEmpresarialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuCrearEmpresa = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuCrearEmpleados = new System.Windows.Forms.ToolStripMenuItem();
+            this.submenuCrearRegistrosRapidos = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ddlMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.categoríasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,7 +152,6 @@
             this.submenuPorcionReceta = new System.Windows.Forms.ToolStripMenuItem();
             this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuTipoUnidades = new System.Windows.Forms.ToolStripMenuItem();
-            this.submenuUnidadesReceta = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuEquivalenciasUnidades = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.ddlFacturacionElectronica = new System.Windows.Forms.ToolStripDropDownButton();
@@ -176,6 +176,7 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.ddPalatiumContable = new System.Windows.Forms.ToolStripDropDownButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.submenuUnidadesReceta = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -404,7 +405,8 @@
             // 
             this.clienteEmpresarialToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.submenuCrearEmpresa,
-            this.submenuCrearEmpleados});
+            this.submenuCrearEmpleados,
+            this.submenuCrearRegistrosRapidos});
             this.clienteEmpresarialToolStripMenuItem.Image = global::Palatium.Properties.Resources.icono_menu_cliente_empresarial;
             this.clienteEmpresarialToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clienteEmpresarialToolStripMenuItem.Name = "clienteEmpresarialToolStripMenuItem";
@@ -416,7 +418,7 @@
             this.submenuCrearEmpresa.Image = global::Palatium.Properties.Resources.icono_menu_empresa;
             this.submenuCrearEmpresa.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuCrearEmpresa.Name = "submenuCrearEmpresa";
-            this.submenuCrearEmpresa.Size = new System.Drawing.Size(177, 36);
+            this.submenuCrearEmpresa.Size = new System.Drawing.Size(212, 36);
             this.submenuCrearEmpresa.Text = "Crear Empresa";
             this.submenuCrearEmpresa.Click += new System.EventHandler(this.submenuCrearEmpresa_Click);
             // 
@@ -425,9 +427,18 @@
             this.submenuCrearEmpleados.Image = global::Palatium.Properties.Resources.icono_menu_empleado;
             this.submenuCrearEmpleados.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuCrearEmpleados.Name = "submenuCrearEmpleados";
-            this.submenuCrearEmpleados.Size = new System.Drawing.Size(177, 36);
+            this.submenuCrearEmpleados.Size = new System.Drawing.Size(212, 36);
             this.submenuCrearEmpleados.Text = "Crear Empleados";
             this.submenuCrearEmpleados.Click += new System.EventHandler(this.submenuCrearEmpleados_Click);
+            // 
+            // submenuCrearRegistrosRapidos
+            // 
+            this.submenuCrearRegistrosRapidos.Image = global::Palatium.Properties.Resources.registro_clientes_nuevo;
+            this.submenuCrearRegistrosRapidos.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.submenuCrearRegistrosRapidos.Name = "submenuCrearRegistrosRapidos";
+            this.submenuCrearRegistrosRapidos.Size = new System.Drawing.Size(212, 36);
+            this.submenuCrearRegistrosRapidos.Text = "Crear Registros Rápidos";
+            this.submenuCrearRegistrosRapidos.Click += new System.EventHandler(this.submenuCrearRegistrosRapidos_Click);
             // 
             // toolStripSeparator1
             // 
@@ -1322,7 +1333,8 @@
             this.submenuTipoReceta,
             this.submenuOrigenReceta,
             this.submenuTemperaturaServicio,
-            this.submenuPorcionReceta});
+            this.submenuPorcionReceta,
+            this.submenuUnidadesReceta});
             this.parámetrizaciónToolStripMenuItem.Image = global::Palatium.Properties.Resources.parametros_receta_nuevo;
             this.parámetrizaciónToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.parámetrizaciónToolStripMenuItem.Name = "parámetrizaciónToolStripMenuItem";
@@ -1378,13 +1390,13 @@
             // 
             this.unidadesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.submenuTipoUnidades,
-            this.submenuUnidadesReceta,
             this.submenuEquivalenciasUnidades});
             this.unidadesToolStripMenuItem.Image = global::Palatium.Properties.Resources.unidades_receta_nuevo;
             this.unidadesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.unidadesToolStripMenuItem.Name = "unidadesToolStripMenuItem";
             this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(173, 36);
             this.unidadesToolStripMenuItem.Text = "Unidades";
+            this.unidadesToolStripMenuItem.Visible = false;
             // 
             // submenuTipoUnidades
             // 
@@ -1394,15 +1406,6 @@
             this.submenuTipoUnidades.Size = new System.Drawing.Size(227, 38);
             this.submenuTipoUnidades.Text = "Tipos de Unidades";
             this.submenuTipoUnidades.Click += new System.EventHandler(this.submenuTipoUnidades_Click);
-            // 
-            // submenuUnidadesReceta
-            // 
-            this.submenuUnidadesReceta.Image = global::Palatium.Properties.Resources.unidades_receta_menu;
-            this.submenuUnidadesReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.submenuUnidadesReceta.Name = "submenuUnidadesReceta";
-            this.submenuUnidadesReceta.Size = new System.Drawing.Size(227, 38);
-            this.submenuUnidadesReceta.Text = "Unidades de Receta";
-            this.submenuUnidadesReceta.Click += new System.EventHandler(this.submenuUnidadesReceta_Click);
             // 
             // submenuEquivalenciasUnidades
             // 
@@ -1631,6 +1634,15 @@
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // submenuUnidadesReceta
+            // 
+            this.submenuUnidadesReceta.Image = global::Palatium.Properties.Resources.unidades_receta_menu;
+            this.submenuUnidadesReceta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.submenuUnidadesReceta.Name = "submenuUnidadesReceta";
+            this.submenuUnidadesReceta.Size = new System.Drawing.Size(214, 36);
+            this.submenuUnidadesReceta.Text = "Unidades de Receta";
+            this.submenuUnidadesReceta.Click += new System.EventHandler(this.submenuUnidadesReceta_Click);
+            // 
             // frmNuevoMenuConfiguracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1767,7 +1779,6 @@
         private System.Windows.Forms.ToolStripMenuItem submenuPorcionReceta;
         private System.Windows.Forms.ToolStripMenuItem unidadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem submenuTipoUnidades;
-        private System.Windows.Forms.ToolStripMenuItem submenuUnidadesReceta;
         private System.Windows.Forms.ToolStripMenuItem submenuEquivalenciasUnidades;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripDropDownButton ddlFacturacionElectronica;
@@ -1802,6 +1813,8 @@
         private System.Windows.Forms.ToolStripMenuItem clienteEmpresarialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem submenuCrearEmpresa;
         private System.Windows.Forms.ToolStripMenuItem submenuCrearEmpleados;
+        private System.Windows.Forms.ToolStripMenuItem submenuCrearRegistrosRapidos;
+        private System.Windows.Forms.ToolStripMenuItem submenuUnidadesReceta;
 
     }
 }

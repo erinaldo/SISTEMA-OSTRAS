@@ -39,13 +39,32 @@ namespace Palatium.Receta
             try
             {
                 sSql = "";
-                sSql += "select id_pos_tipo_unidad, descripcion, codigo" + Environment.NewLine;
-                sSql += "from pos_tipo_unidad" + Environment.NewLine;
-                sSql += "where estado = 'A'";
+                sSql += "select correlativo, valor_texto" + Environment.NewLine;
+                sSql += "from tp_codigos where tabla = 'SYS$00042'" + Environment.NewLine;
+                sSql += "and estado='A'";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
-                cmbTipoUnidad.llenar(dtConsulta, sSql);
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    cmbTipoUnidad.DisplayMember = "valor_texto";
+                    cmbTipoUnidad.ValueMember = "correlativo";
+                    cmbTipoUnidad.DataSource = dtConsulta;
+
+                    if (cmbTipoUnidad.Items.Count > 23)
+                    {
+                        cmbTipoUnidad.SelectedIndex = 23;
+                    }
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }                
             }
 
             catch (Exception ex)
@@ -63,20 +82,20 @@ namespace Palatium.Receta
                 dgvRegistro.Rows.Clear();
 
                 sSql = "";
-                sSql += "select U.id_pos_unidad, U.id_pos_tipo_unidad, U.codigo," + Environment.NewLine;
-                sSql += "U.descripcion, TU.descripcion 'TIPO UNIDAD'," + Environment.NewLine;
+                sSql += "select U.id_pos_unidad, U.cg_unidad, U.codigo," + Environment.NewLine;
+                sSql += "U.descripcion, TC.valor_texto tipo_unidad," + Environment.NewLine;
                 sSql += "case when U.estado = 'A' then 'ACTIVO' else 'INACTIVO' end estado" + Environment.NewLine;
-                sSql += "from pos_unidad U, pos_tipo_unidad TU" + Environment.NewLine;
-                sSql += "where U.id_pos_tipo_unidad = TU.id_pos_tipo_unidad" + Environment.NewLine;
+                sSql += "from pos_unidad U INNER JOIN" + Environment.NewLine;
+                sSql += "tp_codigos TC ON TC.correlativo = U.cg_unidad" + Environment.NewLine;
                 sSql += "and U.estado in ('A', 'N')" + Environment.NewLine;
-                sSql += "and TU.estado in ('A', 'N')" + Environment.NewLine;
+                sSql += "and TC.estado in ('A', 'N')" + Environment.NewLine;
 
                 if (iBandera == 1)
                 {
                     sSql += "and U.descripcion like '%" + txtBuscar.Text.Trim() + "%'" + Environment.NewLine;
                 }
 
-                sSql += "order by U.id_pos_unidad";
+                sSql += "order by U.descripcion";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -86,12 +105,12 @@ namespace Palatium.Receta
                     {
                         for (int i = 0; i < dtConsulta.Rows.Count; i++)
                         {
-                            dgvRegistro.Rows.Add(dtConsulta.Rows[i].ItemArray[0].ToString(),
-                                                dtConsulta.Rows[i].ItemArray[1].ToString(),
-                                                dtConsulta.Rows[i].ItemArray[2].ToString(),
-                                                dtConsulta.Rows[i].ItemArray[3].ToString(),
-                                                dtConsulta.Rows[i].ItemArray[4].ToString(),
-                                                dtConsulta.Rows[i].ItemArray[5].ToString()
+                            dgvRegistro.Rows.Add(dtConsulta.Rows[i]["id_pos_unidad"].ToString(),
+                                                dtConsulta.Rows[i]["cg_unidad"].ToString(),
+                                                dtConsulta.Rows[i]["codigo"].ToString(),
+                                                dtConsulta.Rows[i]["descripcion"].ToString(),
+                                                dtConsulta.Rows[i]["tipo_unidad"].ToString(),
+                                                dtConsulta.Rows[i]["estado"].ToString()
                                                   );
                         }
                     }
@@ -169,7 +188,7 @@ namespace Palatium.Receta
 
                 sSql = "";
                 sSql = "insert into pos_unidad (" + Environment.NewLine;
-                sSql += "id_pos_tipo_unidad, codigo, descripcion, estado," + Environment.NewLine;
+                sSql += "cg_unidad, codigo, descripcion, estado," + Environment.NewLine;
                 sSql += "fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
                 sSql += "values(" + Environment.NewLine;
                 sSql += Convert.ToInt32(cmbTipoUnidad.SelectedValue) + ", '" + txtCodigo.Text.Trim().ToUpper() + "'," + Environment.NewLine;
@@ -214,7 +233,7 @@ namespace Palatium.Receta
 
                 sSql = "";
                 sSql += "update pos_unidad set" + Environment.NewLine;
-                sSql += "id_pos_tipo_unidad = " + Convert.ToInt32(cmbTipoUnidad.SelectedValue) + "," + Environment.NewLine;
+                sSql += "cg_unidad = " + Convert.ToInt32(cmbTipoUnidad.SelectedValue) + "," + Environment.NewLine;
                 sSql += "descripcion = '" + txtDescripcion.Text.Trim().ToUpper() + "'," + Environment.NewLine;
                 sSql += "estado = '" + sEstado + "'" + Environment.NewLine;
                 sSql += "where id_pos_unidad = " + iIdPosUnidad + Environment.NewLine;

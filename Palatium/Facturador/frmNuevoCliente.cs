@@ -637,7 +637,7 @@ namespace Palatium.Facturador
                         iIdTelefono = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
                         sSql = "";
                         sSql = sSql + "update tp_telefonos set" + Environment.NewLine;
-                        sSql = sSql + "oficina = '" + txtTelefono.Text.Trim() + "'" + Environment.NewLine;
+                        sSql = sSql + "domicilio = '" + txtTelefono.Text.Trim() + "'" + Environment.NewLine;
                         sSql = sSql + "where correlativo = " + iIdTelefono;
                     }
 
@@ -646,7 +646,7 @@ namespace Palatium.Facturador
                         //PARA INSERTAR EL TELEFONO EN LA TABLA TP_TELEFONOS
                         sSql = "";
                         sSql = sSql + "Insert Into tp_telefonos (" + Environment.NewLine;
-                        sSql = sSql + "id_persona, idTipoEstablecimiento, CODIGO_AREA, oficina," + Environment.NewLine;
+                        sSql = sSql + "id_persona, idTipoEstablecimiento, CODIGO_AREA, domicilio," + Environment.NewLine;
                         sSql = sSql + "celular,Estado,fecha_ingreso, usuario_ingreso, " + Environment.NewLine;
                         sSql = sSql + "terminal_ingreso,numero_replica_trigger,numero_control_replica)" + Environment.NewLine;
                         sSql = sSql + "Values (" + iIdPersona + ", 1, '02'," + Environment.NewLine;

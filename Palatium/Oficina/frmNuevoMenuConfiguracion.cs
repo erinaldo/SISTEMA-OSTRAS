@@ -651,9 +651,14 @@ namespace Palatium.Oficina
         private void frmNuevoMenuConfiguracion_FormClosing(object sender, FormClosingEventArgs e)
         {
             //this.ActiveMdiChild.Close();
-            for (int i = 0; i < this.MdiChildren.Length; i++)
+            //for (int i = 0; i < this.MdiChildren.Length; i++)
+            //{
+            //    this.MdiChildren[i].Close();
+            //}
+
+            foreach(Form frm in this.MdiChildren)
             {
-                this.MdiChildren[i].Close();
+                frm.Close();
             }
         }
 
@@ -703,6 +708,12 @@ namespace Palatium.Oficina
         {
             Empresa.frmEmpleadosEmpresas empleadosEmpresas = new Empresa.frmEmpleadosEmpresas();
             verificarFormularios(empleadosEmpresas, this);
+        }
+
+        private void submenuCrearRegistrosRapidos_Click(object sender, EventArgs e)
+        {
+            Facturador.frmNuevoClienteRegistro personas = new Facturador.frmNuevoClienteRegistro(1);
+            verificarFormularios(personas, this);
         }
     }
 }

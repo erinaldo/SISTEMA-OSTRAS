@@ -945,7 +945,8 @@ namespace Palatium.Menú
             llenarArregloMaximo();
             ingresaBoton(btnDatosClientes);
 
-            Facturador.frmNuevoCliente personas = new Facturador.frmNuevoCliente("", false);
+            //Facturador.frmNuevoCliente personas = new Facturador.frmNuevoCliente("", false);
+            Facturador.frmNuevoClienteRegistro personas = new Facturador.frmNuevoClienteRegistro(0);
             personas.ShowDialog();
         }
 
@@ -1446,12 +1447,12 @@ namespace Palatium.Menú
         }
 
 
-
-
         private void btnAcerca_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             llenarArregloMaximo();
-            config.ShowDialog();
+            //config.ShowDialog();
+            Oficina.frmSoporteTecnico soporte = new Oficina.frmSoporteTecnico();
+            soporte.ShowDialog();
         }
 
         private void btnCambioOrigen_Click(object sender, EventArgs e)

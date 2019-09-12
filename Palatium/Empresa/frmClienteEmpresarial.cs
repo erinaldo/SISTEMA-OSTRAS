@@ -288,7 +288,7 @@ namespace Palatium.Empresa
 
         private void frmClienteEmpresarial_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+
         }
     }
 }

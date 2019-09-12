@@ -17,6 +17,8 @@ namespace Palatium.Empresa
 
         ConexionBD.ConexionBD conexion = new ConexionBD.ConexionBD();
 
+        Clases.ClaseAbrirCajon abrir = new Clases.ClaseAbrirCajon();
+
         Button[,] botonEmpresa = new Button[4, 2];
         Button[,] botonEmpleado = new Button[4, 5];
 
@@ -374,6 +376,17 @@ namespace Palatium.Empresa
             if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
+            }
+
+            if (Program.iPermitirAbrirCajon == 1)
+            {
+                if (e.KeyCode == Keys.F7)
+                {
+                    if (Program.iPuedeCobrar == 1)
+                    {
+                        abrir.consultarImpresoraAbrirCajon();
+                    }
+                }
             }
         }
 

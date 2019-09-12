@@ -37,21 +37,21 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvRegistro = new System.Windows.Forms.DataGridView();
-            this.grupoDatos = new System.Windows.Forms.GroupBox();
-            this.cmbEstado = new System.Windows.Forms.ComboBox();
-            this.lblEstaJornada = new System.Windows.Forms.Label();
-            this.lblDescrCajero = new System.Windows.Forms.Label();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.lblCodigoCajero = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbTipoUnidad = new MisControles.ComboDatos();
             this.idUnidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idTipoUnidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipoUnidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grupoDatos = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbEstado = new System.Windows.Forms.ComboBox();
+            this.lblEstaJornada = new System.Windows.Forms.Label();
+            this.lblDescrCajero = new System.Windows.Forms.Label();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.lblCodigoCajero = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.cmbTipoUnidad = new System.Windows.Forms.ComboBox();
             this.Grb_opciojornada.SuspendLayout();
             this.Grb_listRejornada.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistro)).BeginInit();
@@ -179,6 +179,47 @@
             this.dgvRegistro.TabIndex = 11;
             this.dgvRegistro.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRegistro_CellDoubleClick);
             // 
+            // idUnidad
+            // 
+            this.idUnidad.HeaderText = "IDUNIDAD";
+            this.idUnidad.Name = "idUnidad";
+            this.idUnidad.ReadOnly = true;
+            this.idUnidad.Visible = false;
+            // 
+            // idTipoUnidad
+            // 
+            this.idTipoUnidad.HeaderText = "IDTIPOUNIDAD";
+            this.idTipoUnidad.Name = "idTipoUnidad";
+            this.idTipoUnidad.ReadOnly = true;
+            this.idTipoUnidad.Visible = false;
+            // 
+            // codigo
+            // 
+            this.codigo.HeaderText = "CODIGO";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            this.codigo.Width = 70;
+            // 
+            // descripcion
+            // 
+            this.descripcion.HeaderText = "DESCRIPCION";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            this.descripcion.Width = 150;
+            // 
+            // tipoUnidad
+            // 
+            this.tipoUnidad.HeaderText = "TIPO UNIDAD";
+            this.tipoUnidad.Name = "tipoUnidad";
+            this.tipoUnidad.ReadOnly = true;
+            this.tipoUnidad.Width = 150;
+            // 
+            // estado1
+            // 
+            this.estado1.HeaderText = "ESTADO";
+            this.estado1.Name = "estado1";
+            this.estado1.ReadOnly = true;
+            // 
             // grupoDatos
             // 
             this.grupoDatos.Controls.Add(this.cmbTipoUnidad);
@@ -196,6 +237,18 @@
             this.grupoDatos.TabIndex = 12;
             this.grupoDatos.TabStop = false;
             this.grupoDatos.Text = "Datos del Registro";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(15, 80);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 15);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Unidad:";
             // 
             // cmbEstado
             // 
@@ -264,67 +317,14 @@
             this.txtCodigo.Size = new System.Drawing.Size(216, 20);
             this.txtCodigo.TabIndex = 3;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(15, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 15);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Tipo Unidad:";
-            // 
             // cmbTipoUnidad
             // 
-            this.cmbTipoUnidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbTipoUnidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoUnidad.FormattingEnabled = true;
             this.cmbTipoUnidad.Location = new System.Drawing.Point(100, 79);
             this.cmbTipoUnidad.Name = "cmbTipoUnidad";
             this.cmbTipoUnidad.Size = new System.Drawing.Size(216, 21);
             this.cmbTipoUnidad.TabIndex = 5;
-            // 
-            // idUnidad
-            // 
-            this.idUnidad.HeaderText = "IDUNIDAD";
-            this.idUnidad.Name = "idUnidad";
-            this.idUnidad.ReadOnly = true;
-            this.idUnidad.Visible = false;
-            // 
-            // idTipoUnidad
-            // 
-            this.idTipoUnidad.HeaderText = "IDTIPOUNIDAD";
-            this.idTipoUnidad.Name = "idTipoUnidad";
-            this.idTipoUnidad.ReadOnly = true;
-            this.idTipoUnidad.Visible = false;
-            // 
-            // codigo
-            // 
-            this.codigo.HeaderText = "CODIGO";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            this.codigo.Width = 70;
-            // 
-            // descripcion
-            // 
-            this.descripcion.HeaderText = "DESCRIPCION";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            this.descripcion.Width = 150;
-            // 
-            // tipoUnidad
-            // 
-            this.tipoUnidad.HeaderText = "TIPO UNIDAD";
-            this.tipoUnidad.Name = "tipoUnidad";
-            this.tipoUnidad.ReadOnly = true;
-            this.tipoUnidad.Width = 150;
-            // 
-            // estado1
-            // 
-            this.estado1.HeaderText = "ESTADO";
-            this.estado1.Name = "estado1";
-            this.estado1.ReadOnly = true;
             // 
             // frmUnidadReceta
             // 
@@ -376,6 +376,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoUnidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn estado1;
-        private MisControles.ComboDatos cmbTipoUnidad;
+        private System.Windows.Forms.ComboBox cmbTipoUnidad;
     }
 }

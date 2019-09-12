@@ -691,6 +691,7 @@ namespace Palatium.Productos
             dgvProductos.Columns[27].Visible = ok;
             dgvProductos.Columns[28].Visible = ok;
             dgvProductos.Columns[29].Visible = ok;
+            dgvProductos.Columns[30].Visible = ok;
 
             dgvProductos.ClearSelection();
         }

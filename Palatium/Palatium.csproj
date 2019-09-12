@@ -393,6 +393,12 @@
     <Compile Include="Facturacion_Electronica\frmVistaPreviaFacturaElectronica.Designer.cs">
       <DependentUpon>frmVistaPreviaFacturaElectronica.cs</DependentUpon>
     </Compile>
+    <Compile Include="Facturador\frmNuevoClienteRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Facturador\frmNuevoClienteRegistro.Designer.cs">
+      <DependentUpon>frmNuevoClienteRegistro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FAyudaClienteDarioVentas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2143,6 +2149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Facturacion_Electronica\rptRIDE.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturador\frmNuevoClienteRegistro.resx">
+      <DependentUpon>frmNuevoClienteRegistro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FAyudaClienteDarioVentas.resx">
       <DependentUpon>FAyudaClienteDarioVentas.cs</DependentUpon>

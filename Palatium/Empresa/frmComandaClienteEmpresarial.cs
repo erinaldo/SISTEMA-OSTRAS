@@ -17,6 +17,8 @@ namespace Palatium.Empresa
         VentanasMensajes.frmMensajeSiNo SiNo = new VentanasMensajes.frmMensajeSiNo();
         VentanasMensajes.frmMensajeNuevoSiNo NuevoSiNo = new VentanasMensajes.frmMensajeNuevoSiNo();
 
+        Clases.ClaseAbrirCajon abrir = new Clases.ClaseAbrirCajon();
+
          ConexionBD.ConexionBD conexion = new ConexionBD.ConexionBD();
          Button[,] boton = new Button[2, 4];
          Button[,] botonProductos = new Button[5, 5];
@@ -967,6 +969,20 @@ namespace Palatium.Empresa
              btnSiguienteProducto.Enabled = true;
              iCuentaProductos -= 8;
              crearBotonesProductos();
+         }
+
+         private void frmComandaClienteEmpresarial_KeyDown(object sender, KeyEventArgs e)
+         {
+             if (Program.iPermitirAbrirCajon == 1)
+             {
+                 if (e.KeyCode == Keys.F7)
+                 {
+                     if (Program.iPuedeCobrar == 1)
+                     {
+                         abrir.consultarImpresoraAbrirCajon();
+                     }
+                 }
+             }
          }
     }
 }
