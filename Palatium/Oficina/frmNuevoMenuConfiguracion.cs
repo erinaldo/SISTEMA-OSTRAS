@@ -484,7 +484,8 @@ namespace Palatium.Oficina
 
         private void submenuIngresoRecetas_Click(object sender, EventArgs e)
         {
-            Receta.frmNuevaAdministracionReceta receta = new Receta.frmNuevaAdministracionReceta();
+            //Receta.frmNuevaAdministracionReceta receta = new Receta.frmNuevaAdministracionReceta();
+            Receta.frmAdministraciónDeReceta receta = new Receta.frmAdministraciónDeReceta();
             verificarFormularios(receta, this);
         }
 

@@ -785,6 +785,12 @@
     <Compile Include="Receta\frmListarRecetas.Designer.cs">
       <DependentUpon>frmListarRecetas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Receta\frmModalIngrediente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receta\frmModalIngrediente.Designer.cs">
+      <DependentUpon>frmModalIngrediente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receta\frmNuevaAdministracionReceta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2529,6 +2535,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Receta\frmListarRecetas.resx">
       <DependentUpon>frmListarRecetas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receta\frmModalIngrediente.resx">
+      <DependentUpon>frmModalIngrediente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receta\frmNuevaAdministracionReceta.resx">
       <DependentUpon>frmNuevaAdministracionReceta.cs</DependentUpon>

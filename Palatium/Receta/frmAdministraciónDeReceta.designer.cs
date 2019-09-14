@@ -29,35 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAdministraciónDeReceta));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgvReceta = new System.Windows.Forms.DataGridView();
             this.txtCostoTotal = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.dgvReceta = new System.Windows.Forms.DataGridView();
-            this.codigoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadBruta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadNeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.porcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.costoUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rendimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIdUnidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIdPorcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iUnidadControl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.equivalencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio_unitario_completo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnA = new System.Windows.Forms.Button();
             this.btnX = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -106,6 +87,13 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ingrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rendimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.costo_unitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReceta)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -120,9 +108,9 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.groupBox2.Controls.Add(this.dgvReceta);
             this.groupBox2.Controls.Add(this.txtCostoTotal);
             this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.dgvReceta);
             this.groupBox2.Controls.Add(this.btnA);
             this.groupBox2.Controls.Add(this.btnX);
             this.groupBox2.Location = new System.Drawing.Point(21, 257);
@@ -131,12 +119,36 @@
             this.groupBox2.TabIndex = 129;
             this.groupBox2.TabStop = false;
             // 
+            // dgvReceta
+            // 
+            this.dgvReceta.AllowUserToAddRows = false;
+            this.dgvReceta.AllowUserToDeleteRows = false;
+            this.dgvReceta.AllowUserToResizeColumns = false;
+            this.dgvReceta.AllowUserToResizeRows = false;
+            this.dgvReceta.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvReceta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReceta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ingrediente,
+            this.unidad,
+            this.rendimiento,
+            this.cantidad,
+            this.costo_unitario,
+            this.importe,
+            this.id_producto});
+            this.dgvReceta.Location = new System.Drawing.Point(27, 12);
+            this.dgvReceta.Name = "dgvReceta";
+            this.dgvReceta.RowHeadersVisible = false;
+            this.dgvReceta.Size = new System.Drawing.Size(962, 223);
+            this.dgvReceta.TabIndex = 86;
+            this.dgvReceta.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceta_CellEndEdit);
+            this.dgvReceta.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvReceta_EditingControlShowing);
+            // 
             // txtCostoTotal
             // 
             this.txtCostoTotal.BackColor = System.Drawing.SystemColors.Window;
             this.txtCostoTotal.Enabled = false;
             this.txtCostoTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCostoTotal.Location = new System.Drawing.Point(882, 246);
+            this.txtCostoTotal.Location = new System.Drawing.Point(865, 244);
             this.txtCostoTotal.Multiline = true;
             this.txtCostoTotal.Name = "txtCostoTotal";
             this.txtCostoTotal.ReadOnly = true;
@@ -149,181 +161,17 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(774, 247);
+            this.label13.Location = new System.Drawing.Point(757, 245);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(90, 19);
             this.label13.TabIndex = 85;
             this.label13.Text = "Costo Total";
             // 
-            // dgvReceta
-            // 
-            this.dgvReceta.AllowUserToAddRows = false;
-            this.dgvReceta.AllowUserToDeleteRows = false;
-            this.dgvReceta.AllowUserToResizeColumns = false;
-            this.dgvReceta.AllowUserToResizeRows = false;
-            this.dgvReceta.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvReceta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReceta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codigoProducto,
-            this.descripcionProducto,
-            this.cantidadBruta,
-            this.cantidadNeta,
-            this.unidad,
-            this.porcion,
-            this.costoUnitario,
-            this.rendimiento,
-            this.importe,
-            this.idProducto,
-            this.colIdUnidad,
-            this.colIdPorcion,
-            this.iUnidadControl,
-            this.equivalencia,
-            this.precio_unitario_completo});
-            this.dgvReceta.GridColor = System.Drawing.SystemColors.ButtonFace;
-            this.dgvReceta.Location = new System.Drawing.Point(6, 14);
-            this.dgvReceta.Name = "dgvReceta";
-            this.dgvReceta.ReadOnly = true;
-            this.dgvReceta.RowHeadersWidth = 25;
-            this.dgvReceta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReceta.Size = new System.Drawing.Size(999, 226);
-            this.dgvReceta.TabIndex = 83;
-            this.dgvReceta.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceta_CellDoubleClick);
-            // 
-            // codigoProducto
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.codigoProducto.DefaultCellStyle = dataGridViewCellStyle1;
-            this.codigoProducto.HeaderText = "Código Producto";
-            this.codigoProducto.Name = "codigoProducto";
-            this.codigoProducto.ReadOnly = true;
-            // 
-            // descripcionProducto
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.descripcionProducto.DefaultCellStyle = dataGridViewCellStyle2;
-            this.descripcionProducto.HeaderText = "Descripción del Producto";
-            this.descripcionProducto.Name = "descripcionProducto";
-            this.descripcionProducto.ReadOnly = true;
-            this.descripcionProducto.Width = 225;
-            // 
-            // cantidadBruta
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N3";
-            dataGridViewCellStyle3.NullValue = "0";
-            this.cantidadBruta.DefaultCellStyle = dataGridViewCellStyle3;
-            this.cantidadBruta.HeaderText = "Cantidad Bruta";
-            this.cantidadBruta.Name = "cantidadBruta";
-            this.cantidadBruta.ReadOnly = true;
-            this.cantidadBruta.Width = 60;
-            // 
-            // cantidadNeta
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N3";
-            dataGridViewCellStyle4.NullValue = "0";
-            this.cantidadNeta.DefaultCellStyle = dataGridViewCellStyle4;
-            this.cantidadNeta.HeaderText = "Cantidad Neta";
-            this.cantidadNeta.Name = "cantidadNeta";
-            this.cantidadNeta.ReadOnly = true;
-            this.cantidadNeta.Width = 60;
-            // 
-            // unidad
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.unidad.DefaultCellStyle = dataGridViewCellStyle5;
-            this.unidad.HeaderText = "Unidad";
-            this.unidad.Name = "unidad";
-            this.unidad.ReadOnly = true;
-            this.unidad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.unidad.Width = 120;
-            // 
-            // porcion
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.porcion.DefaultCellStyle = dataGridViewCellStyle6;
-            this.porcion.HeaderText = "Porcion";
-            this.porcion.Name = "porcion";
-            this.porcion.ReadOnly = true;
-            this.porcion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.porcion.Width = 120;
-            // 
-            // costoUnitario
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = "0";
-            this.costoUnitario.DefaultCellStyle = dataGridViewCellStyle7;
-            this.costoUnitario.HeaderText = "Costo Unitario";
-            this.costoUnitario.Name = "costoUnitario";
-            this.costoUnitario.ReadOnly = true;
-            this.costoUnitario.Width = 90;
-            // 
-            // rendimiento
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.rendimiento.DefaultCellStyle = dataGridViewCellStyle8;
-            this.rendimiento.HeaderText = "Rendimiento";
-            this.rendimiento.Name = "rendimiento";
-            this.rendimiento.ReadOnly = true;
-            this.rendimiento.Width = 80;
-            // 
-            // importe
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.importe.DefaultCellStyle = dataGridViewCellStyle9;
-            this.importe.HeaderText = "Importe";
-            this.importe.Name = "importe";
-            this.importe.ReadOnly = true;
-            this.importe.Width = 90;
-            // 
-            // idProducto
-            // 
-            this.idProducto.HeaderText = "ID PRODUCTO";
-            this.idProducto.Name = "idProducto";
-            this.idProducto.ReadOnly = true;
-            this.idProducto.Visible = false;
-            // 
-            // colIdUnidad
-            // 
-            this.colIdUnidad.HeaderText = "ID UNIDAD";
-            this.colIdUnidad.Name = "colIdUnidad";
-            this.colIdUnidad.ReadOnly = true;
-            this.colIdUnidad.Visible = false;
-            // 
-            // colIdPorcion
-            // 
-            this.colIdPorcion.HeaderText = "ID PORCION";
-            this.colIdPorcion.Name = "colIdPorcion";
-            this.colIdPorcion.ReadOnly = true;
-            this.colIdPorcion.Visible = false;
-            // 
-            // iUnidadControl
-            // 
-            this.iUnidadControl.HeaderText = "UNIDAD CONTROL";
-            this.iUnidadControl.Name = "iUnidadControl";
-            this.iUnidadControl.ReadOnly = true;
-            this.iUnidadControl.Visible = false;
-            // 
-            // equivalencia
-            // 
-            this.equivalencia.HeaderText = "EQUIVALENCIA";
-            this.equivalencia.Name = "equivalencia";
-            this.equivalencia.ReadOnly = true;
-            this.equivalencia.Visible = false;
-            // 
-            // precio_unitario_completo
-            // 
-            this.precio_unitario_completo.HeaderText = "P. UNIT.";
-            this.precio_unitario_completo.Name = "precio_unitario_completo";
-            this.precio_unitario_completo.ReadOnly = true;
-            this.precio_unitario_completo.Visible = false;
-            // 
             // btnA
             // 
             this.btnA.Enabled = false;
             this.btnA.Image = global::Palatium.Properties.Resources.anadir;
-            this.btnA.Location = new System.Drawing.Point(35, 241);
+            this.btnA.Location = new System.Drawing.Point(56, 241);
             this.btnA.Name = "btnA";
             this.btnA.Size = new System.Drawing.Size(23, 23);
             this.btnA.TabIndex = 16;
@@ -334,7 +182,7 @@
             // 
             this.btnX.Enabled = false;
             this.btnX.Image = global::Palatium.Properties.Resources.menos;
-            this.btnX.Location = new System.Drawing.Point(10, 241);
+            this.btnX.Location = new System.Drawing.Point(27, 241);
             this.btnX.Name = "btnX";
             this.btnX.Size = new System.Drawing.Size(23, 23);
             this.btnX.TabIndex = 17;
@@ -880,6 +728,63 @@
             this.groupBox4.TabIndex = 129;
             this.groupBox4.TabStop = false;
             // 
+            // ingrediente
+            // 
+            this.ingrediente.HeaderText = "INGREDIENTE";
+            this.ingrediente.Name = "ingrediente";
+            this.ingrediente.ReadOnly = true;
+            this.ingrediente.Width = 280;
+            // 
+            // unidad
+            // 
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.unidad.DefaultCellStyle = dataGridViewCellStyle16;
+            this.unidad.HeaderText = "UNIDAD";
+            this.unidad.Name = "unidad";
+            this.unidad.ReadOnly = true;
+            this.unidad.Width = 125;
+            // 
+            // rendimiento
+            // 
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rendimiento.DefaultCellStyle = dataGridViewCellStyle17;
+            this.rendimiento.HeaderText = "% RENDIMIENTO";
+            this.rendimiento.Name = "rendimiento";
+            this.rendimiento.ReadOnly = true;
+            this.rendimiento.Width = 125;
+            // 
+            // cantidad
+            // 
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cantidad.DefaultCellStyle = dataGridViewCellStyle18;
+            this.cantidad.HeaderText = "CANTIDAD";
+            this.cantidad.Name = "cantidad";
+            // 
+            // costo_unitario
+            // 
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.costo_unitario.DefaultCellStyle = dataGridViewCellStyle19;
+            this.costo_unitario.HeaderText = "COSTO UNITARIO";
+            this.costo_unitario.Name = "costo_unitario";
+            this.costo_unitario.ReadOnly = true;
+            this.costo_unitario.Width = 150;
+            // 
+            // importe
+            // 
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.importe.DefaultCellStyle = dataGridViewCellStyle20;
+            this.importe.HeaderText = "IMPORTE";
+            this.importe.Name = "importe";
+            this.importe.ReadOnly = true;
+            this.importe.Width = 150;
+            // 
+            // id_producto
+            // 
+            this.id_producto.HeaderText = "ID";
+            this.id_producto.Name = "id_producto";
+            this.id_producto.ReadOnly = true;
+            this.id_producto.Visible = false;
+            // 
             // frmAdministraciónDeReceta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -925,7 +830,6 @@
         private System.Windows.Forms.Button btnGrabar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dgvReceta;
         private System.Windows.Forms.ToolTip ttDetalle;
         private System.Windows.Forms.TextBox txtCostoTotal;
         private System.Windows.Forms.Label label13;
@@ -969,20 +873,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtRendimiento;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codigoProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadBruta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadNeta;
+        private System.Windows.Forms.DataGridView dgvReceta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ingrediente;
         private System.Windows.Forms.DataGridViewTextBoxColumn unidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn porcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn costoUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn rendimiento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn costo_unitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn importe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIdUnidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIdPorcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iUnidadControl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn equivalencia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio_unitario_completo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_producto;
     }
 }

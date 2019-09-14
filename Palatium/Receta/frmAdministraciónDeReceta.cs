@@ -922,7 +922,13 @@ namespace Palatium.Receta
                 catchMensaje.lblMensaje.Text = ex.ToString();
                 catchMensaje.ShowDialog();
             }
-        }  
+        }
+
+        //VALIDAR SOLO NUMEROS
+        private void dText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            caracter.soloDecimales(sender, e, 6);
+        }
 
         #endregion
 
@@ -1066,22 +1072,20 @@ namespace Palatium.Receta
 
         private void btnA_Click(object sender, EventArgs e)
         {
-            Receta.frmIngresarIngrediente ingrediente = new Receta.frmIngresarIngrediente(0, 0, 0, 0, 1);
+            Receta.frmModalIngrediente ingrediente = new Receta.frmModalIngrediente();
             ingrediente.ShowDialog();
 
             if (ingrediente.DialogResult == DialogResult.OK)
             {
-                dgvReceta.Rows.Add(ingrediente.sCodigo_R, ingrediente.sDescripcion_R, ingrediente.txtCantidadBruta.Text.Trim(),
-                                   ingrediente.txtCantidadNeta.Text.Trim(), ingrediente.sUnidadProductoReceta,
-                                   ingrediente.cmbPorciones.Text.Trim(), ingrediente.txtCostoUnitario.Text.Trim(),
-                                   ingrediente.txtRendimiento.Text.Trim(), ingrediente.txtImporteTotal.Text.Trim(),
-                                   ingrediente.iCorrelativo_R.ToString(), ingrediente.iUnidadProductoReceta,
-                                   ingrediente.cmbPorciones.SelectedValue, ingrediente.iUnidadControl.ToString(),
-                                   ingrediente.dbEquivalencia_DC.ToString(), ingrediente.dbPrecioUnitario_P);
+                Decimal dbValorUnitario_R = ingrediente.dbValorUnitario;
+                Decimal dbPresentacion_R = ingrediente.dbPresentacion;
+                Decimal dbRendimiento_R = ingrediente.dbRendimiento;
+                Decimal dbPorcentaje_R = (dbRendimiento_R * 100) / dbPresentacion_R;
+
+                dgvReceta.Rows.Add(ingrediente.sNombreProducto, ingrediente.sUnidadConsumo, dbPorcentaje_R.ToString("N2"),
+                                   "0", dbValorUnitario_R.ToString(), "0.00");
 
                 ingrediente.Close();
-                llenarValoresTexto();
-                dgvReceta.ClearSelection();
             }
         }
 
@@ -1171,6 +1175,35 @@ namespace Palatium.Receta
                 ingrediente.Close();
                 llenarValoresTexto();
                 dgvReceta.ClearSelection();
+            }
+        }
+
+        private void dgvReceta_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            TextBox texto = e.Control as TextBox;
+
+            if (texto != null)
+            {
+                DataGridViewTextBoxEditingControl dTexto = (DataGridViewTextBoxEditingControl)e.Control;
+                dTexto.KeyPress -= new KeyPressEventHandler(dText_KeyPress);
+                dTexto.KeyPress += new KeyPressEventHandler(dText_KeyPress);
+            }
+        }
+
+        private void dgvReceta_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dgvReceta.Columns[e.ColumnIndex].Name == "cantidad")
+                {
+                    
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.lblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
             }
         }
     }
