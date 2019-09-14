@@ -46,22 +46,23 @@ namespace Palatium.Receta
                 dgvDatos.Rows.Clear();
 
                 sSql = "";
-                sSql += "select E.id_pos_equivalencia, E.id_pos_unidad, E.id_pos_unidad_equivalencia," + Environment.NewLine;
-                sSql += "E.descripcion, E.equivalencia," + Environment.NewLine;
-                sSql += "case E.estado when 'A' then 'ACTIVO' else 'INACTIVO' end estado" + Environment.NewLine;
-                sSql += "from pos_equivalencias E, pos_unidad ORIGEN, pos_unidad EQUIVALENCIA" + Environment.NewLine;
-                sSql += "where E.id_pos_unidad = ORIGEN.id_pos_unidad" + Environment.NewLine;
-                sSql += "and E.id_pos_unidad_equivalencia = EQUIVALENCIA.id_pos_unidad" + Environment.NewLine;
-                sSql += "and E.estado = 'A'" + Environment.NewLine;
-                sSql += "and ORIGEN.estado = 'A'" + Environment.NewLine;
-                sSql += "and EQUIVALENCIA.estado = 'A'" + Environment.NewLine;
+                sSql += "select EU.id_pos_equivalencia_unidad, EU.id_pos_unidad_inicial," + Environment.NewLine;
+                sSql += "EU.id_pos_unidad_final, INICIAL.descripcion + ' A ' + FINAL.descripcion descripcion," + Environment.NewLine;
+                sSql += "EU.factor_conversion, case EU.estado when 'A' then 'ACTIVO' else 'INACTIVO' end estado" + Environment.NewLine;
+                sSql += "from pos_equivalencia_unidad EU INNER JOIN" + Environment.NewLine;
+                sSql += "pos_unidad INICIAL ON INICIAL.id_pos_unidad = EU.id_pos_unidad_inicial" + Environment.NewLine;
+                sSql += "and EU.estado in ('A', 'N')" + Environment.NewLine;
+                sSql += "and INICIAL.estado in ('A', 'N') INNER JOIN" + Environment.NewLine;
+                sSql += "pos_unidad FINAL ON FINAL.id_pos_unidad = EU.id_pos_unidad_final" + Environment.NewLine;
+                sSql += "and FINAL.estado in ('A', 'N')" + Environment.NewLine;
 
                 if (iBandera == 1)
                 {
-                    sSql += "and E.descripcion like '%" + txtBuscar.Text.Trim() + "%'" + Environment.NewLine;
+                    sSql += "where INICIAL.descripcion like '%" + txtBuscar.Text.Trim() + "%'" + Environment.NewLine;
+                    sSql += "or FINAL.descripcion like '%" + txtBuscar.Text.Trim() + "%'" + Environment.NewLine;
                 }
 
-                sSql += "order by E.id_pos_equivalencia";
+                sSql += "order by INICIAL.descripcion";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -71,12 +72,12 @@ namespace Palatium.Receta
                     {
                         for (int i = 0; i < dtConsulta.Rows.Count; i++)
                         {
-                            dgvDatos.Rows.Add(dtConsulta.Rows[i][0].ToString(),
-                                              dtConsulta.Rows[i][1].ToString(),
-                                              dtConsulta.Rows[i][2].ToString(),
-                                              dtConsulta.Rows[i][3].ToString(),
-                                              dtConsulta.Rows[i][4].ToString(),
-                                              dtConsulta.Rows[i][5].ToString()
+                            dgvDatos.Rows.Add(dtConsulta.Rows[i]["id_pos_equivalencia_unidad"].ToString(),
+                                              dtConsulta.Rows[i]["id_pos_unidad_inicial"].ToString(),
+                                              dtConsulta.Rows[i]["id_pos_unidad_final"].ToString(),
+                                              dtConsulta.Rows[i]["descripcion"].ToString(),
+                                              dtConsulta.Rows[i]["factor_conversion"].ToString(),
+                                              dtConsulta.Rows[i]["estado"].ToString()
                                                   );
                         }
 
@@ -105,14 +106,27 @@ namespace Palatium.Receta
             try
             {
                 sSql = "";
-                sSql += "select id_pos_unidad, descripcion, codigo" + Environment.NewLine;
+                sSql += "select id_pos_unidad, descripcion" + Environment.NewLine;
                 sSql += "from pos_unidad" + Environment.NewLine;
                 sSql += "where estado in ('A', 'N')";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
 
-                cmbUnidadOrigen.llenar(dtConsulta, sSql);
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    cmbUnidadOrigen.DisplayMember = "descripcion";
+                    cmbUnidadOrigen.ValueMember = "id_pos_unidad";
+                    cmbUnidadOrigen.DataSource = dtConsulta;
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                } 
             }
 
             catch (Exception ex)
@@ -122,20 +136,33 @@ namespace Palatium.Receta
             }
         }
 
-        //FUNCION PARA CARGAR LOS COMBOBOX DE UNIDADES EQUIVALENCIA
-        private void llenarComboEquivalencia()
+        //FUNCION PARA CARGAR LOS COMBOBOX DE UNIDADES DESTINO
+        private void llenarComboDestino()
         {
             try
             {
                 sSql = "";
-                sSql += "select id_pos_unidad, descripcion, codigo" + Environment.NewLine;
+                sSql += "select id_pos_unidad, descripcion" + Environment.NewLine;
                 sSql += "from pos_unidad" + Environment.NewLine;
                 sSql += "where estado in ('A', 'N')";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
 
-                cmbUnidadEquivalencia.llenar(dtConsulta, sSql);
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    cmbUnidadDestino.DisplayMember = "descripcion";
+                    cmbUnidadDestino.ValueMember = "id_pos_unidad";
+                    cmbUnidadDestino.DataSource = dtConsulta;
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
             }
 
             catch (Exception ex)
@@ -143,32 +170,34 @@ namespace Palatium.Receta
                 catchMensaje.lblMensaje.Text = ex.ToString();
                 catchMensaje.ShowDialog();
             }
-        }
+        }  
 
         //FUNCION PARA VALIDAR LOS COMBOBOX
         private void concatenarCombos()
         {
             try
             {
-                if ((Convert.ToInt32(cmbUnidadOrigen.SelectedValue) == 0) && (Convert.ToInt32(cmbUnidadEquivalencia.SelectedValue) == 0))
-                {
-                    txtDescripcion.Clear();
-                }
+                txtDescripcion.Text = cmbUnidadOrigen.Text.Trim().ToUpper() + " - " + cmbUnidadDestino.Text.Trim().ToUpper();
 
-                else if ((Convert.ToInt32(cmbUnidadOrigen.SelectedValue) != 0) && (Convert.ToInt32(cmbUnidadEquivalencia.SelectedValue) == 0))
-                {
-                    txtDescripcion.Text = cmbUnidadOrigen.Text.Trim().ToUpper() + " -";
-                }
+                //if ((Convert.ToInt32(cmbUnidadOrigen.SelectedValue) == 0) && (Convert.ToInt32(cmbUnidadDestino.SelectedValue) == 0))
+                //{
+                //    txtDescripcion.Clear();
+                //}
 
-                else if ((Convert.ToInt32(cmbUnidadOrigen.SelectedValue) == 0) && (Convert.ToInt32(cmbUnidadEquivalencia.SelectedValue)!= 0))
-                {
-                    txtDescripcion.Text = " - " + cmbUnidadEquivalencia.Text.Trim().ToUpper();
-                }
+                //else if ((Convert.ToInt32(cmbUnidadOrigen.SelectedValue) != 0) && (Convert.ToInt32(cmbUnidadDestino.SelectedValue) == 0))
+                //{
+                //    txtDescripcion.Text = cmbUnidadOrigen.Text.Trim().ToUpper() + " -";
+                //}
 
-                else
-                {
-                    txtDescripcion.Text = cmbUnidadOrigen.Text.Trim().ToUpper() + " - " + cmbUnidadEquivalencia.Text.Trim().ToUpper();
-                }
+                //else if ((Convert.ToInt32(cmbUnidadOrigen.SelectedValue) == 0) && (Convert.ToInt32(cmbUnidadDestino.SelectedValue) != 0))
+                //{
+                //    txtDescripcion.Text = " - " + cmbUnidadDestino.Text.Trim().ToUpper();
+                //}
+
+                //else
+                //{
+                //    txtDescripcion.Text = cmbUnidadOrigen.Text.Trim().ToUpper() + " - " + cmbUnidadDestino.Text.Trim().ToUpper();
+                //}
             }
 
             catch (Exception ex)
@@ -190,7 +219,7 @@ namespace Palatium.Receta
                     iIdOrigen = Convert.ToInt32(dgvDatos.Rows[i].Cells[1].Value.ToString());
                     iIdEquivalencia = Convert.ToInt32(dgvDatos.Rows[i].Cells[2].Value.ToString());
 
-                    if ((iIdOrigen == Convert.ToInt32(cmbUnidadOrigen.SelectedValue)) && (iIdEquivalencia == Convert.ToInt32(cmbUnidadEquivalencia.SelectedValue)))
+                    if ((iIdOrigen == Convert.ToInt32(cmbUnidadOrigen.SelectedValue)) && (iIdEquivalencia == Convert.ToInt32(cmbUnidadDestino.SelectedValue)))
                     {
                         iBandera = 1;
                         break;
@@ -220,16 +249,17 @@ namespace Palatium.Receta
         private void limpiar()
         {
             cmbUnidadOrigen.SelectedIndexChanged -= new EventHandler(cmbUnidadOrigen_SelectedIndexChanged);
+            cmbUnidadDestino.SelectedIndexChanged -= new EventHandler(cmbUnidadEquivalencia_SelectedIndexChanged);
             llenarComboOrigen();
+            llenarComboDestino();
             cmbUnidadOrigen.SelectedIndexChanged += new EventHandler(cmbUnidadOrigen_SelectedIndexChanged);
+            cmbUnidadDestino.SelectedIndexChanged += new EventHandler(cmbUnidadEquivalencia_SelectedIndexChanged);
 
-            cmbUnidadEquivalencia.SelectedIndexChanged -= new EventHandler(cmbUnidadEquivalencia_SelectedIndexChanged);
-            llenarComboEquivalencia();            
-            cmbUnidadEquivalencia.SelectedIndexChanged += new EventHandler(cmbUnidadEquivalencia_SelectedIndexChanged);
+            txtDescripcion.Text = cmbUnidadOrigen.Text.Trim().ToUpper() + " - " + cmbUnidadDestino.Text.Trim().ToUpper();
 
             llenarGrid(0);
             txtBuscar.Clear();
-            txtDescripcion.Clear();
+            //txtDescripcion.Clear();
             txtEquivalencia.Clear();
             btnNuevo.Text = "Nuevo";
             cmbEstado.Text = "ACTIVO";
@@ -252,15 +282,15 @@ namespace Palatium.Receta
                 }
 
                 iIdOrigen = Convert.ToInt32(cmbUnidadOrigen.SelectedValue);
-                iIdEquivalencia = Convert.ToInt32(cmbUnidadEquivalencia.SelectedValue);
+                iIdEquivalencia = Convert.ToInt32(cmbUnidadDestino.SelectedValue);
 
                 sSql = "";
-                sSql = "insert into pos_equivalencias (" + Environment.NewLine;
-                sSql += "id_pos_unidad, id_pos_unidad_equivalencia, descripcion," + Environment.NewLine;
-                sSql += "equivalencia, estado, fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                sSql = "insert into pos_equivalencia_unidad (" + Environment.NewLine;
+                sSql += "id_pos_unidad_inicial, id_pos_unidad_final, factor_conversion," + Environment.NewLine;
+                sSql += "estado, fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
                 sSql += "values(" + Environment.NewLine;
-                sSql += iIdOrigen + ", " + iIdEquivalencia + ", '" + txtDescripcion.Text.Trim().ToUpper() + "'," + Environment.NewLine;
-                sSql += Convert.ToDouble(txtEquivalencia.Text.Trim()) + ", 'A', GETDATE(), '" + Program.sDatosMaximo[0] + "','" + Program.sDatosMaximo[1] + "')";
+                sSql += iIdOrigen + ", " + iIdEquivalencia + ", '" + Convert.ToDecimal(txtEquivalencia.Text.Trim()) + "'," + Environment.NewLine;
+                sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "','" + Program.sDatosMaximo[1] + "')";
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
@@ -299,16 +329,15 @@ namespace Palatium.Receta
                 }
 
                 iIdOrigen = Convert.ToInt32(cmbUnidadOrigen.SelectedValue);
-                iIdEquivalencia = Convert.ToInt32(cmbUnidadEquivalencia.SelectedValue);
+                iIdEquivalencia = Convert.ToInt32(cmbUnidadDestino.SelectedValue);
 
                 sSql = "";
-                sSql += "update pos_equivalencias set" + Environment.NewLine;
-                sSql += "id_pos_unidad = " + iIdOrigen + "," + Environment.NewLine;
-                sSql += "id_pos_unidad_equivalencia = " + iIdEquivalencia + "," + Environment.NewLine;
-                sSql += "descripcion = '" + txtDescripcion.Text.Trim().ToUpper() + "'," + Environment.NewLine;
-                sSql += "equivalencia = " + Convert.ToDouble(txtEquivalencia.Text.Trim()) + "," + Environment.NewLine;
+                sSql += "update pos_equivalencia_unidad set" + Environment.NewLine;
+                sSql += "id_pos_unidad_inicial = " + iIdOrigen + "," + Environment.NewLine;
+                sSql += "id_pos_unidad_final = " + iIdEquivalencia + "," + Environment.NewLine;
+                sSql += "factor_conversion = '" + txtEquivalencia.Text.Trim() + "'," + Environment.NewLine;
                 sSql += "estado = '" + sEstado + "'" + Environment.NewLine;
-                sSql += "where id_pos_equivalencia = " + iIdRegistro + Environment.NewLine;
+                sSql += "where id_pos_equivalencia_unidad = " + iIdRegistro + Environment.NewLine;
                 sSql += "and estado in ('A', 'N')";
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
@@ -383,7 +412,7 @@ namespace Palatium.Receta
 
         private void txtEquivalencia_KeyPress(object sender, KeyPressEventArgs e)
         {
-            caracter.soloDecimales(sender, e, 2);            
+            caracter.soloDecimales(sender, e, 5);            
         }
 
         private void frmEquivalenciaUnidad_Load(object sender, EventArgs e)
@@ -393,12 +422,16 @@ namespace Palatium.Receta
 
         private void cmbUnidadOrigen_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cmbUnidadDestino.SelectedIndexChanged -= new EventHandler(cmbUnidadEquivalencia_SelectedIndexChanged);
             concatenarCombos();
+            cmbUnidadDestino.SelectedIndexChanged += new EventHandler(cmbUnidadEquivalencia_SelectedIndexChanged);
         }
 
         private void cmbUnidadEquivalencia_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cmbUnidadOrigen.SelectedIndexChanged -= new EventHandler(cmbUnidadOrigen_SelectedIndexChanged);
             concatenarCombos();
+            cmbUnidadOrigen.SelectedIndexChanged += new EventHandler(cmbUnidadOrigen_SelectedIndexChanged);
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -438,11 +471,11 @@ namespace Palatium.Receta
                         cmbUnidadOrigen.Focus();
                     }
 
-                    else if (Convert.ToInt32(cmbUnidadEquivalencia.SelectedValue) == 0)
+                    else if (Convert.ToInt32(cmbUnidadDestino.SelectedValue) == 0)
                     {
                         ok.lblMensaje.Text = "Favor seleccione la unidad final para la conversión.";
                         ok.ShowDialog();
-                        cmbUnidadEquivalencia.Focus();
+                        cmbUnidadDestino.Focus();
                     }
 
                     else if (comprobarRegistros() == 1)
@@ -527,7 +560,7 @@ namespace Palatium.Receta
                 grupoDatos.Enabled = true;
                 iIdRegistro= Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value.ToString());
                 cmbUnidadOrigen.SelectedValue = dgvDatos.CurrentRow.Cells[1].Value.ToString();
-                cmbUnidadEquivalencia.SelectedValue = dgvDatos.CurrentRow.Cells[2].Value.ToString();
+                cmbUnidadDestino.SelectedValue = dgvDatos.CurrentRow.Cells[2].Value.ToString();
                 txtDescripcion.Text = dgvDatos.CurrentRow.Cells[3].Value.ToString();
                 txtEquivalencia.Text = dgvDatos.CurrentRow.Cells[4].Value.ToString();
                 cmbEstado.Text = dgvDatos.CurrentRow.Cells[5].Value.ToString();

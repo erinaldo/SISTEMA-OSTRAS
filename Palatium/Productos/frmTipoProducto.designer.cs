@@ -154,6 +154,8 @@
             // 
             this.dgvRegistro.AllowUserToAddRows = false;
             this.dgvRegistro.AllowUserToDeleteRows = false;
+            this.dgvRegistro.AllowUserToResizeColumns = false;
+            this.dgvRegistro.AllowUserToResizeRows = false;
             this.dgvRegistro.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvRegistro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRegistro.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

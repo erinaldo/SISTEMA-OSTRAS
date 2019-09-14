@@ -39,6 +39,12 @@ namespace Palatium.Clases
                 return;
             }
 
+            if (e.KeyChar == 127)
+            {
+                e.Handled = false;
+                return;
+            }
+
             bool IsDec = false;
             int nroDec = 0;
 

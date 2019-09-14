@@ -27,6 +27,8 @@ namespace Palatium.Productos
         int iIdRegistro;
         int iCuenta;
         int iCantidad;
+        int iMateriaPrima;
+        int iProductoTerminado;
 
         bool bRespuesta;
 
@@ -45,8 +47,9 @@ namespace Palatium.Productos
                 dgvRegistro.Rows.Clear();
 
                 sSql = "";
-                sSql += "select id_pos_clase_producto   , codigo, descripcion," + Environment.NewLine;
-                sSql += "case estado when 'A' then 'ACTIVO' else 'INACTIVO' end estado" + Environment.NewLine;
+                sSql += "select id_pos_clase_producto, codigo, descripcion," + Environment.NewLine;
+                sSql += "case estado when 'A' then 'ACTIVO' else 'INACTIVO' end estado," + Environment.NewLine;
+                sSql += "aplica_materia_prima, aplica_producto_terminado" + Environment.NewLine;
                 sSql += "from pos_clase_producto" + Environment.NewLine;
                 sSql += "where estado in ('A', 'N')" + Environment.NewLine;
 
@@ -66,10 +69,12 @@ namespace Palatium.Productos
                 {
                     for (int i = 0; i < dtConsulta.Rows.Count; i++)
                     {
-                        dgvRegistro.Rows.Add(dtConsulta.Rows[i][0].ToString(),
-                                            dtConsulta.Rows[i][1].ToString(),
-                                            dtConsulta.Rows[i][2].ToString(),
-                                            dtConsulta.Rows[i][3].ToString()
+                        dgvRegistro.Rows.Add(dtConsulta.Rows[i]["id_pos_clase_producto"].ToString(),
+                                             dtConsulta.Rows[i]["codigo"].ToString(),
+                                             dtConsulta.Rows[i]["descripcion"].ToString(),
+                                             dtConsulta.Rows[i]["estado"].ToString(),
+                                             dtConsulta.Rows[i]["aplica_materia_prima"].ToString(),
+                                             dtConsulta.Rows[i]["aplica_producto_terminado"].ToString()
                                               );
                     }
                 }
@@ -102,6 +107,9 @@ namespace Palatium.Productos
             grupoDatos.Enabled = false;
             btnAnular.Enabled = false;
             cmbEstado.Enabled = false;
+
+            chkMateriaPrima.Checked = false;
+            chkProductoTerminado.Checked = false;
 
             txtBuscar.Focus();
         }
@@ -188,9 +196,11 @@ namespace Palatium.Productos
 
                 sSql = "";
                 sSql += "insert into pos_clase_producto (" + Environment.NewLine;
-                sSql += "codigo, descripcion, estado, fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                sSql += "codigo, descripcion, aplica_materia_prima, aplica_producto_terminado" + Environment.NewLine;
+                sSql += "estado, fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
                 sSql += "values(" + Environment.NewLine;
                 sSql += "'" + txtCodigo.Text.Trim().ToUpper() + "', '" + txtDescripcion.Text.Trim().ToUpper() + "'," + Environment.NewLine;
+                sSql += iMateriaPrima + ", " + iProductoTerminado + ", ";
                 sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
 
                 //EJECUTAR LA INSTRUCCIÓN SQL
@@ -235,6 +245,8 @@ namespace Palatium.Productos
                 sSql = "";
                 sSql += "update pos_clase_producto set" + Environment.NewLine;
                 sSql += "descripcion = '" + txtDescripcion.Text.Trim().ToUpper() + "'," + Environment.NewLine;
+                sSql += "aplica_materia_prima = " + iMateriaPrima + "," + Environment.NewLine;
+                sSql += "aplica_producto_terminado = " + iProductoTerminado + "," + Environment.NewLine;
                 sSql += "estado = '" + sEstado + "'" + Environment.NewLine;
                 sSql += "where id_pos_clase_producto = " + iIdRegistro + Environment.NewLine;
                 sSql += "and estado in ('A', 'N')";
@@ -357,6 +369,27 @@ namespace Palatium.Productos
 
                     else
                     {
+                        if (chkMateriaPrima.Checked == true)
+                        {
+                            iMateriaPrima = 1;
+                        }
+
+                        else
+                        {
+                            iMateriaPrima = 0;
+                        }
+
+                        if (chkProductoTerminado.Checked == true)
+                        {
+                            iProductoTerminado = 1;
+                        }
+
+                        else
+                        {
+                            iProductoTerminado = 0;
+                        }
+
+
                         if (btnNuevo.Text == "Guardar")
                         {
                             iCantidad = contarRegistros();
@@ -471,6 +504,26 @@ namespace Palatium.Productos
                 txtCodigo.Text = dgvRegistro.CurrentRow.Cells[1].Value.ToString();
                 txtDescripcion.Text = dgvRegistro.CurrentRow.Cells[2].Value.ToString().ToUpper();
                 cmbEstado.Text = dgvRegistro.CurrentRow.Cells[3].Value.ToString().ToUpper();
+
+                if (Convert.ToInt32(dgvRegistro.CurrentRow.Cells[4].Value.ToString()) == 1)
+                {
+                    chkMateriaPrima.Checked = true;
+                }
+
+                else
+                {
+                    chkMateriaPrima.Checked = false;
+                }
+
+                if (Convert.ToInt32(dgvRegistro.CurrentRow.Cells[5].Value.ToString()) == 1)
+                {
+                    chkProductoTerminado.Checked = true;
+                }
+
+                else
+                {
+                    chkProductoTerminado.Checked = false;
+                }
 
                 grupoDatos.Enabled = true;
                 txtCodigo.Enabled = false;

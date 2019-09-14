@@ -258,12 +258,34 @@ namespace Palatium.Productos
                 sSql = "";
                 sSql += "select id_pos_clase_producto, descripcion" + Environment.NewLine;
                 sSql += "from pos_clase_producto" + Environment.NewLine;
-                sSql += "where estado = 'A'";
+                sSql += "where estado = 'A'" + Environment.NewLine;
+                sSql += "and aplica_materia_prima = 1" + Environment.NewLine;
+                sSql += "and aplica_producto_terminado = 0";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
 
-                cmbClaseProducto.llenar(dtConsulta, sSql);
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    cmbClaseProducto.DisplayMember = "descripcion";
+                    cmbClaseProducto.ValueMember = "id_pos_clase_producto";
+                    cmbClaseProducto.DataSource = dtConsulta;
+
+                    //if (cmbConsumo.Items.Count > 22)
+                    //{
+                    //    cmbConsumo.SelectedIndex = 22;
+                    //}
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
+
+                //cmbClaseProducto.llenar(dtConsulta, sSql);
             }
 
             catch (Exception ex)
@@ -286,7 +308,27 @@ namespace Palatium.Productos
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
 
-                cmbTipoProducto.llenar(dtConsulta, sSql);
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    cmbTipoProducto.DisplayMember = "descripcion";
+                    cmbTipoProducto.ValueMember = "id_pos_tipo_producto";
+                    cmbTipoProducto.DataSource = dtConsulta;
+
+                    //if (cmbConsumo.Items.Count > 22)
+                    //{
+                    //    cmbConsumo.SelectedIndex = 22;
+                    //}
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
+
+                //cmbTipoProducto.llenar(dtConsulta, sSql);
             }
 
             catch (Exception ex)
@@ -585,7 +627,7 @@ namespace Palatium.Productos
 
                             else
                             {
-                                dgvProductos.Rows[i].Cells[4].Value = (Convert.ToDouble(dtConsulta.Rows[0][0].ToString()).ToString("N5"));
+                                dgvProductos.Rows[i].Cells[4].Value = Convert.ToDouble(dtConsulta.Rows[0][0].ToString()).ToString("N5");
                             }
                         }
 
@@ -604,46 +646,14 @@ namespace Palatium.Productos
                         return;
                     }
 
-                    sSql = "";
-                    sSql += "select id_producto_padre" + Environment.NewLine;
-                    sSql += "from cv401_productos" + Environment.NewLine;
-                    sSql += "where id_producto = " + Convert.ToInt32(dgvProductos.Rows[i].Cells[0].Value) + Environment.NewLine;
-                    sSql += "and estado = 'A'";
-
-                    dtConsulta = new DataTable();
-                    dtConsulta.Clear();
-
-                    bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-                    if (bRespuesta == true)
-                    {
-                        if (dtConsulta.Rows.Count == 0)
-                        {
-                            ok.lblMensaje.Text = "Ocurrió un problema al realizar la consulta 3.";
-                            ok.ShowDialog();
-                            return;
-                        }
-
-                        else
-                        {
-                            iIdPadre = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-                        }
-                    }
-
-                    else
-                    {
-                        catchMensaje.lblMensaje.Text = sSql;
-                        catchMensaje.ShowDialog();
-                        return;
-                    }
-
+                    //RECUPERANDO LA UNIDAD DE COMPRA
                     sSql = "";
                     sSql += "select UP.cg_unidad, TC.valor_texto" + Environment.NewLine;
-                    sSql += "from cv401_unidades_productos UP, tp_codigos TC " + Environment.NewLine;
-                    sSql += "where TC.correlativo = UP.cg_unidad" + Environment.NewLine;
-                    sSql += "and UP.id_producto = " + iIdPadre + Environment.NewLine;
-                    sSql += "and UP.estado = 'A'";
-                    //sSql = "select * from cv401_unidades_productos where id_producto = " + iIdPadre + " and estado = 'A'";
+                    sSql += "from cv401_unidades_productos UP INNER JOIN" + Environment.NewLine;
+                    sSql += "tp_codigos TC ON TC.correlativo = UP.cg_unidad" + Environment.NewLine;
+                    sSql += "and UP.estado = 'A'" + Environment.NewLine;
+                    sSql += "where UP.id_producto = " + Convert.ToInt32(dgvProductos.Rows[i].Cells[0].Value) + Environment.NewLine;
+                    sSql += "and UP.unidad_compra = 1";
 
                     dtConsulta = new DataTable();
                     dtConsulta.Clear();
@@ -652,20 +662,17 @@ namespace Palatium.Productos
 
                     if (bRespuesta == true)
                     {
-                        if (dtConsulta.Rows.Count == 0)
+                        if (dtConsulta.Rows.Count > 0)
                         {
-                            ok.lblMensaje.Text = "Ocurrió un problema al realizar la consulta 4.";
-                            ok.ShowDialog();
-                            return;
+                            dgvProductos.Rows[i].Cells[12].Value = dtConsulta.Rows[0]["cg_unidad"].ToString();
+                            dgvProductos.Rows[i].Cells[14].Value = dtConsulta.Rows[0]["valor_texto"].ToString();
                         }
 
                         else
                         {
-                            dgvProductos.Rows[i].Cells[12].Value = dtConsulta.Rows[0][0].ToString();
-                            dgvProductos.Rows[i].Cells[13].Value = dtConsulta.Rows[1][0].ToString();
-
-                            dgvProductos.Rows[i].Cells[14].Value = dtConsulta.Rows[0][1].ToString();
-                            dgvProductos.Rows[i].Cells[15].Value = dtConsulta.Rows[1][1].ToString();
+                            ok.lblMensaje.Text = "Ocurrió un problema al realizar la consulta 2.";
+                            ok.ShowDialog();
+                            return;
                         }
                     }
 
@@ -674,7 +681,44 @@ namespace Palatium.Productos
                         catchMensaje.lblMensaje.Text = sSql;
                         catchMensaje.ShowDialog();
                         return;
-                    }                    
+                    }
+
+                    //RECUPERANDO LA UNIDAD DE CONSUMO
+                    sSql = "";
+                    sSql += "select UP.cg_unidad, TC.valor_texto" + Environment.NewLine;
+                    sSql += "from cv401_unidades_productos UP INNER JOIN" + Environment.NewLine;
+                    sSql += "tp_codigos TC ON TC.correlativo = UP.cg_unidad" + Environment.NewLine;
+                    sSql += "and UP.estado = 'A'" + Environment.NewLine;
+                    sSql += "where UP.id_producto = " + Convert.ToInt32(dgvProductos.Rows[i].Cells[0].Value) + Environment.NewLine;
+                    sSql += "and UP.unidad_compra = 0";
+
+                    dtConsulta = new DataTable();
+                    dtConsulta.Clear();
+
+                    bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                    if (bRespuesta == true)
+                    {
+                        if (dtConsulta.Rows.Count > 0)
+                        {
+                            dgvProductos.Rows[i].Cells[13].Value = dtConsulta.Rows[0]["cg_unidad"].ToString();
+                            dgvProductos.Rows[i].Cells[15].Value = dtConsulta.Rows[0]["valor_texto"].ToString();
+                        }
+
+                        else
+                        {
+                            ok.lblMensaje.Text = "Ocurrió un problema al realizar la consulta 2.";
+                            ok.ShowDialog();
+                            return;
+                        }
+                    }
+
+                    else
+                    {
+                        catchMensaje.lblMensaje.Text = sSql;
+                        catchMensaje.ShowDialog();
+                        return;
+                    }               
                 }
             }
 
@@ -1669,17 +1713,18 @@ namespace Palatium.Productos
                 cmbClaseProducto.SelectedValue = dgvProductos.CurrentRow.Cells[18].Value.ToString();
                 cmbTipoProducto.SelectedValue = dgvProductos.CurrentRow.Cells[19].Value.ToString();
 
-                dPrecioUnitario = Convert.ToDecimal(dgvProductos.CurrentRow.Cells[3].Value.ToString());
+                dPrecioUnitario = Convert.ToDecimal(dgvProductos.CurrentRow.Cells[29].Value.ToString());
                 dPresentacion = Convert.ToDecimal(dgvProductos.CurrentRow.Cells[27].Value.ToString());
                 dPrecioCompra = dPrecioUnitario * dPresentacion;
                 
                 txtPrecioCompra.Text = dPrecioCompra.ToString("N4");
-                txtPresentacion.Text = dPresentacion.ToString("N4");
+                //txtPresentacion.Text = dPresentacion.ToString("N4");
+                txtPresentacion.Text = dgvProductos.CurrentRow.Cells[27].Value.ToString();
                 txtRendimiento.Text = dgvProductos.CurrentRow.Cells[28].Value.ToString();
                 txtPrecioUnitario.Text = dPrecioUnitario.ToString("N4");
 
                 sPrecioBase = dgvProductos.CurrentRow.Cells[3].Value.ToString();
-                txtPrecioMinorista.Text = dgvProductos.CurrentRow.Cells[4].Value.ToString();
+                txtPrecioMinorista.Text = Convert.ToDouble(dgvProductos.CurrentRow.Cells[4].Value.ToString()).ToString();
                 dPrecioMinorista = Convert.ToDecimal(dgvProductos.CurrentRow.Cells[4].Value.ToString());
                 sPrecioMinorista = dgvProductos.CurrentRow.Cells[4].Value.ToString();
 

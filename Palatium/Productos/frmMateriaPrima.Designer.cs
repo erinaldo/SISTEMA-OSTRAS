@@ -33,6 +33,8 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.dBAyudaCategorias = new Controles.Auxiliares.DB_Ayuda();
             this.grupoPrecio = new System.Windows.Forms.GroupBox();
+            this.cmbConsumo = new System.Windows.Forms.ComboBox();
+            this.cmbCompra = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -56,9 +58,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbClaseProducto = new MisControles.ComboDatos();
             this.label4 = new System.Windows.Forms.Label();
-            this.cmbTipoProducto = new MisControles.ComboDatos();
             this.label3 = new System.Windows.Forms.Label();
             this.lblDecripCategoria = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -93,8 +93,8 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.cmbCompra = new System.Windows.Forms.ComboBox();
-            this.cmbConsumo = new System.Windows.Forms.ComboBox();
+            this.cmbTipoProducto = new System.Windows.Forms.ComboBox();
+            this.cmbClaseProducto = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.grupoPrecio.SuspendLayout();
             this.grupoDatos.SuspendLayout();
@@ -186,6 +186,24 @@
             this.grupoPrecio.TabIndex = 33;
             this.grupoPrecio.TabStop = false;
             this.grupoPrecio.Text = "Control de Precio y Unidades";
+            // 
+            // cmbConsumo
+            // 
+            this.cmbConsumo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConsumo.FormattingEnabled = true;
+            this.cmbConsumo.Location = new System.Drawing.Point(133, 204);
+            this.cmbConsumo.Name = "cmbConsumo";
+            this.cmbConsumo.Size = new System.Drawing.Size(111, 21);
+            this.cmbConsumo.TabIndex = 78;
+            // 
+            // cmbCompra
+            // 
+            this.cmbCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCompra.FormattingEnabled = true;
+            this.cmbCompra.Location = new System.Drawing.Point(133, 178);
+            this.cmbCompra.Name = "cmbCompra";
+            this.cmbCompra.Size = new System.Drawing.Size(111, 21);
+            this.cmbCompra.TabIndex = 73;
             // 
             // label10
             // 
@@ -399,13 +417,13 @@
             // 
             // grupoDatos
             // 
+            this.grupoDatos.Controls.Add(this.cmbClaseProducto);
+            this.grupoDatos.Controls.Add(this.cmbTipoProducto);
             this.grupoDatos.Controls.Add(this.label8);
             this.grupoDatos.Controls.Add(this.label9);
             this.grupoDatos.Controls.Add(this.label7);
             this.grupoDatos.Controls.Add(this.label1);
-            this.grupoDatos.Controls.Add(this.cmbClaseProducto);
             this.grupoDatos.Controls.Add(this.label4);
-            this.grupoDatos.Controls.Add(this.cmbTipoProducto);
             this.grupoDatos.Controls.Add(this.label3);
             this.grupoDatos.Controls.Add(this.lblDecripCategoria);
             this.grupoDatos.Controls.Add(this.txtNombre);
@@ -467,14 +485,6 @@
             this.label1.TabIndex = 69;
             this.label1.Text = "*";
             // 
-            // cmbClaseProducto
-            // 
-            this.cmbClaseProducto.FormattingEnabled = true;
-            this.cmbClaseProducto.Location = new System.Drawing.Point(154, 94);
-            this.cmbClaseProducto.Name = "cmbClaseProducto";
-            this.cmbClaseProducto.Size = new System.Drawing.Size(194, 21);
-            this.cmbClaseProducto.TabIndex = 10;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -486,14 +496,6 @@
             this.label4.Size = new System.Drawing.Size(107, 15);
             this.label4.TabIndex = 68;
             this.label4.Text = "Clase de Producto";
-            // 
-            // cmbTipoProducto
-            // 
-            this.cmbTipoProducto.FormattingEnabled = true;
-            this.cmbTipoProducto.Location = new System.Drawing.Point(154, 72);
-            this.cmbTipoProducto.Name = "cmbTipoProducto";
-            this.cmbTipoProducto.Size = new System.Drawing.Size(194, 21);
-            this.cmbTipoProducto.TabIndex = 9;
             // 
             // label3
             // 
@@ -909,23 +911,23 @@
             this.dgvProductos.TabIndex = 28;
             this.dgvProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellDoubleClick);
             // 
-            // cmbCompra
+            // cmbTipoProducto
             // 
-            this.cmbCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCompra.FormattingEnabled = true;
-            this.cmbCompra.Location = new System.Drawing.Point(133, 178);
-            this.cmbCompra.Name = "cmbCompra";
-            this.cmbCompra.Size = new System.Drawing.Size(111, 21);
-            this.cmbCompra.TabIndex = 73;
+            this.cmbTipoProducto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoProducto.FormattingEnabled = true;
+            this.cmbTipoProducto.Location = new System.Drawing.Point(154, 73);
+            this.cmbTipoProducto.Name = "cmbTipoProducto";
+            this.cmbTipoProducto.Size = new System.Drawing.Size(194, 21);
+            this.cmbTipoProducto.TabIndex = 79;
             // 
-            // cmbConsumo
+            // cmbClaseProducto
             // 
-            this.cmbConsumo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbConsumo.FormattingEnabled = true;
-            this.cmbConsumo.Location = new System.Drawing.Point(133, 204);
-            this.cmbConsumo.Name = "cmbConsumo";
-            this.cmbConsumo.Size = new System.Drawing.Size(111, 21);
-            this.cmbConsumo.TabIndex = 78;
+            this.cmbClaseProducto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbClaseProducto.FormattingEnabled = true;
+            this.cmbClaseProducto.Location = new System.Drawing.Point(154, 95);
+            this.cmbClaseProducto.Name = "cmbClaseProducto";
+            this.cmbClaseProducto.Size = new System.Drawing.Size(194, 21);
+            this.cmbClaseProducto.TabIndex = 80;
             // 
             // frmMateriaPrima
             // 
@@ -981,9 +983,7 @@
         private System.Windows.Forms.Label lblPreCompra;
         private System.Windows.Forms.Label lblPrecioMinorista;
         private System.Windows.Forms.GroupBox grupoDatos;
-        private MisControles.ComboDatos cmbClaseProducto;
         private System.Windows.Forms.Label label4;
-        private MisControles.ComboDatos cmbTipoProducto;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblDecripCategoria;
         private System.Windows.Forms.TextBox txtNombre;
@@ -1034,5 +1034,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox cmbCompra;
         private System.Windows.Forms.ComboBox cmbConsumo;
+        private System.Windows.Forms.ComboBox cmbClaseProducto;
+        private System.Windows.Forms.ComboBox cmbTipoProducto;
     }
 }

@@ -32,6 +32,8 @@ namespace Palatium.Personal
         int iIdCajero;
         int iPermisos;
         int iCuenta;
+        int iCuentaMeseros;
+        int iCuentaCajeros;
 
         public frmCajeros()
         {
@@ -149,6 +151,81 @@ namespace Palatium.Personal
             }
         }
 
+        //FUNCION PARA COMPROBAR LA CLAVE INGRESADA PARA EVITAR DUPLICADOS
+        private int devolverConsultaPasswordCajero()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select count(*) cuenta" + Environment.NewLine;
+                sSql += "from pos_cajero" + Environment.NewLine;
+                sSql += "where claveacceso = '" + txtClaveAcceso.Text.Trim() + "'" + Environment.NewLine;
+                sSql += "and estado in ('A', 'N')" + Environment.NewLine;
+                sSql += "and id_pos_cajero <> " + iIdCajero;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    return Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return -1;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.lblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return -1;
+            }
+        }
+
+        //FUNCION PARA COMPROBAR LA CLAVE INGRESADA PARA EVITAR DUPLICADOS
+        private int devolverConsultaPasswordMesero()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select count(*) cuenta" + Environment.NewLine;
+                sSql += "from pos_mesero" + Environment.NewLine;
+                sSql += "where claveacceso = '" + txtClaveAcceso.Text.Trim() + "'" + Environment.NewLine;
+                sSql += "and estado in ('A', 'N')";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    return Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return -1;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.lblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return -1;
+            }
+        }
+
         //FUNCION PARA LLENAR EL GRID
         private void llenarGrid(int iBandera)
         {
@@ -223,6 +300,36 @@ namespace Palatium.Personal
         {
             try
             {
+                iCuentaCajeros = devolverConsultaPasswordCajero();
+
+                if (iCuentaCajeros == -1)
+                {
+                    txtClaveAcceso.Focus();
+                    return;
+                }
+
+                if (iCuentaCajeros > 0)
+                {
+                    ok.lblMensaje.Text = "La clave ingresada ya está asignada para usuario";
+                    ok.ShowDialog();
+                    txtClaveAcceso.Focus();
+                    return;
+                }
+
+                iCuentaMeseros = devolverConsultaPasswordMesero();
+
+                if (iCuentaMeseros == -1)
+                {
+                    return;
+                }
+
+                if (iCuentaMeseros > 0)
+                {
+                    ok.lblMensaje.Text = "La clave ingresada ya está asignada para usuario";
+                    ok.ShowDialog();
+                    return;
+                }
+
                 //INICIA TRANSACCION
                 if (!conexion.GFun_Lo_Maneja_Transaccion(Program.G_INICIA_TRANSACCION))
                 {
@@ -273,6 +380,36 @@ namespace Palatium.Personal
         {
             try
             {
+                iCuentaCajeros = devolverConsultaPasswordCajero();
+
+                if (iCuentaCajeros == -1)
+                {
+                    txtClaveAcceso.Focus();
+                    return;
+                }
+
+                if (iCuentaCajeros > 0)
+                {
+                    ok.lblMensaje.Text = "La clave ingresada ya está asignada para usuario";
+                    ok.ShowDialog();
+                    txtClaveAcceso.Focus();
+                    return;
+                }
+
+                iCuentaMeseros = devolverConsultaPasswordMesero();
+
+                if (iCuentaMeseros == -1)
+                {
+                    return;
+                }
+
+                if (iCuentaMeseros > 0)
+                {
+                    ok.lblMensaje.Text = "La clave ingresada ya está asignada para usuario";
+                    ok.ShowDialog();
+                    return;
+                }
+
                 //INICIA TRANSACCION
                 if (!conexion.GFun_Lo_Maneja_Transaccion(Program.G_INICIA_TRANSACCION))
                 {

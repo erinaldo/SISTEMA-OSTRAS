@@ -37,10 +37,6 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvRegistro = new System.Windows.Forms.DataGridView();
-            this.idJornada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estado1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grupoDatos = new System.Windows.Forms.GroupBox();
             this.cmbEstado = new System.Windows.Forms.ComboBox();
             this.lblEstaJornada = new System.Windows.Forms.Label();
@@ -48,6 +44,14 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblCodigoCajero = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.chkMateriaPrima = new System.Windows.Forms.CheckBox();
+            this.chkProductoTerminado = new System.Windows.Forms.CheckBox();
+            this.idJornada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estado1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.materia_prima = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.producto_terminado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Grb_opciojornada.SuspendLayout();
             this.Grb_listRejornada.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistro)).BeginInit();
@@ -61,9 +65,9 @@
             this.Grb_opciojornada.Controls.Add(this.btnLimpiar);
             this.Grb_opciojornada.Controls.Add(this.btnAnular);
             this.Grb_opciojornada.Controls.Add(this.btnNuevo);
-            this.Grb_opciojornada.Location = new System.Drawing.Point(12, 252);
+            this.Grb_opciojornada.Location = new System.Drawing.Point(12, 246);
             this.Grb_opciojornada.Name = "Grb_opciojornada";
-            this.Grb_opciojornada.Size = new System.Drawing.Size(342, 103);
+            this.Grb_opciojornada.Size = new System.Drawing.Size(342, 75);
             this.Grb_opciojornada.TabIndex = 19;
             this.Grb_opciojornada.TabStop = false;
             this.Grb_opciojornada.Text = "Opciones";
@@ -72,7 +76,7 @@
             // 
             this.btnCerrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnCerrar.ForeColor = System.Drawing.Color.Transparent;
-            this.btnCerrar.Location = new System.Drawing.Point(240, 33);
+            this.btnCerrar.Location = new System.Drawing.Point(245, 22);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(64, 39);
             this.btnCerrar.TabIndex = 3;
@@ -84,7 +88,7 @@
             // 
             this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnLimpiar.ForeColor = System.Drawing.Color.Transparent;
-            this.btnLimpiar.Location = new System.Drawing.Point(170, 33);
+            this.btnLimpiar.Location = new System.Drawing.Point(175, 22);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(64, 39);
             this.btnLimpiar.TabIndex = 2;
@@ -97,7 +101,7 @@
             this.btnAnular.BackColor = System.Drawing.Color.Red;
             this.btnAnular.Enabled = false;
             this.btnAnular.ForeColor = System.Drawing.Color.Transparent;
-            this.btnAnular.Location = new System.Drawing.Point(100, 33);
+            this.btnAnular.Location = new System.Drawing.Point(105, 22);
             this.btnAnular.Name = "btnAnular";
             this.btnAnular.Size = new System.Drawing.Size(64, 39);
             this.btnAnular.TabIndex = 1;
@@ -109,7 +113,7 @@
             // 
             this.btnNuevo.BackColor = System.Drawing.Color.Blue;
             this.btnNuevo.ForeColor = System.Drawing.Color.Transparent;
-            this.btnNuevo.Location = new System.Drawing.Point(30, 33);
+            this.btnNuevo.Location = new System.Drawing.Point(35, 22);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(64, 39);
             this.btnNuevo.TabIndex = 0;
@@ -125,7 +129,7 @@
             this.Grb_listRejornada.Controls.Add(this.dgvRegistro);
             this.Grb_listRejornada.Location = new System.Drawing.Point(362, 79);
             this.Grb_listRejornada.Name = "Grb_listRejornada";
-            this.Grb_listRejornada.Size = new System.Drawing.Size(469, 276);
+            this.Grb_listRejornada.Size = new System.Drawing.Size(469, 242);
             this.Grb_listRejornada.TabIndex = 18;
             this.Grb_listRejornada.TabStop = false;
             this.Grb_listRejornada.Text = "Lista de Registros";
@@ -154,13 +158,17 @@
             // 
             this.dgvRegistro.AllowUserToAddRows = false;
             this.dgvRegistro.AllowUserToDeleteRows = false;
+            this.dgvRegistro.AllowUserToResizeColumns = false;
+            this.dgvRegistro.AllowUserToResizeRows = false;
             this.dgvRegistro.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvRegistro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRegistro.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idJornada,
             this.codigo,
             this.descripcion,
-            this.estado1});
+            this.estado1,
+            this.materia_prima,
+            this.producto_terminado});
             this.dgvRegistro.GridColor = System.Drawing.SystemColors.ControlLight;
             this.dgvRegistro.Location = new System.Drawing.Point(16, 61);
             this.dgvRegistro.MultiSelect = false;
@@ -168,9 +176,114 @@
             this.dgvRegistro.ReadOnly = true;
             this.dgvRegistro.RowHeadersVisible = false;
             this.dgvRegistro.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRegistro.Size = new System.Drawing.Size(434, 199);
+            this.dgvRegistro.Size = new System.Drawing.Size(434, 167);
             this.dgvRegistro.TabIndex = 0;
             this.dgvRegistro.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRegistro_CellDoubleClick);
+            // 
+            // grupoDatos
+            // 
+            this.grupoDatos.BackColor = System.Drawing.Color.Transparent;
+            this.grupoDatos.Controls.Add(this.chkProductoTerminado);
+            this.grupoDatos.Controls.Add(this.chkMateriaPrima);
+            this.grupoDatos.Controls.Add(this.cmbEstado);
+            this.grupoDatos.Controls.Add(this.lblEstaJornada);
+            this.grupoDatos.Controls.Add(this.lblDescrCajero);
+            this.grupoDatos.Controls.Add(this.txtDescripcion);
+            this.grupoDatos.Controls.Add(this.lblCodigoCajero);
+            this.grupoDatos.Controls.Add(this.txtCodigo);
+            this.grupoDatos.Enabled = false;
+            this.grupoDatos.Location = new System.Drawing.Point(12, 79);
+            this.grupoDatos.Name = "grupoDatos";
+            this.grupoDatos.Size = new System.Drawing.Size(342, 161);
+            this.grupoDatos.TabIndex = 17;
+            this.grupoDatos.TabStop = false;
+            this.grupoDatos.Text = "Datos del Registro";
+            // 
+            // cmbEstado
+            // 
+            this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEstado.Enabled = false;
+            this.cmbEstado.FormattingEnabled = true;
+            this.cmbEstado.Items.AddRange(new object[] {
+            "ACTIVO",
+            "INACTIVO"});
+            this.cmbEstado.Location = new System.Drawing.Point(100, 124);
+            this.cmbEstado.Name = "cmbEstado";
+            this.cmbEstado.Size = new System.Drawing.Size(107, 21);
+            this.cmbEstado.TabIndex = 10;
+            // 
+            // lblEstaJornada
+            // 
+            this.lblEstaJornada.AutoSize = true;
+            this.lblEstaJornada.BackColor = System.Drawing.Color.Transparent;
+            this.lblEstaJornada.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstaJornada.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblEstaJornada.Location = new System.Drawing.Point(15, 124);
+            this.lblEstaJornada.Name = "lblEstaJornada";
+            this.lblEstaJornada.Size = new System.Drawing.Size(48, 15);
+            this.lblEstaJornada.TabIndex = 7;
+            this.lblEstaJornada.Text = "Estado:";
+            // 
+            // lblDescrCajero
+            // 
+            this.lblDescrCajero.AutoSize = true;
+            this.lblDescrCajero.BackColor = System.Drawing.Color.Transparent;
+            this.lblDescrCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescrCajero.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblDescrCajero.Location = new System.Drawing.Point(15, 56);
+            this.lblDescrCajero.Name = "lblDescrCajero";
+            this.lblDescrCajero.Size = new System.Drawing.Size(75, 15);
+            this.lblDescrCajero.TabIndex = 5;
+            this.lblDescrCajero.Text = "Descripción:";
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDescripcion.Location = new System.Drawing.Point(100, 54);
+            this.txtDescripcion.MaxLength = 20;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(216, 20);
+            this.txtDescripcion.TabIndex = 4;
+            // 
+            // lblCodigoCajero
+            // 
+            this.lblCodigoCajero.AutoSize = true;
+            this.lblCodigoCajero.BackColor = System.Drawing.Color.Transparent;
+            this.lblCodigoCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodigoCajero.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblCodigoCajero.Location = new System.Drawing.Point(15, 30);
+            this.lblCodigoCajero.Name = "lblCodigoCajero";
+            this.lblCodigoCajero.Size = new System.Drawing.Size(49, 15);
+            this.lblCodigoCajero.TabIndex = 3;
+            this.lblCodigoCajero.Text = "Código:";
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(100, 28);
+            this.txtCodigo.MaxLength = 20;
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(216, 20);
+            this.txtCodigo.TabIndex = 2;
+            // 
+            // chkMateriaPrima
+            // 
+            this.chkMateriaPrima.AutoSize = true;
+            this.chkMateriaPrima.Location = new System.Drawing.Point(18, 91);
+            this.chkMateriaPrima.Name = "chkMateriaPrima";
+            this.chkMateriaPrima.Size = new System.Drawing.Size(122, 17);
+            this.chkMateriaPrima.TabIndex = 11;
+            this.chkMateriaPrima.Text = "Aplica Materia Prima";
+            this.chkMateriaPrima.UseVisualStyleBackColor = true;
+            // 
+            // chkProductoTerminado
+            // 
+            this.chkProductoTerminado.AutoSize = true;
+            this.chkProductoTerminado.Location = new System.Drawing.Point(161, 91);
+            this.chkProductoTerminado.Name = "chkProductoTerminado";
+            this.chkProductoTerminado.Size = new System.Drawing.Size(154, 17);
+            this.chkProductoTerminado.TabIndex = 20;
+            this.chkProductoTerminado.Text = "Aplica Producto Terminado";
+            this.chkProductoTerminado.UseVisualStyleBackColor = true;
             // 
             // idJornada
             // 
@@ -198,89 +311,19 @@
             this.estado1.Name = "estado1";
             this.estado1.ReadOnly = true;
             // 
-            // grupoDatos
+            // materia_prima
             // 
-            this.grupoDatos.BackColor = System.Drawing.Color.Transparent;
-            this.grupoDatos.Controls.Add(this.cmbEstado);
-            this.grupoDatos.Controls.Add(this.lblEstaJornada);
-            this.grupoDatos.Controls.Add(this.lblDescrCajero);
-            this.grupoDatos.Controls.Add(this.txtDescripcion);
-            this.grupoDatos.Controls.Add(this.lblCodigoCajero);
-            this.grupoDatos.Controls.Add(this.txtCodigo);
-            this.grupoDatos.Enabled = false;
-            this.grupoDatos.Location = new System.Drawing.Point(12, 79);
-            this.grupoDatos.Name = "grupoDatos";
-            this.grupoDatos.Size = new System.Drawing.Size(342, 151);
-            this.grupoDatos.TabIndex = 17;
-            this.grupoDatos.TabStop = false;
-            this.grupoDatos.Text = "Datos del Registro";
+            this.materia_prima.HeaderText = "MATERIA PRIMA";
+            this.materia_prima.Name = "materia_prima";
+            this.materia_prima.ReadOnly = true;
+            this.materia_prima.Visible = false;
             // 
-            // cmbEstado
+            // producto_terminado
             // 
-            this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbEstado.Enabled = false;
-            this.cmbEstado.FormattingEnabled = true;
-            this.cmbEstado.Items.AddRange(new object[] {
-            "ACTIVO",
-            "INACTIVO"});
-            this.cmbEstado.Location = new System.Drawing.Point(100, 106);
-            this.cmbEstado.Name = "cmbEstado";
-            this.cmbEstado.Size = new System.Drawing.Size(107, 21);
-            this.cmbEstado.TabIndex = 10;
-            // 
-            // lblEstaJornada
-            // 
-            this.lblEstaJornada.AutoSize = true;
-            this.lblEstaJornada.BackColor = System.Drawing.Color.Transparent;
-            this.lblEstaJornada.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstaJornada.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblEstaJornada.Location = new System.Drawing.Point(15, 106);
-            this.lblEstaJornada.Name = "lblEstaJornada";
-            this.lblEstaJornada.Size = new System.Drawing.Size(48, 15);
-            this.lblEstaJornada.TabIndex = 7;
-            this.lblEstaJornada.Text = "Estado:";
-            // 
-            // lblDescrCajero
-            // 
-            this.lblDescrCajero.AutoSize = true;
-            this.lblDescrCajero.BackColor = System.Drawing.Color.Transparent;
-            this.lblDescrCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescrCajero.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblDescrCajero.Location = new System.Drawing.Point(15, 56);
-            this.lblDescrCajero.Name = "lblDescrCajero";
-            this.lblDescrCajero.Size = new System.Drawing.Size(75, 15);
-            this.lblDescrCajero.TabIndex = 5;
-            this.lblDescrCajero.Text = "Descripción:";
-            // 
-            // txtDescripcion
-            // 
-            this.txtDescripcion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtDescripcion.Location = new System.Drawing.Point(100, 54);
-            this.txtDescripcion.MaxLength = 20;
-            this.txtDescripcion.Multiline = true;
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(216, 44);
-            this.txtDescripcion.TabIndex = 4;
-            // 
-            // lblCodigoCajero
-            // 
-            this.lblCodigoCajero.AutoSize = true;
-            this.lblCodigoCajero.BackColor = System.Drawing.Color.Transparent;
-            this.lblCodigoCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodigoCajero.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblCodigoCajero.Location = new System.Drawing.Point(15, 30);
-            this.lblCodigoCajero.Name = "lblCodigoCajero";
-            this.lblCodigoCajero.Size = new System.Drawing.Size(49, 15);
-            this.lblCodigoCajero.TabIndex = 3;
-            this.lblCodigoCajero.Text = "Código:";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(100, 28);
-            this.txtCodigo.MaxLength = 20;
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(216, 20);
-            this.txtCodigo.TabIndex = 2;
+            this.producto_terminado.HeaderText = "PRODUCTO TERMINADO";
+            this.producto_terminado.Name = "producto_terminado";
+            this.producto_terminado.ReadOnly = true;
+            this.producto_terminado.Visible = false;
             // 
             // frmAdministracionClaseProducto
             // 
@@ -288,7 +331,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(842, 372);
+            this.ClientSize = new System.Drawing.Size(842, 337);
             this.Controls.Add(this.Grb_opciojornada);
             this.Controls.Add(this.Grb_listRejornada);
             this.Controls.Add(this.grupoDatos);
@@ -326,9 +369,13 @@
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label lblCodigoCajero;
         private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.CheckBox chkProductoTerminado;
+        private System.Windows.Forms.CheckBox chkMateriaPrima;
         private System.Windows.Forms.DataGridViewTextBoxColumn idJornada;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn estado1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn materia_prima;
+        private System.Windows.Forms.DataGridViewTextBoxColumn producto_terminado;
     }
 }

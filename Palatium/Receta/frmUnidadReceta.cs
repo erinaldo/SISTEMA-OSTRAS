@@ -83,7 +83,7 @@ namespace Palatium.Receta
 
                 sSql = "";
                 sSql += "select U.id_pos_unidad, U.cg_unidad, U.codigo," + Environment.NewLine;
-                sSql += "U.descripcion, TC.valor_texto tipo_unidad," + Environment.NewLine;
+                sSql += "U.descripcion, U.abreviatura, TC.valor_texto tipo_unidad," + Environment.NewLine;
                 sSql += "case when U.estado = 'A' then 'ACTIVO' else 'INACTIVO' end estado" + Environment.NewLine;
                 sSql += "from pos_unidad U INNER JOIN" + Environment.NewLine;
                 sSql += "tp_codigos TC ON TC.correlativo = U.cg_unidad" + Environment.NewLine;
@@ -109,6 +109,7 @@ namespace Palatium.Receta
                                                 dtConsulta.Rows[i]["cg_unidad"].ToString(),
                                                 dtConsulta.Rows[i]["codigo"].ToString(),
                                                 dtConsulta.Rows[i]["descripcion"].ToString(),
+                                                dtConsulta.Rows[i]["abreviatura"].ToString(),
                                                 dtConsulta.Rows[i]["tipo_unidad"].ToString(),
                                                 dtConsulta.Rows[i]["estado"].ToString()
                                                   );
@@ -141,6 +142,7 @@ namespace Palatium.Receta
             txtCodigo.Text = "";
             txtBuscar.Text = "";
             txtDescripcion.Text = "";
+            txtAbreviatura.Clear();
             btnNuevo.Text = "Nuevo";
             grupoDatos.Enabled = false;
             btnAnular.Enabled = false;
@@ -188,11 +190,11 @@ namespace Palatium.Receta
 
                 sSql = "";
                 sSql = "insert into pos_unidad (" + Environment.NewLine;
-                sSql += "cg_unidad, codigo, descripcion, estado," + Environment.NewLine;
+                sSql += "cg_unidad, codigo, descripcion, abreviatura, estado," + Environment.NewLine;
                 sSql += "fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
                 sSql += "values(" + Environment.NewLine;
                 sSql += Convert.ToInt32(cmbTipoUnidad.SelectedValue) + ", '" + txtCodigo.Text.Trim().ToUpper() + "'," + Environment.NewLine;
-                sSql += "'" + txtDescripcion.Text.Trim().ToUpper() + "', 'A', GETDATE()," + Environment.NewLine;
+                sSql += "'" + txtDescripcion.Text.Trim().ToUpper() + "', '" + txtAbreviatura.Text.Trim() + "', 'A', GETDATE()," + Environment.NewLine;
                 sSql += "'" + Program.sDatosMaximo[0] + "','" + Program.sDatosMaximo[1] + "')";
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
@@ -235,6 +237,7 @@ namespace Palatium.Receta
                 sSql += "update pos_unidad set" + Environment.NewLine;
                 sSql += "cg_unidad = " + Convert.ToInt32(cmbTipoUnidad.SelectedValue) + "," + Environment.NewLine;
                 sSql += "descripcion = '" + txtDescripcion.Text.Trim().ToUpper() + "'," + Environment.NewLine;
+                sSql += "abreviatura = '" + txtAbreviatura.Text.Trim() + "'," + Environment.NewLine;
                 sSql += "estado = '" + sEstado + "'" + Environment.NewLine;
                 sSql += "where id_pos_unidad = " + iIdPosUnidad + Environment.NewLine;
                 sSql += "and estado in ('A', 'N')";
@@ -393,6 +396,14 @@ namespace Palatium.Receta
                         return;
                     }
 
+                    else if (txtAbreviatura.Text.Trim() == "")
+                    {
+                        ok.lblMensaje.Text = "Favor ingrese la abreviatura para el registro.";
+                        ok.ShowDialog();
+                        txtAbreviatura.Focus();
+                        return;
+                    }
+
                     if (cmbEstado.Text == "ACTIVO")
                     {
                         sEstado = "A";
@@ -500,7 +511,8 @@ namespace Palatium.Receta
                 cmbTipoUnidad.SelectedValue = dgvRegistro.CurrentRow.Cells[1].Value.ToString();
                 txtCodigo.Text = dgvRegistro.CurrentRow.Cells[2].Value.ToString();
                 txtDescripcion.Text = dgvRegistro.CurrentRow.Cells[3].Value.ToString();
-                cmbEstado.Text = dgvRegistro.CurrentRow.Cells[5].Value.ToString();
+                txtAbreviatura.Text = dgvRegistro.CurrentRow.Cells[4].Value.ToString();
+                cmbEstado.Text = dgvRegistro.CurrentRow.Cells[6].Value.ToString();
                 btnNuevo.Text = "Actualizar";
                 txtCodigo.Enabled = false;
                 btnAnular.Enabled = true;

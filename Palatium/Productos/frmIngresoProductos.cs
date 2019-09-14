@@ -65,7 +65,9 @@ namespace Palatium.Productos
                 sSql = "";
                 sSql += "select id_pos_clase_producto, descripcion" + Environment.NewLine;
                 sSql += "from pos_clase_producto" + Environment.NewLine;
-                sSql += "where estado = 'A'";
+                sSql += "where estado = 'A'" + Environment.NewLine;
+                sSql += "and aplica_producto_terminado = 1" + Environment.NewLine;
+                sSql += "and aplica_materia_prima = 0";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();

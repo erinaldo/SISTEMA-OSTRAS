@@ -28,18 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.lblDescrCajero = new System.Windows.Forms.Label();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtEquivalencia = new System.Windows.Forms.TextBox();
             this.grupoDatos = new System.Windows.Forms.GroupBox();
             this.cmbEstado = new System.Windows.Forms.ComboBox();
             this.lblEstaJornada = new System.Windows.Forms.Label();
-            this.cmbUnidadEquivalencia = new MisControles.ComboDatos();
-            this.cmbUnidadOrigen = new MisControles.ComboDatos();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblDescrCajero = new System.Windows.Forms.Label();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblCodigoCajero = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
@@ -50,40 +48,19 @@
             this.btnAnular = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.Grb_opciojornada = new System.Windows.Forms.GroupBox();
+            this.cmbUnidadOrigen = new System.Windows.Forms.ComboBox();
+            this.cmbUnidadDestino = new System.Windows.Forms.ComboBox();
             this.idRegistro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idUnidadOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idUnidadEquivalencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.equivalencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.factor_conversion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grupoDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.Grb_listRejornada.SuspendLayout();
             this.Grb_opciojornada.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblDescrCajero
-            // 
-            this.lblDescrCajero.AutoSize = true;
-            this.lblDescrCajero.BackColor = System.Drawing.Color.Transparent;
-            this.lblDescrCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescrCajero.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblDescrCajero.Location = new System.Drawing.Point(15, 115);
-            this.lblDescrCajero.Name = "lblDescrCajero";
-            this.lblDescrCajero.Size = new System.Drawing.Size(75, 15);
-            this.lblDescrCajero.TabIndex = 5;
-            this.lblDescrCajero.Text = "Descripción:";
-            // 
-            // txtDescripcion
-            // 
-            this.txtDescripcion.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtDescripcion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtDescripcion.Location = new System.Drawing.Point(100, 114);
-            this.txtDescripcion.MaxLength = 20;
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.ReadOnly = true;
-            this.txtDescripcion.Size = new System.Drawing.Size(269, 20);
-            this.txtDescripcion.TabIndex = 5;
             // 
             // txtEquivalencia
             // 
@@ -97,10 +74,10 @@
             // 
             // grupoDatos
             // 
+            this.grupoDatos.Controls.Add(this.cmbUnidadDestino);
+            this.grupoDatos.Controls.Add(this.cmbUnidadOrigen);
             this.grupoDatos.Controls.Add(this.cmbEstado);
             this.grupoDatos.Controls.Add(this.lblEstaJornada);
-            this.grupoDatos.Controls.Add(this.cmbUnidadEquivalencia);
-            this.grupoDatos.Controls.Add(this.cmbUnidadOrigen);
             this.grupoDatos.Controls.Add(this.label1);
             this.grupoDatos.Controls.Add(this.label2);
             this.grupoDatos.Controls.Add(this.lblDescrCajero);
@@ -140,26 +117,6 @@
             this.lblEstaJornada.TabIndex = 11;
             this.lblEstaJornada.Text = "Estado:";
             // 
-            // cmbUnidadEquivalencia
-            // 
-            this.cmbUnidadEquivalencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbUnidadEquivalencia.FormattingEnabled = true;
-            this.cmbUnidadEquivalencia.Location = new System.Drawing.Point(144, 69);
-            this.cmbUnidadEquivalencia.Name = "cmbUnidadEquivalencia";
-            this.cmbUnidadEquivalencia.Size = new System.Drawing.Size(225, 21);
-            this.cmbUnidadEquivalencia.TabIndex = 4;
-            this.cmbUnidadEquivalencia.SelectedIndexChanged += new System.EventHandler(this.cmbUnidadEquivalencia_SelectedIndexChanged);
-            // 
-            // cmbUnidadOrigen
-            // 
-            this.cmbUnidadOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbUnidadOrigen.FormattingEnabled = true;
-            this.cmbUnidadOrigen.Location = new System.Drawing.Point(144, 42);
-            this.cmbUnidadOrigen.Name = "cmbUnidadOrigen";
-            this.cmbUnidadOrigen.Size = new System.Drawing.Size(225, 21);
-            this.cmbUnidadOrigen.TabIndex = 3;
-            this.cmbUnidadOrigen.SelectedIndexChanged += new System.EventHandler(this.cmbUnidadOrigen_SelectedIndexChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -168,9 +125,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Location = new System.Drawing.Point(15, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 15);
+            this.label1.Size = new System.Drawing.Size(80, 15);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Unidad Equivalencia:";
+            this.label1.Text = "Unidad Final:";
             // 
             // label2
             // 
@@ -180,9 +137,32 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label2.Location = new System.Drawing.Point(15, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 15);
+            this.label2.Size = new System.Drawing.Size(85, 15);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Unidad Origen:";
+            this.label2.Text = "Unidad Inicial:";
+            // 
+            // lblDescrCajero
+            // 
+            this.lblDescrCajero.AutoSize = true;
+            this.lblDescrCajero.BackColor = System.Drawing.Color.Transparent;
+            this.lblDescrCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescrCajero.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblDescrCajero.Location = new System.Drawing.Point(15, 115);
+            this.lblDescrCajero.Name = "lblDescrCajero";
+            this.lblDescrCajero.Size = new System.Drawing.Size(75, 15);
+            this.lblDescrCajero.TabIndex = 5;
+            this.lblDescrCajero.Text = "Descripción:";
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtDescripcion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDescripcion.Location = new System.Drawing.Point(100, 114);
+            this.txtDescripcion.MaxLength = 20;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.ReadOnly = true;
+            this.txtDescripcion.Size = new System.Drawing.Size(269, 20);
+            this.txtDescripcion.TabIndex = 5;
             // 
             // lblCodigoCajero
             // 
@@ -230,7 +210,7 @@
             this.idUnidadOrigen,
             this.idUnidadEquivalencia,
             this.descripcion,
-            this.equivalencia,
+            this.factor_conversion,
             this.estado});
             this.dgvDatos.GridColor = System.Drawing.SystemColors.ControlLight;
             this.dgvDatos.Location = new System.Drawing.Point(13, 61);
@@ -238,7 +218,7 @@
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(490, 232);
+            this.dgvDatos.Size = new System.Drawing.Size(535, 232);
             this.dgvDatos.TabIndex = 12;
             this.dgvDatos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellDoubleClick);
             // 
@@ -250,7 +230,7 @@
             this.Grb_listRejornada.Controls.Add(this.dgvDatos);
             this.Grb_listRejornada.Location = new System.Drawing.Point(431, 22);
             this.Grb_listRejornada.Name = "Grb_listRejornada";
-            this.Grb_listRejornada.Size = new System.Drawing.Size(519, 310);
+            this.Grb_listRejornada.Size = new System.Drawing.Size(558, 310);
             this.Grb_listRejornada.TabIndex = 14;
             this.Grb_listRejornada.TabStop = false;
             this.Grb_listRejornada.Text = "Lista de Registros";
@@ -317,6 +297,26 @@
             this.Grb_opciojornada.TabStop = false;
             this.Grb_opciojornada.Text = "Opciones";
             // 
+            // cmbUnidadOrigen
+            // 
+            this.cmbUnidadOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUnidadOrigen.FormattingEnabled = true;
+            this.cmbUnidadOrigen.Location = new System.Drawing.Point(144, 42);
+            this.cmbUnidadOrigen.Name = "cmbUnidadOrigen";
+            this.cmbUnidadOrigen.Size = new System.Drawing.Size(225, 21);
+            this.cmbUnidadOrigen.TabIndex = 3;
+            this.cmbUnidadOrigen.SelectedIndexChanged += new System.EventHandler(this.cmbUnidadOrigen_SelectedIndexChanged);
+            // 
+            // cmbUnidadDestino
+            // 
+            this.cmbUnidadDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUnidadDestino.FormattingEnabled = true;
+            this.cmbUnidadDestino.Location = new System.Drawing.Point(144, 67);
+            this.cmbUnidadDestino.Name = "cmbUnidadDestino";
+            this.cmbUnidadDestino.Size = new System.Drawing.Size(225, 21);
+            this.cmbUnidadDestino.TabIndex = 4;
+            this.cmbUnidadDestino.SelectedIndexChanged += new System.EventHandler(this.cmbUnidadEquivalencia_SelectedIndexChanged);
+            // 
             // idRegistro
             // 
             this.idRegistro.HeaderText = "ID";
@@ -345,18 +345,19 @@
             this.descripcion.ReadOnly = true;
             this.descripcion.Width = 250;
             // 
-            // equivalencia
+            // factor_conversion
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.equivalencia.DefaultCellStyle = dataGridViewCellStyle1;
-            this.equivalencia.HeaderText = "EQUIVALENCIA";
-            this.equivalencia.Name = "equivalencia";
-            this.equivalencia.ReadOnly = true;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.factor_conversion.DefaultCellStyle = dataGridViewCellStyle9;
+            this.factor_conversion.HeaderText = "FACTOR CONVERSIÓN";
+            this.factor_conversion.Name = "factor_conversion";
+            this.factor_conversion.ReadOnly = true;
+            this.factor_conversion.Width = 150;
             // 
             // estado
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.estado.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.estado.DefaultCellStyle = dataGridViewCellStyle10;
             this.estado.HeaderText = "ESTADO";
             this.estado.Name = "estado";
             this.estado.ReadOnly = true;
@@ -367,7 +368,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(943, 348);
+            this.ClientSize = new System.Drawing.Size(994, 348);
             this.Controls.Add(this.grupoDatos);
             this.Controls.Add(this.Grb_listRejornada);
             this.Controls.Add(this.Grb_opciojornada);
@@ -389,8 +390,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblDescrCajero;
-        private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.TextBox txtEquivalencia;
         private System.Windows.Forms.GroupBox grupoDatos;
         private System.Windows.Forms.Label lblCodigoCajero;
@@ -405,15 +404,17 @@
         private System.Windows.Forms.GroupBox Grb_opciojornada;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private MisControles.ComboDatos cmbUnidadEquivalencia;
-        private MisControles.ComboDatos cmbUnidadOrigen;
         private System.Windows.Forms.ComboBox cmbEstado;
         private System.Windows.Forms.Label lblEstaJornada;
+        private System.Windows.Forms.Label lblDescrCajero;
+        private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.ComboBox cmbUnidadOrigen;
+        private System.Windows.Forms.ComboBox cmbUnidadDestino;
         private System.Windows.Forms.DataGridViewTextBoxColumn idRegistro;
         private System.Windows.Forms.DataGridViewTextBoxColumn idUnidadOrigen;
         private System.Windows.Forms.DataGridViewTextBoxColumn idUnidadEquivalencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn equivalencia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn factor_conversion;
         private System.Windows.Forms.DataGridViewTextBoxColumn estado;
     }
 }
