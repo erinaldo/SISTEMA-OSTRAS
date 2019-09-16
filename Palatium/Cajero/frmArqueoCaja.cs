@@ -664,7 +664,6 @@ namespace Palatium.Cajero
             catch (Exception ex)
             {
                 catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowInTaskbar = false;
                 catchMensaje.ShowDialog();
             }
         }
@@ -677,13 +676,15 @@ namespace Palatium.Cajero
             {
                 sSql = "";
                 sSql += "select count(*) cuenta" + Environment.NewLine;
-                sSql += "from cv403_cab_pedidos" + Environment.NewLine;
-                sSql += "where fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
-                sSql += "and id_pos_origen_orden = '" + sCodigo_P + "'" + Environment.NewLine;
-                sSql += "and id_pos_jornada = " + iJornada + Environment.NewLine;
-                sSql += "and estado = 'A'" + Environment.NewLine;
-                sSql += "and estado_orden in ('Pagada', 'Cerrada')" + Environment.NewLine;
-                sSql += "and id_localidad = " + cmbLocalidades.SelectedValue;
+                sSql += "from cv403_cab_pedidos CP INNER JOIN" + Environment.NewLine;
+                sSql += "pos_origen_orden O ON O.id_pos_origen_orden = CP.id_pos_origen_orden" + Environment.NewLine;
+                sSql += "and O.estado = 'A'" + Environment.NewLine;
+                sSql += "and CP.estado = 'A'" + Environment.NewLine;
+                sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and O.codigo = '" + sCodigo_P + "'" + Environment.NewLine;
+                sSql += "and CP.id_pos_jornada = " + iJornada + Environment.NewLine;                
+                sSql += "and CP.estado_orden in ('Pagada', 'Cerrada')" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + cmbLocalidades.SelectedValue;
 
                 DataTable dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -1025,9 +1026,13 @@ namespace Palatium.Cajero
             txtParaMesa.Text = calcularNumeroOrdenes("01").ToString();
             txtParaLlevar.Text = calcularNumeroOrdenes("02").ToString();
             txtParaDomicilio.Text = calcularNumeroOrdenes("03").ToString();
+            txtVentaExpress.Text = calcularNumeroOrdenes("10").ToString();
+
             txtTotalParaMesa.Text = calcularTotalOrigenOrden("01").ToString("N2");
             txtTotalParaLlevar.Text = calcularTotalOrigenOrden("02").ToString("N2");
             txtTotalParaDomicilio.Text = calcularTotalOrigenOrden("03").ToString("N2");
+            txtTotalVentaExpress.Text = calcularTotalOrigenOrden("10").ToString("N2");
+
             txtTotalCortesias.Text = dTotalPagadoCortesiaP.ToString("N2");
             consultaProductosAhorro();
             extraerIva();

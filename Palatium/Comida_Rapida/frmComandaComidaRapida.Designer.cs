@@ -37,19 +37,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnAnterior = new System.Windows.Forms.Button();
-            this.btnSiguiente = new System.Windows.Forms.Button();
-            this.btnSiguienteProducto = new System.Windows.Forms.Button();
-            this.btnAnteriorProducto = new System.Windows.Forms.Button();
-            this.lblProductos = new System.Windows.Forms.Label();
-            this.pnlProductos = new System.Windows.Forms.Panel();
-            this.pnlCategorias = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTotal = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblEmpleado = new System.Windows.Forms.Label();
-            this.lblEmpresa = new System.Windows.Forms.Label();
+            this.txtfacturacion = new System.Windows.Forms.TextBox();
+            this.TxtNumeroFactura = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.dgvPedido = new System.Windows.Forms.DataGridView();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,99 +54,34 @@
             this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRemoverItem = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.btnEditarItems = new System.Windows.Forms.Button();
+            this.lblProductos = new System.Windows.Forms.Label();
+            this.btnAnteriorProducto = new System.Windows.Forms.Button();
+            this.btnSiguienteProducto = new System.Windows.Forms.Button();
+            this.pnlProductos = new System.Windows.Forms.Panel();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnAnterior = new System.Windows.Forms.Button();
+            this.pnlCategorias = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedido)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnAnterior
-            // 
-            this.btnAnterior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnAnterior.Enabled = false;
-            this.btnAnterior.Image = global::Palatium.Properties.Resources.izquierda;
-            this.btnAnterior.Location = new System.Drawing.Point(797, 12);
-            this.btnAnterior.Name = "btnAnterior";
-            this.btnAnterior.Size = new System.Drawing.Size(131, 71);
-            this.btnAnterior.TabIndex = 131;
-            this.btnAnterior.UseVisualStyleBackColor = false;
-            this.btnAnterior.Visible = false;
-            // 
-            // btnSiguiente
-            // 
-            this.btnSiguiente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnSiguiente.Image = global::Palatium.Properties.Resources.derecha;
-            this.btnSiguiente.Location = new System.Drawing.Point(797, 85);
-            this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(131, 71);
-            this.btnSiguiente.TabIndex = 132;
-            this.btnSiguiente.UseVisualStyleBackColor = false;
-            this.btnSiguiente.Visible = false;
-            // 
-            // btnSiguienteProducto
-            // 
-            this.btnSiguienteProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnSiguienteProducto.Image = global::Palatium.Properties.Resources.derecha;
-            this.btnSiguienteProducto.Location = new System.Drawing.Point(797, 272);
-            this.btnSiguienteProducto.Name = "btnSiguienteProducto";
-            this.btnSiguienteProducto.Size = new System.Drawing.Size(131, 71);
-            this.btnSiguienteProducto.TabIndex = 136;
-            this.btnSiguienteProducto.UseVisualStyleBackColor = false;
-            this.btnSiguienteProducto.Visible = false;
-            // 
-            // btnAnteriorProducto
-            // 
-            this.btnAnteriorProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnAnteriorProducto.Enabled = false;
-            this.btnAnteriorProducto.Image = global::Palatium.Properties.Resources.izquierda;
-            this.btnAnteriorProducto.Location = new System.Drawing.Point(797, 201);
-            this.btnAnteriorProducto.Name = "btnAnteriorProducto";
-            this.btnAnteriorProducto.Size = new System.Drawing.Size(131, 71);
-            this.btnAnteriorProducto.TabIndex = 135;
-            this.btnAnteriorProducto.UseVisualStyleBackColor = false;
-            this.btnAnteriorProducto.Visible = false;
-            // 
-            // lblProductos
-            // 
-            this.lblProductos.AutoSize = true;
-            this.lblProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductos.ForeColor = System.Drawing.Color.Red;
-            this.lblProductos.Location = new System.Drawing.Point(12, 171);
-            this.lblProductos.Name = "lblProductos";
-            this.lblProductos.Size = new System.Drawing.Size(137, 24);
-            this.lblProductos.TabIndex = 134;
-            this.lblProductos.Text = "PRODUCTOS";
-            // 
-            // pnlProductos
-            // 
-            this.pnlProductos.BackColor = System.Drawing.Color.DodgerBlue;
-            this.pnlProductos.Location = new System.Drawing.Point(12, 201);
-            this.pnlProductos.Name = "pnlProductos";
-            this.pnlProductos.Size = new System.Drawing.Size(779, 528);
-            this.pnlProductos.TabIndex = 133;
-            // 
-            // pnlCategorias
-            // 
-            this.pnlCategorias.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.pnlCategorias.Location = new System.Drawing.Point(12, 12);
-            this.pnlCategorias.Name = "pnlCategorias";
-            this.pnlCategorias.Size = new System.Drawing.Size(779, 145);
-            this.pnlCategorias.TabIndex = 130;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel1.Controls.Add(this.lblTotal);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(1077, 515);
+            this.panel1.Location = new System.Drawing.Point(685, 438);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(261, 214);
+            this.panel1.Size = new System.Drawing.Size(393, 71);
             this.panel1.TabIndex = 140;
             // 
             // lblTotal
             // 
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.Lime;
-            this.lblTotal.Location = new System.Drawing.Point(141, 20);
+            this.lblTotal.Location = new System.Drawing.Point(270, 18);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(107, 31);
             this.lblTotal.TabIndex = 25;
@@ -174,46 +102,48 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel2.Controls.Add(this.lblEmpleado);
-            this.panel2.Controls.Add(this.lblEmpresa);
-            this.panel2.Location = new System.Drawing.Point(945, 12);
+            this.panel2.Controls.Add(this.txtfacturacion);
+            this.panel2.Controls.Add(this.TxtNumeroFactura);
+            this.panel2.Location = new System.Drawing.Point(685, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(393, 79);
+            this.panel2.Size = new System.Drawing.Size(393, 78);
             this.panel2.TabIndex = 139;
             // 
-            // lblEmpleado
+            // txtfacturacion
             // 
-            this.lblEmpleado.AutoSize = true;
-            this.lblEmpleado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmpleado.ForeColor = System.Drawing.Color.Lime;
-            this.lblEmpleado.Location = new System.Drawing.Point(12, 43);
-            this.lblEmpleado.Name = "lblEmpleado";
-            this.lblEmpleado.Size = new System.Drawing.Size(98, 20);
-            this.lblEmpleado.TabIndex = 21;
-            this.lblEmpleado.Text = "EMPLEADO";
+            this.txtfacturacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtfacturacion.Location = new System.Drawing.Point(56, 22);
+            this.txtfacturacion.Name = "txtfacturacion";
+            this.txtfacturacion.ReadOnly = true;
+            this.txtfacturacion.Size = new System.Drawing.Size(113, 38);
+            this.txtfacturacion.TabIndex = 143;
+            this.txtfacturacion.Text = "001-003";
+            this.txtfacturacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // lblEmpresa
+            // TxtNumeroFactura
             // 
-            this.lblEmpresa.AutoSize = true;
-            this.lblEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmpresa.ForeColor = System.Drawing.Color.Lime;
-            this.lblEmpresa.Location = new System.Drawing.Point(12, 10);
-            this.lblEmpresa.Name = "lblEmpresa";
-            this.lblEmpresa.Size = new System.Drawing.Size(102, 24);
-            this.lblEmpresa.TabIndex = 20;
-            this.lblEmpresa.Text = "EMPRESA";
+            this.TxtNumeroFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtNumeroFactura.Location = new System.Drawing.Point(185, 22);
+            this.TxtNumeroFactura.MaxLength = 9;
+            this.TxtNumeroFactura.Name = "TxtNumeroFactura";
+            this.TxtNumeroFactura.ReadOnly = true;
+            this.TxtNumeroFactura.Size = new System.Drawing.Size(158, 38);
+            this.TxtNumeroFactura.TabIndex = 145;
+            this.TxtNumeroFactura.Text = "999999999";
+            this.TxtNumeroFactura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnAceptar
             // 
             this.btnAceptar.BackColor = System.Drawing.Color.Lime;
             this.btnAceptar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAceptar.Font = new System.Drawing.Font("Maiandra GD", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptar.Location = new System.Drawing.Point(945, 587);
+            this.btnAceptar.Location = new System.Drawing.Point(685, 530);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(130, 71);
+            this.btnAceptar.Size = new System.Drawing.Size(188, 100);
             this.btnAceptar.TabIndex = 138;
-            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.Text = "Pagar en Efectivo";
             this.btnAceptar.UseVisualStyleBackColor = false;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // dgvPedido
             // 
@@ -245,7 +175,7 @@
             this.dgvPedido.DefaultCellStyle = dataGridViewCellStyle17;
             this.dgvPedido.EnableHeadersVisualStyles = false;
             this.dgvPedido.GridColor = System.Drawing.SystemColors.ControlLight;
-            this.dgvPedido.Location = new System.Drawing.Point(945, 97);
+            this.dgvPedido.Location = new System.Drawing.Point(685, 96);
             this.dgvPedido.MultiSelect = false;
             this.dgvPedido.Name = "dgvPedido";
             this.dgvPedido.ReadOnly = true;
@@ -254,8 +184,9 @@
             dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvPedido.RowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dgvPedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPedido.Size = new System.Drawing.Size(393, 412);
+            this.dgvPedido.Size = new System.Drawing.Size(393, 336);
             this.dgvPedido.TabIndex = 137;
+            this.dgvPedido.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedido_CellDoubleClick);
             // 
             // cantidad
             // 
@@ -333,48 +264,146 @@
             this.btnRemoverItem.BackColor = System.Drawing.Color.Orange;
             this.btnRemoverItem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRemoverItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoverItem.Location = new System.Drawing.Point(945, 515);
+            this.btnRemoverItem.Location = new System.Drawing.Point(534, 560);
             this.btnRemoverItem.Name = "btnRemoverItem";
             this.btnRemoverItem.Size = new System.Drawing.Size(130, 71);
             this.btnRemoverItem.TabIndex = 141;
             this.btnRemoverItem.Text = "Remover Ítem";
             this.btnRemoverItem.UseVisualStyleBackColor = false;
+            this.btnRemoverItem.Click += new System.EventHandler(this.btnRemoverItem_Click);
             // 
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.Color.OrangeRed;
             this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Location = new System.Drawing.Point(945, 658);
+            this.btnSalir.Font = new System.Drawing.Font("Maiandra GD", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.Location = new System.Drawing.Point(890, 530);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(130, 71);
+            this.btnSalir.Size = new System.Drawing.Size(188, 100);
             this.btnSalir.TabIndex = 142;
             this.btnSalir.Text = "Salir del Menú";
             this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // btnEditarItems
+            // 
+            this.btnEditarItems.BackColor = System.Drawing.Color.LightCoral;
+            this.btnEditarItems.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditarItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditarItems.Location = new System.Drawing.Point(398, 559);
+            this.btnEditarItems.Name = "btnEditarItems";
+            this.btnEditarItems.Size = new System.Drawing.Size(130, 71);
+            this.btnEditarItems.TabIndex = 143;
+            this.btnEditarItems.Text = "Editar\r\nItems";
+            this.btnEditarItems.UseVisualStyleBackColor = false;
+            this.btnEditarItems.Visible = false;
+            // 
+            // lblProductos
+            // 
+            this.lblProductos.AutoSize = true;
+            this.lblProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductos.ForeColor = System.Drawing.Color.Red;
+            this.lblProductos.Location = new System.Drawing.Point(12, 166);
+            this.lblProductos.Name = "lblProductos";
+            this.lblProductos.Size = new System.Drawing.Size(137, 24);
+            this.lblProductos.TabIndex = 150;
+            this.lblProductos.Text = "PRODUCTOS";
+            // 
+            // btnAnteriorProducto
+            // 
+            this.btnAnteriorProducto.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnAnteriorProducto.Enabled = false;
+            this.btnAnteriorProducto.Font = new System.Drawing.Font("Maiandra GD", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnteriorProducto.Image = global::Palatium.Properties.Resources.izquierda;
+            this.btnAnteriorProducto.Location = new System.Drawing.Point(12, 560);
+            this.btnAnteriorProducto.Name = "btnAnteriorProducto";
+            this.btnAnteriorProducto.Size = new System.Drawing.Size(130, 71);
+            this.btnAnteriorProducto.TabIndex = 149;
+            this.btnAnteriorProducto.UseVisualStyleBackColor = false;
+            this.btnAnteriorProducto.Visible = false;
+            this.btnAnteriorProducto.Click += new System.EventHandler(this.btnAnteriorProducto_Click);
+            // 
+            // btnSiguienteProducto
+            // 
+            this.btnSiguienteProducto.BackColor = System.Drawing.Color.Yellow;
+            this.btnSiguienteProducto.Enabled = false;
+            this.btnSiguienteProducto.Font = new System.Drawing.Font("Maiandra GD", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSiguienteProducto.Image = global::Palatium.Properties.Resources.derecha;
+            this.btnSiguienteProducto.Location = new System.Drawing.Point(142, 560);
+            this.btnSiguienteProducto.Name = "btnSiguienteProducto";
+            this.btnSiguienteProducto.Size = new System.Drawing.Size(130, 71);
+            this.btnSiguienteProducto.TabIndex = 148;
+            this.btnSiguienteProducto.UseVisualStyleBackColor = false;
+            this.btnSiguienteProducto.Visible = false;
+            this.btnSiguienteProducto.Click += new System.EventHandler(this.btnSiguienteProducto_Click);
+            // 
+            // pnlProductos
+            // 
+            this.pnlProductos.BackColor = System.Drawing.Color.DodgerBlue;
+            this.pnlProductos.Location = new System.Drawing.Point(12, 196);
+            this.pnlProductos.Name = "pnlProductos";
+            this.pnlProductos.Size = new System.Drawing.Size(652, 358);
+            this.pnlProductos.TabIndex = 147;
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnSiguiente.Image = global::Palatium.Properties.Resources.derecha;
+            this.btnSiguiente.Location = new System.Drawing.Point(532, 84);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(131, 71);
+            this.btnSiguiente.TabIndex = 146;
+            this.btnSiguiente.UseVisualStyleBackColor = false;
+            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
+            // 
+            // btnAnterior
+            // 
+            this.btnAnterior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnAnterior.Enabled = false;
+            this.btnAnterior.Image = global::Palatium.Properties.Resources.izquierda;
+            this.btnAnterior.Location = new System.Drawing.Point(532, 13);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(131, 71);
+            this.btnAnterior.TabIndex = 145;
+            this.btnAnterior.UseVisualStyleBackColor = false;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
+            // pnlCategorias
+            // 
+            this.pnlCategorias.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.pnlCategorias.Location = new System.Drawing.Point(12, 12);
+            this.pnlCategorias.Name = "pnlCategorias";
+            this.pnlCategorias.Size = new System.Drawing.Size(652, 145);
+            this.pnlCategorias.TabIndex = 144;
             // 
             // frmComandaComidaRapida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(1350, 741);
+            this.ClientSize = new System.Drawing.Size(1092, 640);
+            this.Controls.Add(this.lblProductos);
+            this.Controls.Add(this.btnAnteriorProducto);
+            this.Controls.Add(this.btnSiguienteProducto);
+            this.Controls.Add(this.pnlProductos);
+            this.Controls.Add(this.btnSiguiente);
+            this.Controls.Add(this.btnAnterior);
+            this.Controls.Add(this.pnlCategorias);
+            this.Controls.Add(this.btnEditarItems);
             this.Controls.Add(this.btnRemoverItem);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.dgvPedido);
-            this.Controls.Add(this.btnAnterior);
-            this.Controls.Add(this.btnSiguiente);
-            this.Controls.Add(this.btnSiguienteProducto);
-            this.Controls.Add(this.btnAnteriorProducto);
-            this.Controls.Add(this.lblProductos);
-            this.Controls.Add(this.pnlProductos);
-            this.Controls.Add(this.pnlCategorias);
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmComandaComidaRapida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Comanda";
             this.Load += new System.EventHandler(this.frmComandaComidaRapida_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmComandaComidaRapida_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -387,19 +416,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnAnterior;
-        private System.Windows.Forms.Button btnSiguiente;
-        private System.Windows.Forms.Button btnSiguienteProducto;
-        private System.Windows.Forms.Button btnAnteriorProducto;
-        private System.Windows.Forms.Label lblProductos;
-        private System.Windows.Forms.Panel pnlProductos;
-        private System.Windows.Forms.Panel pnlCategorias;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label lblEmpleado;
-        private System.Windows.Forms.Label lblEmpresa;
         private System.Windows.Forms.Button btnAceptar;
         public System.Windows.Forms.DataGridView dgvPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
@@ -411,6 +431,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
         private System.Windows.Forms.Button btnRemoverItem;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.TextBox txtfacturacion;
+        private System.Windows.Forms.TextBox TxtNumeroFactura;
+        private System.Windows.Forms.Button btnEditarItems;
+        private System.Windows.Forms.Label lblProductos;
+        private System.Windows.Forms.Button btnAnteriorProducto;
+        private System.Windows.Forms.Button btnSiguienteProducto;
+        private System.Windows.Forms.Panel pnlProductos;
+        private System.Windows.Forms.Button btnSiguiente;
+        private System.Windows.Forms.Button btnAnterior;
+        private System.Windows.Forms.Panel pnlCategorias;
 
     }
 }

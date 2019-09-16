@@ -502,7 +502,7 @@ namespace Palatium.Empresa
              }
          }
 
-        //FUNCION PARA CALCULAR TOTALES
+         //FUNCION PARA CALCULAR TOTALES
          public void calcularTotales()
          {
              Decimal dSubtotalConIva = 0;
@@ -599,6 +599,7 @@ namespace Palatium.Empresa
 
                  dtConsulta = new DataTable();
                  dtConsulta.Clear();
+
                  sTabla = "cv403_cab_pedidos";
                  sCampo = "Id_Pedido";
                  iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
@@ -611,6 +612,7 @@ namespace Palatium.Empresa
                  }
 
                  iIdPedido = Convert.ToInt32(iMaximo);
+
                  sSql = "";
                  sSql += "select numero_pedido" + Environment.NewLine;
                  sSql += "from tp_localidades_impresoras" + Environment.NewLine;

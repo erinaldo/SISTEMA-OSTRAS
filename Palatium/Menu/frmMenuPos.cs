@@ -295,6 +295,7 @@ namespace Palatium.Menú
             grupoAccesos.Enabled = true;
             btnCobroAlmuerzos.Enabled = true;
             btnCobroAlmuerzos.Enabled = true;
+            btnVentaExpress.Enabled = true;
 
             if (Program.iFacturacionElectronica == 1)
             {
@@ -434,6 +435,7 @@ namespace Palatium.Menú
             btnEntradaCajero.Enabled = true;
             grupoAccesos.Enabled = false;
             btnCobroAlmuerzos.Enabled = false;
+            btnVentaExpress.Enabled = false;
             //btnSalir.Enabled = true;
         }
 
@@ -1500,6 +1502,27 @@ namespace Palatium.Menú
         private void btnClienteEmpresarial_MouseLeave(object sender, EventArgs e)
         {
             salidaBoton(btnClienteEmpresarial);
+        }
+
+        private void btnVentaExpress_Click(object sender, EventArgs e)
+        {
+            llenarArregloMaximo();
+            ingresaBoton(btnVentaExpress);
+
+            consultarDatos("10", "");
+
+            Comida_Rapida.frmComandaComidaRapida comanda = new Comida_Rapida.frmComandaComidaRapida(Program.iIdOrigenOrden);
+            comanda.ShowDialog();
+        }
+
+        private void btnVentaExpress_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnVentaExpress);
+        }
+
+        private void btnVentaExpress_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnVentaExpress);
         }
     }
 }

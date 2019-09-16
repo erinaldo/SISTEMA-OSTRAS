@@ -1164,6 +1164,8 @@ namespace Palatium.Receta
                     }
 
                     llenarValoresTexto();
+
+                    dgvReceta.ClearSelection();
                 }
             }
 

@@ -118,7 +118,7 @@ namespace Palatium.Clases
 
                 else
                 {
-                    sTexto = sTexto + "N.V.   : " + dtConsulta.Rows[0][53].ToString() + "-" + dtConsulta.Rows[0][54].ToString() + "-" + sSecuencial + Environment.NewLine;
+                    sTexto = sTexto + "N.E.   : " + dtConsulta.Rows[0][53].ToString() + "-" + dtConsulta.Rows[0][54].ToString() + "-" + sSecuencial + Environment.NewLine;
                 }
 
 

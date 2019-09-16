@@ -199,7 +199,7 @@ namespace Palatium.Clases
                 sSql = sSql + "select descripcion, sum(valor) valor, cambio,  count(*) cuenta," + Environment.NewLine;
                 sSql = sSql + "sum(isnull(valor_recibido, valor)) valor_recibido" + Environment.NewLine;
                 sSql = sSql + "from pos_vw_pedido_forma_pago" + Environment.NewLine;
-                sSql = sSql + "where id_pedido = " + (object)iIdPedido + Environment.NewLine;
+                sSql = sSql + "where id_pedido = " + iIdPedido + Environment.NewLine;
                 sSql = sSql + "group by descripcion, valor, cambio, valor_recibido" + Environment.NewLine;
                 sSql += "having count(*) >= 1";
 

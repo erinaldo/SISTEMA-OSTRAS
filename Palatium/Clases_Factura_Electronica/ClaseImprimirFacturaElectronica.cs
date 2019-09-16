@@ -267,7 +267,7 @@ namespace Palatium.Clases_Factura_Electronica
                 sTexto += "".PadLeft(20, ' ') + "".PadLeft(20, '-') + Environment.NewLine;
                 sTexto += "TOTAL:".PadLeft(28, ' ') + dTotal.ToString("N2").PadLeft(12, ' ') + Environment.NewLine;
                 sTexto += "".PadLeft(40, '-') + Environment.NewLine;
-                sTexto += "CAMBIO: " + Convert.ToDecimal(dtPagosClase.Rows[0]["cambio"].ToString()).ToString("N2");
+                sTexto += "CAMBIO A ENTREGAR: " + Convert.ToDecimal(dtPagosClase.Rows[0]["cambio"].ToString()).ToString("N2") + Environment.NewLine;
                 sTexto += "".PadLeft(40, '-') + Environment.NewLine;
                 sTexto += "La notificacion electronica sera enviada" + Environment.NewLine;
                 sTexto += "a su correo electronico." + Environment.NewLine;

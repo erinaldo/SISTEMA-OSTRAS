@@ -67,6 +67,7 @@
             this.logo = new System.Windows.Forms.PictureBox();
             this.grupoAccesos = new System.Windows.Forms.GroupBox();
             this.btnReimprimirFactura = new System.Windows.Forms.Button();
+            this.btnVentaExpress = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
@@ -455,7 +456,7 @@
             this.btnRepartidorExterno.ForeColor = System.Drawing.Color.White;
             this.btnRepartidorExterno.Image = global::Palatium.Properties.Resources.icono_repartidor_externo;
             this.btnRepartidorExterno.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRepartidorExterno.Location = new System.Drawing.Point(12, 136);
+            this.btnRepartidorExterno.Location = new System.Drawing.Point(394, 9);
             this.btnRepartidorExterno.Name = "btnRepartidorExterno";
             this.btnRepartidorExterno.Size = new System.Drawing.Size(172, 118);
             this.btnRepartidorExterno.TabIndex = 25;
@@ -463,6 +464,7 @@
             this.btnRepartidorExterno.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.ttMensaje.SetToolTip(this.btnRepartidorExterno, "Clic aquí para gestión de comandas por repartidores externos");
             this.btnRepartidorExterno.UseVisualStyleBackColor = false;
+            this.btnRepartidorExterno.Visible = false;
             this.btnRepartidorExterno.Click += new System.EventHandler(this.btnRepartidorExterno_Click);
             this.btnRepartidorExterno.MouseEnter += new System.EventHandler(this.btnRepartidorExterno_MouseEnter);
             this.btnRepartidorExterno.MouseLeave += new System.EventHandler(this.btnRepartidorExterno_MouseLeave);
@@ -758,6 +760,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnVentaExpress);
             this.panel1.Controls.Add(this.btnSalir);
             this.panel1.Controls.Add(this.btnCerrarSesion);
             this.panel1.Controls.Add(this.btnOficina);
@@ -773,7 +776,6 @@
             this.panel1.Controls.Add(this.btnCanjes);
             this.panel1.Controls.Add(this.btnConsumoEmpleados);
             this.panel1.Controls.Add(this.btnFuncionarios);
-            this.panel1.Controls.Add(this.btnRepartidorExterno);
             this.panel1.Controls.Add(this.btnEstadisticas);
             this.panel1.Controls.Add(this.btnDomicilios);
             this.panel1.Controls.Add(this.btnLlevar);
@@ -852,6 +854,29 @@
             this.btnReimprimirFactura.MouseEnter += new System.EventHandler(this.btnReimprimirFactura_MouseEnter);
             this.btnReimprimirFactura.MouseLeave += new System.EventHandler(this.btnReimprimirFactura_MouseLeave);
             // 
+            // btnVentaExpress
+            // 
+            this.btnVentaExpress.BackColor = System.Drawing.Color.Navy;
+            this.btnVentaExpress.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnVentaExpress.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVentaExpress.FlatAppearance.BorderSize = 2;
+            this.btnVentaExpress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVentaExpress.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVentaExpress.ForeColor = System.Drawing.Color.White;
+            this.btnVentaExpress.Image = global::Palatium.Properties.Resources.icono_comida_rapida;
+            this.btnVentaExpress.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnVentaExpress.Location = new System.Drawing.Point(12, 136);
+            this.btnVentaExpress.Name = "btnVentaExpress";
+            this.btnVentaExpress.Size = new System.Drawing.Size(172, 118);
+            this.btnVentaExpress.TabIndex = 41;
+            this.btnVentaExpress.Text = "Venta Express\r\nen Efectivo";
+            this.btnVentaExpress.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ttMensaje.SetToolTip(this.btnVentaExpress, "Clic aquí para gestión de comandas de forma express");
+            this.btnVentaExpress.UseVisualStyleBackColor = false;
+            this.btnVentaExpress.Click += new System.EventHandler(this.btnVentaExpress_Click);
+            this.btnVentaExpress.MouseEnter += new System.EventHandler(this.btnVentaExpress_MouseEnter);
+            this.btnVentaExpress.MouseLeave += new System.EventHandler(this.btnVentaExpress_MouseLeave);
+            // 
             // frmMenuPos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -867,6 +892,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.logo);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.btnRepartidorExterno);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMenuPos";
             this.ShowInTaskbar = false;
@@ -921,5 +947,6 @@
         private System.Windows.Forms.Button btnReimprimirFactura;
         private System.Windows.Forms.Button btnCambioCajero;
         private System.Windows.Forms.Button btnAnularFactura;
+        private System.Windows.Forms.Button btnVentaExpress;
     }
 }

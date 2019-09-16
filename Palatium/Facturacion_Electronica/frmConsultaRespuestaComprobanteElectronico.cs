@@ -691,8 +691,8 @@ namespace Palatium.Facturacion_Electronica
                     txtEstadoEnvio.Text = respuesta.Estado;
                     txtNumeroAutorizacion.Text = respuesta.NumeroAutorizacion;
                     txtFechaAutorizacion.Text = respuesta.FechaAutorizacion;
-                    txtDetalles_1.Text = respuesta.ErrorIdentificador;
-                    txtDetalles_2.Text = respuesta.ErrorMensaje + Environment.NewLine + respuesta.ErrorTipo;
+                    txtDetalles_1.Text = respuesta.ErrorIdentificador + Environment.NewLine + respuesta.ErrorMensaje + Environment.NewLine + respuesta.ErrorTipo;;
+                    txtDetalles_2.Text = respuesta.ErrorInfoAdicional;
 
                     if ((txtEstadoEnvio.Text == "AUTORIZADO") || (txtEstadoEnvio.Text == "NO AUTORIZADO"))
                     {

@@ -69,8 +69,8 @@ namespace Palatium.Receta
 
                 if (iOp == 1)
                 {
-                    sSql += "and PRO.codigo like '%" + txtBusqueda.Text.Trim() + "%'" + Environment.NewLine;
-                    sSql += "or NOM.Nombre like '%" + txtBusqueda.Text.Trim() + "%'" + Environment.NewLine;
+                    sSql += "and (PRO.codigo like '%" + txtBusqueda.Text.Trim() + "%'" + Environment.NewLine;
+                    sSql += "or NOM.Nombre like '%" + txtBusqueda.Text.Trim() + "%')" + Environment.NewLine;
                 }
 
                 sSql += "order By NOM.Nombre";

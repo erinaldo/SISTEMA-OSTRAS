@@ -38,7 +38,7 @@
             this.rptVisor.Name = "rptVisor";
             this.rptVisor.Size = new System.Drawing.Size(724, 607);
             this.rptVisor.TabIndex = 0;
-            this.rptVisor.ZoomPercent = 200;
+            this.rptVisor.ZoomPercent = 150;
             // 
             // frmVistaPreviaFacturaElectronica
             // 

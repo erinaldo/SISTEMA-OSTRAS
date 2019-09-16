@@ -1043,6 +1043,7 @@ namespace Palatium
                     return sTipoMovimiento + sCodigo + sAnioCorto + sMes + dbValorActual.ToString("N0").PadLeft(4, '0');
 
                 }
+
                 else
                 {
                     int iCorrelativo = 4979;

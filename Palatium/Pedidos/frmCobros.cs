@@ -1394,6 +1394,8 @@ namespace Palatium.Pedidos
                      goto reversa;
                  }
 
+                 iNumeroPago = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+
                  sSql = "";
                  sSql += "insert into cv403_numeros_pagos (" + Environment.NewLine;
                  sSql += "id_pago, serie, numero_pago, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
@@ -1428,6 +1430,7 @@ namespace Palatium.Pedidos
                      }
 
                      iCgTipoDocumento = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+
                      sSql = "";
                      sSql += "insert into cv403_documentos_pagos (" + Environment.NewLine;
                      sSql += "id_pago, cg_tipo_documento, numero_documento, fecha_vcto, " + Environment.NewLine;
@@ -3188,7 +3191,7 @@ namespace Palatium.Pedidos
                      if (iMaximo == -1)
                      {
                          ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                         int num2 = (int)ok.ShowDialog();
+                         ok.ShowDialog();
                          return false;
                      }
 
@@ -3320,7 +3323,7 @@ namespace Palatium.Pedidos
              }
          }
 
-        //FUNCION PARA LLENAR EL DATATABLE
+         //FUNCION PARA LLENAR EL DATATABLE
          private void llenarDataTable()
          {
              try
