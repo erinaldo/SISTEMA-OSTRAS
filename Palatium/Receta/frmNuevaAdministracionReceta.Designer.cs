@@ -30,15 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNuevaAdministracionReceta));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label4 = new System.Windows.Forms.Label();
             this.txtPorcentajeDeUtilidad = new System.Windows.Forms.TextBox();
             this.txtPorcentajeDeCosto = new System.Windows.Forms.TextBox();
@@ -67,6 +63,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtPesoGramos = new System.Windows.Forms.TextBox();
             this.cmbReceta = new MisControles.ComboDatos();
             this.cmbClasificacion = new MisControles.ComboDatos();
             this.label1 = new System.Windows.Forms.Label();
@@ -85,22 +83,16 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtCostoTotal = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.dgvReceta = new System.Windows.Forms.DataGridView();
-            this.codigoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadBruta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadNeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.porcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.costoUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rendimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIdUnidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIdPorcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio_unitario_completo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPosDetalleReceta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgvReceta = new System.Windows.Forms.DataGridView();
+            this.ingrediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rendimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.costo_unitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cg_unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnA = new System.Windows.Forms.Button();
             this.btnX = new System.Windows.Forms.Button();
             this.ttDetalle = new System.Windows.Forms.ToolTip(this.components);
@@ -109,16 +101,14 @@
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnAnular = new System.Windows.Forms.Button();
             this.btnGrabar = new System.Windows.Forms.Button();
-            this.txtPesoGramos = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReceta)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReceta)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,6 +133,7 @@
             this.txtPorcentajeDeUtilidad.Name = "txtPorcentajeDeUtilidad";
             this.txtPorcentajeDeUtilidad.Size = new System.Drawing.Size(123, 20);
             this.txtPorcentajeDeUtilidad.TabIndex = 23;
+            this.txtPorcentajeDeUtilidad.Text = "0";
             this.txtPorcentajeDeUtilidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ttDetalle.SetToolTip(this.txtPorcentajeDeUtilidad, "Porcentaje de Utilidad");
             this.txtPorcentajeDeUtilidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPorcentajeDeUtilidad_KeyPress);
@@ -158,6 +149,7 @@
             this.txtPorcentajeDeCosto.Name = "txtPorcentajeDeCosto";
             this.txtPorcentajeDeCosto.Size = new System.Drawing.Size(123, 20);
             this.txtPorcentajeDeCosto.TabIndex = 22;
+            this.txtPorcentajeDeCosto.Text = "0";
             this.txtPorcentajeDeCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ttDetalle.SetToolTip(this.txtPorcentajeDeCosto, "Porcentaje del costo unitario");
             this.txtPorcentajeDeCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPorcentajeDeCosto_KeyPress);
@@ -173,6 +165,7 @@
             this.txtUtilidadDeGanancias.Name = "txtUtilidadDeGanancias";
             this.txtUtilidadDeGanancias.Size = new System.Drawing.Size(71, 20);
             this.txtUtilidadDeGanancias.TabIndex = 19;
+            this.txtUtilidadDeGanancias.Text = "0";
             this.txtUtilidadDeGanancias.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ttDetalle.SetToolTip(this.txtUtilidadDeGanancias, "Utilidad de Ganancias");
             this.txtUtilidadDeGanancias.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUtilidadDeGanancias_KeyPress);
@@ -188,6 +181,7 @@
             this.txtUtilidadDeServicios.Name = "txtUtilidadDeServicios";
             this.txtUtilidadDeServicios.Size = new System.Drawing.Size(71, 20);
             this.txtUtilidadDeServicios.TabIndex = 20;
+            this.txtUtilidadDeServicios.Text = "0";
             this.txtUtilidadDeServicios.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ttDetalle.SetToolTip(this.txtUtilidadDeServicios, "Utilidad de Servicios");
             this.txtUtilidadDeServicios.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUtilidadDeServicios_KeyPress);
@@ -203,6 +197,7 @@
             this.txtRendimiento.Name = "txtRendimiento";
             this.txtRendimiento.Size = new System.Drawing.Size(74, 21);
             this.txtRendimiento.TabIndex = 21;
+            this.txtRendimiento.Text = "0";
             this.txtRendimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ttDetalle.SetToolTip(this.txtRendimiento, "Es la suma de todos los rendimientos entre \r\nel número de ingredientes.");
             this.txtRendimiento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRendimiento_KeyPress);
@@ -381,6 +376,7 @@
             this.txtCostoUnitario.Name = "txtCostoUnitario";
             this.txtCostoUnitario.Size = new System.Drawing.Size(123, 20);
             this.txtCostoUnitario.TabIndex = 24;
+            this.txtCostoUnitario.Text = "0";
             this.txtCostoUnitario.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ttDetalle.SetToolTip(this.txtCostoUnitario, "Costo unitario de la receta entre el número de porciones");
             this.txtCostoUnitario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCostoUnitario_KeyPress);
@@ -434,6 +430,7 @@
             this.txtPrecioDeVenta.Name = "txtPrecioDeVenta";
             this.txtPrecioDeVenta.Size = new System.Drawing.Size(123, 20);
             this.txtPrecioDeVenta.TabIndex = 25;
+            this.txtPrecioDeVenta.Text = "0";
             this.txtPrecioDeVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ttDetalle.SetToolTip(this.txtPrecioDeVenta, "El precio de venta es el resultado del 30% del Costo Unitario más la suma del mis" +
         "mo Costo Unitario");
@@ -478,6 +475,31 @@
             this.groupBox6.TabIndex = 142;
             this.groupBox6.TabStop = false;
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(14, 102);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(102, 15);
+            this.label19.TabIndex = 141;
+            this.label19.Text = "Peso en Gramos:";
+            // 
+            // txtPesoGramos
+            // 
+            this.txtPesoGramos.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtPesoGramos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPesoGramos.Location = new System.Drawing.Point(136, 101);
+            this.txtPesoGramos.MaxLength = 120;
+            this.txtPesoGramos.Multiline = true;
+            this.txtPesoGramos.Name = "txtPesoGramos";
+            this.txtPesoGramos.Size = new System.Drawing.Size(216, 20);
+            this.txtPesoGramos.TabIndex = 140;
+            this.txtPesoGramos.Text = "0";
+            this.txtPesoGramos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ttDetalle.SetToolTip(this.txtPesoGramos, "Señalar el nombre completo de la receta");
+            this.txtPesoGramos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPesoGramos_KeyPress);
+            // 
             // cmbReceta
             // 
             this.cmbReceta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -502,7 +524,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(14, 19);
+            this.label1.Location = new System.Drawing.Point(14, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 15);
             this.label1.TabIndex = 1;
@@ -668,13 +690,14 @@
             this.txtCostoTotal.BackColor = System.Drawing.SystemColors.Window;
             this.txtCostoTotal.Enabled = false;
             this.txtCostoTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCostoTotal.Location = new System.Drawing.Point(882, 206);
+            this.txtCostoTotal.Location = new System.Drawing.Point(864, 206);
             this.txtCostoTotal.MaxLength = 10;
             this.txtCostoTotal.Multiline = true;
             this.txtCostoTotal.Name = "txtCostoTotal";
             this.txtCostoTotal.ReadOnly = true;
             this.txtCostoTotal.Size = new System.Drawing.Size(123, 20);
             this.txtCostoTotal.TabIndex = 84;
+            this.txtCostoTotal.Text = "0";
             this.txtCostoTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ttDetalle.SetToolTip(this.txtCostoTotal, "Es la suma de todos los importes.");
             // 
@@ -682,11 +705,25 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(774, 207);
+            this.label13.Location = new System.Drawing.Point(756, 207);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(90, 19);
             this.label13.TabIndex = 85;
             this.label13.Text = "Costo Total";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.groupBox2.Controls.Add(this.dgvReceta);
+            this.groupBox2.Controls.Add(this.txtCostoTotal);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.btnA);
+            this.groupBox2.Controls.Add(this.btnX);
+            this.groupBox2.Location = new System.Drawing.Point(20, 243);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1014, 238);
+            this.groupBox2.TabIndex = 137;
+            this.groupBox2.TabStop = false;
             // 
             // dgvReceta
             // 
@@ -697,172 +734,91 @@
             this.dgvReceta.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvReceta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReceta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codigoProducto,
-            this.descripcionProducto,
-            this.cantidadBruta,
-            this.cantidadNeta,
+            this.ingrediente,
             this.unidad,
-            this.porcion,
-            this.costoUnitario,
             this.rendimiento,
+            this.cantidad,
+            this.costo_unitario,
             this.importe,
-            this.idProducto,
-            this.colIdUnidad,
-            this.colIdPorcion,
-            this.precio_unitario_completo,
-            this.idPosDetalleReceta});
-            this.dgvReceta.GridColor = System.Drawing.SystemColors.ButtonFace;
-            this.dgvReceta.Location = new System.Drawing.Point(6, 8);
+            this.id_producto,
+            this.cg_unidad});
+            this.dgvReceta.Location = new System.Drawing.Point(26, 8);
             this.dgvReceta.Name = "dgvReceta";
-            this.dgvReceta.ReadOnly = true;
-            this.dgvReceta.RowHeadersWidth = 25;
+            this.dgvReceta.RowHeadersVisible = false;
             this.dgvReceta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReceta.Size = new System.Drawing.Size(999, 192);
-            this.dgvReceta.TabIndex = 12;
-            this.dgvReceta.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceta_CellDoubleClick);
+            this.dgvReceta.Size = new System.Drawing.Size(962, 187);
+            this.dgvReceta.TabIndex = 87;
+            this.dgvReceta.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceta_CellEndEdit);
+            this.dgvReceta.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvReceta_EditingControlShowing);
             // 
-            // codigoProducto
+            // ingrediente
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.codigoProducto.DefaultCellStyle = dataGridViewCellStyle10;
-            this.codigoProducto.HeaderText = "Código Producto";
-            this.codigoProducto.Name = "codigoProducto";
-            this.codigoProducto.ReadOnly = true;
-            // 
-            // descripcionProducto
-            // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.descripcionProducto.DefaultCellStyle = dataGridViewCellStyle11;
-            this.descripcionProducto.HeaderText = "Descripción del Producto";
-            this.descripcionProducto.Name = "descripcionProducto";
-            this.descripcionProducto.ReadOnly = true;
-            this.descripcionProducto.Width = 225;
-            // 
-            // cantidadBruta
-            // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N3";
-            dataGridViewCellStyle12.NullValue = "0";
-            this.cantidadBruta.DefaultCellStyle = dataGridViewCellStyle12;
-            this.cantidadBruta.HeaderText = "Cantidad Bruta";
-            this.cantidadBruta.Name = "cantidadBruta";
-            this.cantidadBruta.ReadOnly = true;
-            this.cantidadBruta.Width = 60;
-            // 
-            // cantidadNeta
-            // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Format = "N3";
-            dataGridViewCellStyle13.NullValue = "0";
-            this.cantidadNeta.DefaultCellStyle = dataGridViewCellStyle13;
-            this.cantidadNeta.HeaderText = "Cantidad Neta";
-            this.cantidadNeta.Name = "cantidadNeta";
-            this.cantidadNeta.ReadOnly = true;
-            this.cantidadNeta.Width = 60;
+            this.ingrediente.HeaderText = "INGREDIENTE";
+            this.ingrediente.Name = "ingrediente";
+            this.ingrediente.ReadOnly = true;
+            this.ingrediente.Width = 280;
             // 
             // unidad
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.unidad.DefaultCellStyle = dataGridViewCellStyle14;
-            this.unidad.HeaderText = "Unidad";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.unidad.DefaultCellStyle = dataGridViewCellStyle6;
+            this.unidad.HeaderText = "UNIDAD";
             this.unidad.Name = "unidad";
             this.unidad.ReadOnly = true;
-            this.unidad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.unidad.Width = 120;
-            // 
-            // porcion
-            // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.porcion.DefaultCellStyle = dataGridViewCellStyle15;
-            this.porcion.HeaderText = "Porcion";
-            this.porcion.Name = "porcion";
-            this.porcion.ReadOnly = true;
-            this.porcion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.porcion.Width = 120;
-            // 
-            // costoUnitario
-            // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "N2";
-            dataGridViewCellStyle16.NullValue = "0";
-            this.costoUnitario.DefaultCellStyle = dataGridViewCellStyle16;
-            this.costoUnitario.HeaderText = "Costo Unitario";
-            this.costoUnitario.Name = "costoUnitario";
-            this.costoUnitario.ReadOnly = true;
-            this.costoUnitario.Width = 90;
+            this.unidad.Width = 125;
             // 
             // rendimiento
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.rendimiento.DefaultCellStyle = dataGridViewCellStyle17;
-            this.rendimiento.HeaderText = "Rendimiento";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rendimiento.DefaultCellStyle = dataGridViewCellStyle7;
+            this.rendimiento.HeaderText = "% RENDIMIENTO";
             this.rendimiento.Name = "rendimiento";
             this.rendimiento.ReadOnly = true;
-            this.rendimiento.Width = 80;
+            this.rendimiento.Width = 125;
+            // 
+            // cantidad
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cantidad.DefaultCellStyle = dataGridViewCellStyle8;
+            this.cantidad.HeaderText = "CANTIDAD";
+            this.cantidad.Name = "cantidad";
+            // 
+            // costo_unitario
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.costo_unitario.DefaultCellStyle = dataGridViewCellStyle9;
+            this.costo_unitario.HeaderText = "COSTO UNITARIO";
+            this.costo_unitario.Name = "costo_unitario";
+            this.costo_unitario.ReadOnly = true;
+            this.costo_unitario.Width = 150;
             // 
             // importe
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.importe.DefaultCellStyle = dataGridViewCellStyle18;
-            this.importe.HeaderText = "Importe";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.importe.DefaultCellStyle = dataGridViewCellStyle10;
+            this.importe.HeaderText = "IMPORTE";
             this.importe.Name = "importe";
             this.importe.ReadOnly = true;
-            this.importe.Width = 90;
+            this.importe.Width = 150;
             // 
-            // idProducto
+            // id_producto
             // 
-            this.idProducto.HeaderText = "ID PRODUCTO";
-            this.idProducto.Name = "idProducto";
-            this.idProducto.ReadOnly = true;
-            this.idProducto.Visible = false;
+            this.id_producto.HeaderText = "ID";
+            this.id_producto.Name = "id_producto";
+            this.id_producto.ReadOnly = true;
+            this.id_producto.Visible = false;
             // 
-            // colIdUnidad
+            // cg_unidad
             // 
-            this.colIdUnidad.HeaderText = "ID UNIDAD";
-            this.colIdUnidad.Name = "colIdUnidad";
-            this.colIdUnidad.ReadOnly = true;
-            this.colIdUnidad.Visible = false;
-            // 
-            // colIdPorcion
-            // 
-            this.colIdPorcion.HeaderText = "ID PORCION";
-            this.colIdPorcion.Name = "colIdPorcion";
-            this.colIdPorcion.ReadOnly = true;
-            this.colIdPorcion.Visible = false;
-            // 
-            // precio_unitario_completo
-            // 
-            this.precio_unitario_completo.HeaderText = "P. UNIT.";
-            this.precio_unitario_completo.Name = "precio_unitario_completo";
-            this.precio_unitario_completo.ReadOnly = true;
-            this.precio_unitario_completo.Visible = false;
-            // 
-            // idPosDetalleReceta
-            // 
-            this.idPosDetalleReceta.HeaderText = "ID DETALLE RECETA";
-            this.idPosDetalleReceta.Name = "idPosDetalleReceta";
-            this.idPosDetalleReceta.ReadOnly = true;
-            this.idPosDetalleReceta.Visible = false;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.groupBox2.Controls.Add(this.txtCostoTotal);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.dgvReceta);
-            this.groupBox2.Controls.Add(this.btnA);
-            this.groupBox2.Controls.Add(this.btnX);
-            this.groupBox2.Location = new System.Drawing.Point(20, 243);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1014, 238);
-            this.groupBox2.TabIndex = 137;
-            this.groupBox2.TabStop = false;
+            this.cg_unidad.HeaderText = "CG_UNIDAD";
+            this.cg_unidad.Name = "cg_unidad";
+            this.cg_unidad.Visible = false;
             // 
             // btnA
             // 
             this.btnA.Enabled = false;
             this.btnA.Image = global::Palatium.Properties.Resources.anadir;
-            this.btnA.Location = new System.Drawing.Point(35, 201);
+            this.btnA.Location = new System.Drawing.Point(55, 203);
             this.btnA.Name = "btnA";
             this.btnA.Size = new System.Drawing.Size(23, 23);
             this.btnA.TabIndex = 13;
@@ -873,7 +829,7 @@
             // 
             this.btnX.Enabled = false;
             this.btnX.Image = global::Palatium.Properties.Resources.menos;
-            this.btnX.Location = new System.Drawing.Point(10, 201);
+            this.btnX.Location = new System.Drawing.Point(30, 203);
             this.btnX.Name = "btnX";
             this.btnX.Size = new System.Drawing.Size(23, 23);
             this.btnX.TabIndex = 14;
@@ -944,29 +900,6 @@
             this.btnGrabar.UseVisualStyleBackColor = true;
             this.btnGrabar.Click += new System.EventHandler(this.btnGrabar_Click);
             // 
-            // txtPesoGramos
-            // 
-            this.txtPesoGramos.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPesoGramos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPesoGramos.Location = new System.Drawing.Point(136, 101);
-            this.txtPesoGramos.MaxLength = 120;
-            this.txtPesoGramos.Multiline = true;
-            this.txtPesoGramos.Name = "txtPesoGramos";
-            this.txtPesoGramos.Size = new System.Drawing.Size(216, 20);
-            this.txtPesoGramos.TabIndex = 140;
-            this.ttDetalle.SetToolTip(this.txtPesoGramos, "Señalar el nombre completo de la receta");
-            this.txtPesoGramos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPesoGramos_KeyPress);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(14, 102);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(102, 15);
-            this.label19.TabIndex = 141;
-            this.label19.Text = "Peso en Gramos:";
-            // 
             // frmNuevaAdministracionReceta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -993,9 +926,9 @@
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReceta)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReceta)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1046,7 +979,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox txtCostoTotal;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DataGridView dgvReceta;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnA;
         private System.Windows.Forms.Button btnX;
@@ -1055,25 +987,20 @@
         private System.Windows.Forms.Button btnAnular;
         private System.Windows.Forms.Button btnGrabar;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codigoProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadBruta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadNeta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn porcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn costoUnitario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rendimiento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn importe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIdUnidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIdPorcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio_unitario_completo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idPosDetalleReceta;
         private System.Windows.Forms.TextBox txtPorcentajeGananciaDeseada;
         private System.Windows.Forms.TextBox txtPorcentajeServicioDeseado;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txtPesoGramos;
+        private System.Windows.Forms.DataGridView dgvReceta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ingrediente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rendimiento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn costo_unitario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cg_unidad;
     }
 }

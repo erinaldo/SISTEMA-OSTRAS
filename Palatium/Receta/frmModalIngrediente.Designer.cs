@@ -49,7 +49,7 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(540, 209);
+            this.dgvDatos.Size = new System.Drawing.Size(603, 209);
             this.dgvDatos.TabIndex = 0;
             this.dgvDatos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellDoubleClick);
             // 
@@ -58,7 +58,7 @@
             this.txtBusqueda.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBusqueda.Location = new System.Drawing.Point(201, 12);
             this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new System.Drawing.Size(351, 20);
+            this.txtBusqueda.Size = new System.Drawing.Size(414, 20);
             this.txtBusqueda.TabIndex = 3;
             this.txtBusqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBusqueda_KeyPress);
             // 
@@ -76,7 +76,7 @@
             // 
             this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnAceptar.ForeColor = System.Drawing.Color.White;
-            this.btnAceptar.Location = new System.Drawing.Point(407, 264);
+            this.btnAceptar.Location = new System.Drawing.Point(469, 264);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(70, 39);
             this.btnAceptar.TabIndex = 4;
@@ -88,7 +88,7 @@
             // 
             this.btnCerrarInformeVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnCerrarInformeVentas.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarInformeVentas.Location = new System.Drawing.Point(483, 264);
+            this.btnCerrarInformeVentas.Location = new System.Drawing.Point(545, 264);
             this.btnCerrarInformeVentas.Name = "btnCerrarInformeVentas";
             this.btnCerrarInformeVentas.Size = new System.Drawing.Size(70, 39);
             this.btnCerrarInformeVentas.TabIndex = 5;
@@ -102,7 +102,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(565, 306);
+            this.ClientSize = new System.Drawing.Size(627, 306);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.btnCerrarInformeVentas);
             this.Controls.Add(this.txtBusqueda);

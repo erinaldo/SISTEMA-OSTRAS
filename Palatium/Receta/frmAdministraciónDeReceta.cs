@@ -1196,7 +1196,29 @@ namespace Palatium.Receta
             {
                 if (dgvReceta.Columns[e.ColumnIndex].Name == "cantidad")
                 {
-                    
+                    if (dgvReceta.Rows[e.RowIndex].Cells[3].Value == null)
+                    {
+                        dgvReceta.Rows[e.RowIndex].Cells[3].Value = "";
+                    }
+
+                    string sCantidadGrid_R = dgvReceta.Rows[e.RowIndex].Cells[3].Value.ToString().Trim();
+
+                    if ((sCantidadGrid_R != null) && (sCantidadGrid_R != ""))
+                    {
+                        Decimal dbCantidad_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[3].Value.ToString().Trim());
+                        Decimal dbPrecioUnitario_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[4].Value.ToString().Trim());
+                        Decimal dbPorcentaje_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[2].Value.ToString().Trim());
+                        Decimal dbCantidadOriginal_R = (dbCantidad_R * 100) / dbPorcentaje_R;
+                        Decimal dbPrecioTotal_R = dbCantidadOriginal_R * dbPrecioUnitario_R;
+
+                        dgvReceta.Rows[e.RowIndex].Cells[5].Value = dbPrecioTotal_R.ToString("N6");
+                    }
+
+                    else
+                    {
+                        dgvReceta.Rows[e.RowIndex].Cells[3].Value = "0";
+                        dgvReceta.Rows[e.RowIndex].Cells[5].Value = "0.00";
+                    }
                 }
             }
 
