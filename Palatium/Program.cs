@@ -89,7 +89,7 @@ namespace Palatium
                     parametros.cargarDatosImpresion();
                     parametros.cargarDatosEmpresa();
                     parametros.obtenerCgLocalidad();
-                    monedas.llenarMonedas();
+                    //monedas.llenarMonedas();
 
                     redimension.extraerPixelado();
 

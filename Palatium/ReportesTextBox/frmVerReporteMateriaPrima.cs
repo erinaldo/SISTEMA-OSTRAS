@@ -31,6 +31,7 @@ namespace Palatium.ReportesTextBox
         int iCortarPapel;
         int iAbrirCajon;
         int iCantidadImpresiones;
+        int iIdLocalidad;
 
         //VARIABLES DE CONFIGURACION DE LA IMPRESORA
         string sNombreImpresora;
@@ -38,10 +39,11 @@ namespace Palatium.ReportesTextBox
         string sIpImpresora;
         string sDescripcionImpresora;
 
-        public frmVerReporteMateriaPrima(string sFecha, int iCerrar)
+        public frmVerReporteMateriaPrima(string sFecha, int iCerrar, int iIdLocalidad_P)
         {
             this.sFecha = sFecha;
             this.iCerrar = iCerrar;
+            this.iIdLocalidad = iIdLocalidad_P;
             InitializeComponent();
         }
 
@@ -113,7 +115,7 @@ namespace Palatium.ReportesTextBox
         {
             try
             {
-                sRetorno = reporte.llenarReporte(sFecha);
+                sRetorno = reporte.llenarReporte(sFecha, iIdLocalidad);
 
                 if (sRetorno == "")
                 {

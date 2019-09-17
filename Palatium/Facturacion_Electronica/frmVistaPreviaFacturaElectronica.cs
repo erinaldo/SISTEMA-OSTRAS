@@ -136,7 +136,7 @@ namespace Palatium.Facturacion_Electronica
                 for (int i = 0; i < dtDatos.Rows.Count; i++)
                 {
                     sCodigo = dtDatos.Rows[i]["codigo"].ToString();
-                    sNombreProducto = dtDatos.Rows[0]["nombre"].ToString();
+                    sNombreProducto = dtDatos.Rows[i]["nombre"].ToString();
 
                     iPagaIVA = Convert.ToInt32(dtDatos.Rows[i]["paga_iva"].ToString());
                     iPagaICE = Convert.ToInt32(dtDatos.Rows[i]["paga_ice"].ToString());

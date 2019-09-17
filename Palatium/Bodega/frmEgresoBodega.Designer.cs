@@ -45,6 +45,16 @@
             this.txtValorTotal = new System.Windows.Forms.TextBox();
             this.lblValorTotal = new System.Windows.Forms.Label();
             this.dgvDetalleVenta = new System.Windows.Forms.DataGridView();
+            this.codigoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.punto = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.descripcionProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadAnterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -74,16 +84,6 @@
             this.lblProveedor = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbMotivo = new MisControles.ComboDatos();
-            this.codigoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.punto = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.descripcionProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadAnterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleVenta)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -239,6 +239,81 @@
             this.dgvDetalleVenta.TabIndex = 52;
             this.dgvDetalleVenta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleVenta_CellContentClick);
             this.dgvDetalleVenta.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleVenta_CellEndEdit);
+            // 
+            // codigoProducto
+            // 
+            this.codigoProducto.HeaderText = "Código Producto";
+            this.codigoProducto.Name = "codigoProducto";
+            this.codigoProducto.Width = 135;
+            // 
+            // punto
+            // 
+            this.punto.HeaderText = ".";
+            this.punto.Name = "punto";
+            this.punto.Text = "?";
+            this.punto.Width = 20;
+            // 
+            // descripcionProducto
+            // 
+            this.descripcionProducto.HeaderText = "Descripción del Producto";
+            this.descripcionProducto.Name = "descripcionProducto";
+            this.descripcionProducto.ReadOnly = true;
+            this.descripcionProducto.Width = 200;
+            // 
+            // unidad
+            // 
+            this.unidad.HeaderText = "Unidad";
+            this.unidad.Name = "unidad";
+            this.unidad.ReadOnly = true;
+            this.unidad.Width = 60;
+            // 
+            // cantidad
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cantidad.DefaultCellStyle = dataGridViewCellStyle1;
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            // 
+            // precioUnitario
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.precioUnitario.DefaultCellStyle = dataGridViewCellStyle2;
+            this.precioUnitario.HeaderText = "Precio Uni.";
+            this.precioUnitario.Name = "precioUnitario";
+            this.precioUnitario.Width = 90;
+            // 
+            // subtotal
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.subtotal.DefaultCellStyle = dataGridViewCellStyle3;
+            this.subtotal.HeaderText = "Subtotal";
+            this.subtotal.Name = "subtotal";
+            this.subtotal.ReadOnly = true;
+            this.subtotal.Width = 70;
+            // 
+            // stock
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.stock.DefaultCellStyle = dataGridViewCellStyle4;
+            this.stock.HeaderText = "Stock";
+            this.stock.Name = "stock";
+            this.stock.ReadOnly = true;
+            this.stock.Width = 70;
+            // 
+            // cantidadAnterior
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cantidadAnterior.DefaultCellStyle = dataGridViewCellStyle5;
+            this.cantidadAnterior.HeaderText = "Cantidad Anterior";
+            this.cantidadAnterior.Name = "cantidadAnterior";
+            this.cantidadAnterior.ReadOnly = true;
+            this.cantidadAnterior.Width = 120;
+            // 
+            // idProducto
+            // 
+            this.idProducto.HeaderText = "ID PRODUCTO";
+            this.idProducto.Name = "idProducto";
+            this.idProducto.Visible = false;
             // 
             // textBox3
             // 
@@ -526,87 +601,12 @@
             this.cmbMotivo.Size = new System.Drawing.Size(296, 21);
             this.cmbMotivo.TabIndex = 0;
             // 
-            // codigoProducto
-            // 
-            this.codigoProducto.HeaderText = "Código Producto";
-            this.codigoProducto.Name = "codigoProducto";
-            this.codigoProducto.Width = 135;
-            // 
-            // punto
-            // 
-            this.punto.HeaderText = ".";
-            this.punto.Name = "punto";
-            this.punto.Text = "?";
-            this.punto.Width = 20;
-            // 
-            // descripcionProducto
-            // 
-            this.descripcionProducto.HeaderText = "Descripción del Producto";
-            this.descripcionProducto.Name = "descripcionProducto";
-            this.descripcionProducto.ReadOnly = true;
-            this.descripcionProducto.Width = 200;
-            // 
-            // unidad
-            // 
-            this.unidad.HeaderText = "Unidad";
-            this.unidad.Name = "unidad";
-            this.unidad.ReadOnly = true;
-            this.unidad.Width = 60;
-            // 
-            // cantidad
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cantidad.DefaultCellStyle = dataGridViewCellStyle1;
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            // 
-            // precioUnitario
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.precioUnitario.DefaultCellStyle = dataGridViewCellStyle2;
-            this.precioUnitario.HeaderText = "Precio Uni.";
-            this.precioUnitario.Name = "precioUnitario";
-            this.precioUnitario.Width = 90;
-            // 
-            // subtotal
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.subtotal.DefaultCellStyle = dataGridViewCellStyle3;
-            this.subtotal.HeaderText = "Subtotal";
-            this.subtotal.Name = "subtotal";
-            this.subtotal.ReadOnly = true;
-            this.subtotal.Width = 70;
-            // 
-            // stock
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.stock.DefaultCellStyle = dataGridViewCellStyle4;
-            this.stock.HeaderText = "Stock";
-            this.stock.Name = "stock";
-            this.stock.ReadOnly = true;
-            this.stock.Width = 70;
-            // 
-            // cantidadAnterior
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cantidadAnterior.DefaultCellStyle = dataGridViewCellStyle5;
-            this.cantidadAnterior.HeaderText = "Cantidad Anterior";
-            this.cantidadAnterior.Name = "cantidadAnterior";
-            this.cantidadAnterior.ReadOnly = true;
-            this.cantidadAnterior.Width = 120;
-            // 
-            // idProducto
-            // 
-            this.idProducto.HeaderText = "ID PRODUCTO";
-            this.idProducto.Name = "idProducto";
-            this.idProducto.Visible = false;
-            // 
             // frmEgresoBodega
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.ClientSize = new System.Drawing.Size(966, 481);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);

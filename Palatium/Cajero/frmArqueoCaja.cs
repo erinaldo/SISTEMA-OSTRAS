@@ -53,8 +53,13 @@ namespace Palatium.Cajero
         int iOp;
         int iJornada;
 
+        int iMoneda01, iMoneda05, iMoneda10, iMoneda25, iMoneda50;
+        int iBillete1, iBillete2, iBillete5, iBillete10, iBillete20, iBillete50, iBillete100;
+
         double dTotalPagadoCortesiaP;
         double dTotalProductosCortesiaP;
+
+        Decimal dbCajaFinal;
 
         public frmResumenCaja(int iPuedeGuardar)
         {
@@ -489,7 +494,6 @@ namespace Palatium.Cajero
             catch (Exception)
             {
                 ok.LblMensaje.Text = "Error al cargar las transferencias, tajertas y cheques.";
-                ok.ShowInTaskbar = false;
                 ok.ShowDialog();
             }
         }
@@ -656,7 +660,6 @@ namespace Palatium.Cajero
                 else
                 {
                     catchMensaje.LblMensaje.Text = sSql;
-                    catchMensaje.ShowInTaskbar = false;
                     catchMensaje.ShowDialog();
                 }
 
@@ -1119,7 +1122,6 @@ namespace Palatium.Cajero
         private void btnSalidas_Click(object sender, EventArgs e)
         {
             //Oficina.frmMovimientosCaja movimiento = new Oficina.frmMovimientosCaja(2);
-            //movimiento.ShowInTaskbar = false;
             //movimiento.ShowDialog();
             //sumaEntradasSalidas(0);
 
@@ -1130,7 +1132,6 @@ namespace Palatium.Cajero
         private void btnEntradas_Click(object sender, EventArgs e)
         {
             //Oficina.frmMovimientosCaja movimiento = new Oficina.frmMovimientosCaja(1);
-            //movimiento.ShowInTaskbar = false;
             //movimiento.ShowDialog();
             //sumaEntradasSalidas(1);
             
@@ -1145,34 +1146,6 @@ namespace Palatium.Cajero
         private void TimerHora_Tick(object sender, EventArgs e)
         {
             LblFecha.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        }
-
-        private void BtnAbrirCaja_Click(object sender, EventArgs e)
-        {
-            if (Program.iManejaJornada == 1)
-            {
-                Program.iMostrarJornada = 1;
-            }
-
-            Menú.frmCodigoAdministrador codigo = new Menú.frmCodigoAdministrador();
-            codigo.ShowDialog();
-
-            if (codigo.DialogResult == DialogResult.OK)
-            {
-                codigo.Close();
-
-                Pedidos.frmCalendario calendario = new Pedidos.frmCalendario(DateTime.Now.ToString("dd/MM/yyyy"));
-                calendario.ShowDialog();
-
-                if (calendario.DialogResult == DialogResult.OK)
-                {
-                    sFecha = Convert.ToDateTime(calendario.txtFecha.Text).ToString("yyyy/MM/dd");
-                    lblFechaCaja.Text = sFecha;
-                    iJornada = Program.iJornadaRecuperada;
-                    consultarEstadoCaja();
-                    cargarValores();                    
-                }
-            }            
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)
@@ -1190,90 +1163,130 @@ namespace Palatium.Cajero
                         //ACTUALIZAR EL REGISTRO PARA CERRAR EL CAJERO
                         //INICIAMOS UNA NUEVA TRANSACCION
                         //=======================================================================================================
-                        //=======================================================================================================
                         if (!conexion.GFun_Lo_Maneja_Transaccion(Program.G_INICIA_TRANSACCION))
                         {
                             ok.LblMensaje.Text = "Error al abrir transacción.";
                             ok.ShowDialog();
-                            goto fin;
+                            return;
                         }
                         //=======================================================================================================
 
+                        iMoneda01 = Convert.ToInt32(Program.sContarDinero[7, 1]);
+                        iMoneda05 = Convert.ToInt32(Program.sContarDinero[8, 1]);
+                        iMoneda10 = Convert.ToInt32(Program.sContarDinero[9, 1]);
+                        iMoneda25 = Convert.ToInt32(Program.sContarDinero[10, 1]);
+                        iMoneda50 = Convert.ToInt32(Program.sContarDinero[11, 1]);
+
+                        iBillete1 = Convert.ToInt32(Program.sContarDinero[0, 1]);
+                        iBillete2 = Convert.ToInt32(Program.sContarDinero[1, 1]);
+                        iBillete5 = Convert.ToInt32(Program.sContarDinero[2, 1]);
+                        iBillete10 = Convert.ToInt32(Program.sContarDinero[3, 1]);
+                        iBillete20 = Convert.ToInt32(Program.sContarDinero[4, 1]);
+                        iBillete50 = Convert.ToInt32(Program.sContarDinero[5, 1]);
+                        iBillete100 = Convert.ToInt32(Program.sContarDinero[6, 1]);
+
+                        dbCajaFinal = 0;
+
+                        for (int i = 0; i < Program.sContarDinero.Length / 3; i++)
+                        {
+                            dbCajaFinal += Convert.ToDecimal(Program.sContarDinero[i, 2]);
+                        }
+
+                        //INSERTAR LOS VALORES DE LAS MONEDAS
+                        sSql = "";
+                        sSql += "insert into pos_monedas (" + Environment.NewLine;
+                        sSql += "id_pos_cierre_cajero, id_localidad, moneda01, moneda05, moneda10," + Environment.NewLine;
+                        sSql += "moneda25, moneda50, billete1, billete2, billete5, billete10," + Environment.NewLine;
+                        sSql += "billete20, billete50, billete100, estado, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
+                        sSql += "terminal_ingreso, tipo_ingreso)" + Environment.NewLine;
+                        sSql += "values (" + Environment.NewLine;
+                        sSql += Program.iIdPosCierreCajero + ", " + Program.iIdLocalidad + ", " + iMoneda01 + ", ";
+                        sSql += iMoneda05 + ", " + iMoneda10 + ", " + iMoneda25 + ", " + iMoneda50 + "," + Environment.NewLine;
+                        sSql += iBillete1 + ", " + iBillete2 + ", " + iBillete5 + ", " + iBillete10 + ", " + iBillete20 + ",";
+                        sSql += iBillete50 + ", " + iBillete100 + "," + Environment.NewLine;
+                        sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 1)";
+
+                        if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                        {
+                            catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                            catchMensaje.ShowDialog();
+                            goto reversa;
+                        }
+
+                        //--------------------------------------------------------------------------------------------------------------
+
+                        sFechaCierre = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                        //sFechaCorta = DateTime.Now.ToString("yyyy/MM/ss HH:mm:ss");
+                        sHoraCierre = sFechaCierre.Substring(11, 8);
+
+                        sSql = "";
+                        sSql += "update pos_cierre_cajero set" + Environment.NewLine;
+                        sSql += "fecha_cierre = '" + sFechaCierre.Substring(0, 10) + "'," + Environment.NewLine;
+                        sSql += "hora_cierre = '" + sHoraCierre + "'," + Environment.NewLine;
+                        sSql += "ahorro_emergencia = " + Convert.ToDecimal(txtAhorroManual.Text.Trim()) + "," + Environment.NewLine;
+                        sSql += "caja_final = " + dbCajaFinal + "," + Environment.NewLine;
+                        sSql += "estado_cierre_cajero = 'Cerrada'" + Environment.NewLine;
+                        sSql += "where id_pos_cierre_cajero = " + Program.iIdPosCierreCajero;
+
+                        if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                        {
+                            catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                            catchMensaje.ShowDialog();
+                            goto reversa;
+                        }
+
+                        conexion.GFun_Lo_Maneja_Transaccion(Program.G_TERMINA_TRANSACCION);
+
+                        ReportesTextBox.frmVerResumenCaja resumen = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
+                        resumen.ShowDialog();
+
+                        //ReportesTextBox.frmVerReportePropietario reporte = new ReportesTextBox.frmVerReportePropietario(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue));
+                        //reporte.ShowDialog();
+
+                        //ReportesTextBox.frmReporteVendido vendido = new ReportesTextBox.frmReporteVendido(sFecha, 1, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
+                        //vendido.ShowDialog();
+
+                        if (iOp == 1)
+                        {
+                            SiNo.LblMensaje.Text = "El cierre de caja se ha registrado con éxito.\n¿Desea enviar el informe al administrador?.";
+                            SiNo.ShowDialog();
+
+                            if (SiNo.DialogResult == DialogResult.OK)
+                            {
+                                if (enviarMail() == true)
+                                {
+                                    ok.LblMensaje.Text = "El informe de ventas se ha enviado con éxito.";
+                                }
+
+                                else
+                                {
+                                    ok.LblMensaje.Text = "No se pudo enviar el informe al administrador.";
+
+                                }
+                            }
+
+                            this.DialogResult = DialogResult.OK;
+                        }
+
                         else
                         {
-                            sFechaCierre = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                            //sFechaCorta = DateTime.Now.ToString("yyyy/MM/ss HH:mm:ss");
-                            sHoraCierre = sFechaCierre.Substring(11, 8);
+                            ok.LblMensaje.Text = "El cierre de caja se ha registrado con éxito.";
+                            ok.ShowDialog();
 
-                            sSql = "";
-                            sSql += "update pos_cierre_cajero set" + Environment.NewLine;
-                            sSql += "fecha_cierre = '" + sFechaCierre.Substring(0, 10) + "'," + Environment.NewLine;
-                            sSql += "hora_cierre = '" + sHoraCierre + "'," + Environment.NewLine;
-                            sSql += "ahorro_emergencia = " + Convert.ToDecimal(txtAhorroManual.Text.Trim()) + "," + Environment.NewLine;
-                            sSql += "estado_cierre_cajero = 'Cerrada' " + Environment.NewLine;
-                            sSql += "where id_pos_cierre_cajero = " + Program.iIdPosCierreCajero;
-
-                            if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                            if (ok.DialogResult == DialogResult.OK)
                             {
-                                catchMensaje.LblMensaje.Text = sSql;
-                                catchMensaje.ShowDialog();
-                                goto reversa;
-                            }
-
-                            conexion.GFun_Lo_Maneja_Transaccion(Program.G_TERMINA_TRANSACCION);
-
-                            ReportesTextBox.frmVerResumenCaja resumen = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
-                            resumen.ShowDialog();
-
-                            //ReportesTextBox.frmVerReportePropietario reporte = new ReportesTextBox.frmVerReportePropietario(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue));
-                            //reporte.ShowDialog();
-
-                            //ReportesTextBox.frmReporteVendido vendido = new ReportesTextBox.frmReporteVendido(sFecha, 1, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
-                            //vendido.ShowDialog();
-
-                            if (iOp == 1)
-                            {
-                                SiNo.LblMensaje.Text = "El cierre de caja se ha registrado con éxito.\n¿Desea enviar el informe al administrador?.";
-                                SiNo.ShowDialog();
-
-                                if (SiNo.DialogResult == DialogResult.OK)
-                                {
-                                    if (enviarMail() == true)
-                                    {
-                                        ok.LblMensaje.Text = "El informe de ventas se ha enviado con éxito.";
-                                    }
-
-                                    else
-                                    {
-                                        ok.LblMensaje.Text = "No se pudo enviar el informe al administrador.";
-
-                                    }
-                                }
-
                                 this.DialogResult = DialogResult.OK;
                             }
-
-                            else
-                            {
-                                ok.LblMensaje.Text = "El cierre de caja se ha registrado con éxito.";
-                                ok.ShowDialog();
-
-                                if (ok.DialogResult == DialogResult.OK)
-                                {
-                                    this.DialogResult = DialogResult.OK;
-                                }
-                            }
-
-                            this.Close();
-                            goto fin;
                         }
+
+                        this.Close();
+                        return;
                     }
                 }
 
                 else
                 {
                     ok.LblMensaje.Text = "No puede cerrar la caja, ya que aún existen órdenes abiertas. Favor cobrar las cuentas abiertas.";
-                    ok.ShowInTaskbar = false;
                     ok.ShowDialog();
                 }
             }
@@ -1282,14 +1295,7 @@ namespace Palatium.Cajero
                 goto reversa;
             }
 
-        reversa:
-            {
-                conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION);
-            }
-
-        //=======================================================================================================
-        fin:
-            { }
+            reversa: { conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION); }
         }
 
         private void btnVentasMesero_Click(object sender, EventArgs e)
@@ -1350,13 +1356,13 @@ namespace Palatium.Cajero
 
         private void btnListarMateriaPrima_Click(object sender, EventArgs e)
         {
-            ReportesTextBox.frmVerReporteMateriaPrima vendido = new ReportesTextBox.frmVerReporteMateriaPrima(sFecha, 1);
+            ReportesTextBox.frmVerReporteMateriaPrima vendido = new ReportesTextBox.frmVerReporteMateriaPrima(sFecha, 1, Convert.ToInt32(cmbLocalidades.SelectedValue));
             vendido.ShowDialog();
         }
 
         private void btnDetallarVentas_Click(object sender, EventArgs e)
         {
-            Cajero.frmDetalleVentas detalle = new frmDetalleVentas(iJornada, sFecha);
+            Cajero.frmDetalleVentas detalle = new frmDetalleVentas(iJornada, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue));
             detalle.ShowDialog();
         }
 
@@ -1396,12 +1402,12 @@ namespace Palatium.Cajero
 
         private void btnAbrirCaja_MouseEnter(object sender, EventArgs e)
         {
-            ingresaBoton(btnAbrirCaja);
+            ingresaBoton(btnRevisarCaja);
         }
 
         private void btnAbrirCaja_MouseLeave(object sender, EventArgs e)
         {
-            salidaBoton(btnAbrirCaja);
+            salidaBoton(btnRevisarCaja);
         }
 
         private void BtnGuardar_MouseEnter(object sender, EventArgs e)
@@ -1502,6 +1508,40 @@ namespace Palatium.Cajero
         private void btnContarDinero_MouseLeave(object sender, EventArgs e)
         {
             salidaBoton(btnContarDinero);
+        }
+
+        private void btnRevisarCaja_Click(object sender, EventArgs e)
+        {
+            if (Program.iManejaJornada == 1)
+            {
+                Program.iMostrarJornada = 1;
+            }
+
+            Menú.frmCodigoAdministrador codigo = new Menú.frmCodigoAdministrador();
+            codigo.ShowDialog();
+
+            if (codigo.DialogResult == DialogResult.OK)
+            {
+                codigo.Close();
+
+                Pedidos.frmCalendario calendario = new Pedidos.frmCalendario(DateTime.Now.ToString("dd/MM/yyyy"));
+                calendario.ShowDialog();
+
+                if (calendario.DialogResult == DialogResult.OK)
+                {
+                    sFecha = Convert.ToDateTime(calendario.txtFecha.Text).ToString("yyyy/MM/dd");
+                    lblFechaCaja.Text = sFecha;
+                    iJornada = Program.iJornadaRecuperada;
+                    consultarEstadoCaja();
+                    cargarValores();
+                }
+            }     
+        }
+
+        private void btnAbrirCaja_Click(object sender, EventArgs e)
+        {
+            Cajero.frmIngresarDineroCaja ingreso = new frmIngresarDineroCaja(Program.iIdPosCierreCajero, Convert.ToInt32(cmbLocalidades.SelectedValue));
+            ingreso.ShowDialog();
         }
     }
 }

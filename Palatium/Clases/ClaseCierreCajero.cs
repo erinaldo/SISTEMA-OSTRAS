@@ -25,6 +25,8 @@ namespace Palatium.Clases
         string sValorEmpresa;
         string sRetorno_P;
         string sValorAhorroProductos;
+        string sCajaInicial = "0.00";
+        string sCajaFinal = "0.00";
 
         int iIdTipoVenta;
         int iContador;
@@ -865,6 +867,45 @@ namespace Palatium.Clases
             }
         }
 
+        //FUNCION PARA CONSULTAR LOS VALORES DE LA CAJA INICIAL Y FINAL
+        private void consultarValoresCaja()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select ltrim(str(isnull(caja_inicial, 0), 10, 2)) caja_inicial," + Environment.NewLine;
+                sSql += "ltrim(str(isnull(caja_final, 0), 10, 2)) caja_final" + Environment.NewLine;
+                sSql += "from pos_cierre_cajero" + Environment.NewLine;
+                sSql += "where fecha_apertura = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and id_localidad = " + iIdLocalidad + Environment.NewLine;
+                sSql += "and id_jornada = " + Program.iJornadaRecuperada;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                if (dtConsulta.Rows.Count > 0)
+                {
+                    sCajaInicial = dtConsulta.Rows[0]["caja_inicial"].ToString();
+                    sCajaFinal = dtConsulta.Rows[0]["caja_final"].ToString();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+            }
+        }
+
         #endregion
 
 
@@ -893,6 +934,11 @@ namespace Palatium.Clases
                 {
                     sTexto += ("JORNADA: ".PadRight(9, ' ') + Program.iJornadaRecuperada) + Environment.NewLine;
                 }
+
+                sTexto += "".PadLeft(40, '-') + Environment.NewLine;
+                consultarValoresCaja();
+
+                sTexto += "VALOR CAJA INICIAL: " + sCajaInicial + Environment.NewLine;
 
                 sTexto += "".PadLeft(40, '-') + Environment.NewLine;
                 sTexto += Environment.NewLine;
@@ -1054,8 +1100,6 @@ namespace Palatium.Clases
                         //drCortesia["TotalProductoCortesia"] = "0.00";
                     }
                 }
-
-
                
                 sSql = "";
                 sSql += "select NCP.numero_pedido, C.motivo_cancelacion" + Environment.NewLine;
@@ -1116,6 +1160,8 @@ namespace Palatium.Clases
                 sTexto += "".PadLeft(40, '-') + Environment.NewLine;
                 sTexto += "AHORRO TOTAL EN PRODUCTOS:".PadRight(30, ' ') + sValorAhorroProductos.PadLeft(10, ' ') + Environment.NewLine;
                 sTexto += "AHORRO INGRESO MANUAL    :".PadRight(30, ' ') + dbAhorroEmergencia.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                sTexto += "".PadLeft(40, '-') + Environment.NewLine;
+                sTexto += "VALOR CAJA FINAL: " + sCajaFinal + Environment.NewLine;
                 sTexto += "".PadLeft(40, '-') + Environment.NewLine;
                 sTexto += Environment.NewLine + Environment.NewLine + Environment.NewLine + ".";
 

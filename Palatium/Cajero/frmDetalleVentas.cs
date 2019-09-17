@@ -27,14 +27,16 @@ namespace Palatium.Cajero
 
         int iIdRegistro;
         int iIdJornada;
+        int iIdLocalidad;
 
         decimal dbCantidad;
         decimal dbTotal;
 
-        public frmDetalleVentas(int iIdJornada_P, string sFecha_P)
+        public frmDetalleVentas(int iIdJornada_P, string sFecha_P, int iIdLocalidad_P)
         {
             this.iIdJornada = iIdJornada_P;
             this.sFecha = sFecha_P;
+            this.iIdLocalidad = iIdLocalidad_P;
             InitializeComponent();
         }
 
@@ -82,7 +84,7 @@ namespace Palatium.Cajero
                 sSql += "cv401_productos PROD on NOM.id_producto = PROD.id_producto" + Environment.NewLine;
                 sSql += "and PROD.estado = 'A'" + Environment.NewLine;
                 sSql += "where CAB.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
-                sSql += "and CAB.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and CAB.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 //sSql += "and CAB.estado_orden = 'Pagada'" + Environment.NewLine;
                 sSql += "and CAB.estado_orden in ('Pagada', 'Cerrada')" + Environment.NewLine;
 
@@ -184,7 +186,7 @@ namespace Palatium.Cajero
 
         private void dgvDatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Cajero.frmDetalleProductoVenta venta = new frmDetalleProductoVenta(Convert.ToInt32(dgvDatos.CurrentRow.Cells["idProducto"].Value), dgvDatos.CurrentRow.Cells["descripcion"].Value.ToString().ToUpper(), sFecha);
+            Cajero.frmDetalleProductoVenta venta = new frmDetalleProductoVenta(Convert.ToInt32(dgvDatos.CurrentRow.Cells["idProducto"].Value), dgvDatos.CurrentRow.Cells["descripcion"].Value.ToString().ToUpper(), sFecha, iIdLocalidad);
             venta.ShowDialog();
         }
     }

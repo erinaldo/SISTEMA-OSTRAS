@@ -151,6 +151,7 @@
             this.submenuTemperaturaServicio = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuPorcionReceta = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuUnidadesReceta = new System.Windows.Forms.ToolStripMenuItem();
+            this.submenuEquivalenciasUnidades = new System.Windows.Forms.ToolStripMenuItem();
             this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuTipoUnidades = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -176,7 +177,6 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.ddPalatiumContable = new System.Windows.Forms.ToolStripDropDownButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.submenuEquivalenciasUnidades = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -829,13 +829,14 @@
             this.formatosDeImpresiónToolStripMenuItem.Name = "formatosDeImpresiónToolStripMenuItem";
             this.formatosDeImpresiónToolStripMenuItem.Size = new System.Drawing.Size(210, 36);
             this.formatosDeImpresiónToolStripMenuItem.Text = "Formatos de Impresión";
+            this.formatosDeImpresiónToolStripMenuItem.Visible = false;
             // 
             // submenuFormatoFactura
             // 
             this.submenuFormatoFactura.Image = global::Palatium.Properties.Resources.modelo_factura_menu;
             this.submenuFormatoFactura.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFormatoFactura.Name = "submenuFormatoFactura";
-            this.submenuFormatoFactura.Size = new System.Drawing.Size(148, 36);
+            this.submenuFormatoFactura.Size = new System.Drawing.Size(168, 36);
             this.submenuFormatoFactura.Text = "Facturas";
             this.submenuFormatoFactura.Click += new System.EventHandler(this.submenuFormatoFactura_Click);
             // 
@@ -844,7 +845,7 @@
             this.submenuFormatoPrecuenta.Image = global::Palatium.Properties.Resources.modelo_precuenta_png;
             this.submenuFormatoPrecuenta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFormatoPrecuenta.Name = "submenuFormatoPrecuenta";
-            this.submenuFormatoPrecuenta.Size = new System.Drawing.Size(148, 36);
+            this.submenuFormatoPrecuenta.Size = new System.Drawing.Size(168, 36);
             this.submenuFormatoPrecuenta.Text = "Precuentas";
             this.submenuFormatoPrecuenta.Click += new System.EventHandler(this.submenuFormatoPrecuenta_Click);
             // 
@@ -886,6 +887,7 @@
             this.soporteToolStripMenuItem.Name = "soporteToolStripMenuItem";
             this.soporteToolStripMenuItem.Size = new System.Drawing.Size(210, 36);
             this.soporteToolStripMenuItem.Text = "Soporte";
+            this.soporteToolStripMenuItem.Visible = false;
             // 
             // submenuEjecutarSQL
             // 
@@ -1054,6 +1056,7 @@
             this.submenuDashboard.Name = "submenuDashboard";
             this.submenuDashboard.Size = new System.Drawing.Size(217, 38);
             this.submenuDashboard.Text = "DashBoard";
+            this.submenuDashboard.Visible = false;
             this.submenuDashboard.Click += new System.EventHandler(this.submenuDashboard_Click);
             // 
             // impresionesToolStripMenuItem
@@ -1131,7 +1134,7 @@
             this.bodegasToolStripMenuItem.Image = global::Palatium.Properties.Resources.bodegas_nuevo;
             this.bodegasToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.bodegasToolStripMenuItem.Name = "bodegasToolStripMenuItem";
-            this.bodegasToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
+            this.bodegasToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
             this.bodegasToolStripMenuItem.Text = "Bodegas";
             // 
             // submenuDefinicionCorta
@@ -1160,7 +1163,7 @@
             this.materiaPrimaToolStripMenuItem.Image = global::Palatium.Properties.Resources.materia_prima_nuevo;
             this.materiaPrimaToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.materiaPrimaToolStripMenuItem.Name = "materiaPrimaToolStripMenuItem";
-            this.materiaPrimaToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
+            this.materiaPrimaToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
             this.materiaPrimaToolStripMenuItem.Text = "Materia Prima";
             // 
             // submenuIngresoBodega
@@ -1188,7 +1191,7 @@
             this.transferenciasToolStripMenuItem.Image = global::Palatium.Properties.Resources.transferencias_nuevo;
             this.transferenciasToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.transferenciasToolStripMenuItem.Name = "transferenciasToolStripMenuItem";
-            this.transferenciasToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
+            this.transferenciasToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
             this.transferenciasToolStripMenuItem.Text = "Transferencias";
             // 
             // submenuDespachoEntreBodegas
@@ -1213,7 +1216,7 @@
             this.reportesToolStripMenuItem.Image = global::Palatium.Properties.Resources.informe_bodega_nuevo;
             this.reportesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
             this.reportesToolStripMenuItem.Text = "Reportes";
             // 
             // submenuReporteMovimientosBodega
@@ -1395,6 +1398,15 @@
             this.submenuUnidadesReceta.Size = new System.Drawing.Size(227, 38);
             this.submenuUnidadesReceta.Text = "Unidades de Receta";
             this.submenuUnidadesReceta.Click += new System.EventHandler(this.submenuUnidadesReceta_Click);
+            // 
+            // submenuEquivalenciasUnidades
+            // 
+            this.submenuEquivalenciasUnidades.Image = global::Palatium.Properties.Resources.equivalencia_menu;
+            this.submenuEquivalenciasUnidades.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.submenuEquivalenciasUnidades.Name = "submenuEquivalenciasUnidades";
+            this.submenuEquivalenciasUnidades.Size = new System.Drawing.Size(227, 38);
+            this.submenuEquivalenciasUnidades.Text = "Equivalencias de Unidades";
+            this.submenuEquivalenciasUnidades.Click += new System.EventHandler(this.submenuEquivalenciasUnidades_Click);
             // 
             // unidadesToolStripMenuItem
             // 
@@ -1633,15 +1645,6 @@
             this.statusStrip1.Size = new System.Drawing.Size(1050, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // submenuEquivalenciasUnidades
-            // 
-            this.submenuEquivalenciasUnidades.Image = global::Palatium.Properties.Resources.equivalencia_menu;
-            this.submenuEquivalenciasUnidades.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.submenuEquivalenciasUnidades.Name = "submenuEquivalenciasUnidades";
-            this.submenuEquivalenciasUnidades.Size = new System.Drawing.Size(227, 38);
-            this.submenuEquivalenciasUnidades.Text = "Equivalencias de Unidades";
-            this.submenuEquivalenciasUnidades.Click += new System.EventHandler(this.submenuEquivalenciasUnidades_Click);
             // 
             // frmNuevoMenuConfiguracion
             // 

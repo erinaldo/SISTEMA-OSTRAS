@@ -13,39 +13,43 @@ namespace Palatium.Pedidos
 {
     public partial class frmCobros : Form
     {
-         ConexionBD.ConexionBD conexion = new ConexionBD.ConexionBD();
-         VentanasMensajes.frmMensajeOK ok = new VentanasMensajes.frmMensajeOK();
-         VentanasMensajes.frmMensajeCatch catchMensaje = new VentanasMensajes.frmMensajeCatch();
-         Clases.ClaseValidarRUC validarRuc = new Clases.ClaseValidarRUC();
-         Clases.ClaseAbrirCajon abrir = new Clases.ClaseAbrirCajon();
-         ValidarCedula validarCedula = new ValidarCedula();
+        ConexionBD.ConexionBD conexion = new ConexionBD.ConexionBD();
+        
+        VentanasMensajes.frmMensajeOK ok = new VentanasMensajes.frmMensajeOK();
+        VentanasMensajes.frmMensajeCatch catchMensaje = new VentanasMensajes.frmMensajeCatch();
+        VentanasMensajes.frmMensajeNuevoSiNo NuevoSiNo = new VentanasMensajes.frmMensajeNuevoSiNo();
 
-         Button[,] boton = new Button[5, 2];
+        Clases.ClaseValidarRUC validarRuc = new Clases.ClaseValidarRUC();
+        Clases.ClaseAbrirCajon abrir = new Clases.ClaseAbrirCajon();
+        ValidarCedula validarCedula = new ValidarCedula();
+        
+        Button[,] boton = new Button[5, 2];
 
-         int iIdCaja = 30;
-         int iCgEstadoDctoPorCobrar = 7461;
-         int iIdTipoEmision = 0;
-         int iIdTipoAmbiente = 0;
+        int iIdCaja;
+        int iCgEstadoDctoPorCobrar = 7461;
+        int iIdTipoEmision = 0;
+        int iIdTipoAmbiente = 0;
 
-         Orden ord;
-         Button bpagar;
+        Orden ord;
+        Button bpagar;
 
-         string sSql;
-         string sCiudad;
-         string sNumeroFactura;
-         string sIdOrden;
-         string sFechaCorta;
-         string sTabla;
-         string sCampo;
-         string sFecha;
-         string sFacturaRecuperada;
-         string sMovimiento;
-         string sSecuencial;
-         string sNumeroOrden;
+        string sSql;
+        string sCiudad;
+        string sNumeroFactura;
+        string sIdOrden;
+        string sFechaCorta;
+        string sTabla;
+        string sCampo;
+        string sFecha;
+        string sFacturaRecuperada;
+        string sMovimiento;
+        string sSecuencial;
+        string sNumeroOrden;
          string sEstablecimiento;
          string sPuntoEmision;
          string sClaveAcceso;
          string sCorreoElectronicoCF;
+         string sCorreoAyuda;
 
          long iMaximo;
 
@@ -122,13 +126,75 @@ namespace Palatium.Pedidos
 
          public frmCobros(string sIdOrden_P)
          {
-             sIdOrden = sIdOrden_P;
+            sIdOrden = sIdOrden_P;
             InitializeComponent();
          }
 
-        #region FUNCIONES DEL USUARIO
+        #region FUNCIONES PARA INTEGRAR LA CUENTA POR COBRAR
 
-        //FUNCION PARA EXTRAER LA LISTA MINORISTA
+        //FUNCION PARA GUARDAR LA COMANDA COMO UNA CUENTA POR COBRAR
+        private void guardarCuentaCobrar()
+         {
+            try
+            {
+                if (!conexion.GFun_Lo_Maneja_Transaccion(Program.G_INICIA_TRANSACCION))
+                {
+                    ok.LblMensaje.Text = "Error al abrir transacción.";
+                    ok.ShowDialog();
+                    return;
+                }
+
+                //ACTUALIZAR EL ESTADO DE LA ORDEN EN CV403_CAB_PEDIDOS
+                sSql = "";
+                sSql += "update cv403_cab_pedidos set" + Environment.NewLine;
+                sSql += "id_persona = " + iIdPersona + "," + Environment.NewLine;
+                sSql += "fecha_cierre_orden = GETDATE()," + Environment.NewLine;
+                sSql += "estado_orden = 'Cerrada'" + Environment.NewLine;
+                sSql += "where id_pedido = " + sIdOrden + Environment.NewLine;
+                sSql += "and estado = 'A'";
+
+                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION); 
+                    return;
+                }
+
+                conexion.GFun_Lo_Maneja_Transaccion(Program.G_TERMINA_TRANSACCION);
+
+
+                Program.sIDPERSONA = null;
+                Program.dbValorPorcentaje = 0;
+                Program.dbDescuento = 0.0;
+
+                this.Close();
+
+                if (Program.iBanderaCerrarVentana == 0)
+                {
+                    ord = Owner as Orden;
+                    ord.Close();
+                }
+
+                else
+                {
+                    Program.iBanderaCerrarVentana = 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION);
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+            }
+         }
+
+        #endregion
+
+         #region FUNCIONES DEL USUARIO
+
+         //FUNCION PARA EXTRAER LA LISTA MINORISTA
          private void extraerListaMinorista()
          {
             try
@@ -1571,6 +1637,29 @@ namespace Palatium.Pedidos
          {
              try
              {
+                 //SELECCIONAR EL ID DE CAJA
+                 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                 sSql = "";
+                 sSql += "select id_caja" + Environment.NewLine;
+                 sSql += "from cv405_cajas" + Environment.NewLine;
+                 sSql += "where estado = 'A'" + Environment.NewLine;
+                 sSql += "and id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                 sSql += "and cg_tipo_caja = 8906";
+
+                 dtConsulta = new DataTable();
+                 dtConsulta.Clear();
+
+                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                 if (bRespuesta == false)
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
+
+                 iIdCaja = Convert.ToInt32(dtConsulta.Rows[0]["id_caja"].ToString());
+
                  sSql = "";
                  sSql += "select numeromovimientocaja" + Environment.NewLine;
                  sSql += "from tp_localidades_impresoras" + Environment.NewLine;
@@ -2495,6 +2584,23 @@ namespace Palatium.Pedidos
                      return;
                  }
 
+                 if (btnCorreoElectronicoDefault.AccessibleName == "1")
+                 {
+                     sSql = "";
+                     sSql += "update tp_personas set" + Environment.NewLine;
+                     sSql += "correo_electronico = '" + txtMail.Text.Trim() + "'" + Environment.NewLine;
+                     sSql += "where id_persona = " + iIdPersona + Environment.NewLine;
+                     sSql += "and estado = 'A'";
+
+                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                     {
+                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                         catchMensaje.ShowDialog();
+                         conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION);
+                         return;
+                     }
+                 }
+
                  if (iBanderaRecargoBoton == 1)
                  {
                      if ((Program.iAplicaRecargoTarjeta == 1) && (iBanderaRecargoBDD == 1) && (actualizarPreciosRecargo() == false))
@@ -3116,6 +3222,29 @@ namespace Palatium.Pedidos
          {
              try
              {
+                 //SELECCIONAR EL ID DE CAJA
+                 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                 sSql = "";
+                 sSql += "select id_caja" + Environment.NewLine;
+                 sSql += "from cv405_cajas" + Environment.NewLine;
+                 sSql += "where estado = 'A'" + Environment.NewLine;
+                 sSql += "and id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                 sSql += "and cg_tipo_caja = 8906";
+
+                 dtConsulta = new DataTable();
+                 dtConsulta.Clear();
+
+                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                 if (bRespuesta == false)
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
+
+                 iIdCaja = Convert.ToInt32(dtConsulta.Rows[0]["id_caja"].ToString());
+
                  sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
                  sSecuencial = TxtNumeroFactura.Text.Trim().PadLeft(9, '0');
 
@@ -4265,12 +4394,6 @@ namespace Palatium.Pedidos
              }
          }
 
-         private void btnDividirPrecio_Click(object sender, EventArgs e)
-         {
-             tecladoNumericoDividirPrecio teclado = new tecladoNumericoDividirPrecio(dTotal.ToString());
-             teclado.ShowDialog();
-         }
-
          private void btnRemoverIVA_Click(object sender, EventArgs e)
          {
              iEjecutarActualizacionTarjetas = 0;
@@ -4376,7 +4499,46 @@ namespace Palatium.Pedidos
 
          private void btnCorreoElectronicoDefault_Click(object sender, EventArgs e)
          {
-             txtMail.Text = Program.sCorreoElectronicoDefault;
+             //txtMail.Text = Program.sCorreoElectronicoDefault;
+             if (btnCorreoElectronicoDefault.AccessibleName == "0")
+             {
+                 sCorreoAyuda = txtMail.Text.Trim();
+                 btnCorreoElectronicoDefault.AccessibleName = "1";
+                 txtMail.ReadOnly = false;
+                 txtMail.Focus();
+             }
+
+             else
+             {
+                 txtMail.Text = sCorreoAyuda;
+                 btnCorreoElectronicoDefault.AccessibleName = "0";
+                 txtMail.ReadOnly = true;
+                 btnCorreoElectronicoDefault.Focus();
+             }
+         }
+
+         private void btnCuentaCobrar_Click(object sender, EventArgs e)
+         {
+             if (iIdPersona == Program.iIdPersona)
+             {
+                 ok.LblMensaje.Text = "La cuenta por cobrar debe ser ingresada con datos del cliente.";
+                 ok.ShowDialog();
+                 return;
+             }
+
+             NuevoSiNo.lblMensaje.Text = "¿Está seguro que desea guardar la comanda como una cuenta por cobrar?";
+             NuevoSiNo.ShowDialog();
+
+             if (NuevoSiNo.DialogResult == DialogResult.OK)
+             {
+                 guardarCuentaCobrar();
+             }
+         }
+
+         private void btnDividirPrecio_Click(object sender, EventArgs e)
+         {
+             tecladoNumericoDividirPrecio teclado = new tecladoNumericoDividirPrecio(dTotal.ToString());
+             teclado.ShowDialog();
          }
     }
 }

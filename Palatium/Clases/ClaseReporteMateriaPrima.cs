@@ -17,6 +17,8 @@ namespace Palatium.Clases
 
         bool bRespuesta = false;
 
+        int iIdLocalidad;
+
         string sSql;
         string sFecha;
         string sTexto;
@@ -93,11 +95,12 @@ namespace Palatium.Clases
             }
         }
 
-        public string llenarReporte(string sFecha_P)
+        public string llenarReporte(string sFecha_P, int iIdLocalidad_P)
         {
             try
             {
                 this.sFecha = sFecha_P;
+                this.iIdLocalidad = iIdLocalidad_P;
 
                 if (consultarFechaHora() == false)
                 {
@@ -117,6 +120,7 @@ namespace Palatium.Clases
                 sSql = "";
                 sSql += "select * from pos_vw_reporte_materia_prima" + Environment.NewLine;
                 sSql += "where fecha_pedido = '" + sFecha_P + "'" + Environment.NewLine;
+                sSql += "and id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "order by cantidad";
 
                 dtConsulta = new DataTable();

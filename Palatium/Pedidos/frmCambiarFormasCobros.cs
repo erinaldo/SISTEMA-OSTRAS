@@ -22,7 +22,7 @@ namespace Palatium.Pedidos
 
         Button[,] boton = new Button[5, 2];
 
-        int iIdCaja = 30;
+        int iIdCaja;
         int iCgEstadoDctoPorCobrar = 7461;
         int iIdTipoEmision = 0;
         int iIdTipoAmbiente = 0;
@@ -800,6 +800,30 @@ namespace Palatium.Pedidos
         {
             try
             {
+                //SELECCIONAR EL ID DE CAJA
+                //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                sSql = "";
+                sSql += "select id_caja" + Environment.NewLine;
+                sSql += "from cv405_cajas" + Environment.NewLine;
+                sSql += "where estado = 'A'" + Environment.NewLine;
+                sSql += "and id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and cg_tipo_caja = 8906";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                iIdCaja = Convert.ToInt32(dtConsulta.Rows[0]["id_caja"].ToString());
+
+
                 sSql = "";
                 sSql += "select numeromovimientocaja" + Environment.NewLine;
                 sSql += "from tp_localidades_impresoras" + Environment.NewLine;

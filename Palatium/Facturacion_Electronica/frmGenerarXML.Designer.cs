@@ -109,7 +109,6 @@
             this.clmDescto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmVTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblPrecioUnitario = new System.Windows.Forms.Label();
             this.rad4Decimales = new System.Windows.Forms.RadioButton();
             this.rad2Decimales = new System.Windows.Forms.RadioButton();
             this.btnGenerarXML = new System.Windows.Forms.Button();
@@ -123,7 +122,6 @@
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.ttMensaje = new System.Windows.Forms.ToolTip(this.components);
-            this.btnRefrescar = new System.Windows.Forms.Button();
             this.tabDatosFactura.SuspendLayout();
             this.tabDatosRegistro.SuspendLayout();
             this.tabEspecificaciones.SuspendLayout();
@@ -150,6 +148,7 @@
             this.cmbLocalidad.Name = "cmbLocalidad";
             this.cmbLocalidad.Size = new System.Drawing.Size(169, 21);
             this.cmbLocalidad.TabIndex = 5;
+            this.cmbLocalidad.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidad_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -177,7 +176,7 @@
             // 
             this.tabDatosFactura.Controls.Add(this.tabDatosRegistro);
             this.tabDatosFactura.Controls.Add(this.tabEspecificaciones);
-            this.tabDatosFactura.Location = new System.Drawing.Point(17, 72);
+            this.tabDatosFactura.Location = new System.Drawing.Point(17, 60);
             this.tabDatosFactura.Name = "tabDatosFactura";
             this.tabDatosFactura.SelectedIndex = 0;
             this.tabDatosFactura.Size = new System.Drawing.Size(1014, 197);
@@ -762,9 +761,9 @@
             this.Grb_listReCateraCobrar.Controls.Add(this.txtValorBruto);
             this.Grb_listReCateraCobrar.Controls.Add(this.lblValor);
             this.Grb_listReCateraCobrar.Controls.Add(this.dgvReimpresionFactura);
-            this.Grb_listReCateraCobrar.Location = new System.Drawing.Point(17, 275);
+            this.Grb_listReCateraCobrar.Location = new System.Drawing.Point(17, 262);
             this.Grb_listReCateraCobrar.Name = "Grb_listReCateraCobrar";
-            this.Grb_listReCateraCobrar.Size = new System.Drawing.Size(1014, 276);
+            this.Grb_listReCateraCobrar.Size = new System.Drawing.Size(1014, 239);
             this.Grb_listReCateraCobrar.TabIndex = 54;
             this.Grb_listReCateraCobrar.TabStop = false;
             this.Grb_listReCateraCobrar.Text = "Lista de Registros";
@@ -774,7 +773,7 @@
             this.txtTotalPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtTotalPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalPagar.ForeColor = System.Drawing.Color.Red;
-            this.txtTotalPagar.Location = new System.Drawing.Point(901, 240);
+            this.txtTotalPagar.Location = new System.Drawing.Point(901, 202);
             this.txtTotalPagar.Multiline = true;
             this.txtTotalPagar.Name = "txtTotalPagar";
             this.txtTotalPagar.ReadOnly = true;
@@ -788,7 +787,7 @@
             this.lblTotalPagar.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalPagar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblTotalPagar.Location = new System.Drawing.Point(901, 222);
+            this.lblTotalPagar.Location = new System.Drawing.Point(901, 184);
             this.lblTotalPagar.Name = "lblTotalPagar";
             this.lblTotalPagar.Size = new System.Drawing.Size(83, 15);
             this.lblTotalPagar.TabIndex = 50;
@@ -796,7 +795,7 @@
             // 
             // txtIva
             // 
-            this.txtIva.Location = new System.Drawing.Point(683, 240);
+            this.txtIva.Location = new System.Drawing.Point(683, 202);
             this.txtIva.Multiline = true;
             this.txtIva.Name = "txtIva";
             this.txtIva.ReadOnly = true;
@@ -810,7 +809,7 @@
             this.lblIva.BackColor = System.Drawing.Color.Transparent;
             this.lblIva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIva.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblIva.Location = new System.Drawing.Point(686, 222);
+            this.lblIva.Location = new System.Drawing.Point(686, 184);
             this.lblIva.Name = "lblIva";
             this.lblIva.Size = new System.Drawing.Size(39, 15);
             this.lblIva.TabIndex = 48;
@@ -818,7 +817,7 @@
             // 
             // txtSubTotal
             // 
-            this.txtSubTotal.Location = new System.Drawing.Point(574, 240);
+            this.txtSubTotal.Location = new System.Drawing.Point(574, 202);
             this.txtSubTotal.Multiline = true;
             this.txtSubTotal.Name = "txtSubTotal";
             this.txtSubTotal.ReadOnly = true;
@@ -832,7 +831,7 @@
             this.lblSubTotal.BackColor = System.Drawing.Color.Transparent;
             this.lblSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubTotal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblSubTotal.Location = new System.Drawing.Point(571, 222);
+            this.lblSubTotal.Location = new System.Drawing.Point(571, 184);
             this.lblSubTotal.Name = "lblSubTotal";
             this.lblSubTotal.Size = new System.Drawing.Size(62, 15);
             this.lblSubTotal.TabIndex = 46;
@@ -840,7 +839,7 @@
             // 
             // txtServicio
             // 
-            this.txtServicio.Location = new System.Drawing.Point(792, 240);
+            this.txtServicio.Location = new System.Drawing.Point(792, 202);
             this.txtServicio.Multiline = true;
             this.txtServicio.Name = "txtServicio";
             this.txtServicio.ReadOnly = true;
@@ -854,7 +853,7 @@
             this.lblServicio.BackColor = System.Drawing.Color.Transparent;
             this.lblServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblServicio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblServicio.Location = new System.Drawing.Point(797, 222);
+            this.lblServicio.Location = new System.Drawing.Point(797, 184);
             this.lblServicio.Name = "lblServicio";
             this.lblServicio.Size = new System.Drawing.Size(53, 15);
             this.lblServicio.TabIndex = 44;
@@ -862,7 +861,7 @@
             // 
             // txtDescuento
             // 
-            this.txtDescuento.Location = new System.Drawing.Point(465, 240);
+            this.txtDescuento.Location = new System.Drawing.Point(465, 202);
             this.txtDescuento.Multiline = true;
             this.txtDescuento.Name = "txtDescuento";
             this.txtDescuento.ReadOnly = true;
@@ -876,7 +875,7 @@
             this.lblDescuento.BackColor = System.Drawing.Color.Transparent;
             this.lblDescuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescuento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblDescuento.Location = new System.Drawing.Point(465, 222);
+            this.lblDescuento.Location = new System.Drawing.Point(465, 184);
             this.lblDescuento.Name = "lblDescuento";
             this.lblDescuento.Size = new System.Drawing.Size(69, 15);
             this.lblDescuento.TabIndex = 42;
@@ -884,7 +883,7 @@
             // 
             // txtValorBruto
             // 
-            this.txtValorBruto.Location = new System.Drawing.Point(356, 240);
+            this.txtValorBruto.Location = new System.Drawing.Point(356, 202);
             this.txtValorBruto.Multiline = true;
             this.txtValorBruto.Name = "txtValorBruto";
             this.txtValorBruto.ReadOnly = true;
@@ -898,7 +897,7 @@
             this.lblValor.BackColor = System.Drawing.Color.Transparent;
             this.lblValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblValor.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblValor.Location = new System.Drawing.Point(353, 222);
+            this.lblValor.Location = new System.Drawing.Point(353, 184);
             this.lblValor.Name = "lblValor";
             this.lblValor.Size = new System.Drawing.Size(70, 15);
             this.lblValor.TabIndex = 40;
@@ -924,7 +923,7 @@
             this.dgvReimpresionFactura.ReadOnly = true;
             this.dgvReimpresionFactura.RowHeadersWidth = 26;
             this.dgvReimpresionFactura.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReimpresionFactura.Size = new System.Drawing.Size(945, 191);
+            this.dgvReimpresionFactura.Size = new System.Drawing.Size(945, 157);
             this.dgvReimpresionFactura.TabIndex = 0;
             // 
             // clmCodigo
@@ -989,22 +988,10 @@
             this.clmVTotal.ReadOnly = true;
             this.clmVTotal.Width = 80;
             // 
-            // lblPrecioUnitario
-            // 
-            this.lblPrecioUnitario.AutoSize = true;
-            this.lblPrecioUnitario.BackColor = System.Drawing.Color.Transparent;
-            this.lblPrecioUnitario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecioUnitario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblPrecioUnitario.Location = new System.Drawing.Point(507, 560);
-            this.lblPrecioUnitario.Name = "lblPrecioUnitario";
-            this.lblPrecioUnitario.Size = new System.Drawing.Size(111, 16);
-            this.lblPrecioUnitario.TabIndex = 62;
-            this.lblPrecioUnitario.Text = "Precio Unitario";
-            // 
             // rad4Decimales
             // 
             this.rad4Decimales.AutoSize = true;
-            this.rad4Decimales.Location = new System.Drawing.Point(506, 600);
+            this.rad4Decimales.Location = new System.Drawing.Point(506, 525);
             this.rad4Decimales.Name = "rad4Decimales";
             this.rad4Decimales.Size = new System.Drawing.Size(83, 17);
             this.rad4Decimales.TabIndex = 61;
@@ -1015,7 +1002,7 @@
             // 
             this.rad2Decimales.AutoSize = true;
             this.rad2Decimales.Checked = true;
-            this.rad2Decimales.Location = new System.Drawing.Point(506, 582);
+            this.rad2Decimales.Location = new System.Drawing.Point(506, 507);
             this.rad2Decimales.Name = "rad2Decimales";
             this.rad2Decimales.Size = new System.Drawing.Size(83, 17);
             this.rad2Decimales.TabIndex = 60;
@@ -1027,7 +1014,7 @@
             // 
             this.btnGenerarXML.BackColor = System.Drawing.Color.Maroon;
             this.btnGenerarXML.ForeColor = System.Drawing.Color.White;
-            this.btnGenerarXML.Location = new System.Drawing.Point(657, 575);
+            this.btnGenerarXML.Location = new System.Drawing.Point(653, 507);
             this.btnGenerarXML.Name = "btnGenerarXML";
             this.btnGenerarXML.Size = new System.Drawing.Size(70, 39);
             this.btnGenerarXML.TabIndex = 59;
@@ -1040,7 +1027,7 @@
             // 
             this.btnFormatoRide.BackColor = System.Drawing.Color.Olive;
             this.btnFormatoRide.ForeColor = System.Drawing.Color.White;
-            this.btnFormatoRide.Location = new System.Drawing.Point(733, 575);
+            this.btnFormatoRide.Location = new System.Drawing.Point(729, 507);
             this.btnFormatoRide.Name = "btnFormatoRide";
             this.btnFormatoRide.Size = new System.Drawing.Size(70, 39);
             this.btnFormatoRide.TabIndex = 58;
@@ -1053,7 +1040,7 @@
             // 
             this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnLimpiar.ForeColor = System.Drawing.Color.White;
-            this.btnLimpiar.Location = new System.Drawing.Point(809, 575);
+            this.btnLimpiar.Location = new System.Drawing.Point(805, 507);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(70, 39);
             this.btnLimpiar.TabIndex = 57;
@@ -1066,7 +1053,7 @@
             // 
             this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnImprimir.ForeColor = System.Drawing.Color.White;
-            this.btnImprimir.Location = new System.Drawing.Point(885, 575);
+            this.btnImprimir.Location = new System.Drawing.Point(881, 507);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(70, 39);
             this.btnImprimir.TabIndex = 55;
@@ -1079,7 +1066,7 @@
             // 
             this.btnCerrarCateraCobrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnCerrarCateraCobrar.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarCateraCobrar.Location = new System.Drawing.Point(961, 575);
+            this.btnCerrarCateraCobrar.Location = new System.Drawing.Point(957, 507);
             this.btnCerrarCateraCobrar.Name = "btnCerrarCateraCobrar";
             this.btnCerrarCateraCobrar.Size = new System.Drawing.Size(70, 39);
             this.btnCerrarCateraCobrar.TabIndex = 56;
@@ -1104,7 +1091,7 @@
             // 
             this.txtMail.BackColor = System.Drawing.Color.White;
             this.txtMail.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.txtMail.Location = new System.Drawing.Point(72, 573);
+            this.txtMail.Location = new System.Drawing.Point(72, 517);
             this.txtMail.Multiline = true;
             this.txtMail.Name = "txtMail";
             this.txtMail.ReadOnly = true;
@@ -1117,7 +1104,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(21, 574);
+            this.label2.Location = new System.Drawing.Point(21, 518);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 15);
             this.label2.TabIndex = 90;
@@ -1129,7 +1116,7 @@
             this.btnEditar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnEditar.FlatAppearance.BorderSize = 0;
             this.btnEditar.Image = global::Palatium.Properties.Resources.editar_img;
-            this.btnEditar.Location = new System.Drawing.Point(325, 569);
+            this.btnEditar.Location = new System.Drawing.Point(325, 513);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(33, 29);
             this.btnEditar.TabIndex = 92;
@@ -1143,7 +1130,7 @@
             this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.Image = global::Palatium.Properties.Resources.disco_flexible;
-            this.btnGuardar.Location = new System.Drawing.Point(364, 569);
+            this.btnGuardar.Location = new System.Drawing.Point(364, 513);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(33, 29);
             this.btnGuardar.TabIndex = 93;
@@ -1151,31 +1138,18 @@
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // btnRefrescar
-            // 
-            this.btnRefrescar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnRefrescar.ForeColor = System.Drawing.Color.White;
-            this.btnRefrescar.Location = new System.Drawing.Point(270, 22);
-            this.btnRefrescar.Name = "btnRefrescar";
-            this.btnRefrescar.Size = new System.Drawing.Size(88, 29);
-            this.btnRefrescar.TabIndex = 94;
-            this.btnRefrescar.Text = "Refrescar";
-            this.btnRefrescar.UseVisualStyleBackColor = false;
-            // 
             // frmGenerarXML
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1048, 626);
-            this.Controls.Add(this.btnRefrescar);
+            this.ClientSize = new System.Drawing.Size(1048, 555);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.txtMail);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnOKFactura);
-            this.Controls.Add(this.lblPrecioUnitario);
             this.Controls.Add(this.rad4Decimales);
             this.Controls.Add(this.rad2Decimales);
             this.Controls.Add(this.btnGenerarXML);
@@ -1279,7 +1253,6 @@
         private System.Windows.Forms.TextBox txtValorBruto;
         private System.Windows.Forms.Label lblValor;
         private System.Windows.Forms.DataGridView dgvReimpresionFactura;
-        private System.Windows.Forms.Label lblPrecioUnitario;
         private System.Windows.Forms.RadioButton rad4Decimales;
         private System.Windows.Forms.RadioButton rad2Decimales;
         private System.Windows.Forms.Button btnGenerarXML;
@@ -1304,6 +1277,5 @@
         private System.Windows.Forms.ToolTip ttMensaje;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Button btnRefrescar;
     }
 }

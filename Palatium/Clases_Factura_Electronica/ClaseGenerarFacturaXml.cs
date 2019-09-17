@@ -136,7 +136,7 @@ namespace Palatium.Clases_Factura_Electronica
         #endregion
 
 
-        public string GSub_ActualizaPantalla(string P_St_CodDoc)
+        public string GSub_ActualizaPantalla(string P_St_CodDoc, int iIdLocalidad_P)
         {
             //      P_Ln_Orden
             //      1 Comprobantes generados
@@ -207,6 +207,7 @@ namespace Palatium.Clases_Factura_Electronica
                 sAyuda = sAyuda + "and L.cg_localidad = LOCALIDAD.correlativo" + Environment.NewLine;
                 sAyuda = sAyuda + "and TC.idtipocomprobante=F.idtipocomprobante" + Environment.NewLine;
                 sAyuda = sAyuda + "and TC.codigo='" + sTipoComprobanteVenta + "'" + Environment.NewLine;
+                sAyuda = sAyuda + "and F.id_localidad = " + iIdLocalidad_P + "" + Environment.NewLine;
                 sAyuda = sAyuda + "order by F.id_factura desc";
             }
 

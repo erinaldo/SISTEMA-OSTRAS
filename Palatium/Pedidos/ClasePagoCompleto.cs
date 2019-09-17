@@ -46,7 +46,7 @@ namespace Palatium.Pedidos
         int iIdFacturaPedido;
         int iIdLocalidadImpresora;
         int iIdPosMovimientoCaja;
-        int iIdCaja = 30;
+        int iIdCaja;
 
         long iMaximo;
 
@@ -779,6 +779,29 @@ namespace Palatium.Pedidos
                     catchMensaje.ShowDialog();
                     goto reversa;
                 }
+
+                //SELECCIONAR EL ID DE CAJA
+                //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                sSql = "";
+                sSql += "select id_caja" + Environment.NewLine;
+                sSql += "from cv405_cajas" + Environment.NewLine;
+                sSql += "where estado = 'A'" + Environment.NewLine;
+                sSql += "and id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and cg_tipo_caja = 8906";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                iIdCaja = Convert.ToInt32(dtConsulta.Rows[0]["id_caja"].ToString());
 
                 //INSERTAR UN MOVIMIENTO
                 //INSTRUCCION INSERTAR EN LA TABLA POS_MOVIMIENTO_CAJA

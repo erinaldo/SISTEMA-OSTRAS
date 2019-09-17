@@ -280,6 +280,12 @@
     <Compile Include="Cajero\frmDetalleVentas.Designer.cs">
       <DependentUpon>frmDetalleVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cajero\frmIngresarDineroCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajero\frmIngresarDineroCaja.Designer.cs">
+      <DependentUpon>frmIngresarDineroCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cajero\frmRecuperarDinero.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2104,6 +2110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cajero\frmDetalleVentas.resx">
       <DependentUpon>frmDetalleVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cajero\frmIngresarDineroCaja.resx">
+      <DependentUpon>frmIngresarDineroCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cajero\frmRecuperarDinero.resx">
       <DependentUpon>frmRecuperarDinero.cs</DependentUpon>

@@ -26,6 +26,7 @@ namespace Palatium.Cajero
         bool bRespuesta;
 
         int iIdProducto;
+        int iIdLocalidad;
 
         //VARIABLES DEL GRID
         string sOrigen;
@@ -39,11 +40,12 @@ namespace Palatium.Cajero
         decimal dbTotal;
         decimal dbSumaTotal;
 
-        public frmDetalleProductoVenta(int iIdProducto_P, string sNombreProducto_P, string sFecha_P)
+        public frmDetalleProductoVenta(int iIdProducto_P, string sNombreProducto_P, string sFecha_P, int iIdLocalidad_P)
         {
             this.iIdProducto = iIdProducto_P;
             this.sNombreProducto = sNombreProducto_P;
             this.sFecha = sFecha_P;
+            this.iIdLocalidad = iIdLocalidad_P;
             InitializeComponent();
         }
 
@@ -78,6 +80,7 @@ namespace Palatium.Cajero
                 sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 //sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
                 sSql += "and CP.estado_orden in ('Pagada', 'Cerrada')" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "and DP.id_producto = " + iIdProducto;
 
                 dtConsulta = new DataTable();

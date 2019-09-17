@@ -14,6 +14,8 @@ namespace Palatium.Cajero
         VentanasMensajes.frmMensajeCatch catchMensaje = new VentanasMensajes.frmMensajeCatch();
         VentanasMensajes.frmMensajeOK ok = new VentanasMensajes.frmMensajeOK();
 
+        Clases.ClaseAbrirCajon abrir = new Clases.ClaseAbrirCajon();
+
         double dValor, dCantidad, dTotal, dSuma;
         string sValorGrid;
         string sCantidadGrid;
@@ -128,6 +130,17 @@ namespace Palatium.Cajero
             {
                 this.Close();
             }
+
+            if (Program.iPermitirAbrirCajon == 1)
+            {
+                if (e.KeyCode == Keys.F7)
+                {
+                    if (Program.iPuedeCobrar == 1)
+                    {
+                        abrir.consultarImpresoraAbrirCajon();
+                    }
+                }
+            }
         }
 
         private void dgvBilletes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -136,6 +149,11 @@ namespace Palatium.Cajero
             {
                 if (dgvBilletes.Columns[e.ColumnIndex].Name == "colCantidad")
                 {
+                    if (dgvBilletes.Rows[e.RowIndex].Cells[1].Value == null)
+                    {
+                        dgvBilletes.Rows[e.RowIndex].Cells[1].Value = "0";
+                    }
+
                     sCantidadGrid = dgvBilletes.Rows[e.RowIndex].Cells[1].Value.ToString().Trim();
 
                     if ((sCantidadGrid != null) && (sCantidadGrid != ""))

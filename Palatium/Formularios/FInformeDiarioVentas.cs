@@ -145,10 +145,7 @@ namespace Palatium.Formularios
 
                 cmbLocalidad.llenar(dtConsulta, sSql);
 
-                if (cmbLocalidad.Items.Count > 0)
-                {
-                    cmbLocalidad.SelectedIndex = 1;
-                }
+                cmbLocalidad.SelectedValue = Program.iIdLocalidad;
             }
 
             catch (Exception ex)
@@ -352,6 +349,8 @@ namespace Palatium.Formularios
                         txtValorIva.Text = dbValorIVA.ToString("N2");
                         txtServicio.Text = dbValorServicio.ToString("N2");
                         txtValorTotal.Text = (dbBaseIVA + dbBaseCero - dbDescuento + dbValorIVA + dbValorServicio).ToString("N2");
+
+                        dgvInformeVentas.ClearSelection();
                     }
 
                     else

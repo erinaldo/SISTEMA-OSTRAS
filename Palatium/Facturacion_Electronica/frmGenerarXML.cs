@@ -64,7 +64,7 @@ namespace Palatium.Facturacion_Electronica
         //FUNCION PARA RELLENAR LAS INSTRUCCIONES SQL
         private void llenarInstruccionesSQL()
         {
-            sAyuda = generar.GSub_ActualizaPantalla("01");
+            sAyuda = generar.GSub_ActualizaPantalla("01", Convert.ToInt32(cmbLocalidad.SelectedValue));
             iCol_Correlativo = 4;
             iCol_Codigo = 0;
             iCol_Descripcion = 1;
@@ -94,18 +94,19 @@ namespace Palatium.Facturacion_Electronica
                 dtConsulta.Clear();
 
                 cmbLocalidad.llenar(dtConsulta, sSql);
+                cmbLocalidad.SelectedValue = Program.iIdLocalidad;
 
-                if (cmbLocalidad.Items.Count > 0)
-                {
-                    cmbLocalidad.SelectedIndex = 1;
-                }
+                //if (cmbLocalidad.Items.Count > 0)
+                //{
+                //    cmbLocalidad.SelectedIndex = 1;
+                //}
 
-                cmbLocalidad2.llenar(dtConsulta, sSql);
+                //cmbLocalidad2.llenar(dtConsulta, sSql);
 
-                if (cmbLocalidad2.Items.Count > 0)
-                {
-                    cmbLocalidad2.SelectedIndex = 1;
-                }
+                //if (cmbLocalidad2.Items.Count > 0)
+                //{
+                //    cmbLocalidad2.SelectedIndex = 1;
+                //}
             }
 
             catch (Exception ex)
@@ -383,8 +384,8 @@ namespace Palatium.Facturacion_Electronica
             iIdFactura = 0;
             iIdPersona = 0;
 
-            cmbLocalidad.SelectedIndex = 1;
-            cmbLocalidad2.SelectedIndex = 1;
+            //cmbLocalidad.SelectedIndex = 1;
+            //cmbLocalidad2.SelectedIndex = 1;
             cmbMonedaFactura.SelectedIndex = 1;
             cmbVendedor.SelectedIndex = 1;
             dgvReimpresionFactura.Rows.Clear();
@@ -536,8 +537,11 @@ namespace Palatium.Facturacion_Electronica
         #endregion
 
         private void frmGenerarXML_Load(object sender, EventArgs e)
-        {            
+        {
+            cmbLocalidad.SelectedIndexChanged -= new EventHandler(cmbLocalidad_SelectedIndexChanged);
             llenarComboLocalidad();
+            cmbLocalidad.SelectedIndexChanged += new EventHandler(cmbLocalidad_SelectedIndexChanged);
+
             llenarComboVendedor();
             llenarComboMoneda();
             parametrosFacturacion();
@@ -690,6 +694,11 @@ namespace Palatium.Facturacion_Electronica
                 //ACTUALIZAR CORREO ELECTRÓNICO
                 actualizarCorreoElectronico();
             }
+        }
+
+        private void cmbLocalidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            llenarInstruccionesSQL();
         }
     }
 }

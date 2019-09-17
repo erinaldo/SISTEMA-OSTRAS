@@ -28,20 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
-            this.colMarca = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colIdFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLocalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEstablecimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPtoEmision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumeroComprobante = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMensaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkEnviarCorreos = new System.Windows.Forms.CheckBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnFinal = new System.Windows.Forms.Button();
             this.btnInicial = new System.Windows.Forms.Button();
@@ -65,8 +60,18 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnSincronizar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.chkEnviarCorreos = new System.Windows.Forms.CheckBox();
+            this.colMarca = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colIdFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLocalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEstablecimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPtoEmision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumeroComprobante = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMensaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -95,91 +100,6 @@
             this.dgvDatos.Size = new System.Drawing.Size(1023, 320);
             this.dgvDatos.TabIndex = 0;
             // 
-            // colMarca
-            // 
-            this.colMarca.Frozen = true;
-            this.colMarca.HeaderText = "Marca";
-            this.colMarca.Name = "colMarca";
-            this.colMarca.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colMarca.Width = 50;
-            // 
-            // colIdFactura
-            // 
-            this.colIdFactura.Frozen = true;
-            this.colIdFactura.HeaderText = "ID";
-            this.colIdFactura.Name = "colIdFactura";
-            this.colIdFactura.ReadOnly = true;
-            this.colIdFactura.Visible = false;
-            // 
-            // colLocalidad
-            // 
-            this.colLocalidad.Frozen = true;
-            this.colLocalidad.HeaderText = "Localidad";
-            this.colLocalidad.Name = "colLocalidad";
-            // 
-            // colTipo
-            // 
-            this.colTipo.Frozen = true;
-            this.colTipo.HeaderText = "Doc";
-            this.colTipo.Name = "colTipo";
-            this.colTipo.Width = 50;
-            // 
-            // colFecha
-            // 
-            this.colFecha.Frozen = true;
-            this.colFecha.HeaderText = "Fecha";
-            this.colFecha.Name = "colFecha";
-            this.colFecha.Width = 75;
-            // 
-            // colEstablecimiento
-            // 
-            this.colEstablecimiento.Frozen = true;
-            this.colEstablecimiento.HeaderText = "Est.";
-            this.colEstablecimiento.Name = "colEstablecimiento";
-            this.colEstablecimiento.Width = 50;
-            // 
-            // colPtoEmision
-            // 
-            this.colPtoEmision.Frozen = true;
-            this.colPtoEmision.HeaderText = "Pto. Vta.";
-            this.colPtoEmision.Name = "colPtoEmision";
-            this.colPtoEmision.Width = 50;
-            // 
-            // colNumeroComprobante
-            // 
-            this.colNumeroComprobante.Frozen = true;
-            this.colNumeroComprobante.HeaderText = "Comprobante";
-            this.colNumeroComprobante.Name = "colNumeroComprobante";
-            this.colNumeroComprobante.Width = 65;
-            // 
-            // colCliente
-            // 
-            this.colCliente.Frozen = true;
-            this.colCliente.HeaderText = "Cliente";
-            this.colCliente.Name = "colCliente";
-            this.colCliente.Width = 170;
-            // 
-            // colMail
-            // 
-            this.colMail.Frozen = true;
-            this.colMail.HeaderText = "CorreoElectrónico";
-            this.colMail.Name = "colMail";
-            this.colMail.Width = 140;
-            // 
-            // colEstado
-            // 
-            this.colEstado.Frozen = true;
-            this.colEstado.HeaderText = "Estado";
-            this.colEstado.Name = "colEstado";
-            this.colEstado.Width = 140;
-            // 
-            // colMensaje
-            // 
-            this.colMensaje.Frozen = true;
-            this.colMensaje.HeaderText = "Mensaje";
-            this.colMensaje.Name = "colMensaje";
-            this.colMensaje.Width = 150;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -203,6 +123,28 @@
             this.groupBox1.Size = new System.Drawing.Size(1023, 81);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.chkEnviarCorreos);
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox2.Location = new System.Drawing.Point(704, 11);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(219, 54);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Para Facturas Autorizadas";
+            // 
+            // chkEnviarCorreos
+            // 
+            this.chkEnviarCorreos.AutoSize = true;
+            this.chkEnviarCorreos.Location = new System.Drawing.Point(23, 23);
+            this.chkEnviarCorreos.Name = "chkEnviarCorreos";
+            this.chkEnviarCorreos.Size = new System.Drawing.Size(175, 17);
+            this.chkEnviarCorreos.TabIndex = 0;
+            this.chkEnviarCorreos.Text = "Enviar Comprobantes a Correos";
+            this.chkEnviarCorreos.UseVisualStyleBackColor = true;
+            this.chkEnviarCorreos.CheckedChanged += new System.EventHandler(this.chkEnviarCorreos_CheckedChanged);
             // 
             // btnOK
             // 
@@ -459,27 +401,99 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // groupBox2
+            // colMarca
             // 
-            this.groupBox2.Controls.Add(this.chkEnviarCorreos);
-            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox2.Location = new System.Drawing.Point(704, 11);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(219, 54);
-            this.groupBox2.TabIndex = 15;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Para Facturas Autorizadas";
+            this.colMarca.Frozen = true;
+            this.colMarca.HeaderText = "Marca";
+            this.colMarca.Name = "colMarca";
+            this.colMarca.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colMarca.Width = 50;
             // 
-            // chkEnviarCorreos
+            // colIdFactura
             // 
-            this.chkEnviarCorreos.AutoSize = true;
-            this.chkEnviarCorreos.Location = new System.Drawing.Point(23, 23);
-            this.chkEnviarCorreos.Name = "chkEnviarCorreos";
-            this.chkEnviarCorreos.Size = new System.Drawing.Size(175, 17);
-            this.chkEnviarCorreos.TabIndex = 0;
-            this.chkEnviarCorreos.Text = "Enviar Comprobantes a Correos";
-            this.chkEnviarCorreos.UseVisualStyleBackColor = true;
-            this.chkEnviarCorreos.CheckedChanged += new System.EventHandler(this.chkEnviarCorreos_CheckedChanged);
+            this.colIdFactura.Frozen = true;
+            this.colIdFactura.HeaderText = "ID";
+            this.colIdFactura.Name = "colIdFactura";
+            this.colIdFactura.ReadOnly = true;
+            this.colIdFactura.Visible = false;
+            // 
+            // colLocalidad
+            // 
+            this.colLocalidad.Frozen = true;
+            this.colLocalidad.HeaderText = "Localidad";
+            this.colLocalidad.Name = "colLocalidad";
+            // 
+            // colTipo
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colTipo.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colTipo.Frozen = true;
+            this.colTipo.HeaderText = "Doc";
+            this.colTipo.Name = "colTipo";
+            this.colTipo.Width = 50;
+            // 
+            // colFecha
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colFecha.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colFecha.Frozen = true;
+            this.colFecha.HeaderText = "Fecha";
+            this.colFecha.Name = "colFecha";
+            this.colFecha.Width = 75;
+            // 
+            // colEstablecimiento
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colEstablecimiento.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colEstablecimiento.Frozen = true;
+            this.colEstablecimiento.HeaderText = "Est.";
+            this.colEstablecimiento.Name = "colEstablecimiento";
+            this.colEstablecimiento.Width = 50;
+            // 
+            // colPtoEmision
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colPtoEmision.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colPtoEmision.Frozen = true;
+            this.colPtoEmision.HeaderText = "Pto. Vta.";
+            this.colPtoEmision.Name = "colPtoEmision";
+            this.colPtoEmision.Width = 50;
+            // 
+            // colNumeroComprobante
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colNumeroComprobante.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colNumeroComprobante.Frozen = true;
+            this.colNumeroComprobante.HeaderText = "Comprobante";
+            this.colNumeroComprobante.Name = "colNumeroComprobante";
+            this.colNumeroComprobante.Width = 65;
+            // 
+            // colCliente
+            // 
+            this.colCliente.Frozen = true;
+            this.colCliente.HeaderText = "Cliente";
+            this.colCliente.Name = "colCliente";
+            this.colCliente.Width = 170;
+            // 
+            // colMail
+            // 
+            this.colMail.Frozen = true;
+            this.colMail.HeaderText = "CorreoElectrónico";
+            this.colMail.Name = "colMail";
+            this.colMail.Width = 140;
+            // 
+            // colEstado
+            // 
+            this.colEstado.Frozen = true;
+            this.colEstado.HeaderText = "Estado";
+            this.colEstado.Name = "colEstado";
+            // 
+            // colMensaje
+            // 
+            this.colMensaje.Frozen = true;
+            this.colMensaje.HeaderText = "Mensaje";
+            this.colMensaje.Name = "colMensaje";
+            this.colMensaje.Width = 150;
             // 
             // frmSincronizarFacturas
             // 
@@ -544,6 +558,8 @@
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.Button btnExcel;
         private System.Windows.Forms.CheckBox chkSeleccionar;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox chkEnviarCorreos;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colMarca;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdFactura;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocalidad;
@@ -556,7 +572,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEstado;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMensaje;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox chkEnviarCorreos;
     }
 }
