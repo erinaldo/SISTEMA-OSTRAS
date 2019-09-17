@@ -18,6 +18,8 @@ namespace Palatium.Cajero
         VentanasMensajes.frmMensajeNuevoOk ok = new VentanasMensajes.frmMensajeNuevoOk();
         VentanasMensajes.frmMensajeNuevoSiNo NuevoSiNo = new VentanasMensajes.frmMensajeNuevoSiNo();
 
+        Clases.ClaseAbrirCajon abrir = new Clases.ClaseAbrirCajon();
+
         double dValor, dCantidad, dTotal, dSuma;
 
         string sValorGrid;
@@ -312,6 +314,17 @@ namespace Palatium.Cajero
             if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
+            }
+
+            if (Program.iPermitirAbrirCajon == 1)
+            {
+                if (e.KeyCode == Keys.F7)
+                {
+                    if (Program.iPuedeCobrar == 1)
+                    {
+                        abrir.consultarImpresoraAbrirCajon();
+                    }
+                }
             }
         }
 
