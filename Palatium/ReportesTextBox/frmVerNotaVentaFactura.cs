@@ -88,6 +88,15 @@ namespace Palatium.ReportesTextBox
                         imprimir.AbreCajon();
                         imprimir.imprimirReporte(sNombreImpresora);
 
+                        
+                        //IMPRIMIR
+                        imprimir.iniciarImpresion();
+                        //imprimir.escritoEspaciadoCorto(txtReporte.Text);
+                        imprimir.escritoEspaciadoCorto(notaVenta.llenarNota(dtConsulta, sIdOrden, "Pagada"));
+                        imprimir.escritoFuenteAlta("TOTAL:" + notaVenta.dbTotal.ToString("N2").PadLeft(27, ' ') + Environment.NewLine);
+                        imprimir.cortarPapel();
+                        imprimir.imprimirReporte(sNombreImpresora);
+
                         //IMPRIMIR
                         imprimir.iniciarImpresion();
                         //imprimir.escritoEspaciadoCorto(txtReporte.Text);

@@ -92,7 +92,7 @@ namespace Palatium
             sSql += "and CP.fecha_orden = '" + sFechaActual + "'" + Environment.NewLine;
             sSql += "and CP.id_pos_jornada = " + Program.iJORNADA + Environment.NewLine;
             sSql += "and CP.id_pos_cajero = " + Program.CAJERO_ID + Environment.NewLine;
-            sSql += "and CP.estado_orden in ('Abierta', 'Pre-Cuenta', 'Cerrada')" + Environment.NewLine;
+            sSql += "and CP.estado_orden in ('Abierta', 'Pre-Cuenta')" + Environment.NewLine;
 
             if (iOp == 1)
             {

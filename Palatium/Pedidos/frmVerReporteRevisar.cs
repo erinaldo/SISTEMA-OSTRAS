@@ -131,7 +131,8 @@ namespace Palatium.Pedidos
                         }
 
                         //FACTURA
-                        else if (iIdTipoComprobante == 2)
+                        //else if (iIdTipoComprobante == 2)
+                        else if (iTipoComprobante == 2)
                         {
                             if (iIdTipoFactura == 1)
                             {
@@ -159,7 +160,8 @@ namespace Palatium.Pedidos
                             }
                         }
 
-                        else if (iIdTipoComprobante == 3)
+                        //else if (iIdTipoComprobante == 3)
+                        else if (iTipoComprobante == 3)
                         {
                             imprimir.iniciarImpresion();
                             imprimir.escritoEspaciadoCorto(notaVenta.llenarNota(iIdFactura));
