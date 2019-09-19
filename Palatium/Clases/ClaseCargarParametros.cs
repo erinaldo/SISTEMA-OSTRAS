@@ -122,7 +122,7 @@ namespace Palatium.Clases
                 sSql += "PL.consumidor_final, PL.id_vendedor, PL.maneja_jornada, C.descripcion, PL.imprimir_datos_factura, VC.valor_texto," + Environment.NewLine;
                 sSql += "PL.id_producto_anula, PL.valor_precio_anula, PL.clave_acceso_admin," + Environment.NewLine;
                 sSql += "isnull(PL.id_pos_impresora, 0), isnull(ejecutar_impresion, 0) ejecutar_impresion," + Environment.NewLine;
-                sSql += "isnull(permitir_abrir_cajon, 0) permitir_abrir_cajon" + Environment.NewLine;
+                sSql += "isnull(permitir_abrir_cajon, 0) permitir_abrir_cajon, isnull(PL.valor_maximo_recargo, 0) valor_maximo_recargo" + Environment.NewLine;
                 sSql += "from pos_parametro_localidad PL, pos_mesero M, pos_cajero C, tp_vw_ciudad VC" + Environment.NewLine;
                 sSql += "where M.id_pos_mesero = PL.id_pos_mesero" + Environment.NewLine;
                 sSql += "and C.id_pos_cajero = PL.id_pos_cajero" + Environment.NewLine;
@@ -164,6 +164,7 @@ namespace Palatium.Clases
                         Program.iIdImpresoraReportes = Convert.ToInt32(dtConsulta.Rows[0][18].ToString());
                         Program.iEjecutarImpresion = Convert.ToInt32(dtConsulta.Rows[0][19].ToString());
                         Program.iPermitirAbrirCajon = Convert.ToInt32(dtConsulta.Rows[0][20].ToString());
+                        Program.dbValorMaximoRecargoTarjetas = Convert.ToDecimal(dtConsulta.Rows[0]["valor_maximo_recargo"].ToString());
                         return "";
                     }
 

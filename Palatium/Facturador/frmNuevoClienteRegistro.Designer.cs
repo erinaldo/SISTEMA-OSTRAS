@@ -425,6 +425,7 @@
             this.txtIdentificacion.Size = new System.Drawing.Size(162, 22);
             this.txtIdentificacion.TabIndex = 0;
             this.txtIdentificacion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIdentificacion_KeyPress);
+            this.txtIdentificacion.Leave += new System.EventHandler(this.txtIdentificacion_Leave);
             // 
             // txtNombres
             // 

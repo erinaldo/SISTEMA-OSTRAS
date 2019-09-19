@@ -341,12 +341,16 @@ namespace Palatium.Clases
                     
                     if (consultarTipoProductos() == 1)
                     {
+                        sTexto = sTexto + "".PadRight(40, '=') + Environment.NewLine;
+                        sTexto = sTexto + "PRODUCTOS COBRADOS".PadLeft(29, ' ') + Environment.NewLine;
                         sTexto = sTexto + llenarPorDetalle();
                     }
 
                     else
                     {
                         sTexto = sTexto + "".PadRight(40, '=') + Environment.NewLine;
+                        sTexto = sTexto + "PRODUCTOS COBRADOS".PadLeft(29, ' ') + Environment.NewLine;
+                        sTexto = sTexto + "".PadRight(40, '-') + Environment.NewLine;
                         sTexto = sTexto + "".PadRight(5, ' ') + "DESCRIPCION".PadRight(20, ' ') + "CANT.".PadLeft(5, ' ') + "TOTAL".PadLeft(10, ' ') + Environment.NewLine;
                         sTexto = sTexto + "".PadRight(40, '=') + Environment.NewLine;
 
@@ -459,13 +463,108 @@ namespace Palatium.Clases
                 sSql += "and CAB.estado = 'A'" + Environment.NewLine;
                 sSql += "and DET.estado = 'A' inner join" + Environment.NewLine;
                 sSql += "cv401_productos PROD on NOM.id_producto = PROD.id_producto" + Environment.NewLine;
-                sSql += "and PROD.estado = 'A'" + Environment.NewLine;
+                sSql += "and PROD.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "pos_origen_orden O ON O.id_pos_origen_orden = CAB.id_pos_origen_orden" + Environment.NewLine;
+                sSql += "and O.estado = 'A'" + Environment.NewLine;
                 sSql += "where CAB.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 //sSql += "and CAB.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
                 sSql += "and CAB.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "and CAB.estado_orden in ('Pagada', 'Cerrada')" + Environment.NewLine;
                 sSql += "and CAB.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
                 sSql += "and PROD.id_pos_tipo_producto = " + Convert.ToInt32(dtTipoProducto.Rows[i][0].ToString()) + Environment.NewLine;
+                sSql += "and O.cuenta_por_cobrar = 0" + Environment.NewLine;
+                sSql += "group by NOM.nombre" + Environment.NewLine;
+                sSql += "order by sum(DET.cantidad)";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    if (dtConsulta.Rows.Count > 0)
+                    {
+                        dbSumarPorTipoProducto = 0;
+
+                        sContinuar += "".PadRight(40, '=') + Environment.NewLine;
+                        sContinuar += "TIPO DE PRODUCTO: " + dtTipoProducto.Rows[i][1].ToString().ToUpper().Trim() + Environment.NewLine;
+                        sContinuar += "".PadRight(40, '=') + Environment.NewLine;
+                        sTexto = sTexto + " ".PadRight(5, ' ') + "DESCRIPCION".PadRight(20, ' ') + "CANT.".PadLeft(5, ' ') + "TOTAL".PadLeft(10, ' ') + Environment.NewLine;
+                        sTexto = sTexto + "*".PadRight(40, '=') + Environment.NewLine;
+
+                        for (int j = 0; j < dtConsulta.Rows.Count; j++)
+                        {
+                            sNombreProducto = dtConsulta.Rows[j][0].ToString();
+                            dCantidad = Convert.ToDouble(dtConsulta.Rows[j][1].ToString());
+                            dTotal = Convert.ToDouble(dtConsulta.Rows[j][2].ToString());
+                            dbSumarPorTipoProducto += Convert.ToDecimal(dtConsulta.Rows[j][2].ToString());
+                            dSuma = dSuma + dTotal;
+
+                            if (sNombreProducto.Length > 25)
+                            {
+                                sNombreProducto = sNombreProducto.Substring(0, 25);
+                            }
+
+                            sContinuar = sContinuar + sNombreProducto.PadRight(25, ' ') + dCantidad.ToString("N0").PadLeft(5, ' ') + dTotal.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        }
+
+                        sContinuar += "".PadLeft(40, '-') + Environment.NewLine + ("TOTAL " + dtTipoProducto.Rows[i][1].ToString().ToUpper().Trim()).PadRight(30, ' ') + dbSumarPorTipoProducto.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                    }
+                }
+                
+                sContinuar += Environment.NewLine;                
+            }
+
+            if (cantidadCuentasClienteEmpresarial() > 0)
+            {
+                sContinuar = sContinuar + "".PadRight(40, '=') + Environment.NewLine;
+                sContinuar = sContinuar + "PRODUCTOS CLIENTE EMPRESARIAL".PadLeft(35, ' ') + Environment.NewLine;
+                sContinuar = sContinuar + llenarPorDetalleClienteEmpresarial();
+            }
+
+            sContinuar = sContinuar + "*".PadRight(40, '*') + Environment.NewLine + Environment.NewLine;
+            sContinuar = sContinuar + "TOTALES".PadRight(30, ' ') + dSuma.ToString("N2").PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
+            sContinuar = sContinuar + "NOTA: EN EL TOTAL INCLUYE LOS VALORES DE" + Environment.NewLine;
+            sContinuar = sContinuar + "CUENTAS POR COBRAR Y CORTESÍAS" + Environment.NewLine;
+            sContinuar = sContinuar + Environment.NewLine + Environment.NewLine;
+
+            sContinuar = sContinuar + reporteCantidadPagos();            
+
+            //sContinuar = sContinuar + Environment.NewLine + Environment.NewLine + Environment.NewLine + ".";
+
+            return sContinuar;
+
+        }
+
+        //FUNCION PARA CLASIFICAR LOS ITEMS CLIENTE EMPRESARIAL
+        private string llenarPorDetalleClienteEmpresarial()
+        {
+            string sContinuar = "";
+
+            for (int i = 0; i < dtTipoProducto.Rows.Count; i++)
+            {
+                sSql = "";
+                sSql += "select NOM.nombre, sum(DET.cantidad) CANTIDAD," + Environment.NewLine;
+                sSql += "sum(DET.cantidad *(((DET.precio_unitario + valor_iva+ valor_otro)-valor_dscto))) TOTAL" + Environment.NewLine;
+                sSql += "from cv403_det_pedidos DET inner join" + Environment.NewLine;
+                sSql += "cv401_nombre_productos NOM on DET.id_producto = NOM.id_producto" + Environment.NewLine;
+                sSql += "and NOM.estado = 'A' inner join" + Environment.NewLine;
+                sSql += "cv403_cab_pedidos CAB on CAB.id_pedido = DET.id_pedido" + Environment.NewLine;
+                sSql += "and CAB.estado = 'A'" + Environment.NewLine;
+                sSql += "and DET.estado = 'A' inner join" + Environment.NewLine;
+                sSql += "cv401_productos PROD on NOM.id_producto = PROD.id_producto" + Environment.NewLine;
+                sSql += "and PROD.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "pos_origen_orden O ON O.id_pos_origen_orden = CAB.id_pos_origen_orden" + Environment.NewLine;
+                sSql += "and O.estado = 'A'" + Environment.NewLine;
+                sSql += "where CAB.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
+                //sSql += "and CAB.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and CAB.id_localidad = " + iIdLocalidad + Environment.NewLine;
+                sSql += "and CAB.estado_orden = 'Cerrada'" + Environment.NewLine;
+                sSql += "and CAB.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                sSql += "and PROD.id_pos_tipo_producto = " + Convert.ToInt32(dtTipoProducto.Rows[i][0].ToString()) + Environment.NewLine;
+                sSql += "and O.cuenta_por_cobrar = 1" + Environment.NewLine;
+                sSql += "and O.codigo = '12'" + Environment.NewLine;
                 sSql += "group by NOM.nombre" + Environment.NewLine;
                 sSql += "order by sum(DET.cantidad)";
 
@@ -508,19 +607,48 @@ namespace Palatium.Clases
 
                 sContinuar += Environment.NewLine;
             }
-
-            sContinuar = sContinuar + "*".PadRight(40, '*') + Environment.NewLine + Environment.NewLine;
-            sContinuar = sContinuar + "TOTALES".PadRight(30, ' ') + dSuma.ToString("N2").PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
-            sContinuar = sContinuar + "NOTA: EN EL TOTAL INCLUYE LOS VALORES DE" + Environment.NewLine;
-            sContinuar = sContinuar + "CUENTAS POR COBRAR Y CORTESÍAS" + Environment.NewLine;
-            sContinuar = sContinuar + Environment.NewLine + Environment.NewLine;
-
-            sContinuar = sContinuar + reporteCantidadPagos();            
-
-            //sContinuar = sContinuar + Environment.NewLine + Environment.NewLine + Environment.NewLine + ".";
-
+            
             return sContinuar;
 
+        }
+
+        //FUNCION PARA CONTAR LAS CUENTAS DEL CLIENTE EMPRESARIAL
+        private int cantidadCuentasClienteEmpresarial()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select count(*) cuenta " + Environment.NewLine;
+                sSql += "from cv403_cab_pedidos CP INNER JOIN" + Environment.NewLine;
+                sSql += "pos_origen_orden O ON O.id_pos_origen_orden = CP.id_pos_origen_orden" + Environment.NewLine;
+                sSql += "and CP.estado = 'A'" + Environment.NewLine;
+                sSql += "and O.estado = 'A'" + Environment.NewLine;
+                sSql += "where O.codigo = '12'" + Environment.NewLine;
+                sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
+                sSql += "and CP.estado_orden = 'Cerrada'" + Environment.NewLine;
+                sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    return Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                }
+
+                else
+                {
+                    return 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
 
         private string reporteCantidadPagos()

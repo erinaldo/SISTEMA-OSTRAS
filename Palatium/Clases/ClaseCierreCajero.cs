@@ -31,6 +31,7 @@ namespace Palatium.Clases
         int iIdTipoVenta;
         int iContador;
         int iIdLocalidad;
+        int iIdCierreCajero;
         
         object iCuentaRegistros;
 
@@ -906,16 +907,120 @@ namespace Palatium.Clases
             }
         }
 
+        //FUNCION PARA CONTAR LAS MONEDAS
+        private string recuperarMonedas()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select * from pos_monedas" + Environment.NewLine;
+                sSql += "where id_pos_cierre_cajero = " + iIdCierreCajero + Environment.NewLine;
+                sSql += "and id_localidad = " + iIdLocalidad + Environment.NewLine;
+                sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                sSql += "and tipo_ingreso = 1";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    if (dtConsulta.Rows.Count > 0)
+                    {
+                        Decimal iMonedas;
+                        Decimal dbValorCalculo;
+
+                        string sMoneda = "";
+                        sMoneda += "RESUMEN DE MONEDAS Y BILLETES".PadLeft(35, ' ') + Environment.NewLine;
+                        sMoneda += "".PadLeft(40, '-') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda01"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("0.01");
+                        sMoneda += "1   CENTAVO".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda05"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("0.05");
+                        sMoneda += "5   CENTAVOS".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda10"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("0.10");
+                        sMoneda += "10  CENTAVOS".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda25"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("0.25");
+                        sMoneda += "25  CENTAVOS".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda50"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("0.50");
+                        sMoneda += "50  CENTAVOS".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete1"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("1");
+                        sMoneda += "1   DOLAR".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete2"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("2");
+                        sMoneda += "2 DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete5"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("5");
+                        sMoneda += "5   DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete10"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("10");
+                        sMoneda += "10  DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete20"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("20");
+                        sMoneda += "20  DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete50"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("50");
+                        sMoneda += "50  DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete100"].ToString());
+                        dbValorCalculo = iMonedas * Convert.ToDecimal("100");
+                        sMoneda += "100 DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+
+                        sMoneda += "".PadLeft(40, '-') + Environment.NewLine;
+                        return sMoneda;
+                    }
+
+                    else
+                    {
+                        return "";
+                    }
+                }
+
+                else
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return "";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return "";
+            }
+        }
+
+
         #endregion
 
 
-        public string llenarCierreCajero(string sFecha_P, int iIdLocalidad_P, Decimal dbAhorroEmergencia_R)
+        public string llenarCierreCajero(string sFecha_P, int iIdLocalidad_P, Decimal dbAhorroEmergencia_R, int iIdCierreCajero_P)
         {
             try
             {
                 this.sFecha = sFecha_P;
                 this.iIdLocalidad = iIdLocalidad_P;
                 this.dbAhorroEmergencia = dbAhorroEmergencia_R;
+                this.iIdCierreCajero = iIdCierreCajero_P;
 
                 sTexto = "";
                 sTexto += Environment.NewLine;
@@ -1162,7 +1267,8 @@ namespace Palatium.Clases
                 sTexto += "AHORRO INGRESO MANUAL    :".PadRight(30, ' ') + dbAhorroEmergencia.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
                 sTexto += "".PadLeft(40, '-') + Environment.NewLine;
                 sTexto += "VALOR CAJA FINAL: " + sCajaFinal + Environment.NewLine;
-                sTexto += "".PadLeft(40, '-') + Environment.NewLine;
+                sTexto += "".PadLeft(40, '-') + Environment.NewLine + Environment.NewLine;
+                sTexto += recuperarMonedas();
                 sTexto += Environment.NewLine + Environment.NewLine + Environment.NewLine + ".";
 
                 return sTexto;

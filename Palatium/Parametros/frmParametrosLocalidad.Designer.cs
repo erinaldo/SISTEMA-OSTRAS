@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkAbrirCajon = new System.Windows.Forms.CheckBox();
             this.chkEjecutarImpresiones = new System.Windows.Forms.CheckBox();
             this.dBAyudaVendedor = new Controles.Auxiliares.DB_Ayuda();
             this.dBAyudaConsumidorFinal = new Controles.Auxiliares.DB_Ayuda();
@@ -84,7 +85,8 @@
             this.dBAyudaProducto = new Controles.Auxiliares.DB_Ayuda();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.chkAbrirCajon = new System.Windows.Forms.CheckBox();
+            this.txtMontoMaximo = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.grupoOpciones.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -143,6 +145,18 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros de la Localidad";
+            // 
+            // chkAbrirCajon
+            // 
+            this.chkAbrirCajon.AutoSize = true;
+            this.chkAbrirCajon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAbrirCajon.Location = new System.Drawing.Point(510, 322);
+            this.chkAbrirCajon.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chkAbrirCajon.Name = "chkAbrirCajon";
+            this.chkAbrirCajon.Size = new System.Drawing.Size(202, 19);
+            this.chkAbrirCajon.TabIndex = 56;
+            this.chkAbrirCajon.Text = "Permitir Abrir el Cajón de Dinero";
+            this.chkAbrirCajon.UseVisualStyleBackColor = true;
             // 
             // chkEjecutarImpresiones
             // 
@@ -793,17 +807,26 @@
             this.label20.TabIndex = 23;
             this.label20.Text = "Producto Default \r\npara Anulación:";
             // 
-            // chkAbrirCajon
+            // txtMontoMaximo
             // 
-            this.chkAbrirCajon.AutoSize = true;
-            this.chkAbrirCajon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAbrirCajon.Location = new System.Drawing.Point(510, 322);
-            this.chkAbrirCajon.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.chkAbrirCajon.Name = "chkAbrirCajon";
-            this.chkAbrirCajon.Size = new System.Drawing.Size(202, 19);
-            this.chkAbrirCajon.TabIndex = 56;
-            this.chkAbrirCajon.Text = "Permitir Abrir el Cajón de Dinero";
-            this.chkAbrirCajon.UseVisualStyleBackColor = true;
+            this.txtMontoMaximo.Location = new System.Drawing.Point(864, 334);
+            this.txtMontoMaximo.MaxLength = 5;
+            this.txtMontoMaximo.Name = "txtMontoMaximo";
+            this.txtMontoMaximo.Size = new System.Drawing.Size(110, 21);
+            this.txtMontoMaximo.TabIndex = 43;
+            this.txtMontoMaximo.Text = "0";
+            this.txtMontoMaximo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtMontoMaximo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontoMaximo_KeyPress);
+            this.txtMontoMaximo.Leave += new System.EventHandler(this.txtMontoMaximo_Leave);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(851, 292);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(137, 30);
+            this.label23.TabIndex = 44;
+            this.label23.Text = "Monto Máximo para\r\nRecargo de Tarjetas";
             // 
             // frmParametrosLocalidad
             // 
@@ -812,6 +835,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1065, 489);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.txtMontoMaximo);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grupoOpciones);
@@ -831,6 +856,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -893,5 +919,7 @@
         private Controles.Auxiliares.DB_Ayuda dBAyudaCiudad;
         private System.Windows.Forms.CheckBox chkEjecutarImpresiones;
         private System.Windows.Forms.CheckBox chkAbrirCajon;
+        private System.Windows.Forms.TextBox txtMontoMaximo;
+        private System.Windows.Forms.Label label23;
     }
 }

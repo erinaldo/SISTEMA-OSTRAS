@@ -52,6 +52,7 @@ namespace Palatium.Cajero
         int iPuedeGuardar;
         int iOp;
         int iJornada;
+        int iIdCierreCajero;
 
         int iMoneda01, iMoneda05, iMoneda10, iMoneda25, iMoneda50;
         int iBillete1, iBillete2, iBillete5, iBillete10, iBillete20, iBillete50, iBillete100;
@@ -59,6 +60,7 @@ namespace Palatium.Cajero
         double dTotalPagadoCortesiaP;
         double dTotalProductosCortesiaP;
 
+        Decimal dbCajaInicial;
         Decimal dbCajaFinal;
 
         public frmResumenCaja(int iPuedeGuardar)
@@ -219,7 +221,7 @@ namespace Palatium.Cajero
                 sMensajeEnviar = sMensajeEnviar + "Estimado(a) " + sRazonSocial + ":" + Environment.NewLine;
                 sMensajeEnviar = sMensajeEnviar + Environment.NewLine;
                 sMensajeEnviar = sMensajeEnviar + "Se procede a informar el cierre de cajero realizado en  la fecha " + sFecha + "." + Environment.NewLine + Environment.NewLine;
-                sMensajeEnviar = sMensajeEnviar + arqueo.llenarCierreCajero(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim())) + Environment.NewLine + Environment.NewLine;
+                sMensajeEnviar = sMensajeEnviar + arqueo.llenarCierreCajero(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()), iIdCierreCajero) + Environment.NewLine + Environment.NewLine;
                 sMensajeEnviar = sMensajeEnviar + reporte.llenarReporteVentas(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim())) + Environment.NewLine + Environment.NewLine;
                 sMensajeEnviar = sMensajeEnviar + arqueo2.llenarInforme(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue)) + Environment.NewLine + Environment.NewLine;
                 sMensajeEnviar = sMensajeEnviar + "Enviado por: " + Program.sNombreUsuario.ToUpper() + Environment.NewLine;
@@ -257,7 +259,8 @@ namespace Palatium.Cajero
                 }
 
                 sSql = "";
-                sSql += "select estado_cierre_cajero, isnull(ahorro_emergencia, '0.00') ahorro_emergencia" + Environment.NewLine;
+                sSql += "select estado_cierre_cajero, isnull(ahorro_emergencia, '0.00') ahorro_emergencia," + Environment.NewLine;
+                sSql += "isnull(caja_inicial, 0) caja_inicial, id_pos_cierre_cajero" + Environment.NewLine;
                 sSql += "from pos_cierre_cajero" + Environment.NewLine;
                 sSql += "where fecha_apertura = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and estado = 'A'" + Environment.NewLine;
@@ -274,11 +277,16 @@ namespace Palatium.Cajero
                     if (dtConsulta.Rows.Count > 0)
                     {
                         txtAhorroManual.Text = Convert.ToDecimal(dtConsulta.Rows[0]["ahorro_emergencia"].ToString()).ToString("N2");
+                        txtCajaInicial.Text = Convert.ToDecimal(dtConsulta.Rows[0]["caja_inicial"].ToString()).ToString("N2");
+                        dbCajaInicial = Convert.ToDecimal(dtConsulta.Rows[0]["caja_inicial"].ToString());
+                        iIdCierreCajero = Convert.ToInt32(dtConsulta.Rows[0]["id_pos_cierre_cajero"].ToString());
                     }
 
                     else
                     {
                         txtAhorroManual.Text = "0.00";
+                        txtCajaInicial.Text = "0.00";
+                        iIdCierreCajero = 0;
                     }
                 }
 
@@ -999,7 +1007,7 @@ namespace Palatium.Cajero
                 //dbIvaCobrado_P = Convert.ToDecimal(txtImpuestoIVA.Text.Trim());
 
                 //dbTotal_P = dbEfectivoCobrado_P - dbAhorroProducto_P - dbAhorroManual_P + dbEntradasManuales_P - dbSalidasManuales_P - dbIvaCobrado_P;
-                dbTotal_P = dbEfectivoCobrado_P - dbAhorroProducto_P - dbAhorroManual_P + dbEntradasManuales_P - dbSalidasManuales_P;
+                dbTotal_P = dbEfectivoCobrado_P - dbAhorroProducto_P - dbAhorroManual_P + dbEntradasManuales_P - dbSalidasManuales_P + dbCajaInicial;
 
                 txtTotalCaja.Text = dbTotal_P.ToString("N2");
                 txtTotalCaja.Focus();
@@ -1198,13 +1206,13 @@ namespace Palatium.Cajero
                         sSql += "id_pos_cierre_cajero, id_localidad, moneda01, moneda05, moneda10," + Environment.NewLine;
                         sSql += "moneda25, moneda50, billete1, billete2, billete5, billete10," + Environment.NewLine;
                         sSql += "billete20, billete50, billete100, estado, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
-                        sSql += "terminal_ingreso, tipo_ingreso)" + Environment.NewLine;
+                        sSql += "terminal_ingreso, tipo_ingreso, id_pos_jornada)" + Environment.NewLine;
                         sSql += "values (" + Environment.NewLine;
                         sSql += Program.iIdPosCierreCajero + ", " + Program.iIdLocalidad + ", " + iMoneda01 + ", ";
                         sSql += iMoneda05 + ", " + iMoneda10 + ", " + iMoneda25 + ", " + iMoneda50 + "," + Environment.NewLine;
                         sSql += iBillete1 + ", " + iBillete2 + ", " + iBillete5 + ", " + iBillete10 + ", " + iBillete20 + ",";
                         sSql += iBillete50 + ", " + iBillete100 + "," + Environment.NewLine;
-                        sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 1)";
+                        sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 1, " + Program.iJORNADA + ")";
 
                         if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                         {
@@ -1237,7 +1245,7 @@ namespace Palatium.Cajero
 
                         conexion.GFun_Lo_Maneja_Transaccion(Program.G_TERMINA_TRANSACCION);
 
-                        ReportesTextBox.frmVerResumenCaja resumen = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
+                        ReportesTextBox.frmVerResumenCaja resumen = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()), iIdCierreCajero);
                         resumen.ShowDialog();
 
                         //ReportesTextBox.frmVerReportePropietario reporte = new ReportesTextBox.frmVerReportePropietario(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue));
@@ -1306,7 +1314,7 @@ namespace Palatium.Cajero
 
         private void btnReimpresionTickets_Click(object sender, EventArgs e)
         {
-            ReportesTextBox.frmVerResumenCaja vendido = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
+            ReportesTextBox.frmVerResumenCaja vendido = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()), iIdCierreCajero);
             vendido.ShowDialog();
         }
 
@@ -1542,6 +1550,12 @@ namespace Palatium.Cajero
         {
             Cajero.frmIngresarDineroCaja ingreso = new frmIngresarDineroCaja(Program.iIdPosCierreCajero, Convert.ToInt32(cmbLocalidades.SelectedValue));
             ingreso.ShowDialog();
+
+            if (ingreso.DialogResult == DialogResult.OK)
+            {
+                txtCajaInicial.Text = ingreso.dbCajaInicial.ToString("N2");
+                ingreso.Close();
+            }
         }
     }
 }

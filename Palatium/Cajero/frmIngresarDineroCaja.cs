@@ -32,7 +32,7 @@ namespace Palatium.Cajero
         int iIdPosCierreCajero;
         int iIdLocalidad;
 
-        Decimal dbCajaInicial;
+        public Decimal dbCajaInicial;
 
         DataTable dtConsulta;
 
@@ -172,13 +172,13 @@ namespace Palatium.Cajero
                 sSql += "id_pos_cierre_cajero, id_localidad, moneda01, moneda05, moneda10," + Environment.NewLine;
                 sSql += "moneda25, moneda50, billete1, billete2, billete5, billete10," + Environment.NewLine;
                 sSql += "billete20, billete50, billete100, estado, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
-                sSql += "terminal_ingreso, tipo_ingreso)" + Environment.NewLine;
+                sSql += "terminal_ingreso, tipo_ingreso, id_pos_jornada)" + Environment.NewLine;
                 sSql += "values (" + Environment.NewLine;
                 sSql += Program.iIdPosCierreCajero + ", " + Program.iIdLocalidad + ", " + iMoneda01 + ", ";
                 sSql += iMoneda05 + ", " + iMoneda10 + ", " + iMoneda25 + ", " + iMoneda50 + "," + Environment.NewLine;
                 sSql += iBillete1 + ", " + iBillete2 + ", " + iBillete5 + ", " + iBillete10 + ", " + iBillete20 + ",";
                 sSql += iBillete50 + ", " + iBillete100 + "," + Environment.NewLine;
-                sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 0)";
+                sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 0, " + Program.iJORNADA + ")";
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
@@ -205,7 +205,7 @@ namespace Palatium.Cajero
 
                 ok.lblMensaje.Text = "Registro de efectivo ingresado éxitosamente.";
                 ok.ShowDialog();
-                this.Close();
+                this.DialogResult = DialogResult.OK;
                 return;
             }
 

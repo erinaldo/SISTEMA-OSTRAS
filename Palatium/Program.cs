@@ -219,6 +219,7 @@ namespace Palatium
         public static int iComprobanteNotaEntrega;
         public static int iHabilitaOpciones;
         public static string sCorreoElectronicoDefault;
+        public static Decimal dbValorMaximoRecargoTarjetas;
 
         public static int iCortar = 0;
         public static int iIdPersonaFacturador;

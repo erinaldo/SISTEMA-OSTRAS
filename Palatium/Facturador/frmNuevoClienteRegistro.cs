@@ -889,5 +889,24 @@ namespace Palatium.Facturador
                 }
             }
         }
+
+        private void txtIdentificacion_Leave(object sender, EventArgs e)
+        {
+            if (txtIdentificacion.Text != "")
+            {
+                //AQUI INSTRUCCIONES PARA CONSULTAR Y VALIDAR LA CEDULA
+                if ((esNumero(txtIdentificacion.Text.Trim()) == true) && (chkPasaporte.Checked == false))
+                {
+                    validarIdentificacion(1);
+                }
+
+                else
+                {
+                    iIdTipoPersona = 2447;
+                    iIdTipoIdentificacion = 180;
+                    consultarRegistro();
+                }
+            }
+        }
     }
 }

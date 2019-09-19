@@ -37,6 +37,7 @@ namespace Palatium.Comida_Rapida
         DataTable dtConsulta;
         DataTable dtCategorias;
         DataTable dtProductos;
+        DataTable dtRecargos;
 
         bool bRespuesta;
 
@@ -78,6 +79,8 @@ namespace Palatium.Comida_Rapida
         int iIdDocumentoPago;
         int iIdPosMovimientoCaja;
         int iNumeroMovimientoCaja;
+        int iBanderaEfectivoTarjeta;
+        int iBanderaAplicaRecargo;
 
         Decimal dIVA_P;
         Decimal dPrecioUnitario_P;
@@ -869,60 +872,122 @@ namespace Palatium.Comida_Rapida
                     return false;
                 }
 
-                //CICLO PARA INSERTAR EN LA TABLA CV403_DET_PEDIDOS
-                for (int i = 0; i < dgvPedido.Rows.Count; i++)
+                if (iBanderaAplicaRecargo == 0)
                 {
-                    iIdProducto_P = Convert.ToInt32(dgvPedido.Rows[i].Cells["idProducto"].Value);
-                    dPrecioUnitario_P = Convert.ToDecimal(dgvPedido.Rows[i].Cells["valuni"].Value);
-                    dCantidad_P = Convert.ToDecimal(dgvPedido.Rows[i].Cells["cantidad"].Value);
-                    sPagaIva_P = dgvPedido.Rows[i].Cells["pagaIva"].Value.ToString();
-
-                    if (sPagaIva_P == "1")
+                    //CICLO PARA INSERTAR EN LA TABLA CV403_DET_PEDIDOS
+                    for (int i = 0; i < dgvPedido.Rows.Count; i++)
                     {
-                        dIVA_P = dPrecioUnitario_P * Convert.ToDecimal(Program.iva);
-                    }
+                        iIdProducto_P = Convert.ToInt32(dgvPedido.Rows[i].Cells["idProducto"].Value);
+                        dPrecioUnitario_P = Convert.ToDecimal(dgvPedido.Rows[i].Cells["valuni"].Value);
+                        dCantidad_P = Convert.ToDecimal(dgvPedido.Rows[i].Cells["cantidad"].Value);
+                        sPagaIva_P = dgvPedido.Rows[i].Cells["pagaIva"].Value.ToString();
 
-                    else
-                    {
-                        dIVA_P = 0;
-                    }
+                        if (sPagaIva_P == "1")
+                        {
+                            dIVA_P = dPrecioUnitario_P * Convert.ToDecimal(Program.iva);
+                        }
 
-                    sSql = "";
-                    sSql += "Insert Into cv403_det_pedidos(" + Environment.NewLine;
-                    sSql += "Id_Pedido, id_producto, Cg_Unidad_Medida, precio_unitario," + Environment.NewLine;
-                    sSql += "Cantidad, Valor_Dscto, Valor_Ice, Valor_Iva ,Valor_otro," + Environment.NewLine;
-                    sSql += "comentario, Id_Definicion_Combo, fecha_ingreso," + Environment.NewLine;
-                    sSql += "Usuario_Ingreso, Terminal_ingreso, id_pos_mascara_item, secuencia," + Environment.NewLine;
-                    sSql += "id_pos_secuencia_entrega, Estado, numero_replica_trigger," + Environment.NewLine;
-                    sSql += "numero_control_replica, id_empleado_cliente_empresarial)" + Environment.NewLine;
-                    sSql += "values(" + Environment.NewLine;
-                    sSql += iIdPedido + ", " + iIdProducto_P + ", 546, " + dPrecioUnitario_P + ", " + Environment.NewLine;
-                    sSql += dCantidad_P + ", 0, 0, " + dIVA_P + ", 0, " + Environment.NewLine;
-                    sSql += "null, null, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                    sSql += "'" + Program.sDatosMaximo[1] + "', 0, 1, null, 'A', 0, 0, " + iIdPersona + ")";
+                        else
+                        {
+                            dIVA_P = 0;
+                        }
 
-                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                    {
-                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                        catchMensaje.ShowDialog();
-                        return false;
-                    }
+                        sSql = "";
+                        sSql += "Insert Into cv403_det_pedidos(" + Environment.NewLine;
+                        sSql += "Id_Pedido, id_producto, Cg_Unidad_Medida, precio_unitario," + Environment.NewLine;
+                        sSql += "Cantidad, Valor_Dscto, Valor_Ice, Valor_Iva ,Valor_otro," + Environment.NewLine;
+                        sSql += "comentario, Id_Definicion_Combo, fecha_ingreso," + Environment.NewLine;
+                        sSql += "Usuario_Ingreso, Terminal_ingreso, id_pos_mascara_item, secuencia," + Environment.NewLine;
+                        sSql += "id_pos_secuencia_entrega, Estado, numero_replica_trigger," + Environment.NewLine;
+                        sSql += "numero_control_replica, id_empleado_cliente_empresarial)" + Environment.NewLine;
+                        sSql += "values(" + Environment.NewLine;
+                        sSql += iIdPedido + ", " + iIdProducto_P + ", 546, " + dPrecioUnitario_P + ", " + Environment.NewLine;
+                        sSql += dCantidad_P + ", 0, 0, " + dIVA_P + ", 0, " + Environment.NewLine;
+                        sSql += "null, null, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                        sSql += "'" + Program.sDatosMaximo[1] + "', 0, 1, null, 'A', 0, 0, " + iIdPersona + ")";
 
-                    sSql = "";
-                    sSql += "insert into cv403_cantidades_despachadas(" + Environment.NewLine;
-                    sSql += "id_despacho_pedido, id_producto, cantidad, estado," + Environment.NewLine;
-                    sSql += "numero_replica_trigger, numero_control_replica)" + Environment.NewLine;
-                    sSql += "values (" + Environment.NewLine;
-                    sSql += iIdDespachoPedido + ", " + dgvPedido.Rows[i].Cells["idProducto"].Value + "," + Environment.NewLine;
-                    sSql += dgvPedido.Rows[i].Cells["cantidad"].Value + ", 'A', 1, 0)";
+                        if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                        {
+                            catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                            catchMensaje.ShowDialog();
+                            return false;
+                        }
 
-                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                    {
-                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                        catchMensaje.ShowDialog();
-                        return false;
+                        sSql = "";
+                        sSql += "insert into cv403_cantidades_despachadas(" + Environment.NewLine;
+                        sSql += "id_despacho_pedido, id_producto, cantidad, estado," + Environment.NewLine;
+                        sSql += "numero_replica_trigger, numero_control_replica)" + Environment.NewLine;
+                        sSql += "values (" + Environment.NewLine;
+                        sSql += iIdDespachoPedido + ", " + dgvPedido.Rows[i].Cells["idProducto"].Value + "," + Environment.NewLine;
+                        sSql += dgvPedido.Rows[i].Cells["cantidad"].Value + ", 'A', 1, 0)";
+
+                        if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                        {
+                            catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                            catchMensaje.ShowDialog();
+                            return false;
+                        }
                     }
                 }
+
+                else
+                {
+                    //CICLO PARA INSERTAR EN LA TABLA CV403_DET_PEDIDOS
+                    for (int i = 0; i < dtRecargos.Rows.Count; i++)
+                    {
+                        iIdProducto_P = Convert.ToInt32(dtRecargos.Rows[i]["id_producto"].ToString());
+                        dPrecioUnitario_P = Convert.ToDecimal(dtRecargos.Rows[i]["valor_recargo"].ToString());
+                        dCantidad_P = Convert.ToDecimal(dtRecargos.Rows[i]["cantidad"].ToString());
+                        sPagaIva_P = dtRecargos.Rows[i]["paga_iva"].ToString();
+
+                        if (sPagaIva_P == "1")
+                        {
+                            dIVA_P = Convert.ToDecimal(dtRecargos.Rows[i]["valor_iva"].ToString());
+                        }
+
+                        else
+                        {
+                            dIVA_P = 0;
+                        }
+
+                        sSql = "";
+                        sSql += "Insert Into cv403_det_pedidos(" + Environment.NewLine;
+                        sSql += "Id_Pedido, id_producto, Cg_Unidad_Medida, precio_unitario," + Environment.NewLine;
+                        sSql += "Cantidad, Valor_Dscto, Valor_Ice, Valor_Iva ,Valor_otro," + Environment.NewLine;
+                        sSql += "comentario, Id_Definicion_Combo, fecha_ingreso," + Environment.NewLine;
+                        sSql += "Usuario_Ingreso, Terminal_ingreso, id_pos_mascara_item, secuencia," + Environment.NewLine;
+                        sSql += "id_pos_secuencia_entrega, Estado, numero_replica_trigger," + Environment.NewLine;
+                        sSql += "numero_control_replica, id_empleado_cliente_empresarial)" + Environment.NewLine;
+                        sSql += "values(" + Environment.NewLine;
+                        sSql += iIdPedido + ", " + iIdProducto_P + ", 546, " + dPrecioUnitario_P + ", " + Environment.NewLine;
+                        sSql += dCantidad_P + ", 0, 0, " + dIVA_P + ", 0, " + Environment.NewLine;
+                        sSql += "null, null, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                        sSql += "'" + Program.sDatosMaximo[1] + "', 0, 1, null, 'A', 0, 0, " + iIdPersona + ")";
+
+                        if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                        {
+                            catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                            catchMensaje.ShowDialog();
+                            return false;
+                        }
+
+                        sSql = "";
+                        sSql += "insert into cv403_cantidades_despachadas(" + Environment.NewLine;
+                        sSql += "id_despacho_pedido, id_producto, cantidad, estado," + Environment.NewLine;
+                        sSql += "numero_replica_trigger, numero_control_replica)" + Environment.NewLine;
+                        sSql += "values (" + Environment.NewLine;
+                        sSql += iIdDespachoPedido + ", " + dgvPedido.Rows[i].Cells["idProducto"].Value + "," + Environment.NewLine;
+                        sSql += dgvPedido.Rows[i].Cells["cantidad"].Value + ", 'A', 1, 0)";
+
+                        if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                        {
+                            catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                            catchMensaje.ShowDialog();
+                            return false;
+                        }
+                    }
+                }
+
 
                 return true;
             }
@@ -1065,8 +1130,17 @@ namespace Palatium.Comida_Rapida
                 sSql += "and FP.estado = 'A' INNER JOIN" + Environment.NewLine;
                 sSql += "cv403_formas_pagos FPA ON FP.id_sri_forma_pago = FPA.id_sri_forma_pago" + Environment.NewLine;
                 sSql += "and FPA.estado = 'A'" + Environment.NewLine;
-                sSql += "where MP.codigo = 'EF'" + Environment.NewLine;
-                sSql += "and FPA.id_localidad = " + Program.iIdLocalidad;
+                sSql += "where FPA.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+
+                if (iBanderaEfectivoTarjeta == 0)
+                {
+                    sSql += "and MP.codigo = 'EF'";
+                }
+
+                else
+                {
+                    sSql += "and FC.id_pos_tipo_forma_cobro = " + iIdTipoFormaCobro;
+                }
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -1549,7 +1623,17 @@ namespace Palatium.Comida_Rapida
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            crearComanda();
+            if (dgvPedido.Rows.Count == 0)
+            {
+                ok.LblMensaje.Text = "No hay ítems ingresados para crear la comanda";
+                ok.ShowDialog();
+            }
+
+            else
+            {
+                iBanderaEfectivoTarjeta = 0;
+                crearComanda();
+            }
         }
 
         private void frmComandaComidaRapida_KeyDown(object sender, KeyEventArgs e)
@@ -1567,6 +1651,62 @@ namespace Palatium.Comida_Rapida
                     {
                         abrir.consultarImpresoraAbrirCajon();
                     }
+                }
+            }
+        }
+
+        private void btnTarjetas_Click(object sender, EventArgs e)
+        {
+            if (dgvPedido.Rows.Count == 0)
+            {
+                ok.LblMensaje.Text = "No hay ítems ingresados para crear la comanda";
+                ok.ShowDialog();
+            }
+
+            else
+            {
+                DataTable dtItems = new DataTable();
+                dtItems.Columns.Add("cantidad");
+                dtItems.Columns.Add("valor_item");
+                dtItems.Columns.Add("valor_recargo");
+                dtItems.Columns.Add("valor_iva");
+                dtItems.Columns.Add("total");
+                dtItems.Columns.Add("id_producto");
+                dtItems.Columns.Add("paga_iva");
+
+                for (int i = 0; i < dgvPedido.Rows.Count; i++)
+                {
+                    DataRow row = dtItems.NewRow();
+                    row["cantidad"] = dgvPedido.Rows[i].Cells[0].Value.ToString();
+                    row["valor_item"] = dgvPedido.Rows[i].Cells[2].Value.ToString();
+                    row["valor_recargo"] = "0";
+                    row["valor_iva"] = "0";
+                    row["total"] = "0";
+                    row["id_producto"] = dgvPedido.Rows[i].Cells[6].Value.ToString();
+                    row["paga_iva"] = dgvPedido.Rows[i].Cells[5].Value.ToString();
+                    dtItems.Rows.Add(row);
+                }
+
+
+                Comida_Rapida.frmCobroRapidoTarjetas cobro = new frmCobroRapidoTarjetas(dTotalDebido, dtItems);
+                cobro.ShowDialog();
+
+                if (cobro.DialogResult == DialogResult.OK)
+                {
+                    iBanderaEfectivoTarjeta = 1;
+                    iBanderaAplicaRecargo = cobro.iBanderaRecargo;
+                    dtRecargos = new DataTable();
+                    dtRecargos = cobro.dtValores;
+                    iIdTipoFormaCobro = cobro.iIdFormaPago;
+                    
+                    if (iBanderaAplicaRecargo == 1)
+                    {
+                        dTotalDebido = cobro.dbPagar;
+                        lblTotal.Text = "$ " + dTotalDebido.ToString("N2");
+                    }
+
+                    cobro.Close();
+                    crearComanda();
                 }
             }
         }

@@ -17,6 +17,8 @@ namespace Palatium.Parametros
         VentanasMensajes.frmMensajeNuevoSiNo NuevoSiNo = new VentanasMensajes.frmMensajeNuevoSiNo();
 
         Clases.ClaseCargarParametros parametros = new Clases.ClaseCargarParametros();
+        Clases.ClaseValidarCaracteres caracter = new Clases.ClaseValidarCaracteres();
+
         DataTable dtConsulta;
         string sSql;
         bool bActualizar;
@@ -200,6 +202,7 @@ namespace Palatium.Parametros
             dBAyudaConsumidorFinal.limpiar();
             dBAyudaVendedor.limpiar();
             dBAyudaProducto.limpiar();
+            txtMontoMaximo.Text = "0";
         }
 
         //FUNCION PARA LIMPIAR SIN REINICIAR
@@ -230,6 +233,7 @@ namespace Palatium.Parametros
             chkCortesias.Checked = false;
             chkFuncionarios.Checked = false;
             chkConsumoEmpleados.Checked = false;
+            txtMontoMaximo.Text = "0";
         }
 
         //CONSULTAR EL REGISTRO 
@@ -286,6 +290,7 @@ namespace Palatium.Parametros
                         cmbPrecuenta.SelectedValue = dtConsulta.Rows[0][18].ToString();
                         cmbFactura.SelectedValue = dtConsulta.Rows[0][19].ToString();
                         cmbImpresoras.SelectedValue = dtConsulta.Rows[0][20].ToString();
+                        txtMontoMaximo.Text = dtConsulta.Rows[0]["valor_maximo_recargo"].ToString();
 
                         //CHECKBOX IMPRESION COCINA
                         if (dtConsulta.Rows[0][21].ToString() == "0")
@@ -514,7 +519,7 @@ namespace Palatium.Parametros
                 sSql += "maneja_cortesia, maneja_canjes, maneja_vale_funcionario," + Environment.NewLine;
                 sSql += "maneja_consumo_empleados, imprimir_datos_factura," + Environment.NewLine;
                 sSql += "id_producto_anula, valor_precio_anula, id_pos_impresora, ejecutar_impresion," + Environment.NewLine;
-                sSql += "permitir_abrir_cajon)" + Environment.NewLine;
+                sSql += "permitir_abrir_cajon, valor_maximo_recargo)" + Environment.NewLine;
                 sSql += "values (" + Environment.NewLine;
                 sSql += Convert.ToInt32(cmbLocalidad.SelectedValue) + ", " + dBAyudaCiudad.iId + "," + Environment.NewLine;
                 sSql += dBAyudaCajero.iId + ", " + dBAyudaMesero.iId + ", " + Convert.ToInt32(cmbMoneda.SelectedValue) + "," + Environment.NewLine;
@@ -525,7 +530,7 @@ namespace Palatium.Parametros
                 sSql += iDomicilio + ", " + iMenuExpress + ", " + iCortesia + ", " + iCanjes + "," + Environment.NewLine;
                 sSql += iFuncionarios + ", " + iConsumoEmpleados + ", " + iImprimeDatosFactura + "," + Environment.NewLine;
                 sSql += dBAyudaProducto.iId + ", " + dValor + ", " + Convert.ToInt32(cmbImpresoras.SelectedValue) + "," + Environment.NewLine;
-                sSql += iEjecutarImpresion + ", " + iAbrirCajon + ")";
+                sSql += iEjecutarImpresion + ", " + iAbrirCajon + ", " + Convert.ToDecimal(txtMontoMaximo.Text.Trim()) + ")";
 
                 //EJECUTAR LA INSTRUCCIÓN SQL
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
@@ -596,7 +601,8 @@ namespace Palatium.Parametros
                 sSql += "valor_precio_anula = " + dValor + "," + Environment.NewLine;
                 sSql += "id_pos_impresora = " + Convert.ToInt32(cmbImpresoras.SelectedValue) + "," + Environment.NewLine;
                 sSql += "ejecutar_impresion = " + iEjecutarImpresion + "," + Environment.NewLine;
-                sSql += "permitir_abrir_cajon = " + iAbrirCajon + Environment.NewLine;
+                sSql += "permitir_abrir_cajon = " + iAbrirCajon + "," + Environment.NewLine;
+                sSql += "valor_maximo_recargo = " + Convert.ToDecimal(txtMontoMaximo.Text.Trim()) + Environment.NewLine;
                 sSql += "where id_pos_parametro_localidad = " + iIdParametroLocalidad + Environment.NewLine;
                 sSql += "and estado = 'A'";
 
@@ -1026,6 +1032,19 @@ namespace Palatium.Parametros
         private void btnLimpiarVendedor_Click(object sender, EventArgs e)
         {
             dBAyudaVendedor.limpiar();
+        }
+
+        private void txtMontoMaximo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            caracter.soloNumeros(e);
+        }
+
+        private void txtMontoMaximo_Leave(object sender, EventArgs e)
+        {
+            if (txtMontoMaximo.Text.Trim() == "")
+            {
+                txtMontoMaximo.Text = "0";
+            }
         }
     }
 }

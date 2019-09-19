@@ -37,15 +37,17 @@ namespace Palatium.ReportesTextBox
         string sDescripcionImpresora;
 
         int iIdLocalidad;
+        int iIdCierreCajero;
 
         Decimal dbAhorroEmergencia;
 
-        public frmVerResumenCaja(int iOp, string sFecha_P, int iIdLocalidad_P, Decimal dbAhorroEmergencia_P)
+        public frmVerResumenCaja(int iOp, string sFecha_P, int iIdLocalidad_P, Decimal dbAhorroEmergencia_P, int iIdCierreCajero_P)
         {
             this.iOp = iOp;
             this.sFecha = sFecha_P;
             this.iIdLocalidad = iIdLocalidad_P;
             this.dbAhorroEmergencia = dbAhorroEmergencia_P;
+            this.iIdCierreCajero = iIdCierreCajero_P;
             InitializeComponent();
         }
 
@@ -118,7 +120,7 @@ namespace Palatium.ReportesTextBox
             try
             {
                 sTexto = "";
-                sTexto = arqueo.llenarCierreCajero(sFecha, iIdLocalidad, dbAhorroEmergencia);
+                sTexto = arqueo.llenarCierreCajero(sFecha, iIdLocalidad, dbAhorroEmergencia, iIdCierreCajero);
                 Program.sCierreCajero = "";
                 Program.sCierreCajero = sTexto;
                 //sTexto = arqueo.llenarInforme(sFecha);

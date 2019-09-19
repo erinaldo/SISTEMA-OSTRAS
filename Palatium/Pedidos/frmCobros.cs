@@ -634,7 +634,7 @@ namespace Palatium.Pedidos
              }
          }
 
-        //FUNCION PARA CARGAR FORMAS DE PAGO CON RECARGO
+         //FUNCION PARA CARGAR FORMAS DE PAGO CON RECARGO
          private void cargarFormasPagosRecargo()
          {
              try
