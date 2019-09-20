@@ -930,6 +930,7 @@ namespace Palatium.Clases
                     {
                         Decimal iMonedas;
                         Decimal dbValorCalculo;
+                        Decimal dbSumaMonedas_P = 0;
 
                         string sMoneda = "";
                         sMoneda += "RESUMEN DE MONEDAS Y BILLETES".PadLeft(35, ' ') + Environment.NewLine;
@@ -938,51 +939,65 @@ namespace Palatium.Clases
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda01"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("0.01");
                         sMoneda += "1   CENTAVO".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda05"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("0.05");
                         sMoneda += "5   CENTAVOS".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda10"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("0.10");
                         sMoneda += "10  CENTAVOS".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda25"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("0.25");
                         sMoneda += "25  CENTAVOS".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["moneda50"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("0.50");
                         sMoneda += "50  CENTAVOS".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete1"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("1");
                         sMoneda += "1   DOLAR".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete2"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("2");
-                        sMoneda += "2 DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        sMoneda += "2   DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete5"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("5");
                         sMoneda += "5   DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete10"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("10");
                         sMoneda += "10  DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete20"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("20");
                         sMoneda += "20  DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete50"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("50");
                         sMoneda += "50  DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
                         iMonedas = Convert.ToDecimal(dtConsulta.Rows[0]["billete100"].ToString());
                         dbValorCalculo = iMonedas * Convert.ToDecimal("100");
                         sMoneda += "100 DOLARES".PadRight(20, ' ') + iMonedas.ToString().PadLeft(10, ' ') + dbValorCalculo.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                        dbSumaMonedas_P += dbValorCalculo;
 
+                        sMoneda += "".PadLeft(40, '-') + Environment.NewLine;
+                        sMoneda += "TOTAL EN EFECTIVO DE CAJA:".PadRight(30, ' ') + dbSumaMonedas_P.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
                         sMoneda += "".PadLeft(40, '-') + Environment.NewLine;
                         return sMoneda;
                     }

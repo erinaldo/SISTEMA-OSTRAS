@@ -62,12 +62,13 @@
             this.btnCambioCajero = new System.Windows.Forms.Button();
             this.btnAnularFactura = new System.Windows.Forms.Button();
             this.btnCobroAlmuerzos = new System.Windows.Forms.Button();
+            this.btnVentaExpress = new System.Windows.Forms.Button();
+            this.btnTarjetaAlmuerzo = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.logo = new System.Windows.Forms.PictureBox();
             this.grupoAccesos = new System.Windows.Forms.GroupBox();
             this.btnReimprimirFactura = new System.Windows.Forms.Button();
-            this.btnVentaExpress = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
@@ -758,6 +759,50 @@
             this.btnCobroAlmuerzos.MouseEnter += new System.EventHandler(this.btnCobroAlmuerzos_MouseEnter);
             this.btnCobroAlmuerzos.MouseLeave += new System.EventHandler(this.btnCobroAlmuerzos_MouseLeave);
             // 
+            // btnVentaExpress
+            // 
+            this.btnVentaExpress.BackColor = System.Drawing.Color.Navy;
+            this.btnVentaExpress.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnVentaExpress.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVentaExpress.FlatAppearance.BorderSize = 2;
+            this.btnVentaExpress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVentaExpress.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVentaExpress.ForeColor = System.Drawing.Color.White;
+            this.btnVentaExpress.Image = global::Palatium.Properties.Resources.icono_comida_rapida;
+            this.btnVentaExpress.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnVentaExpress.Location = new System.Drawing.Point(12, 136);
+            this.btnVentaExpress.Name = "btnVentaExpress";
+            this.btnVentaExpress.Size = new System.Drawing.Size(172, 118);
+            this.btnVentaExpress.TabIndex = 41;
+            this.btnVentaExpress.Text = "Venta\r\nExpress\r\n";
+            this.btnVentaExpress.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ttMensaje.SetToolTip(this.btnVentaExpress, "Clic aquí para gestión de comandas de forma express");
+            this.btnVentaExpress.UseVisualStyleBackColor = false;
+            this.btnVentaExpress.Click += new System.EventHandler(this.btnVentaExpress_Click);
+            this.btnVentaExpress.MouseEnter += new System.EventHandler(this.btnVentaExpress_MouseEnter);
+            this.btnVentaExpress.MouseLeave += new System.EventHandler(this.btnVentaExpress_MouseLeave);
+            // 
+            // btnTarjetaAlmuerzo
+            // 
+            this.btnTarjetaAlmuerzo.BackColor = System.Drawing.Color.Navy;
+            this.btnTarjetaAlmuerzo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnTarjetaAlmuerzo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTarjetaAlmuerzo.FlatAppearance.BorderSize = 2;
+            this.btnTarjetaAlmuerzo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTarjetaAlmuerzo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTarjetaAlmuerzo.ForeColor = System.Drawing.Color.White;
+            this.btnTarjetaAlmuerzo.Image = global::Palatium.Properties.Resources.tarjeta_almuerzo_inicio;
+            this.btnTarjetaAlmuerzo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnTarjetaAlmuerzo.Location = new System.Drawing.Point(448, 61);
+            this.btnTarjetaAlmuerzo.Name = "btnTarjetaAlmuerzo";
+            this.btnTarjetaAlmuerzo.Size = new System.Drawing.Size(172, 118);
+            this.btnTarjetaAlmuerzo.TabIndex = 42;
+            this.btnTarjetaAlmuerzo.Text = "Tarjetas de Almuerzo";
+            this.btnTarjetaAlmuerzo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ttMensaje.SetToolTip(this.btnTarjetaAlmuerzo, "Clic aquí para gestión de comandas para tarjetas de almuerzo");
+            this.btnTarjetaAlmuerzo.UseVisualStyleBackColor = false;
+            this.btnTarjetaAlmuerzo.Visible = false;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnVentaExpress);
@@ -769,13 +814,13 @@
             this.panel1.Controls.Add(this.btnEntradaCajero);
             this.panel1.Controls.Add(this.btnReabrirCaja);
             this.panel1.Controls.Add(this.btnFacturasSri);
+            this.panel1.Controls.Add(this.btnFuncionarios);
             this.panel1.Controls.Add(this.btnClienteEmpresarial);
             this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Controls.Add(this.btnRevisar);
             this.panel1.Controls.Add(this.btnCortesias);
             this.panel1.Controls.Add(this.btnCanjes);
             this.panel1.Controls.Add(this.btnConsumoEmpleados);
-            this.panel1.Controls.Add(this.btnFuncionarios);
             this.panel1.Controls.Add(this.btnEstadisticas);
             this.panel1.Controls.Add(this.btnDomicilios);
             this.panel1.Controls.Add(this.btnLlevar);
@@ -854,29 +899,6 @@
             this.btnReimprimirFactura.MouseEnter += new System.EventHandler(this.btnReimprimirFactura_MouseEnter);
             this.btnReimprimirFactura.MouseLeave += new System.EventHandler(this.btnReimprimirFactura_MouseLeave);
             // 
-            // btnVentaExpress
-            // 
-            this.btnVentaExpress.BackColor = System.Drawing.Color.Navy;
-            this.btnVentaExpress.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnVentaExpress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnVentaExpress.FlatAppearance.BorderSize = 2;
-            this.btnVentaExpress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVentaExpress.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVentaExpress.ForeColor = System.Drawing.Color.White;
-            this.btnVentaExpress.Image = global::Palatium.Properties.Resources.icono_comida_rapida;
-            this.btnVentaExpress.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnVentaExpress.Location = new System.Drawing.Point(12, 136);
-            this.btnVentaExpress.Name = "btnVentaExpress";
-            this.btnVentaExpress.Size = new System.Drawing.Size(172, 118);
-            this.btnVentaExpress.TabIndex = 41;
-            this.btnVentaExpress.Text = "Venta Express\r\nen Efectivo";
-            this.btnVentaExpress.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.ttMensaje.SetToolTip(this.btnVentaExpress, "Clic aquí para gestión de comandas de forma express");
-            this.btnVentaExpress.UseVisualStyleBackColor = false;
-            this.btnVentaExpress.Click += new System.EventHandler(this.btnVentaExpress_Click);
-            this.btnVentaExpress.MouseEnter += new System.EventHandler(this.btnVentaExpress_MouseEnter);
-            this.btnVentaExpress.MouseLeave += new System.EventHandler(this.btnVentaExpress_MouseLeave);
-            // 
             // frmMenuPos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -885,6 +907,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1355, 668);
             this.ControlBox = false;
+            this.Controls.Add(this.btnTarjetaAlmuerzo);
             this.Controls.Add(this.grupoAccesos);
             this.Controls.Add(this.btnAcerca);
             this.Controls.Add(this.lblContacto);
@@ -948,5 +971,6 @@
         private System.Windows.Forms.Button btnCambioCajero;
         private System.Windows.Forms.Button btnAnularFactura;
         private System.Windows.Forms.Button btnVentaExpress;
+        private System.Windows.Forms.Button btnTarjetaAlmuerzo;
     }
 }

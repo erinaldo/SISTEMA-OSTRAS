@@ -196,8 +196,25 @@ namespace Palatium.Oficina
                 sSql += "and CJ.cg_tipo_caja = TCJ.correlativo " + Environment.NewLine;
                 sSql += "and TCJ.codigo = 'GENERAL'" + Environment.NewLine;
                 sSql += "and LOC.id_localidad = " + Program.iIdLocalidad;
-                cmbCaja.llenar(dtConsulta, sSql);
-                cmbCaja.SelectedIndex = 1;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    cmbCaja.DisplayMember = "descripcion";
+                    cmbCaja.ValueMember = "id_caja";
+                    cmbCaja.DataSource = dtConsulta;
+
+                }
+
+                else
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
             }
 
             catch (Exception ex)
@@ -220,9 +237,24 @@ namespace Palatium.Oficina
                 sSql += "from pos_vw_cajero_mesero" + Environment.NewLine;
                 sSql += "where estado = 'A'" + Environment.NewLine;
                 sSql += "order by descripcion";
-                
-                cmbEmpleados.llenar(dtConsulta, sSql);
-                cmbEmpleados.SelectedIndex = 1;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    cmbEmpleados.DisplayMember = "descripcion";
+                    cmbEmpleados.ValueMember = "id_persona";
+                    cmbEmpleados.DataSource = dtConsulta;
+                }
+
+                else
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
             }
 
             catch (Exception ex)
@@ -672,12 +704,23 @@ namespace Palatium.Oficina
                 sSql += "select id_pos_cargo, descripcion" + Environment.NewLine;
                 sSql += "from pos_cargo" + Environment.NewLine;
                 sSql += "where estado = 'A'" + Environment.NewLine;
-                
-                cmbCargo.llenar(dtConsulta, sSql);
 
-                if (cmbCargo.Items.Count > 0)
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
                 {
-                    cmbCargo.SelectedIndex = 1;
+                    cmbCargo.DisplayMember = "descripcion";
+                    cmbCargo.ValueMember = "id_pos_cargo";
+                    cmbCargo.DataSource = dtConsulta;
+                }
+
+                else
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
                 }
             }
             catch (Exception ex)

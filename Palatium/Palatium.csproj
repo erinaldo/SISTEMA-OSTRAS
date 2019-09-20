@@ -441,6 +441,12 @@
     <Compile Include="Oficina\frmCargoMovimientos.Designer.cs">
       <DependentUpon>frmCargoMovimientos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Oficina\frmIngresoMasivoPersonal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Oficina\frmIngresoMasivoPersonal.Designer.cs">
+      <DependentUpon>frmIngresoMasivoPersonal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Oficina\frmNuevoMenuConfiguracion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2192,6 +2198,9 @@
     <EmbeddedResource Include="Oficina\frmCargoMovimientos.resx">
       <DependentUpon>frmCargoMovimientos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Oficina\frmIngresoMasivoPersonal.resx">
+      <DependentUpon>frmIngresoMasivoPersonal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Oficina\frmNuevoMenuConfiguracion.resx">
       <DependentUpon>frmNuevoMenuConfiguracion.cs</DependentUpon>
     </EmbeddedResource>
@@ -3212,6 +3221,7 @@
     <None Include="Resources\icono_menu_empleado.png" />
     <None Include="Resources\icono_menu_empresa.png" />
     <None Include="Resources\icono_menu_cliente_empresarial.png" />
+    <None Include="Resources\icono_registro_masivo_personas.png" />
     <Content Include="Resources\icono_sri_2.png" />
     <None Include="Resources\impresoras_menu.png" />
     <None Include="Resources\impresiones_nuevo.png" />
@@ -3342,6 +3352,7 @@
     <None Include="Resources\remover_iva.png" />
     <None Include="Resources\movimiento_caja_menu.png" />
     <None Include="Resources\mail_default.png" />
+    <None Include="Resources\tarjeta_almuerzo_inicio.png" />
     <Content Include="Resources\txt.png" />
     <None Include="Resources\txt1.png" />
     <None Include="Resources\visto_3.png" />

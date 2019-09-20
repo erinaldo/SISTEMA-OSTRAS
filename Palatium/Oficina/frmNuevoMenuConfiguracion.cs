@@ -716,5 +716,11 @@ namespace Palatium.Oficina
             Facturador.frmNuevoClienteRegistro personas = new Facturador.frmNuevoClienteRegistro(1);
             verificarFormularios(personas, this);
         }
+
+        private void subMenuCrearRegistrosMasivos_Click(object sender, EventArgs e)
+        {
+            Oficina.frmIngresoMasivoPersonal ingreso = new frmIngresoMasivoPersonal();
+            verificarFormularios(ingreso, this);
+        }
     }
 }
