@@ -435,6 +435,12 @@
     <Compile Include="Inicio\frmInicio.Designer.cs">
       <DependentUpon>frmInicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menu\frmMenuTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\frmMenuTab.Designer.cs">
+      <DependentUpon>frmMenuTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Oficina\frmCargoMovimientos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2194,6 +2200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio\frmInicio.resx">
       <DependentUpon>frmInicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\frmMenuTab.resx">
+      <DependentUpon>frmMenuTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Oficina\frmCargoMovimientos.resx">
       <DependentUpon>frmCargoMovimientos.cs</DependentUpon>

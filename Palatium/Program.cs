@@ -113,7 +113,7 @@ namespace Palatium
 
                     //Application.Run(new Cajero.frmRecuperarDinero());
                     Application.Run(new frmVerMenu());
-                    //Application.Run(new Comida_Rapida.frmComandaComidaRapida());
+                    //Application.Run(new Menu.frmMenuTab());
                 }
 
                 else

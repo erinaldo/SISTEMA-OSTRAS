@@ -1881,7 +1881,7 @@ namespace Palatium
 
                     }
 
-                    chkImprimirCocina.Checked = false;
+                    //chkImprimirCocina.Checked = false;
                 }
             }
 
@@ -3633,7 +3633,7 @@ namespace Palatium
                     }
 
                     reabrir = "OK";
-                    chkImprimirCocina.Checked = false;
+                    //chkImprimirCocina.Checked = false;
 
                     goto fin;
                 }
