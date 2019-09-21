@@ -142,8 +142,8 @@
   <data name="boton_categoria_salida_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\boton_categoria_salida_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="boton_categorias" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\boton_categorias.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icono_restaurante" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icono_restaurante.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tipo_receta_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tipo_receta_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -153,6 +153,9 @@
   </data>
   <data name="flujo_clientes_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\flujo_clientes_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mesa_juego_con_4_sillas_para_restaurante_comedor_barato_go80_D_NQ_NP_821725_MLM25465991338_032017_F" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesa-juego-con-4-sillas-para-restaurante-comedor-barato-go80-D_NQ_NP_821725-MLM25465991338_032017-F.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="reserva_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reserva_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -277,9 +280,6 @@
   <data name="unidades_receta_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\unidades_receta_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bodega_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bodega_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="sincronizacion_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sincronizacion_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -304,8 +304,8 @@
   <data name="nota_venta" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nota_venta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="unidades_receta_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\unidades_receta_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="receta_menu_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\receta_menu_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="egreso_materia_prima_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\egreso_materia_prima_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -318,9 +318,6 @@
   </data>
   <data name="icono_reimprimir" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icono_reimprimir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="recibos_cobros_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\recibos_cobros_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tipo_ambiente_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tipo_ambiente_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -346,6 +343,9 @@
   <data name="estadisticas_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\estadisticas_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="unidades_receta_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\unidades_receta_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="formas_pago_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\formas_pago_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -358,6 +358,9 @@
   <data name="boton_mesas_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\boton_mesas_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="logo_inicio_sistema" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_inicio_sistema.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="juego_para_restaurante_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\juego-para-restaurante_large.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -366,6 +369,9 @@
   </data>
   <data name="cortesia1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cortesia1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inicio_configuracion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inicio_configuracion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cancelar_peque_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cancelar_peque_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -387,6 +393,9 @@
   </data>
   <data name="boton_mesas_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\boton_mesas_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fondo_inicio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fondo_inicio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="comanda_anular" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\comanda_anular.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -420,9 +429,6 @@
   </data>
   <data name="ventas_categoria_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ventas_categoria_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="formatos_impresion_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\formatos_impresion_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="textura_fondo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\textura_fondo1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -469,6 +475,9 @@
   <data name="procesar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\procesar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="tarjeta_almuerzo_inicio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tarjeta_almuerzo_inicio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="productos_por_categoria_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productos_por_categoria_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -498,9 +507,6 @@
   </data>
   <data name="promotor_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\promotor_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FACTURA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FACTURA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dolar_dashboard_semana" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dolar_dashboard_semana.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -547,6 +553,9 @@
   <data name="movimiento_caja_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\movimiento_caja_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icono_salir_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icono_salir_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="seleccionar_comanda_combinar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\seleccionar_comanda_combinar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -576,6 +585,9 @@
   </data>
   <data name="bodega_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bodega_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cobrar_almuerzos1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cobrar_almuerzos1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="editar_boton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\editar_boton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -694,6 +706,9 @@
   <data name="dashboard_domicilio" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dashboard_domicilio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="impresoras_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\impresoras_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="dashboard_tenedor_promedio" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dashboard_tenedor_promedio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -742,8 +757,8 @@
   <data name="menu_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mesa_juego_con_4_sillas_para_restaurante_comedor_barato_go80_D_NQ_NP_821725_MLM25465991338_032017_F" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mesa-juego-con-4-sillas-para-restaurante-comedor-barato-go80-D_NQ_NP_821725-MLM25465991338_032017-F.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="formatos_impresion_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\formatos_impresion_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo_empresa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo_empresa.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -765,6 +780,9 @@
   </data>
   <data name="ingreso_materia_prima_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ingreso_materia_prima_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inicio_punto_venta_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inicio_punto_venta_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="movimiento_bodega_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\movimiento_bodega_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -789,6 +807,9 @@
   </data>
   <data name="comanda_revisar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\comanda_revisar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boton_categorias" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boton_categorias.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="anadir" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\anadir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -955,8 +976,8 @@
   <data name="recuperacion_cartera_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\recuperacion_cartera_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="registro_clientes_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\registro_clientes_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FACTURA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FACTURA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="boton_mesas_cambio" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\boton_mesas_cambio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1003,9 +1024,6 @@
   <data name="impresora_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\impresora_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icono_restaurante" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icono_restaurante.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="definicion_detallada_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\definicion_detallada_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1033,8 +1051,8 @@
   <data name="excel_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\excel_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="impresoras_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\impresoras_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bodega_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bodega_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icono_revisar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icono_revisar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1044,6 +1062,9 @@
   </data>
   <data name="mail_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mail_default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="registro_clientes_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\registro_clientes_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dolar_dashboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dolar_dashboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1117,8 +1138,8 @@
   <data name="eliminar_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\eliminar_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="receta_menu_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\receta_menu_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="recibos_cobros_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\recibos_cobros_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="txt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\txt1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1156,7 +1177,7 @@
   <data name="silla" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\silla.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tarjeta_almuerzo_inicio" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tarjeta_almuerzo_inicio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icono_cerrar_sesion_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icono_cerrar_sesion_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

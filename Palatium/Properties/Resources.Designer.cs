@@ -693,6 +693,16 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cobrar_almuerzos1 {
+            get {
+                object obj = ResourceManager.GetObject("cobrar_almuerzos1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cobrar_icono {
             get {
                 object obj = ResourceManager.GetObject("cobrar_icono", resourceCulture);
@@ -1433,6 +1443,16 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fondo_inicio {
+            get {
+                object obj = ResourceManager.GetObject("fondo_inicio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fondo_pisos_1 {
             get {
                 object obj = ResourceManager.GetObject("fondo_pisos_1", resourceCulture);
@@ -1666,6 +1686,16 @@ namespace Palatium.Properties {
         internal static System.Drawing.Bitmap icono_cerrar_sesion {
             get {
                 object obj = ResourceManager.GetObject("icono_cerrar_sesion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_cerrar_sesion_menu {
+            get {
+                object obj = ResourceManager.GetObject("icono_cerrar_sesion_menu", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1943,6 +1973,16 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icono_salir_menu {
+            get {
+                object obj = ResourceManager.GetObject("icono_salir_menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icono_salir_sis {
             get {
                 object obj = ResourceManager.GetObject("icono_salir_sis", resourceCulture);
@@ -2113,6 +2153,26 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap inicio_configuracion {
+            get {
+                object obj = ResourceManager.GetObject("inicio_configuracion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inicio_punto_venta_2 {
+            get {
+                object obj = ResourceManager.GetObject("inicio_punto_venta_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap insumo_referencia_menu {
             get {
                 object obj = ResourceManager.GetObject("insumo_referencia_menu", resourceCulture);
@@ -2246,6 +2306,16 @@ namespace Palatium.Properties {
         internal static System.Drawing.Bitmap logo_empresa {
             get {
                 object obj = ResourceManager.GetObject("logo_empresa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_inicio_sistema {
+            get {
+                object obj = ResourceManager.GetObject("logo_inicio_sistema", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
