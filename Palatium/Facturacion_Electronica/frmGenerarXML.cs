@@ -186,7 +186,7 @@ namespace Palatium.Facturacion_Electronica
                 sSql += "CP.Porcentaje_IVA, PR.codigo,NP.nombre, UNIDAD.codigo Unidad, isnull(DP.comentario,'') Comentario, DP.precio_unitario," + Environment.NewLine;
                 sSql += "DP.Cantidad,Case when DP.precio_unitario=0 then 0 else round(100*DP.valor_Dscto/DP.precio_unitario,2) end Pct_Dscto," + Environment.NewLine;
                 sSql += "DP.valor_Dscto, DP.valor_ICE, DP.valor_IVA, DP.Comentario, DP.Id_Det_Pedido, F.fecha_factura, Case when PR.Expira = 1 Then 1 Else 0 End Expira," + Environment.NewLine;
-                sSql += "F.id_persona, TP.identificacion, rtrim(TP.apellidos + ' ' + TP.nombres) cliente, F.id_localidad, DP.valor_otro, F.id_factura, TP.correo_electronico," + Environment.NewLine;
+                sSql += "F.id_persona, TP.identificacion, rtrim(TP.apellidos + ' ' + TP.nombres) cliente, F.id_localidad, isnull(DP.valor_otro, 0) valor_otro, F.id_factura, TP.correo_electronico," + Environment.NewLine;
                 sSql += "TP.correo_electronico, F.id_tipo_emision, F.id_tipo_ambiente" + Environment.NewLine;
                 sSql += "From cv403_facturas F, cv403_facturas_pedidos FP, cv403_cab_pedidos CP, cv403_det_pedidos DP, cv401_productos PR, cv401_nombre_productos NP," + Environment.NewLine;
                 sSql += "tp_codigos UNIDAD, tp_codigos CO, tp_codigos CODI, cv403_vendedores VENDE, cv403_formas_pagos FORPAGO, vta_tipocomprobante TIPOCO," + Environment.NewLine;
