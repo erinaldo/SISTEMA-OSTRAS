@@ -40,6 +40,7 @@
             this.btnAgregarEmpresa = new System.Windows.Forms.Button();
             this.pnlEmpleados = new System.Windows.Forms.Panel();
             this.pnlEmpresa = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -179,6 +180,20 @@
             this.pnlEmpresa.Size = new System.Drawing.Size(362, 540);
             this.pnlEmpresa.TabIndex = 118;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Maiandra GD", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = global::Palatium.Properties.Resources.icono_boton_empresa;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.Location = new System.Drawing.Point(367, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(130, 105);
+            this.button1.TabIndex = 122;
+            this.button1.Text = "button1";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            // 
             // frmSeleccionEmpresaEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,6 +201,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SkyBlue;
             this.ClientSize = new System.Drawing.Size(1362, 741);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnSiguienteEmpleado);
             this.Controls.Add(this.btnAnteriorEmpleado);
@@ -226,5 +242,6 @@
         private System.Windows.Forms.Button btnAgregarEmpresa;
         private System.Windows.Forms.Panel pnlEmpleados;
         private System.Windows.Forms.Panel pnlEmpresa;
+        private System.Windows.Forms.Button button1;
     }
 }
