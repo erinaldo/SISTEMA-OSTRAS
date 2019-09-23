@@ -81,6 +81,7 @@ namespace Palatium.Comida_Rapida
         int iNumeroMovimientoCaja;
         int iBanderaEfectivoTarjeta;
         int iBanderaAplicaRecargo;
+        int iBanderaExpressTarjeta;
 
         Decimal dIVA_P;
         Decimal dPrecioUnitario_P;
@@ -92,9 +93,10 @@ namespace Palatium.Comida_Rapida
         Decimal dbSubtotalRecalcular;
         Decimal dbValorIVA;
 
-        public frmComandaComidaRapida(int iIdPosOrigenOrden_P)
+        public frmComandaComidaRapida(int iIdPosOrigenOrden_P, int iBanderaExpressTarjeta_P)
         {
             this.iIdOrigenOrden = iIdPosOrigenOrden_P;
+            this.iBanderaExpressTarjeta = iBanderaExpressTarjeta_P;
             InitializeComponent();
         }
 
@@ -649,6 +651,18 @@ namespace Palatium.Comida_Rapida
         {
             try
             {
+                string sEstadoOrden;
+
+                if (iBanderaExpressTarjeta == 1)
+                {
+                    sEstadoOrden = "Cerrada";
+                }
+
+                else
+                {
+                    sEstadoOrden = "Pagada";
+                }
+
                 //INSERTAR EN LA TABLA CV403_CAB_PEDIDOS
                 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 sSql = "";
@@ -666,7 +680,7 @@ namespace Palatium.Comida_Rapida
                 sSql += (Program.iva * 100) + "," + Program.iIdVendedor + ",6967, 0, 7471," + Environment.NewLine;
                 sSql += "GETDATE(),'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "'," + iCuentaDiaria + ", 0, ";
                 sSql += Program.iIdCajeroDefault + "," + iIdOrigenOrden + ", 0," + Program.iJORNADA + "," + Environment.NewLine;
-                sSql += "'" + sFecha + "', GETDATE(), GETDATE(), 'Pagada'," + Environment.NewLine;
+                sSql += "'" + sFecha + "', GETDATE(), GETDATE(), '" + sEstadoOrden + "'," + Environment.NewLine;
                 sSql += "1, 1, 1, 0, 0, 'A', 1, null, null," + Environment.NewLine;
                 sSql += Program.iIdMesero + ", " + Program.iIdTerminal + ", " + (Program.servicio * 100) + ", 0)";
 
@@ -1132,14 +1146,22 @@ namespace Palatium.Comida_Rapida
                 sSql += "and FPA.estado = 'A'" + Environment.NewLine;
                 sSql += "where FPA.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
 
-                if (iBanderaEfectivoTarjeta == 0)
+                if (iBanderaExpressTarjeta == 0)
                 {
-                    sSql += "and MP.codigo = 'EF'";
+                    if (iBanderaEfectivoTarjeta == 0)
+                    {
+                        sSql += "and MP.codigo = 'EF'";
+                    }
+
+                    else
+                    {
+                        sSql += "and FC.id_pos_tipo_forma_cobro = " + iIdTipoFormaCobro;
+                    }
                 }
 
                 else
                 {
-                    sSql += "and FC.id_pos_tipo_forma_cobro = " + iIdTipoFormaCobro;
+                    sSql += "and MP.codigo = 'TA'";
                 }
 
                 dtConsulta = new DataTable();
@@ -1336,124 +1358,127 @@ namespace Palatium.Comida_Rapida
                     return false;
                 }
 
-                //SELECCIONAR EL ID DE CAJA
-                //------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                sSql = "";
-                sSql += "select id_caja" + Environment.NewLine;
-                sSql += "from cv405_cajas" + Environment.NewLine;
-                sSql += "where estado = 'A'" + Environment.NewLine;
-                sSql += "and id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
-                sSql += "and cg_tipo_caja = 8906";
-
-                dtConsulta = new DataTable();
-                dtConsulta.Clear();
-
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-                if (bRespuesta == false)
+                if (iBanderaExpressTarjeta == 0)
                 {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return false;
-                }
+                    //SELECCIONAR EL ID DE CAJA
+                    //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    sSql = "";
+                    sSql += "select id_caja" + Environment.NewLine;
+                    sSql += "from cv405_cajas" + Environment.NewLine;
+                    sSql += "where estado = 'A'" + Environment.NewLine;
+                    sSql += "and id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                    sSql += "and cg_tipo_caja = 8906";
 
-                iIdCaja = Convert.ToInt32(dtConsulta.Rows[0]["id_caja"].ToString());
+                    dtConsulta = new DataTable();
+                    dtConsulta.Clear();
 
-                //VARIABLES PARA INSERTAR LOS MOVIMIENTOS DE CAJA
-                //------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                sSecuencial = TxtNumeroFactura.Text.Trim().PadLeft(9, '0');
-                sMovimiento = ("N. ENTREGA. No. " + txtfacturacion.Text.Trim() + "-" + sSecuencial).Trim();
+                    bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
 
-                //INSERTAR EN LA TABLA POS_MOVIMIENTO_CAJA
-                //------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                sSql = "";
-                sSql += "insert into pos_movimiento_caja (" + Environment.NewLine;
-                sSql += "tipo_movimiento, idempresa, id_localidad, id_persona, id_cliente," + Environment.NewLine;
-                sSql += "id_caja, id_pos_cargo, fecha, hora, cg_moneda, valor, concepto," + Environment.NewLine;
-                sSql += "documento_venta, id_documento_pago, id_pos_jornada, estado," + Environment.NewLine;
-                sSql += "fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
-                sSql += "values (" + Environment.NewLine;
-                sSql += "1, " + Program.iIdEmpresa + ", " + Program.iIdLocalidad + "," + Program.iIdPersonaMovimiento + ", ";
-                sSql += + iIdPersona + ", " + iIdCaja + ", 1," + Environment.NewLine;
-                sSql += "'" + sFecha + "', GETDATE(), " + Program.iMoneda + ", " + dTotalDebido + "," + Environment.NewLine;
-                sSql += "'COBRO No. CUENTA " + iNumeroPedidoOrden.ToString() + " (" + sDescripcionFormaPago + ")'," + Environment.NewLine;
-                sSql += "'" + sMovimiento.Trim() + "', " + iIdDocumentoPago + ", " + Program.iJORNADA + "," + Environment.NewLine;
-                sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+                    if (bRespuesta == false)
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
 
-                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return false;
-                }
+                    iIdCaja = Convert.ToInt32(dtConsulta.Rows[0]["id_caja"].ToString());
 
-                //EXTRAER EL ID DEL MOVIMIENTO DE CAJA
-                //------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                sTabla = "pos_movimiento_caja";
-                sCampo = "id_pos_movimiento_caja";
+                    //VARIABLES PARA INSERTAR LOS MOVIMIENTOS DE CAJA
+                    //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    sSecuencial = TxtNumeroFactura.Text.Trim().PadLeft(9, '0');
+                    sMovimiento = ("N. ENTREGA. No. " + txtfacturacion.Text.Trim() + "-" + sSecuencial).Trim();
 
-                iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
+                    //INSERTAR EN LA TABLA POS_MOVIMIENTO_CAJA
+                    //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    sSql = "";
+                    sSql += "insert into pos_movimiento_caja (" + Environment.NewLine;
+                    sSql += "tipo_movimiento, idempresa, id_localidad, id_persona, id_cliente," + Environment.NewLine;
+                    sSql += "id_caja, id_pos_cargo, fecha, hora, cg_moneda, valor, concepto," + Environment.NewLine;
+                    sSql += "documento_venta, id_documento_pago, id_pos_jornada, estado," + Environment.NewLine;
+                    sSql += "fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                    sSql += "values (" + Environment.NewLine;
+                    sSql += "1, " + Program.iIdEmpresa + ", " + Program.iIdLocalidad + "," + Program.iIdPersonaMovimiento + ", ";
+                    sSql += +iIdPersona + ", " + iIdCaja + ", 1," + Environment.NewLine;
+                    sSql += "'" + sFecha + "', GETDATE(), " + Program.iMoneda + ", " + dTotalDebido + "," + Environment.NewLine;
+                    sSql += "'COBRO No. CUENTA " + iNumeroPedidoOrden.ToString() + " (" + sDescripcionFormaPago + ")'," + Environment.NewLine;
+                    sSql += "'" + sMovimiento.Trim() + "', " + iIdDocumentoPago + ", " + Program.iJORNADA + "," + Environment.NewLine;
+                    sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
 
-                if (iMaximo == -1)
-                {
-                    ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                    ok.ShowDialog();
-                    return false;
-                }
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
 
-                iIdPosMovimientoCaja = Convert.ToInt32(iMaximo);
+                    //EXTRAER EL ID DEL MOVIMIENTO DE CAJA
+                    //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    sTabla = "pos_movimiento_caja";
+                    sCampo = "id_pos_movimiento_caja";
 
-                //CONSULTAR EL NUMERO DE MOVIMIENTO DE CAJA EN TP_LOCALIDADES_IMPRESORAS
-                //------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                sSql = "";
-                sSql += "select numeromovimientocaja" + Environment.NewLine;
-                sSql += "from tp_localidades_impresoras" + Environment.NewLine;
-                sSql += "where id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
-                sSql += "and estado = 'A'";
+                    iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
 
-                dtConsulta = new DataTable();
-                dtConsulta.Clear();
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+                    if (iMaximo == -1)
+                    {
+                        ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
+                        ok.ShowDialog();
+                        return false;
+                    }
 
-                if (bRespuesta == false)
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return false;
-                }
+                    iIdPosMovimientoCaja = Convert.ToInt32(iMaximo);
 
-                iNumeroMovimientoCaja = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                    //CONSULTAR EL NUMERO DE MOVIMIENTO DE CAJA EN TP_LOCALIDADES_IMPRESORAS
+                    //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    sSql = "";
+                    sSql += "select numeromovimientocaja" + Environment.NewLine;
+                    sSql += "from tp_localidades_impresoras" + Environment.NewLine;
+                    sSql += "where id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                    sSql += "and estado = 'A'";
 
-                //INSERTAR EN LA TABLA POS_NUMERO_MOVIMIENTO_CAJA
-                //------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                sSql = "";
-                sSql += "insert into pos_numero_movimiento_caja (" + Environment.NewLine;
-                sSql += "id_pos_movimiento_caja, numero_movimiento_caja, estado," + Environment.NewLine;
-                sSql += "fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
-                sSql += "values (" + Environment.NewLine;
-                sSql += iIdPosMovimientoCaja + ", " + iNumeroMovimientoCaja + ", 'A', GETDATE()," + Environment.NewLine;
-                sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+                    dtConsulta = new DataTable();
+                    dtConsulta.Clear();
+                    bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
 
-                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return false;
-                }
+                    if (bRespuesta == false)
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
 
-                //ACTUALIZAR EL NUMERO DE MOVIMIENTO DE CAJA
-                //------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                sSql = "";
-                sSql += "update tp_localidades_impresoras set" + Environment.NewLine;
-                sSql += "numeromovimientocaja = numeromovimientocaja + 1" + Environment.NewLine;
-                sSql += "where id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
-                sSql += "and estado = 'A'";
+                    iNumeroMovimientoCaja = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
 
-                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return false;
+                    //INSERTAR EN LA TABLA POS_NUMERO_MOVIMIENTO_CAJA
+                    //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    sSql = "";
+                    sSql += "insert into pos_numero_movimiento_caja (" + Environment.NewLine;
+                    sSql += "id_pos_movimiento_caja, numero_movimiento_caja, estado," + Environment.NewLine;
+                    sSql += "fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                    sSql += "values (" + Environment.NewLine;
+                    sSql += iIdPosMovimientoCaja + ", " + iNumeroMovimientoCaja + ", 'A', GETDATE()," + Environment.NewLine;
+                    sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
+
+                    //ACTUALIZAR EL NUMERO DE MOVIMIENTO DE CAJA
+                    //------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    sSql = "";
+                    sSql += "update tp_localidades_impresoras set" + Environment.NewLine;
+                    sSql += "numeromovimientocaja = numeromovimientocaja + 1" + Environment.NewLine;
+                    sSql += "where id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                    sSql += "and estado = 'A'";
+
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
                 }
 
                 return true;
@@ -1510,6 +1535,23 @@ namespace Palatium.Comida_Rapida
         {
             datosFactura();
             cargarCategorias();
+
+            if (iBanderaExpressTarjeta == 1)
+            {
+                btnAceptar.Visible = false;
+                btnTarjetas.Visible = false;
+                btnCobroTarjetaAlmuerzo.Visible = true;
+                this.Text = "COMANDA PARA TARJETA DE ALMUERZOS";
+            }
+
+            else
+            {
+                btnAceptar.Visible = true;
+                btnTarjetas.Visible = true;
+                btnCobroTarjetaAlmuerzo.Visible = false;
+                this.Text = "COMANDA PARA VENTA EXPRESS";
+            }
+
         }
 
         private void btnRemoverItem_Click(object sender, EventArgs e)
@@ -1708,6 +1750,20 @@ namespace Palatium.Comida_Rapida
                     cobro.Close();
                     crearComanda();
                 }
+            }
+        }
+
+        private void btnCobroTarjetaAlmuerzo_Click(object sender, EventArgs e)
+        {
+            if (dgvPedido.Rows.Count == 0)
+            {
+                ok.LblMensaje.Text = "No hay ítems ingresados para crear la comanda";
+                ok.ShowDialog();
+            }
+
+            else
+            {
+                crearComanda();
             }
         }
     }

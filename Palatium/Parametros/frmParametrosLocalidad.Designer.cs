@@ -63,7 +63,6 @@
             this.BtnLimpiarCajero = new System.Windows.Forms.Button();
             this.BtnLimpiarCiudad = new System.Windows.Forms.Button();
             this.cmbMoneda = new MisControles.ComboDatos();
-            this.cmbLocalidad = new MisControles.ComboDatos();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -87,6 +86,9 @@
             this.label20 = new System.Windows.Forms.Label();
             this.txtMontoMaximo = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.chkNoProcesados = new System.Windows.Forms.CheckBox();
+            this.chkUsarRecetas = new System.Windows.Forms.CheckBox();
+            this.cmbLocalidad = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.grupoOpciones.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -96,6 +98,9 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.groupBox1.Controls.Add(this.cmbLocalidad);
+            this.groupBox1.Controls.Add(this.chkNoProcesados);
+            this.groupBox1.Controls.Add(this.chkUsarRecetas);
             this.groupBox1.Controls.Add(this.chkAbrirCajon);
             this.groupBox1.Controls.Add(this.chkEjecutarImpresiones);
             this.groupBox1.Controls.Add(this.dBAyudaVendedor);
@@ -130,7 +135,6 @@
             this.groupBox1.Controls.Add(this.BtnLimpiarCajero);
             this.groupBox1.Controls.Add(this.BtnLimpiarCiudad);
             this.groupBox1.Controls.Add(this.cmbMoneda);
-            this.groupBox1.Controls.Add(this.cmbLocalidad);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -141,7 +145,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox1.Size = new System.Drawing.Size(775, 351);
+            this.groupBox1.Size = new System.Drawing.Size(775, 405);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros de la Localidad";
@@ -234,7 +238,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(143, 310);
+            this.label21.Location = new System.Drawing.Point(143, 337);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(12, 15);
@@ -245,7 +249,7 @@
             // 
             this.cmbImpresoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbImpresoras.FormattingEnabled = true;
-            this.cmbImpresoras.Location = new System.Drawing.Point(167, 307);
+            this.cmbImpresoras.Location = new System.Drawing.Point(167, 334);
             this.cmbImpresoras.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbImpresoras.Name = "cmbImpresoras";
             this.cmbImpresoras.Size = new System.Drawing.Size(241, 23);
@@ -255,7 +259,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(28, 310);
+            this.label22.Location = new System.Drawing.Point(28, 337);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(119, 15);
@@ -371,7 +375,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(143, 281);
+            this.label13.Location = new System.Drawing.Point(143, 308);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(12, 15);
@@ -382,7 +386,7 @@
             // 
             this.cmbFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFactura.FormattingEnabled = true;
-            this.cmbFactura.Location = new System.Drawing.Point(167, 278);
+            this.cmbFactura.Location = new System.Drawing.Point(167, 305);
             this.cmbFactura.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbFactura.Name = "cmbFactura";
             this.cmbFactura.Size = new System.Drawing.Size(241, 23);
@@ -392,7 +396,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(28, 281);
+            this.label14.Location = new System.Drawing.Point(28, 308);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(100, 15);
@@ -403,7 +407,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(143, 252);
+            this.label11.Location = new System.Drawing.Point(143, 279);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(12, 15);
@@ -414,7 +418,7 @@
             // 
             this.cmbPrecuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPrecuenta.FormattingEnabled = true;
-            this.cmbPrecuenta.Location = new System.Drawing.Point(167, 249);
+            this.cmbPrecuenta.Location = new System.Drawing.Point(167, 276);
             this.cmbPrecuenta.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbPrecuenta.Name = "cmbPrecuenta";
             this.cmbPrecuenta.Size = new System.Drawing.Size(241, 23);
@@ -424,7 +428,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(28, 252);
+            this.label12.Location = new System.Drawing.Point(28, 279);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(115, 15);
@@ -435,7 +439,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(143, 223);
+            this.label6.Location = new System.Drawing.Point(143, 250);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(12, 15);
@@ -529,28 +533,17 @@
             // 
             this.cmbMoneda.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMoneda.FormattingEnabled = true;
-            this.cmbMoneda.Location = new System.Drawing.Point(167, 220);
+            this.cmbMoneda.Location = new System.Drawing.Point(167, 247);
             this.cmbMoneda.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbMoneda.Name = "cmbMoneda";
             this.cmbMoneda.Size = new System.Drawing.Size(241, 23);
             this.cmbMoneda.TabIndex = 18;
             // 
-            // cmbLocalidad
-            // 
-            this.cmbLocalidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbLocalidad.FormattingEnabled = true;
-            this.cmbLocalidad.Location = new System.Drawing.Point(167, 34);
-            this.cmbLocalidad.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.cmbLocalidad.Name = "cmbLocalidad";
-            this.cmbLocalidad.Size = new System.Drawing.Size(288, 23);
-            this.cmbLocalidad.TabIndex = 11;
-            this.cmbLocalidad.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidad_SelectedIndexChanged);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(28, 223);
+            this.label5.Location = new System.Drawing.Point(28, 250);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 15);
@@ -606,7 +599,7 @@
             this.grupoOpciones.Controls.Add(this.btnLimpiar);
             this.grupoOpciones.Controls.Add(this.btnGrabar);
             this.grupoOpciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grupoOpciones.Location = new System.Drawing.Point(819, 382);
+            this.grupoOpciones.Location = new System.Drawing.Point(821, 420);
             this.grupoOpciones.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.grupoOpciones.Name = "grupoOpciones";
             this.grupoOpciones.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -764,11 +757,11 @@
             this.groupBox3.Controls.Add(this.dBAyudaProducto);
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Controls.Add(this.label20);
-            this.groupBox3.Location = new System.Drawing.Point(28, 378);
+            this.groupBox3.Location = new System.Drawing.Point(28, 425);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(775, 88);
+            this.groupBox3.Size = new System.Drawing.Size(775, 79);
             this.groupBox3.TabIndex = 42;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Productos";
@@ -777,7 +770,7 @@
             // 
             this.dBAyudaProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.dBAyudaProducto.iId = 0;
-            this.dBAyudaProducto.Location = new System.Drawing.Point(167, 42);
+            this.dBAyudaProducto.Location = new System.Drawing.Point(167, 35);
             this.dBAyudaProducto.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dBAyudaProducto.Name = "dBAyudaProducto";
             this.dBAyudaProducto.sCodigo = null;
@@ -800,7 +793,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(26, 34);
+            this.label20.Location = new System.Drawing.Point(26, 27);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(101, 30);
@@ -828,13 +821,46 @@
             this.label23.TabIndex = 44;
             this.label23.Text = "Monto Máximo para\r\nRecargo de Tarjetas";
             // 
+            // chkNoProcesados
+            // 
+            this.chkNoProcesados.AutoSize = true;
+            this.chkNoProcesados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkNoProcesados.Location = new System.Drawing.Point(510, 372);
+            this.chkNoProcesados.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chkNoProcesados.Name = "chkNoProcesados";
+            this.chkNoProcesados.Size = new System.Drawing.Size(219, 19);
+            this.chkNoProcesados.TabIndex = 58;
+            this.chkNoProcesados.Text = "Dscargar Productos no Procesados";
+            this.chkNoProcesados.UseVisualStyleBackColor = true;
+            // 
+            // chkUsarRecetas
+            // 
+            this.chkUsarRecetas.AutoSize = true;
+            this.chkUsarRecetas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkUsarRecetas.Location = new System.Drawing.Point(510, 347);
+            this.chkUsarRecetas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chkUsarRecetas.Name = "chkUsarRecetas";
+            this.chkUsarRecetas.Size = new System.Drawing.Size(213, 19);
+            this.chkUsarRecetas.TabIndex = 57;
+            this.chkUsarRecetas.Text = "Descargar Ingredientes de Receta";
+            this.chkUsarRecetas.UseVisualStyleBackColor = true;
+            // 
+            // cmbLocalidad
+            // 
+            this.cmbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLocalidad.FormattingEnabled = true;
+            this.cmbLocalidad.Location = new System.Drawing.Point(167, 34);
+            this.cmbLocalidad.Name = "cmbLocalidad";
+            this.cmbLocalidad.Size = new System.Drawing.Size(288, 23);
+            this.cmbLocalidad.TabIndex = 80;
+            // 
             // frmParametrosLocalidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1065, 489);
+            this.ClientSize = new System.Drawing.Size(1065, 516);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.txtMontoMaximo);
             this.Controls.Add(this.groupBox3);
@@ -866,7 +892,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private MisControles.ComboDatos cmbMoneda;
-        private MisControles.ComboDatos cmbLocalidad;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -921,5 +946,8 @@
         private System.Windows.Forms.CheckBox chkAbrirCajon;
         private System.Windows.Forms.TextBox txtMontoMaximo;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.CheckBox chkNoProcesados;
+        private System.Windows.Forms.CheckBox chkUsarRecetas;
+        private System.Windows.Forms.ComboBox cmbLocalidad;
     }
 }

@@ -927,6 +927,53 @@ namespace Palatium.Cajero
                 {
                     txtCuentasPorCobrar.Text = dtConsulta.Rows[0][0].ToString();
                 }
+                
+                else
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+            }
+        }
+
+        //FUNCION PARA LAS TARJETAS DE ALMUERZOS
+        private void cargarCuentasTarjetaAlmuerzos()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select ltrim(str(sum(DP.cantidad * (DP.precio_unitario + DP.valor_iva - DP.valor_otro - DP.valor_dscto)), 10, 2)) valor" + Environment.NewLine;
+                sSql += "from cv403_cab_pedidos CP INNER JOIN" + Environment.NewLine;
+                sSql += "cv403_det_pedidos DP ON CP.id_pedido = DP.id_pedido" + Environment.NewLine;
+                sSql += "and CP.estado = 'A'" + Environment.NewLine;
+                sSql += "and DP.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "tp_personas TP ON TP.id_persona = CP.id_persona" + Environment.NewLine;
+                sSql += "and TP.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "pos_origen_orden O ON O.id_pos_origen_orden = CP.id_pos_origen_orden" + Environment.NewLine;
+                sSql += "and O.estado = 'A'" + Environment.NewLine;
+                sSql += "where O.cuenta_por_cobrar = 0" + Environment.NewLine;
+                sSql += "and O.pago_anticipado = 1" + Environment.NewLine;
+                sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and CP.estado_orden = 'Cerrada'" + Environment.NewLine;
+                sSql += "and CP.id_pos_jornada = " + iJornada + Environment.NewLine;
+                sSql += "and CP.id_localidad = " + cmbLocalidades.SelectedValue;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    txtTarjetasAlmuerzos.Text = dtConsulta.Rows[0][0].ToString().Trim();
+                }
+
                 else
                 {
                     catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
@@ -1048,6 +1095,7 @@ namespace Palatium.Cajero
             consultaProductosAhorro();
             extraerIva();
             cargarCuentasPorCobrar();
+            cargarCuentasTarjetaAlmuerzos();
             recalcularValores();
 
             //txtTotalCaja.Text = (Convert.ToDouble(txtTotalVendido.Text) + Convert.ToDouble(txtEntradasManuales.Text) - Convert.ToDouble(txtSalidasManuales.Text)).ToString("N2");

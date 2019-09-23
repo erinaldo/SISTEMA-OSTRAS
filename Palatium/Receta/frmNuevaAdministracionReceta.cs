@@ -46,11 +46,12 @@ namespace Palatium.Receta
         string sNombre_R;
         string sUnidad_R;
         string sRendimiento_R;
+        string sCantidadBruta_R;
         string sCantidadNeta_R;
         string sCostoUnitario_R;
         string sImporte_R;
         string sIdProducto_R;
-        string sCgUnidad_R;
+        string sIdUnidad_R;
         string []sDatos = new string[15];
 
         long iMaximo;
@@ -464,16 +465,17 @@ namespace Palatium.Receta
                         for (int i = 0; i < dtConsulta_1.Rows.Count; i++)
                         {
                             sNombre_R = dtConsulta_1.Rows[i]["nombre"].ToString();
-                            sUnidad_R = dtConsulta_1.Rows[i]["valor_texto"].ToString();
+                            sCantidadBruta_R = dtConsulta_1.Rows[i]["cantidad_bruta"].ToString();
                             sRendimiento_R = dtConsulta_1.Rows[i]["rendimiento"].ToString();
                             sCantidadNeta_R = dtConsulta_1.Rows[i]["cantidad_neta"].ToString();
+                            sUnidad_R = dtConsulta_1.Rows[i]["abreviatura"].ToString();
                             sCostoUnitario_R = dtConsulta_1.Rows[i]["costo_unitario"].ToString();
                             sImporte_R = dtConsulta_1.Rows[i]["importe"].ToString();
                             sIdProducto_R = dtConsulta_1.Rows[i]["id_producto"].ToString();
-                            sCgUnidad_R = dtConsulta_1.Rows[i]["cg_unidad"].ToString();
-
-                            dgvReceta.Rows.Add(sNombre_R, sUnidad_R, sRendimiento_R, sCantidadNeta_R, sCostoUnitario_R,
-                                               sImporte_R, sIdProducto_R, sCgUnidad_R);
+                            sIdUnidad_R = dtConsulta_1.Rows[i]["id_pos_unidad"].ToString();
+                            
+                            dgvReceta.Rows.Add(sNombre_R, sCantidadBruta_R, sRendimiento_R, sCantidadNeta_R, sUnidad_R,
+                                               sCostoUnitario_R, sImporte_R, sIdProducto_R, sIdUnidad_R);
                         }
 
                         dgvReceta.ClearSelection();
@@ -499,22 +501,22 @@ namespace Palatium.Receta
         {
             try
             {
-                sSql = "";
-                sSql += "select id_pos_unidad, cg_unidad" + Environment.NewLine;
-                sSql += "from pos_unidad" + Environment.NewLine;
-                sSql += "where estado in ('A', 'N')";
+                //sSql = "";
+                //sSql += "select id_pos_unidad, cg_unidad" + Environment.NewLine;
+                //sSql += "from pos_unidad" + Environment.NewLine;
+                //sSql += "where estado in ('A', 'N')";
 
-                dtUnidades = new DataTable();
-                dtUnidades.Clear();
+                //dtUnidades = new DataTable();
+                //dtUnidades.Clear();
 
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtUnidades, sSql);
+                //bRespuesta = conexion.GFun_Lo_Busca_Registro(dtUnidades, sSql);
 
-                if (bRespuesta == false)
-                {
-                    ok.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    ok.ShowDialog();
-                    return;
-                }
+                //if (bRespuesta == false)
+                //{
+                //    ok.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                //    ok.ShowDialog();
+                //    return;
+                //}
 
                 if (!conexion.GFun_Lo_Maneja_Transaccion(Program.G_INICIA_TRANSACCION))
                 {
@@ -576,32 +578,22 @@ namespace Palatium.Receta
 
                 for (int i = 0; i < dgvReceta.Rows.Count; i++)
                 {
-                    iIdProducto_R = Convert.ToInt32(dgvReceta.Rows[i].Cells[6].Value);
+                    iIdProducto_R = Convert.ToInt32(dgvReceta.Rows[i].Cells[7].Value);
+                    dbCantidadBruta_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[1].Value);
                     dbCantidadNeta_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[3].Value);
                     dbRendimiento_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[2].Value);
-                    dbCantidadBruta_R = (dbCantidadNeta_R * 100) / dbRendimiento_R;
-                    iCgUnidad_R = Convert.ToInt32(dgvReceta.Rows[i].Cells[7].Value);
-                    dbCostoUnitario_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[4].Value);
+                    iIdUnidad_R = Convert.ToInt32(dgvReceta.Rows[i].Cells[8].Value);
+                    dbCostoUnitario_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[5].Value);
                     dbImporte_R = dbCantidadBruta_R * dbCostoUnitario_R;
-                    iIdUnidad_R = 0;
-
-                    for (int j = 0; j < dtUnidades.Rows.Count; j++)
-                    {
-                        if (iCgUnidad_R == Convert.ToInt32(dtUnidades.Rows[j]["cg_unidad"].ToString()))
-                        {
-                            iIdUnidad_R = Convert.ToInt32(dtUnidades.Rows[j]["id_pos_unidad"].ToString());
-                            break;
-                        }
-                    }
 
                     sSql = "";
                     sSql += "insert into pos_detalle_receta (" + Environment.NewLine;
                     sSql += "id_pos_receta, id_producto, cantidad_bruta, cantidad_neta, id_pos_unidad, costo_unitario," + Environment.NewLine;
-                    sSql += "importe, rendimiento, cg_unidad, estado, fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                    sSql += "importe, rendimiento, estado, fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
                     sSql += "values (" + Environment.NewLine;
                     sSql += iIdReceta + ", " + iIdProducto_R + ", " + dbCantidadBruta_R + "," + Environment.NewLine;
                     sSql += dbCantidadNeta_R + ", " + iIdUnidad_R + ", " + dbCostoUnitario_R + ", " + dbImporte_R + "," + Environment.NewLine;
-                    sSql += dbRendimiento_R + ", " + iCgUnidad_R + ", 'A', GETDATE()," + Environment.NewLine;
+                    sSql += dbRendimiento_R + ", 'A', GETDATE()," + Environment.NewLine;
                     sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
 
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
@@ -707,32 +699,22 @@ namespace Palatium.Receta
 
                 for (int i = 0; i < dgvReceta.Rows.Count; i++)
                 {
-                    iIdProducto_R = Convert.ToInt32(dgvReceta.Rows[i].Cells[6].Value);
+                    iIdProducto_R = Convert.ToInt32(dgvReceta.Rows[i].Cells[7].Value);
+                    dbCantidadBruta_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[1].Value);
                     dbCantidadNeta_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[3].Value);
                     dbRendimiento_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[2].Value);
-                    dbCantidadBruta_R = (dbCantidadNeta_R * 100) / dbRendimiento_R;
-                    iCgUnidad_R = Convert.ToInt32(dgvReceta.Rows[i].Cells[7].Value);
-                    dbCostoUnitario_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[4].Value);
+                    iIdUnidad_R = Convert.ToInt32(dgvReceta.Rows[i].Cells[8].Value);
+                    dbCostoUnitario_R = Convert.ToDecimal(dgvReceta.Rows[i].Cells[5].Value);
                     dbImporte_R = dbCantidadBruta_R * dbCostoUnitario_R;
-                    iIdUnidad_R = 0;
-
-                    for (int j = 0; j < dtUnidades.Rows.Count; j++)
-                    {
-                        if (iCgUnidad_R == Convert.ToInt32(dtUnidades.Rows[j]["cg_unidad"].ToString()))
-                        {
-                            iIdUnidad_R = Convert.ToInt32(dtUnidades.Rows[j]["id_pos_unidad"].ToString());
-                            break;
-                        }
-                    }
 
                     sSql = "";
                     sSql += "insert into pos_detalle_receta (" + Environment.NewLine;
                     sSql += "id_pos_receta, id_producto, cantidad_bruta, cantidad_neta, id_pos_unidad, costo_unitario," + Environment.NewLine;
-                    sSql += "importe, rendimiento, cg_unidad, estado, fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                    sSql += "importe, rendimiento, estado, fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
                     sSql += "values (" + Environment.NewLine;
                     sSql += iIdReceta + ", " + iIdProducto_R + ", " + dbCantidadBruta_R + "," + Environment.NewLine;
                     sSql += dbCantidadNeta_R + ", " + iIdUnidad_R + ", " + dbCostoUnitario_R + ", " + dbImporte_R + "," + Environment.NewLine;
-                    sSql += dbRendimiento_R + ", " + iCgUnidad_R + ", 'A', GETDATE()," + Environment.NewLine;
+                    sSql += dbRendimiento_R + ", 'A', GETDATE()," + Environment.NewLine;
                     sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
 
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
@@ -848,7 +830,7 @@ namespace Palatium.Receta
                     for (int i = 0; i < dgvReceta.Rows.Count; i++)
                     {
                         dbSumaRendimiento += Convert.ToDecimal(dgvReceta.Rows[i].Cells[2].Value.ToString());
-                        dbCostoTotalTotal += Convert.ToDecimal(dgvReceta.Rows[i].Cells[5].Value.ToString());
+                        dbCostoTotalTotal += Convert.ToDecimal(dgvReceta.Rows[i].Cells[6].Value.ToString());
                     }
 
                     dbCostoUnitarioTotal = dbCostoTotalTotal / dbNumeroPorciones;
@@ -1060,11 +1042,11 @@ namespace Palatium.Receta
                 Decimal dbPresentacion_R = ingrediente.dbPresentacion;
                 Decimal dbRendimiento_R = ingrediente.dbRendimiento;
                 Decimal dbPorcentaje_R = (dbRendimiento_R * 100) / dbPresentacion_R;
-                Decimal iCgUnidad_P = ingrediente.iCgUnidad;
+                int iIdUnidad_P = ingrediente.iIdUnidad;
                 Decimal iIdProducto_P = ingrediente.iIdProducto;
 
-                dgvReceta.Rows.Add(ingrediente.sNombreProducto, ingrediente.sUnidadConsumo, dbPorcentaje_R.ToString("N2"),
-                                   "0", dbValorUnitario_R.ToString(), "0.00", iIdProducto_P, iCgUnidad_P);
+                dgvReceta.Rows.Add(ingrediente.sNombreProducto, "0", dbPorcentaje_R.ToString("N2"), "0",
+                                   ingrediente.sUnidadConsumo, dbValorUnitario_R.ToString(), "0.00", iIdProducto_P, iIdUnidad_P);
 
                 ingrediente.Close();
             }
@@ -1137,7 +1119,7 @@ namespace Palatium.Receta
         {
             try
             {
-                if (dgvReceta.Columns[e.ColumnIndex].Name == "cantidad")
+                if (dgvReceta.Columns[e.ColumnIndex].Name == "cantidad_neta")
                 {
                     if (dgvReceta.Rows[e.RowIndex].Cells[3].Value == null)
                     {
@@ -1149,18 +1131,53 @@ namespace Palatium.Receta
                     if ((sCantidadGrid_R != null) && (sCantidadGrid_R != ""))
                     {
                         Decimal dbCantidad_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[3].Value.ToString().Trim());
-                        Decimal dbPrecioUnitario_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[4].Value.ToString().Trim());
+                        Decimal dbPrecioUnitario_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[5].Value.ToString().Trim());
                         Decimal dbPorcentaje_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[2].Value.ToString().Trim());
                         Decimal dbCantidadOriginal_R = (dbCantidad_R * 100) / dbPorcentaje_R;
                         Decimal dbPrecioTotal_R = dbCantidadOriginal_R * dbPrecioUnitario_R;
 
-                        dgvReceta.Rows[e.RowIndex].Cells[5].Value = dbPrecioTotal_R.ToString("N6");
+                        dgvReceta.Rows[e.RowIndex].Cells[1].Value = dbCantidadOriginal_R.ToString("N2");
+                        dgvReceta.Rows[e.RowIndex].Cells[6].Value = dbPrecioTotal_R.ToString("N6");
                     }
 
                     else
                     {
+                        dgvReceta.Rows[e.RowIndex].Cells[1].Value = "0";
                         dgvReceta.Rows[e.RowIndex].Cells[3].Value = "0";
-                        dgvReceta.Rows[e.RowIndex].Cells[5].Value = "0.00";
+                        dgvReceta.Rows[e.RowIndex].Cells[6].Value = "0.00";
+                    }
+
+                    llenarValoresTexto();
+
+                    dgvReceta.ClearSelection();
+                }
+
+                else if (dgvReceta.Columns[e.ColumnIndex].Name == "cantidad_bruta")
+                {
+                    if (dgvReceta.Rows[e.RowIndex].Cells[1].Value == null)
+                    {
+                        dgvReceta.Rows[e.RowIndex].Cells[1].Value = "";
+                    }
+
+                    string sCantidadGrid_R = dgvReceta.Rows[e.RowIndex].Cells[1].Value.ToString().Trim();
+
+                    if ((sCantidadGrid_R != null) && (sCantidadGrid_R != ""))
+                    {
+                        Decimal dbCantidadOriginal_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[1].Value.ToString().Trim());
+                        Decimal dbPrecioUnitario_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[5].Value.ToString().Trim());
+                        Decimal dbPorcentaje_R = Convert.ToDecimal(dgvReceta.Rows[e.RowIndex].Cells[2].Value.ToString().Trim());
+                        Decimal dbCantidad_R = (dbCantidadOriginal_R * dbPorcentaje_R) / 100;
+                        Decimal dbPrecioTotal_R = dbCantidadOriginal_R * dbPrecioUnitario_R;
+
+                        dgvReceta.Rows[e.RowIndex].Cells[3].Value = dbCantidadOriginal_R.ToString("N2");
+                        dgvReceta.Rows[e.RowIndex].Cells[6].Value = dbPrecioTotal_R.ToString("N6");
+                    }
+
+                    else
+                    {
+                        dgvReceta.Rows[e.RowIndex].Cells[1].Value = "0";
+                        dgvReceta.Rows[e.RowIndex].Cells[3].Value = "0";
+                        dgvReceta.Rows[e.RowIndex].Cells[6].Value = "0.00";
                     }
 
                     llenarValoresTexto();

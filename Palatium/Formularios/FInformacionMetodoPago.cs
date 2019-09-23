@@ -158,7 +158,7 @@ namespace Palatium.Formularios
                 sSql += "fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
                 sSql += "values (" + Environment.NewLine;
                 sSql += "'" + txtCodigo.Text.ToString().Trim() + "', '" + txtDescripcion.Text.ToString().Trim() + "'," + Environment.NewLine;
-                sSql += Convert.ToInt32(cmbFormasPagos.SelectedValue) + "'A'," + Environment.NewLine;
+                sSql += Convert.ToInt32(cmbFormasPagos.SelectedValue) + ", 'A'," + Environment.NewLine;
                 sSql += "GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))

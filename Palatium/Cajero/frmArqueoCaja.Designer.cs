@@ -40,6 +40,8 @@
             this.LblFecha = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txtCajaInicial = new System.Windows.Forms.TextBox();
             this.btnSalidas = new System.Windows.Forms.LinkLabel();
             this.txtCobradoTransferencia = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -111,8 +113,8 @@
             this.btnRevisarCaja = new System.Windows.Forms.Button();
             this.TimerHora = new System.Windows.Forms.Timer(this.components);
             this.ttMensaje = new System.Windows.Forms.ToolTip(this.components);
-            this.label24 = new System.Windows.Forms.Label();
-            this.txtCajaInicial = new System.Windows.Forms.TextBox();
+            this.txtTarjetasAlmuerzos = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarjetas)).BeginInit();
@@ -204,6 +206,8 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.groupBox2.Controls.Add(this.txtTarjetasAlmuerzos);
+            this.groupBox2.Controls.Add(this.label25);
             this.groupBox2.Controls.Add(this.label24);
             this.groupBox2.Controls.Add(this.txtCajaInicial);
             this.groupBox2.Controls.Add(this.btnSalidas);
@@ -243,13 +247,36 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label24.Location = new System.Drawing.Point(362, 105);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(107, 16);
+            this.label24.TabIndex = 36;
+            this.label24.Text = "Total Caja Inicial";
+            // 
+            // txtCajaInicial
+            // 
+            this.txtCajaInicial.BackColor = System.Drawing.Color.White;
+            this.txtCajaInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCajaInicial.Location = new System.Drawing.Point(501, 102);
+            this.txtCajaInicial.Name = "txtCajaInicial";
+            this.txtCajaInicial.ReadOnly = true;
+            this.txtCajaInicial.Size = new System.Drawing.Size(196, 22);
+            this.txtCajaInicial.TabIndex = 37;
+            this.txtCajaInicial.Text = "0.00";
+            this.txtCajaInicial.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // btnSalidas
             // 
             this.btnSalidas.AutoSize = true;
             this.btnSalidas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.btnSalidas.ForeColor = System.Drawing.SystemColors.Desktop;
             this.btnSalidas.LinkColor = System.Drawing.Color.Black;
-            this.btnSalidas.Location = new System.Drawing.Point(362, 187);
+            this.btnSalidas.Location = new System.Drawing.Point(362, 179);
             this.btnSalidas.Name = "btnSalidas";
             this.btnSalidas.Size = new System.Drawing.Size(126, 16);
             this.btnSalidas.TabIndex = 35;
@@ -284,7 +311,7 @@
             // 
             this.txtCuentasPorCobrar.BackColor = System.Drawing.Color.CornflowerBlue;
             this.txtCuentasPorCobrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCuentasPorCobrar.Location = new System.Drawing.Point(501, 271);
+            this.txtCuentasPorCobrar.Location = new System.Drawing.Point(501, 281);
             this.txtCuentasPorCobrar.Name = "txtCuentasPorCobrar";
             this.txtCuentasPorCobrar.ReadOnly = true;
             this.txtCuentasPorCobrar.Size = new System.Drawing.Size(196, 22);
@@ -297,7 +324,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label11.Location = new System.Drawing.Point(362, 274);
+            this.label11.Location = new System.Drawing.Point(362, 284);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(130, 16);
             this.label11.TabIndex = 20;
@@ -309,7 +336,7 @@
             this.btnEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.btnEntradas.ForeColor = System.Drawing.SystemColors.Desktop;
             this.btnEntradas.LinkColor = System.Drawing.Color.Black;
-            this.btnEntradas.Location = new System.Drawing.Point(362, 164);
+            this.btnEntradas.Location = new System.Drawing.Point(362, 157);
             this.btnEntradas.Name = "btnEntradas";
             this.btnEntradas.Size = new System.Drawing.Size(137, 16);
             this.btnEntradas.TabIndex = 34;
@@ -322,7 +349,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label13.Location = new System.Drawing.Point(362, 296);
+            this.label13.Location = new System.Drawing.Point(362, 306);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(120, 16);
             this.label13.TabIndex = 22;
@@ -380,7 +407,7 @@
             // 
             this.txtTotalCortesias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.txtTotalCortesias.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalCortesias.Location = new System.Drawing.Point(501, 293);
+            this.txtTotalCortesias.Location = new System.Drawing.Point(501, 303);
             this.txtTotalCortesias.Name = "txtTotalCortesias";
             this.txtTotalCortesias.ReadOnly = true;
             this.txtTotalCortesias.Size = new System.Drawing.Size(196, 22);
@@ -597,7 +624,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label12.Location = new System.Drawing.Point(362, 318);
+            this.label12.Location = new System.Drawing.Point(362, 328);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(135, 16);
             this.label12.TabIndex = 24;
@@ -652,7 +679,7 @@
             // 
             this.txtTotalDescuentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.txtTotalDescuentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalDescuentos.Location = new System.Drawing.Point(501, 315);
+            this.txtTotalDescuentos.Location = new System.Drawing.Point(501, 325);
             this.txtTotalDescuentos.Name = "txtTotalDescuentos";
             this.txtTotalDescuentos.ReadOnly = true;
             this.txtTotalDescuentos.Size = new System.Drawing.Size(196, 22);
@@ -665,7 +692,7 @@
             // 
             this.txtImpuestoIVA.BackColor = System.Drawing.Color.White;
             this.txtImpuestoIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtImpuestoIVA.Location = new System.Drawing.Point(501, 249);
+            this.txtImpuestoIVA.Location = new System.Drawing.Point(501, 236);
             this.txtImpuestoIVA.Name = "txtImpuestoIVA";
             this.txtImpuestoIVA.ReadOnly = true;
             this.txtImpuestoIVA.Size = new System.Drawing.Size(196, 22);
@@ -679,7 +706,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label15.Location = new System.Drawing.Point(362, 252);
+            this.label15.Location = new System.Drawing.Point(362, 239);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(88, 16);
             this.label15.TabIndex = 27;
@@ -752,7 +779,7 @@
             // 
             this.txtTotalCaja.BackColor = System.Drawing.Color.Yellow;
             this.txtTotalCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalCaja.Location = new System.Drawing.Point(501, 207);
+            this.txtTotalCaja.Location = new System.Drawing.Point(501, 199);
             this.txtTotalCaja.Name = "txtTotalCaja";
             this.txtTotalCaja.ReadOnly = true;
             this.txtTotalCaja.Size = new System.Drawing.Size(196, 22);
@@ -765,7 +792,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label10.Location = new System.Drawing.Point(362, 210);
+            this.label10.Location = new System.Drawing.Point(362, 202);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(128, 16);
             this.label10.TabIndex = 18;
@@ -787,7 +814,7 @@
             // 
             this.txtEntradasManuales.BackColor = System.Drawing.Color.White;
             this.txtEntradasManuales.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEntradasManuales.Location = new System.Drawing.Point(501, 161);
+            this.txtEntradasManuales.Location = new System.Drawing.Point(501, 154);
             this.txtEntradasManuales.Name = "txtEntradasManuales";
             this.txtEntradasManuales.ReadOnly = true;
             this.txtEntradasManuales.Size = new System.Drawing.Size(196, 22);
@@ -799,7 +826,7 @@
             // 
             this.txtSalidasManuales.BackColor = System.Drawing.Color.White;
             this.txtSalidasManuales.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSalidasManuales.Location = new System.Drawing.Point(501, 184);
+            this.txtSalidasManuales.Location = new System.Drawing.Point(501, 176);
             this.txtSalidasManuales.Name = "txtSalidasManuales";
             this.txtSalidasManuales.ReadOnly = true;
             this.txtSalidasManuales.Size = new System.Drawing.Size(196, 22);
@@ -823,7 +850,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label7.Location = new System.Drawing.Point(362, 141);
+            this.label7.Location = new System.Drawing.Point(362, 135);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(111, 16);
             this.label7.TabIndex = 14;
@@ -857,7 +884,7 @@
             // 
             this.txtTotalEfectivo.BackColor = System.Drawing.Color.White;
             this.txtTotalEfectivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalEfectivo.Location = new System.Drawing.Point(501, 138);
+            this.txtTotalEfectivo.Location = new System.Drawing.Point(501, 132);
             this.txtTotalEfectivo.Name = "txtTotalEfectivo";
             this.txtTotalEfectivo.ReadOnly = true;
             this.txtTotalEfectivo.Size = new System.Drawing.Size(196, 22);
@@ -1140,28 +1167,29 @@
             this.TimerHora.Interval = 1000;
             this.TimerHora.Tick += new System.EventHandler(this.TimerHora_Tick);
             // 
-            // label24
+            // txtTarjetasAlmuerzos
             // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label24.Location = new System.Drawing.Point(362, 105);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(107, 16);
-            this.label24.TabIndex = 36;
-            this.label24.Text = "Total Caja Inicial";
+            this.txtTarjetasAlmuerzos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.txtTarjetasAlmuerzos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTarjetasAlmuerzos.Location = new System.Drawing.Point(501, 259);
+            this.txtTarjetasAlmuerzos.Name = "txtTarjetasAlmuerzos";
+            this.txtTarjetasAlmuerzos.ReadOnly = true;
+            this.txtTarjetasAlmuerzos.Size = new System.Drawing.Size(196, 22);
+            this.txtTarjetasAlmuerzos.TabIndex = 39;
+            this.txtTarjetasAlmuerzos.Text = "0.00";
+            this.txtTarjetasAlmuerzos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ttMensaje.SetToolTip(this.txtTarjetasAlmuerzos, "La sumatoria del IVA es el resultado de los productos que paguen IVA.");
             // 
-            // txtCajaInicial
+            // label25
             // 
-            this.txtCajaInicial.BackColor = System.Drawing.Color.White;
-            this.txtCajaInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCajaInicial.Location = new System.Drawing.Point(501, 102);
-            this.txtCajaInicial.Name = "txtCajaInicial";
-            this.txtCajaInicial.ReadOnly = true;
-            this.txtCajaInicial.Size = new System.Drawing.Size(196, 22);
-            this.txtCajaInicial.TabIndex = 37;
-            this.txtCajaInicial.Text = "0.00";
-            this.txtCajaInicial.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label25.Location = new System.Drawing.Point(362, 262);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(127, 16);
+            this.label25.TabIndex = 38;
+            this.label25.Text = "Tarjetas Almuerzos:";
             // 
             // frmResumenCaja
             // 
@@ -1281,5 +1309,7 @@
         private System.Windows.Forms.Button btnAbrirCaja;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox txtCajaInicial;
+        private System.Windows.Forms.TextBox txtTarjetasAlmuerzos;
+        private System.Windows.Forms.Label label25;
     }
 }

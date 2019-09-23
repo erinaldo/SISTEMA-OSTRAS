@@ -29,6 +29,8 @@ namespace Palatium.Parametros
         int iManejaJornada = 0;
         int iEjecutarImpresion = 0;
         int iAbrirCajon = 0;
+        int iDescargarReceta;
+        int iDescargarNoProcesados;
 
         int iMesas = 0;
         int iLlevar = 0;
@@ -147,16 +149,24 @@ namespace Palatium.Parametros
             try
             {
                 sSql = "";
-                sSql += "select id_localidad,nombre_localidad from tp_vw_localidades";
+                sSql += "select id_localidad, nombre_localidad from tp_vw_localidades";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
 
-                cmbLocalidad.llenar(dtConsulta, sSql);
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
 
-                if (cmbLocalidad.Items.Count > 0)
+                if (bRespuesta == true)
                 {
-                    cmbLocalidad.SelectedIndex = 1;
+                    cmbLocalidad.DisplayMember = "nombre_localidad";
+                    cmbLocalidad.ValueMember = "id_localidad";
+                    cmbLocalidad.DataSource = dtConsulta;
+                }
+
+                else
+                {
+                    catchMensaje.lblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
                 }
             }
 
@@ -519,7 +529,7 @@ namespace Palatium.Parametros
                 sSql += "maneja_cortesia, maneja_canjes, maneja_vale_funcionario," + Environment.NewLine;
                 sSql += "maneja_consumo_empleados, imprimir_datos_factura," + Environment.NewLine;
                 sSql += "id_producto_anula, valor_precio_anula, id_pos_impresora, ejecutar_impresion," + Environment.NewLine;
-                sSql += "permitir_abrir_cajon, valor_maximo_recargo)" + Environment.NewLine;
+                sSql += "permitir_abrir_cajon, valor_maximo_recargo, descarga_no_procesados, descarga_receta)" + Environment.NewLine;
                 sSql += "values (" + Environment.NewLine;
                 sSql += Convert.ToInt32(cmbLocalidad.SelectedValue) + ", " + dBAyudaCiudad.iId + "," + Environment.NewLine;
                 sSql += dBAyudaCajero.iId + ", " + dBAyudaMesero.iId + ", " + Convert.ToInt32(cmbMoneda.SelectedValue) + "," + Environment.NewLine;
@@ -530,7 +540,8 @@ namespace Palatium.Parametros
                 sSql += iDomicilio + ", " + iMenuExpress + ", " + iCortesia + ", " + iCanjes + "," + Environment.NewLine;
                 sSql += iFuncionarios + ", " + iConsumoEmpleados + ", " + iImprimeDatosFactura + "," + Environment.NewLine;
                 sSql += dBAyudaProducto.iId + ", " + dValor + ", " + Convert.ToInt32(cmbImpresoras.SelectedValue) + "," + Environment.NewLine;
-                sSql += iEjecutarImpresion + ", " + iAbrirCajon + ", " + Convert.ToDecimal(txtMontoMaximo.Text.Trim()) + ")";
+                sSql += iEjecutarImpresion + ", " + iAbrirCajon + ", " + Convert.ToDecimal(txtMontoMaximo.Text.Trim()) + ", ";
+                sSql += iDescargarNoProcesados + ", " + iDescargarReceta + ")";
 
                 //EJECUTAR LA INSTRUCCIÓN SQL
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
@@ -602,7 +613,9 @@ namespace Palatium.Parametros
                 sSql += "id_pos_impresora = " + Convert.ToInt32(cmbImpresoras.SelectedValue) + "," + Environment.NewLine;
                 sSql += "ejecutar_impresion = " + iEjecutarImpresion + "," + Environment.NewLine;
                 sSql += "permitir_abrir_cajon = " + iAbrirCajon + "," + Environment.NewLine;
-                sSql += "valor_maximo_recargo = " + Convert.ToDecimal(txtMontoMaximo.Text.Trim()) + Environment.NewLine;
+                sSql += "valor_maximo_recargo = " + Convert.ToDecimal(txtMontoMaximo.Text.Trim()) + "," + Environment.NewLine;
+                sSql += "descarga_receta = " + iDescargarReceta + "," + Environment.NewLine;
+                sSql += "descarga_no_procesados = " + iDescargarNoProcesados + Environment.NewLine;
                 sSql += "where id_pos_parametro_localidad = " + iIdParametroLocalidad + Environment.NewLine;
                 sSql += "and estado = 'A'";
 
@@ -971,6 +984,28 @@ namespace Palatium.Parametros
                 else
                 {
                     iAbrirCajon = 0;
+                }
+
+                //DESCARGAR RECETAS
+                if (chkUsarRecetas.Checked == true)
+                {
+                    iDescargarReceta = 1;
+                }
+
+                else
+                {
+                    iDescargarReceta = 0;
+                }
+
+                //DESCARGAR NO PROCESADOS
+                if (chkNoProcesados.Checked == true)
+                {
+                    iDescargarNoProcesados = 1;
+                }
+
+                else
+                {
+                    iDescargarNoProcesados = 0;
                 }
 
                 //PROCESO PARA INSERTAR O ACTUALIZAR

@@ -434,7 +434,7 @@
             this.btnFuncionarios.ForeColor = System.Drawing.Color.White;
             this.btnFuncionarios.Image = global::Palatium.Properties.Resources.icono_funcionarios_2;
             this.btnFuncionarios.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnFuncionarios.Location = new System.Drawing.Point(190, 136);
+            this.btnFuncionarios.Location = new System.Drawing.Point(448, 208);
             this.btnFuncionarios.Name = "btnFuncionarios";
             this.btnFuncionarios.Size = new System.Drawing.Size(172, 118);
             this.btnFuncionarios.TabIndex = 26;
@@ -442,6 +442,7 @@
             this.btnFuncionarios.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.ttMensaje.SetToolTip(this.btnFuncionarios, "Clic aquí para gestión de comandas para funcionarios");
             this.btnFuncionarios.UseVisualStyleBackColor = false;
+            this.btnFuncionarios.Visible = false;
             this.btnFuncionarios.Click += new System.EventHandler(this.btnFuncionarios_Click);
             this.btnFuncionarios.MouseEnter += new System.EventHandler(this.btnFuncionarios_MouseEnter);
             this.btnFuncionarios.MouseLeave += new System.EventHandler(this.btnFuncionarios_MouseLeave);
@@ -793,7 +794,7 @@
             this.btnTarjetaAlmuerzo.ForeColor = System.Drawing.Color.White;
             this.btnTarjetaAlmuerzo.Image = global::Palatium.Properties.Resources.tarjeta_almuerzo_inicio;
             this.btnTarjetaAlmuerzo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnTarjetaAlmuerzo.Location = new System.Drawing.Point(448, 61);
+            this.btnTarjetaAlmuerzo.Location = new System.Drawing.Point(190, 136);
             this.btnTarjetaAlmuerzo.Name = "btnTarjetaAlmuerzo";
             this.btnTarjetaAlmuerzo.Size = new System.Drawing.Size(172, 118);
             this.btnTarjetaAlmuerzo.TabIndex = 42;
@@ -801,10 +802,13 @@
             this.btnTarjetaAlmuerzo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.ttMensaje.SetToolTip(this.btnTarjetaAlmuerzo, "Clic aquí para gestión de comandas para tarjetas de almuerzo");
             this.btnTarjetaAlmuerzo.UseVisualStyleBackColor = false;
-            this.btnTarjetaAlmuerzo.Visible = false;
+            this.btnTarjetaAlmuerzo.Click += new System.EventHandler(this.btnTarjetaAlmuerzo_Click);
+            this.btnTarjetaAlmuerzo.MouseEnter += new System.EventHandler(this.btnTarjetaAlmuerzo_MouseEnter);
+            this.btnTarjetaAlmuerzo.MouseLeave += new System.EventHandler(this.btnTarjetaAlmuerzo_MouseLeave);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnTarjetaAlmuerzo);
             this.panel1.Controls.Add(this.btnVentaExpress);
             this.panel1.Controls.Add(this.btnSalir);
             this.panel1.Controls.Add(this.btnCerrarSesion);
@@ -814,7 +818,6 @@
             this.panel1.Controls.Add(this.btnEntradaCajero);
             this.panel1.Controls.Add(this.btnReabrirCaja);
             this.panel1.Controls.Add(this.btnFacturasSri);
-            this.panel1.Controls.Add(this.btnFuncionarios);
             this.panel1.Controls.Add(this.btnClienteEmpresarial);
             this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Controls.Add(this.btnRevisar);
@@ -907,7 +910,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1355, 668);
             this.ControlBox = false;
-            this.Controls.Add(this.btnTarjetaAlmuerzo);
             this.Controls.Add(this.grupoAccesos);
             this.Controls.Add(this.btnAcerca);
             this.Controls.Add(this.lblContacto);
@@ -916,6 +918,7 @@
             this.Controls.Add(this.logo);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnRepartidorExterno);
+            this.Controls.Add(this.btnFuncionarios);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMenuPos";
             this.ShowInTaskbar = false;

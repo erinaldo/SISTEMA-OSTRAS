@@ -296,6 +296,7 @@ namespace Palatium.Menú
             btnCobroAlmuerzos.Enabled = true;
             btnCobroAlmuerzos.Enabled = true;
             btnVentaExpress.Enabled = true;
+            btnTarjetaAlmuerzo.Enabled = true;
 
             if (Program.iFacturacionElectronica == 1)
             {
@@ -436,6 +437,7 @@ namespace Palatium.Menú
             grupoAccesos.Enabled = false;
             btnCobroAlmuerzos.Enabled = false;
             btnVentaExpress.Enabled = false;
+            btnTarjetaAlmuerzo.Enabled = false;
             //btnSalir.Enabled = true;
         }
 
@@ -687,6 +689,9 @@ namespace Palatium.Menú
                 //BtnOficina.Enabled = false;
                 btnRevisar.Enabled = false;
                 btnMovimientoCaja.Enabled = false;
+                btnTarjetaAlmuerzo.Enabled = false;
+                btnVentaExpress.Enabled = false;
+
                 btnEntradaCajero.Enabled = true;
                 grupoAccesos.Enabled = false;
 
@@ -1511,7 +1516,7 @@ namespace Palatium.Menú
 
             consultarDatos("10", "");
 
-            Comida_Rapida.frmComandaComidaRapida comanda = new Comida_Rapida.frmComandaComidaRapida(Program.iIdOrigenOrden);
+            Comida_Rapida.frmComandaComidaRapida comanda = new Comida_Rapida.frmComandaComidaRapida(Program.iIdOrigenOrden, 0);
             comanda.ShowDialog();
         }
 
@@ -1523,6 +1528,27 @@ namespace Palatium.Menú
         private void btnVentaExpress_MouseLeave(object sender, EventArgs e)
         {
             salidaBoton(btnVentaExpress);
+        }
+
+        private void btnTarjetaAlmuerzo_Click(object sender, EventArgs e)
+        {
+            llenarArregloMaximo();
+            ingresaBoton(btnTarjetaAlmuerzo);
+
+            consultarDatos("13", "");
+
+            Comida_Rapida.frmComandaComidaRapida comanda = new Comida_Rapida.frmComandaComidaRapida(Program.iIdOrigenOrden, 1);
+            comanda.ShowDialog();
+        }
+
+        private void btnTarjetaAlmuerzo_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnTarjetaAlmuerzo);
+        }
+
+        private void btnTarjetaAlmuerzo_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnTarjetaAlmuerzo);
         }
     }
 }

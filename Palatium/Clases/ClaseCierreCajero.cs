@@ -184,7 +184,8 @@ namespace Palatium.Clases
                 sSql += "select id_pos_origen_orden, descripcion" + Environment.NewLine;
                 sSql += "from pos_origen_orden" + Environment.NewLine;
                 sSql += "where estado = 'A'" + Environment.NewLine;
-                sSql += "and cuenta_por_cobrar = 0";
+                sSql += "and cuenta_por_cobrar = 0" + Environment.NewLine;
+                sSql += "and pago_anticipado = 0";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -723,7 +724,7 @@ namespace Palatium.Clases
             if (dtConsulta.Rows.Count > 0)
             {
                 dbTotalCuentasPorCobrar = 0;
-                sTextoCuentas += "CUENTAS POR COBRAR".PadLeft(29, ' ') + Environment.NewLine;
+                sTextoCuentas += "CLIENTE EMPRESARIAL" + Environment.NewLine;
                 sTextoCuentas += "".PadLeft(40, '-') + Environment.NewLine;
 
                 for (int i = 0; i < dtConsulta.Rows.Count; i++)
@@ -742,7 +743,50 @@ namespace Palatium.Clases
                 }
 
                 sTextoCuentas += "".PadLeft(40, '-') + Environment.NewLine;
-                sTextoCuentas += "TOTAL CUENTAS POR COBRAR" + dbTotalCuentasPorCobrar.ToString("N2").PadLeft(16, ' ') + Environment.NewLine;
+                sTextoCuentas += "TOTAL CLIENTE EMPRESARIAL" + dbTotalCuentasPorCobrar.ToString("N2").PadLeft(15, ' ') + Environment.NewLine;
+            }
+
+            return sTextoCuentas;
+        }
+
+        //FUNCION PARA LAS TARJETAS DE ALMUERZOS
+        private string cargarCuentasTarjetaAlmuerzos()
+        {
+            sSql = "";
+            sSql += "select O.descripcion, count(*) cuenta," + Environment.NewLine;
+            sSql += "ltrim(str(sum(DP.cantidad * (DP.precio_unitario + DP.valor_iva - DP.valor_otro - DP.valor_dscto)), 10, 2)) valor" + Environment.NewLine;
+            sSql += "from cv403_cab_pedidos CP INNER JOIN" + Environment.NewLine;
+            sSql += "cv403_det_pedidos DP ON CP.id_pedido = DP.id_pedido" + Environment.NewLine;
+            sSql += "and CP.estado = 'A'" + Environment.NewLine;
+            sSql += "and DP.estado = 'A' INNER JOIN" + Environment.NewLine;
+            sSql += "tp_personas TP ON TP.id_persona = CP.id_persona" + Environment.NewLine;
+            sSql += "and TP.estado = 'A' INNER JOIN" + Environment.NewLine;
+            sSql += "pos_origen_orden O ON O.id_pos_origen_orden = CP.id_pos_origen_orden" + Environment.NewLine;
+            sSql += "and O.estado = 'A'" + Environment.NewLine;
+            sSql += "where O.cuenta_por_cobrar = 0" + Environment.NewLine;
+            sSql += "and O.pago_anticipado = 1" + Environment.NewLine;
+            sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
+            sSql += "and CP.estado_orden = 'Cerrada'" + Environment.NewLine;
+            sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+            sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
+            sSql += "group by O.descripcion";
+
+            dtConsulta = new DataTable();
+            dtConsulta.Clear();
+
+            bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+            if (bRespuesta == false)
+            {
+                return "ERROR";
+            }
+
+            sTextoCuentas = "";
+
+            if (dtConsulta.Rows.Count > 0)
+            {
+                sTextoCuentas += dtConsulta.Rows[0]["descripcion"].ToString().Trim().ToUpper().PadRight(21, ' ') + 
+                                 dtConsulta.Rows[0]["cuenta"].ToString().Trim().PadLeft(6, ' ') + dtConsulta.Rows[0]["valor"].ToString().Trim().PadLeft(13, ' ');
             }
 
             return sTextoCuentas;
@@ -1067,6 +1111,18 @@ namespace Palatium.Clases
                 sTexto += "NUMERO DE PERSONAS ATENDIDADS:".PadRight(30, ' ') + calcularTotalPersonas("01").ToString().PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
                 sTexto += "TIPOS DE ORDENES DEL SISTEMA:" + Environment.NewLine + Environment.NewLine;
                 llenarOrdenes();
+                sRetorno_P = cargarCuentasTarjetaAlmuerzos();
+
+                if (sRetorno_P == "ERROR")
+                {
+                    sTexto += "ERROR AL CARGAR LAS TARJETAS DE ALMUERZO." + Environment.NewLine;
+                }
+
+                else
+                {
+                    sTexto += sRetorno_P + Environment.NewLine;
+                }
+
                 sTexto += "".PadLeft(40, '=') + Environment.NewLine;
                 sRetorno_P = cargarCuentasPorCobrar();
 

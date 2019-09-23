@@ -174,11 +174,11 @@ namespace Palatium.Formularios
                 sSql += "FC.id_pos_metodo_pago, id_pos_tipo_venta" + Environment.NewLine;
                 sSql += "FROM pos_tipo_forma_cobro AS FC LEFT OUTER JOIN" + Environment.NewLine;
                 sSql += "tp_vw_tipo_documento_cobro AS DC ON FC.cg_tipo_documento = DC.correlativo" + Environment.NewLine;
-                sSql += "where FC.estado ='A'" + Environment.NewLine;
+                sSql += "and FC.estado ='A'" + Environment.NewLine;
 
                 if (iOp == 1)
                 {
-                    sSql += "and FC.codigo LIKE '%' + '" + txtBuscar.Text.Trim() + "' + %" + Environment.NewLine;
+                    sSql += "where FC.codigo LIKE '%' + '" + txtBuscar.Text.Trim() + "' + %" + Environment.NewLine;
                     sSql += "OR FC.descripcion LIKE '%' + '" + txtBuscar.Text.Trim() + "' + %" + Environment.NewLine;
                 }
 

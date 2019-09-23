@@ -25,7 +25,7 @@ namespace Palatium.Receta
 
         //VARIABLES PUBLICAS
         public int iIdProducto;
-        public int iCgUnidad;
+        public int iIdUnidad;
         public string sNombreProducto;
         public string sUnidadConsumo;
         public Decimal dbPresentacion;
@@ -46,8 +46,8 @@ namespace Palatium.Receta
             {
                 sSql = "";
                 sSql += "select PRO.Id_Producto, NOM.Nombre, PRO.Presentacion," + Environment.NewLine;
-                sSql += "PRO.Rendimiento, UP.cg_unidad, TP.valor_texto unidad_consumo," + Environment.NewLine;
-                sSql += "ltrim(str(isnull(PP.valor, 0), 10, 6)) valor" + Environment.NewLine;
+                sSql += "PRO.Rendimiento, UP.id_pos_unidad, TP.valor_texto unidad_consumo," + Environment.NewLine;
+                sSql += "ltrim(str(isnull(PP.valor, 0), 10, 6)) valor, UP.abreviatura" + Environment.NewLine;
                 sSql += "from cv401_productos PRO INNER JOIN" + Environment.NewLine;
                 sSql += "cv401_productos PROPADRE ON" + Environment.NewLine;
                 sSql += "PRO.Id_Producto_Padre = PROPADRE.id_producto" + Environment.NewLine;
@@ -55,7 +55,7 @@ namespace Palatium.Receta
                 sSql += "and PRO.Estado = 'A' INNER JOIN" + Environment.NewLine;
                 sSql += "cv401_nombre_productos NOM ON PRO.Id_Producto = NOM.Id_Producto" + Environment.NewLine;
                 sSql += "and NOM.estado = 'A' INNER JOIN" + Environment.NewLine;
-                sSql += "cv401_unidades_productos UP ON PRO.id_producto = UP.id_producto" + Environment.NewLine;
+                sSql += "cv401_vw_unidades_productos UP ON PRO.id_producto = UP.id_producto" + Environment.NewLine;
                 sSql += "and UP.estado = 'A' INNER JOIN" + Environment.NewLine;
                 sSql += "tp_codigos TP ON TP.correlativo = UP.cg_unidad INNER JOIN" + Environment.NewLine;
                 sSql += "cv403_precios_productos PP ON PRO.id_producto = PP.id_producto" + Environment.NewLine;
@@ -110,8 +110,8 @@ namespace Palatium.Receta
                 sNombreProducto = dgvDatos.CurrentRow.Cells[1].Value.ToString().Trim().ToUpper();
                 dbPresentacion = Convert.ToDecimal(dgvDatos.CurrentRow.Cells[2].Value);
                 dbRendimiento = Convert.ToDecimal(dgvDatos.CurrentRow.Cells[3].Value);
-                iCgUnidad = Convert.ToInt32(dgvDatos.CurrentRow.Cells[4].Value);
-                sUnidadConsumo = dgvDatos.CurrentRow.Cells[5].Value.ToString().Trim().ToUpper();
+                iIdUnidad = Convert.ToInt32(dgvDatos.CurrentRow.Cells[4].Value);
+                sUnidadConsumo = dgvDatos.CurrentRow.Cells[7].Value.ToString().Trim().ToUpper();
                 dbValorUnitario = Convert.ToDecimal(dgvDatos.CurrentRow.Cells[6].Value);
 
                 this.DialogResult = DialogResult.OK;
