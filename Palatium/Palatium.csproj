@@ -429,6 +429,12 @@
     <Compile Include="Informes\frmPlantillaExcel.Designer.cs">
       <DependentUpon>frmPlantillaExcel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inicio\frmIniciarSesion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio\frmIniciarSesion.designer.cs">
+      <DependentUpon>frmIniciarSesion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inicio\frmInicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -453,18 +459,19 @@
     <Compile Include="Inicio\frmInicioRestaurante.Designer.cs">
       <DependentUpon>frmInicioRestaurante.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inicio\frmMenuTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio\frmMenuTab.designer.cs">
+      <DependentUpon>frmMenuTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inicio\frmUtilitarios.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Inicio\frmUtilitarios.Designer.cs">
       <DependentUpon>frmUtilitarios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menu\frmMenuTab.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Menu\frmMenuTab.Designer.cs">
-      <DependentUpon>frmMenuTab.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Inicio\iForm.cs" />
     <Compile Include="Oficina\frmCargoMovimientos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2222,6 +2229,9 @@
     <EmbeddedResource Include="Informes\frmPlantillaExcel.resx">
       <DependentUpon>frmPlantillaExcel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inicio\frmIniciarSesion.resx">
+      <DependentUpon>frmIniciarSesion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio\frmInicio.resx">
       <DependentUpon>frmInicio.cs</DependentUpon>
     </EmbeddedResource>
@@ -2234,11 +2244,11 @@
     <EmbeddedResource Include="Inicio\frmInicioRestaurante.resx">
       <DependentUpon>frmInicioRestaurante.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inicio\frmMenuTab.resx">
+      <DependentUpon>frmMenuTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio\frmUtilitarios.resx">
       <DependentUpon>frmUtilitarios.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Menu\frmMenuTab.resx">
-      <DependentUpon>frmMenuTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Oficina\frmCargoMovimientos.resx">
       <DependentUpon>frmCargoMovimientos.cs</DependentUpon>
@@ -3125,6 +3135,7 @@
     <None Include="Resources\bodegas_nuevo.png" />
     <None Include="Resources\actualizar_mesas.png" />
     <Content Include="Pedidos\icono_pagar_almuerzo.ico" />
+    <None Include="Resources\abrir_caja_inicial_menu.png" />
     <Content Include="Resources\buscar.png" />
     <None Include="Resources\buscar1.png" />
     <None Include="Resources\editar_png.png" />
@@ -3271,6 +3282,13 @@
     <None Include="Resources\fondo_inicio.png" />
     <None Include="Resources\icono_salir_menu.png" />
     <None Include="Resources\icono_cerrar_sesion_menu.png" />
+    <None Include="Resources\icono_boton_cambio_cajero.png" />
+    <None Include="Resources\icono_boton_cambio_cortesia.png" />
+    <None Include="Resources\icono_boton_abrir_cajon.png" />
+    <None Include="Resources\icono_boton_consulta_precios.png" />
+    <None Include="Resources\icono_boton_cambiar_factura.png" />
+    <None Include="Resources\icono_boton_editar_datos_factura.png" />
+    <None Include="Resources\icono_boton_reimpresion.png" />
     <Content Include="Resources\icono_sri_2.png" />
     <None Include="Resources\impresoras_menu.png" />
     <None Include="Resources\impresiones_nuevo.png" />

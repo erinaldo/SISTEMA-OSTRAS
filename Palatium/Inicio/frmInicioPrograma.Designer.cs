@@ -34,6 +34,8 @@
             this.lblSitioWeb = new System.Windows.Forms.LinkLabel();
             this.btnOficina = new System.Windows.Forms.Button();
             this.btnEntradaCajero = new System.Windows.Forms.Button();
+            this.btnAperturarCaja = new System.Windows.Forms.Button();
+            this.btnSalidaCajero = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,6 +59,7 @@
             this.btnAcerca.TabIndex = 54;
             this.btnAcerca.TabStop = true;
             this.btnAcerca.Text = "Acerca de";
+            this.btnAcerca.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.btnAcerca_LinkClicked);
             // 
             // lblContacto
             // 
@@ -80,6 +83,7 @@
             this.lblSitioWeb.TabIndex = 52;
             this.lblSitioWeb.TabStop = true;
             this.lblSitioWeb.Text = "www.aplicsis.net";
+            this.lblSitioWeb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblSitioWeb_LinkClicked);
             // 
             // btnOficina
             // 
@@ -92,13 +96,14 @@
             this.btnOficina.ForeColor = System.Drawing.Color.White;
             this.btnOficina.Image = global::Palatium.Properties.Resources.icono_oficina;
             this.btnOficina.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnOficina.Location = new System.Drawing.Point(811, 419);
+            this.btnOficina.Location = new System.Drawing.Point(613, 419);
             this.btnOficina.Name = "btnOficina";
             this.btnOficina.Size = new System.Drawing.Size(192, 138);
             this.btnOficina.TabIndex = 72;
             this.btnOficina.Text = "Oficina\r\nAdministración";
             this.btnOficina.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnOficina.UseVisualStyleBackColor = false;
+            this.btnOficina.Click += new System.EventHandler(this.btnOficina_Click);
             this.btnOficina.MouseEnter += new System.EventHandler(this.btnOficina_MouseEnter);
             this.btnOficina.MouseLeave += new System.EventHandler(this.btnOficina_MouseLeave);
             // 
@@ -120,8 +125,52 @@
             this.btnEntradaCajero.Text = "Ingreso Usuario\r\n ";
             this.btnEntradaCajero.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEntradaCajero.UseVisualStyleBackColor = false;
+            this.btnEntradaCajero.Visible = false;
+            this.btnEntradaCajero.Click += new System.EventHandler(this.btnEntradaCajero_Click);
             this.btnEntradaCajero.MouseEnter += new System.EventHandler(this.btnEntradaCajero_MouseEnter);
             this.btnEntradaCajero.MouseLeave += new System.EventHandler(this.btnEntradaCajero_MouseLeave);
+            // 
+            // btnAperturarCaja
+            // 
+            this.btnAperturarCaja.BackColor = System.Drawing.Color.Navy;
+            this.btnAperturarCaja.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAperturarCaja.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAperturarCaja.FlatAppearance.BorderSize = 2;
+            this.btnAperturarCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAperturarCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAperturarCaja.ForeColor = System.Drawing.Color.White;
+            this.btnAperturarCaja.Image = global::Palatium.Properties.Resources.abrir_caja_inicial_menu;
+            this.btnAperturarCaja.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAperturarCaja.Location = new System.Drawing.Point(996, 419);
+            this.btnAperturarCaja.Name = "btnAperturarCaja";
+            this.btnAperturarCaja.Size = new System.Drawing.Size(192, 138);
+            this.btnAperturarCaja.TabIndex = 74;
+            this.btnAperturarCaja.Text = "Aperturar Caja\r\n ";
+            this.btnAperturarCaja.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAperturarCaja.UseVisualStyleBackColor = false;
+            this.btnAperturarCaja.Visible = false;
+            this.btnAperturarCaja.MouseEnter += new System.EventHandler(this.btnAperturarCaja_MouseEnter);
+            this.btnAperturarCaja.MouseLeave += new System.EventHandler(this.btnAperturarCaja_MouseLeave);
+            // 
+            // btnSalidaCajero
+            // 
+            this.btnSalidaCajero.BackColor = System.Drawing.Color.Navy;
+            this.btnSalidaCajero.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSalidaCajero.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSalidaCajero.FlatAppearance.BorderSize = 2;
+            this.btnSalidaCajero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalidaCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalidaCajero.ForeColor = System.Drawing.Color.White;
+            this.btnSalidaCajero.Image = global::Palatium.Properties.Resources.icono_abrir_caja;
+            this.btnSalidaCajero.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSalidaCajero.Location = new System.Drawing.Point(119, 232);
+            this.btnSalidaCajero.Name = "btnSalidaCajero";
+            this.btnSalidaCajero.Size = new System.Drawing.Size(192, 138);
+            this.btnSalidaCajero.TabIndex = 75;
+            this.btnSalidaCajero.Text = "Arqueo de Caja\r\n  ";
+            this.btnSalidaCajero.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSalidaCajero.UseVisualStyleBackColor = false;
+            this.btnSalidaCajero.Visible = false;
             // 
             // frmInicioPrograma
             // 
@@ -130,6 +179,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.ClientSize = new System.Drawing.Size(1360, 694);
+            this.Controls.Add(this.btnSalidaCajero);
+            this.Controls.Add(this.btnAperturarCaja);
             this.Controls.Add(this.btnEntradaCajero);
             this.Controls.Add(this.btnOficina);
             this.Controls.Add(this.btnAcerca);
@@ -139,6 +190,7 @@
             this.Name = "frmInicioPrograma";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "INICIO";
+            this.Load += new System.EventHandler(this.frmInicioPrograma_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -153,5 +205,7 @@
         private System.Windows.Forms.LinkLabel lblSitioWeb;
         private System.Windows.Forms.Button btnOficina;
         private System.Windows.Forms.Button btnEntradaCajero;
+        private System.Windows.Forms.Button btnAperturarCaja;
+        private System.Windows.Forms.Button btnSalidaCajero;
     }
 }

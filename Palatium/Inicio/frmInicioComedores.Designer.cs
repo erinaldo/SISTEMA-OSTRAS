@@ -72,6 +72,7 @@
             this.btnVentaExpress.Text = "Venta Express\r\n ";
             this.btnVentaExpress.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnVentaExpress.UseVisualStyleBackColor = false;
+            this.btnVentaExpress.Click += new System.EventHandler(this.btnVentaExpress_Click);
             this.btnVentaExpress.MouseEnter += new System.EventHandler(this.btnVentaExpress_MouseEnter);
             this.btnVentaExpress.MouseLeave += new System.EventHandler(this.btnVentaExpress_MouseLeave);
             // 
@@ -93,6 +94,7 @@
             this.btnClienteEmpresarial.Text = "Cliente Empresarial\r\n ";
             this.btnClienteEmpresarial.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnClienteEmpresarial.UseVisualStyleBackColor = false;
+            this.btnClienteEmpresarial.Click += new System.EventHandler(this.btnClienteEmpresarial_Click);
             this.btnClienteEmpresarial.MouseEnter += new System.EventHandler(this.btnClienteEmpresarial_MouseEnter);
             this.btnClienteEmpresarial.MouseLeave += new System.EventHandler(this.btnClienteEmpresarial_MouseLeave);
             // 
@@ -114,6 +116,7 @@
             this.btnCobroAlmuerzos.Text = "Cobro de Almuerzos\r\n ";
             this.btnCobroAlmuerzos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnCobroAlmuerzos.UseVisualStyleBackColor = false;
+            this.btnCobroAlmuerzos.Click += new System.EventHandler(this.btnCobroAlmuerzos_Click);
             this.btnCobroAlmuerzos.MouseEnter += new System.EventHandler(this.btnCobroAlmuerzos_MouseEnter);
             this.btnCobroAlmuerzos.MouseLeave += new System.EventHandler(this.btnCobroAlmuerzos_MouseLeave);
             // 
@@ -135,6 +138,7 @@
             this.btnSalidaCajero.Text = "Arqueo de Caja\r\n  ";
             this.btnSalidaCajero.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSalidaCajero.UseVisualStyleBackColor = false;
+            this.btnSalidaCajero.Click += new System.EventHandler(this.btnSalidaCajero_Click);
             this.btnSalidaCajero.MouseEnter += new System.EventHandler(this.btnSalidaCajero_MouseEnter);
             this.btnSalidaCajero.MouseLeave += new System.EventHandler(this.btnSalidaCajero_MouseLeave);
             // 
@@ -156,6 +160,7 @@
             this.btnMovimientoCaja.Text = "Movimientos de Caja\r\n ";
             this.btnMovimientoCaja.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMovimientoCaja.UseVisualStyleBackColor = false;
+            this.btnMovimientoCaja.Click += new System.EventHandler(this.btnMovimientoCaja_Click);
             this.btnMovimientoCaja.MouseEnter += new System.EventHandler(this.btnMovimientoCaja_MouseEnter);
             this.btnMovimientoCaja.MouseLeave += new System.EventHandler(this.btnMovimientoCaja_MouseLeave);
             // 
@@ -177,6 +182,7 @@
             this.btnCancelar.Text = "Cancelar Orden\n  ";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             this.btnCancelar.MouseEnter += new System.EventHandler(this.btnCancelar_MouseEnter);
             this.btnCancelar.MouseLeave += new System.EventHandler(this.btnCancelar_MouseLeave);
             // 
@@ -198,6 +204,7 @@
             this.btnRevisar.Text = "Revisar Órdenes\r\n ";
             this.btnRevisar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRevisar.UseVisualStyleBackColor = false;
+            this.btnRevisar.Click += new System.EventHandler(this.btnRevisar_Click);
             this.btnRevisar.MouseEnter += new System.EventHandler(this.btnRevisar_MouseEnter);
             this.btnRevisar.MouseLeave += new System.EventHandler(this.btnRevisar_MouseLeave);
             // 
@@ -219,6 +226,7 @@
             this.btnTarjetaAlmuerzo.Text = "Tarjetas de Almuerzo\r\n ";
             this.btnTarjetaAlmuerzo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnTarjetaAlmuerzo.UseVisualStyleBackColor = false;
+            this.btnTarjetaAlmuerzo.Click += new System.EventHandler(this.btnTarjetaAlmuerzo_Click);
             this.btnTarjetaAlmuerzo.MouseEnter += new System.EventHandler(this.btnTarjetaAlmuerzo_MouseEnter);
             this.btnTarjetaAlmuerzo.MouseLeave += new System.EventHandler(this.btnTarjetaAlmuerzo_MouseLeave);
             // 
@@ -240,6 +248,7 @@
             this.btnDatosClientes.Text = "Clientes\r\n ";
             this.btnDatosClientes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnDatosClientes.UseVisualStyleBackColor = false;
+            this.btnDatosClientes.Click += new System.EventHandler(this.btnDatosClientes_Click);
             this.btnDatosClientes.MouseEnter += new System.EventHandler(this.btnDatosClientes_MouseEnter);
             this.btnDatosClientes.MouseLeave += new System.EventHandler(this.btnDatosClientes_MouseLeave);
             // 
@@ -260,9 +269,12 @@
             this.Controls.Add(this.btnVentaExpress);
             this.Controls.Add(this.btnClienteEmpresarial);
             this.Controls.Add(this.logo);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmInicioComedores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Módulo de Comedores";
+            this.Load += new System.EventHandler(this.frmInicioComedores_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.ResumeLayout(false);
 

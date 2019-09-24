@@ -434,7 +434,7 @@
             this.btnFuncionarios.ForeColor = System.Drawing.Color.White;
             this.btnFuncionarios.Image = global::Palatium.Properties.Resources.icono_funcionarios_2;
             this.btnFuncionarios.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnFuncionarios.Location = new System.Drawing.Point(448, 208);
+            this.btnFuncionarios.Location = new System.Drawing.Point(448, 204);
             this.btnFuncionarios.Name = "btnFuncionarios";
             this.btnFuncionarios.Size = new System.Drawing.Size(172, 118);
             this.btnFuncionarios.TabIndex = 26;
@@ -458,7 +458,7 @@
             this.btnRepartidorExterno.ForeColor = System.Drawing.Color.White;
             this.btnRepartidorExterno.Image = global::Palatium.Properties.Resources.icono_repartidor_externo;
             this.btnRepartidorExterno.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRepartidorExterno.Location = new System.Drawing.Point(394, 9);
+            this.btnRepartidorExterno.Location = new System.Drawing.Point(407, 12);
             this.btnRepartidorExterno.Name = "btnRepartidorExterno";
             this.btnRepartidorExterno.Size = new System.Drawing.Size(172, 118);
             this.btnRepartidorExterno.TabIndex = 25;

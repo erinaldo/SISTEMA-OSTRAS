@@ -1,4 +1,4 @@
-﻿namespace Palatium.Menú
+﻿namespace Palatium.Menu
 {
     partial class frmConsultarPrecio
     {

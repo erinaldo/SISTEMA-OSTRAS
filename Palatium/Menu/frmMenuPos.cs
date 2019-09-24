@@ -1464,7 +1464,7 @@ namespace Palatium.Menú
 
         private void btnCambioOrigen_Click(object sender, EventArgs e)
         {
-            this.llenarArregloMaximo();
+            llenarArregloMaximo();
 
             if (Program.iPuedeCobrar == 1)
             {

@@ -83,6 +83,16 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap abrir_caja_inicial_menu {
+            get {
+                object obj = ResourceManager.GetObject("abrir_caja_inicial_menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap aceptar_digitos {
             get {
                 object obj = ResourceManager.GetObject("aceptar_digitos", resourceCulture);
@@ -1603,6 +1613,66 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icono_boton_abrir_cajon {
+            get {
+                object obj = ResourceManager.GetObject("icono_boton_abrir_cajon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_boton_cambiar_factura {
+            get {
+                object obj = ResourceManager.GetObject("icono_boton_cambiar_factura", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_boton_cambio_cajero {
+            get {
+                object obj = ResourceManager.GetObject("icono_boton_cambio_cajero", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_boton_cambio_cortesia {
+            get {
+                object obj = ResourceManager.GetObject("icono_boton_cambio_cortesia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_boton_consulta_precios {
+            get {
+                object obj = ResourceManager.GetObject("icono_boton_consulta_precios", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_boton_editar_datos_factura {
+            get {
+                object obj = ResourceManager.GetObject("icono_boton_editar_datos_factura", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icono_boton_empleado {
             get {
                 object obj = ResourceManager.GetObject("icono_boton_empleado", resourceCulture);
@@ -1616,6 +1686,16 @@ namespace Palatium.Properties {
         internal static System.Drawing.Bitmap icono_boton_empresa {
             get {
                 object obj = ResourceManager.GetObject("icono_boton_empresa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_boton_reimpresion {
+            get {
+                object obj = ResourceManager.GetObject("icono_boton_reimpresion", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

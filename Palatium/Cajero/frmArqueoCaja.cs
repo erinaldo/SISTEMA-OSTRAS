@@ -948,7 +948,7 @@ namespace Palatium.Cajero
             try
             {
                 sSql = "";
-                sSql += "select ltrim(str(sum(DP.cantidad * (DP.precio_unitario + DP.valor_iva - DP.valor_otro - DP.valor_dscto)), 10, 2)) valor" + Environment.NewLine;
+                sSql += "select ltrim(str(isnull(sum(DP.cantidad * (DP.precio_unitario + DP.valor_iva - DP.valor_otro - DP.valor_dscto)), 0), 10, 2)) valor" + Environment.NewLine;
                 sSql += "from cv403_cab_pedidos CP INNER JOIN" + Environment.NewLine;
                 sSql += "cv403_det_pedidos DP ON CP.id_pedido = DP.id_pedido" + Environment.NewLine;
                 sSql += "and CP.estado = 'A'" + Environment.NewLine;

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Palatium.Menú
+namespace Palatium.Menu
 {
     public partial class frmConsultarPrecio : Form
     {

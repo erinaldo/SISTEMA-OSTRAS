@@ -258,7 +258,7 @@ namespace Palatium.Menú
                 botonSel1 = sender as Button;
                 precios = new Clases.ClasePreciosItems(Convert.ToInt32(botonSel1.AccessibleName));
 
-                Menú.frmConsultarPrecio precio = new frmConsultarPrecio(Convert.ToInt32(botonSel1.AccessibleName));
+                Menu.frmConsultarPrecio precio = new Menu.frmConsultarPrecio(Convert.ToInt32(botonSel1.AccessibleName));
                 precio.ShowDialog();
             }
             catch (Exception ex)
