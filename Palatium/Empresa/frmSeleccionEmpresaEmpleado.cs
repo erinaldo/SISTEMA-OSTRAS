@@ -19,8 +19,8 @@ namespace Palatium.Empresa
 
         Clases.ClaseAbrirCajon abrir = new Clases.ClaseAbrirCajon();
 
-        Button[,] botonEmpresa = new Button[4, 2];
-        Button[,] botonEmpleado = new Button[4, 5];
+        Button[,] botonEmpresa = new Button[5, 3];
+        Button[,] botonEmpleado = new Button[5, 7];
 
         string sSql;
         string sNombreEmpresa;
@@ -40,6 +40,7 @@ namespace Palatium.Empresa
         int iCuentaEmpleados;
         int iIdOrigenOrden;
         int iIdEmpresa;
+        int iIdClienteEmpresarial;
 
         Button bempresa;
         Button bempleado;
@@ -62,21 +63,21 @@ namespace Palatium.Empresa
                 iPosYEmpresas = 0;
                 iCuentaAyudaEmpresas = 0;
 
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    for (int j = 0; j < 2; j++)
+                    for (int j = 0; j < 3; j++)
                     {
                         botonEmpresa[i, j] = new Button();
                         botonEmpresa[i, j].Cursor = Cursors.Hand;
                         botonEmpresa[i, j].Click += new EventHandler(boton_clic_Empresa);
-                        botonEmpresa[i, j].Size = new Size(175, 135);
+                        botonEmpresa[i, j].Size = new Size(130, 105);
                         botonEmpresa[i, j].Location = new Point(iPosXEmpresas, iPosYEmpresas);
                         botonEmpresa[i, j].BackColor = Color.Navy;
                         botonEmpresa[i, j].ForeColor = Color.White;
                         botonEmpresa[i, j].TextAlign = ContentAlignment.BottomCenter;
                         botonEmpresa[i, j].Image = Properties.Resources.icono_boton_empresa;
                         botonEmpresa[i, j].ImageAlign = ContentAlignment.TopCenter;
-                        botonEmpresa[i, j].Font = new Font("Maiandra GD", 9.75f, FontStyle.Bold);
+                        botonEmpresa[i, j].Font = new Font("Maiandra GD", 8.25f, FontStyle.Bold);
                         botonEmpresa[i, j].UseVisualStyleBackColor = false;
                         botonEmpresa[i, j].FlatAppearance.BorderSize = 2;
                         botonEmpresa[i, j].Tag = dtEmpresas.Rows[iCuentaEmpresas]["id_pos_cliente_empresarial"].ToString();
@@ -87,15 +88,15 @@ namespace Palatium.Empresa
                         iCuentaEmpresas++;
                         iCuentaAyudaEmpresas++;
 
-                        if (j + 1 == 2)
+                        if (j + 1 == 3)
                         {
                             iPosXEmpresas = 0;
-                            iPosYEmpresas += 135;
+                            iPosYEmpresas += 105;
                         }
 
                         else
                         {
-                            iPosXEmpresas += 175;
+                            iPosXEmpresas += 130;
                         }
 
                         if (dtEmpresas.Rows.Count == iCuentaEmpresas)
@@ -124,17 +125,23 @@ namespace Palatium.Empresa
         }
 
         //INSTRUCCION PARA CARGAR LOS DATOS DE LAS EMPRESAS
-        private void cargarEmpresas()
+        private void cargarEmpresas(int iOp)
         {
             try
             {
                 sSql = "";
                 sSql += "select CE.id_pos_cliente_empresarial, TP.id_persona," + Environment.NewLine;
-                sSql += "ltrim(isnull(nombres, '') + ' ' + apellidos) empresa" + Environment.NewLine;
+                sSql += "ltrim(isnull(TP.nombres, '') + ' ' + TP.apellidos) empresa" + Environment.NewLine;
                 sSql += "from pos_cliente_empresarial CE INNER JOIN" + Environment.NewLine;
                 sSql += "tp_personas TP ON TP.id_persona = CE.id_persona" + Environment.NewLine;
                 sSql += "and TP.estado = 'A'" + Environment.NewLine;
-                sSql += "and CE.estado = 'A'";
+                sSql += "and CE.estado = 'A'" + Environment.NewLine;
+
+                if (iOp == 1)
+                {
+                    sSql += "and (TP.apellidos like '%" + txtFiltrarEmpresas.Text.Trim() + "%'" + Environment.NewLine;
+                    sSql += "or TP.nombres like '%" + txtFiltrarEmpresas.Text.Trim() + "%')" + Environment.NewLine;
+                }
 
                 dtEmpresas = new DataTable();
                 dtEmpresas.Clear();
@@ -189,11 +196,14 @@ namespace Palatium.Empresa
         //EVENTO CLIC DEL BOTON EMPRESA
         public void boton_clic_Empresa(object sender, EventArgs e)
         {
+            txtFiltrarEmpleados.Clear();
+
             bempresa = sender as Button;
             iIdEmpresa = Convert.ToInt32(bempresa.AccessibleDescription);
             sNombreEmpresa = bempresa.Text.Trim().ToUpper();
             lblNombreEmpresa.Text = "EMPRESA: " + bempresa.Text.Trim().ToUpper();
-            cargarEmpleados(Convert.ToInt32(bempresa.Tag));
+            iIdClienteEmpresarial = Convert.ToInt32(bempresa.Tag);
+            cargarEmpleados(Convert.ToInt32(bempresa.Tag), 0);
         }
 
         //FUNCION PARA MOSTRAR LOS BOTONES DE EMPLEADOS
@@ -206,21 +216,21 @@ namespace Palatium.Empresa
                 iPosYEmpleados = 0;
                 iCuentaAyudaEmpleados = 0;
 
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    for (int j = 0; j < 5; j++)
+                    for (int j = 0; j < 7; j++)
                     {
                         botonEmpleado[i, j] = new Button();
                         botonEmpleado[i, j].Cursor = Cursors.Hand;
                         botonEmpleado[i, j].Click += new EventHandler(boton_clic_Empleado);
-                        botonEmpleado[i, j].Size = new Size(175, 135);
+                        botonEmpleado[i, j].Size = new Size(130, 105);
                         botonEmpleado[i, j].Location = new Point(iPosXEmpleados, iPosYEmpleados);
                         botonEmpleado[i, j].BackColor = Color.FromArgb(128, 255, 128);
                         botonEmpleado[i, j].ForeColor = Color.Black;
                         botonEmpleado[i, j].TextAlign = ContentAlignment.BottomCenter;
                         botonEmpleado[i, j].Image = Properties.Resources.icono_boton_empleado;
                         botonEmpleado[i, j].ImageAlign = ContentAlignment.TopCenter;
-                        botonEmpleado[i, j].Font = new Font("Maiandra GD", 9.75f, FontStyle.Bold);
+                        botonEmpleado[i, j].Font = new Font("Maiandra GD", 8.25f, FontStyle.Bold);
                         botonEmpleado[i, j].Tag = dtEmpleados.Rows[iCuentaEmpleados]["id_persona"].ToString();
                         botonEmpleado[i, j].Text = dtEmpleados.Rows[iCuentaEmpleados]["empleado"].ToString();
                         botonEmpleado[i, j].AccessibleDescription = dtEmpleados.Rows[iCuentaEmpleados]["id_pos_cliente_empresarial"].ToString();
@@ -233,12 +243,12 @@ namespace Palatium.Empresa
                         if (j + 1 == 5)
                         {
                             iPosXEmpleados = 0;
-                            iPosYEmpleados += 135;
+                            iPosYEmpleados += 105;
                         }
 
                         else
                         {
-                            iPosXEmpleados += 175;
+                            iPosXEmpleados += 130;
                         }
 
                         if (dtEmpleados.Rows.Count == iCuentaEmpleados)
@@ -267,18 +277,24 @@ namespace Palatium.Empresa
         }
 
         //FUNCION PARA CARGAR LOS EMPLEADOS
-        private void cargarEmpleados(int iIdClienteEmpresarial_P)
+        private void cargarEmpleados(int iIdClienteEmpresarial_P, int iOp)
         {
             try
             {
                 sSql = "";
                 sSql += "select EMP.id_persona, EMP.id_pos_cliente_empresarial," + Environment.NewLine;
-                sSql += "ltrim(isnull(nombres, '') + ' ' +  apellidos) empleado, EMP.aplica_almuerzo" + Environment.NewLine;
+                sSql += "ltrim(isnull(TP.nombres, '') + ' ' +  TP.apellidos) empleado, EMP.aplica_almuerzo" + Environment.NewLine;
                 sSql += "from pos_empleados EMP INNER JOIN" + Environment.NewLine;
                 sSql += "tp_personas TP ON TP.id_persona = EMP.id_persona" + Environment.NewLine;
                 sSql += "and TP.estado = 'A'" + Environment.NewLine;
                 sSql += "and EMP.estado = 'A'" + Environment.NewLine;
-                sSql += "where EMP.id_pos_cliente_empresarial = " + iIdClienteEmpresarial_P;
+                sSql += "where EMP.id_pos_cliente_empresarial = " + iIdClienteEmpresarial_P + Environment.NewLine;
+
+                if (iOp == 1)
+                {
+                    sSql += "and (TP.apellidos like '%" + txtFiltrarEmpleados.Text.Trim() + "%'" + Environment.NewLine;
+                    sSql += "or TP.nombres like '%" + txtFiltrarEmpleados.Text.Trim() + "%')" + Environment.NewLine;
+                }
                 
                 dtEmpleados = new DataTable();
                 dtEmpleados.Clear();
@@ -347,7 +363,7 @@ namespace Palatium.Empresa
 
         private void frmSeleccionEmpresaEmpleado_Load(object sender, EventArgs e)
         {
-            cargarEmpresas();
+            cargarEmpresas(0);
         }
 
         private void btnSiguienteEmpresa_Click(object sender, EventArgs e)
@@ -390,23 +406,6 @@ namespace Palatium.Empresa
             }
         }
 
-        private void btnAgregarEmpresa_Click(object sender, EventArgs e)
-        {
-            Empresa.frmClienteEmpresarial clienteEmpresarial = new Empresa.frmClienteEmpresarial();
-            clienteEmpresarial.ShowDialog();
-
-            if (clienteEmpresarial.DialogResult == DialogResult.OK)
-            {
-                cargarEmpresas();
-            }
-        }
-
-        private void btnAgregarEmpleado_Click(object sender, EventArgs e)
-        {
-            Empresa.frmEmpleadosEmpresas empleadosEmpresas = new Empresa.frmEmpleadosEmpresas();
-            empleadosEmpresas.ShowDialog();
-        }
-
         private void btnSiguienteEmpleado_Click(object sender, EventArgs e)
         {
             btnAnteriorEmpleado.Enabled = true;
@@ -426,6 +425,51 @@ namespace Palatium.Empresa
             iCuentaEmpleados -= 20;
 
             mostrarEmpleados();
+        }
+
+        private void txtFiltrarEmpresas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                pnlEmpleados.Controls.Clear();
+
+                if (txtFiltrarEmpresas.Text.Trim() == "")
+                {
+                    cargarEmpresas(0);
+                }
+
+                else
+                {
+                    cargarEmpresas(1);
+                }
+            }
+        }
+
+        private void txtFiltrarEmpleados_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (iIdEmpresa == 0)
+                {
+                    ok.LblMensaje.Text = "No ha seleccionado ninguna empresa.";
+                    ok.ShowDialog();
+                }
+
+                else
+                {
+                    //pnlEmpleados.Controls.Clear();
+
+                    if (txtFiltrarEmpleados.Text.Trim() == "")
+                    {
+                        cargarEmpleados(iIdClienteEmpresarial, 0);
+                    }
+
+                    else
+                    {
+                        cargarEmpleados(iIdClienteEmpresarial, 1);
+                    }
+                }
+            }
         }
     }
 }
