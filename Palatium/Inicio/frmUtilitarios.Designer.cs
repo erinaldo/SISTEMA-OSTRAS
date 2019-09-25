@@ -40,6 +40,7 @@
             this.btnReabrirCaja = new System.Windows.Forms.Button();
             this.btnOficina = new System.Windows.Forms.Button();
             this.btnSalidaCajero = new System.Windows.Forms.Button();
+            this.btnEliminarPedido = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -242,7 +243,7 @@
             this.btnOficina.ForeColor = System.Drawing.Color.White;
             this.btnOficina.Image = global::Palatium.Properties.Resources.icono_oficina;
             this.btnOficina.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnOficina.Location = new System.Drawing.Point(928, 439);
+            this.btnOficina.Location = new System.Drawing.Point(1126, 439);
             this.btnOficina.Name = "btnOficina";
             this.btnOficina.Size = new System.Drawing.Size(192, 138);
             this.btnOficina.TabIndex = 71;
@@ -275,6 +276,28 @@
             this.btnSalidaCajero.MouseEnter += new System.EventHandler(this.btnSalidaCajero_MouseEnter);
             this.btnSalidaCajero.MouseLeave += new System.EventHandler(this.btnSalidaCajero_MouseLeave);
             // 
+            // btnEliminarPedido
+            // 
+            this.btnEliminarPedido.BackColor = System.Drawing.Color.Navy;
+            this.btnEliminarPedido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEliminarPedido.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEliminarPedido.FlatAppearance.BorderSize = 2;
+            this.btnEliminarPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminarPedido.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnEliminarPedido.ForeColor = System.Drawing.Color.White;
+            this.btnEliminarPedido.Image = global::Palatium.Properties.Resources.icono_cancelar_orden;
+            this.btnEliminarPedido.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnEliminarPedido.Location = new System.Drawing.Point(532, 439);
+            this.btnEliminarPedido.Name = "btnEliminarPedido";
+            this.btnEliminarPedido.Size = new System.Drawing.Size(192, 138);
+            this.btnEliminarPedido.TabIndex = 83;
+            this.btnEliminarPedido.Text = "Eliminar una Comanda\r\n ";
+            this.btnEliminarPedido.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEliminarPedido.UseVisualStyleBackColor = false;
+            this.btnEliminarPedido.Click += new System.EventHandler(this.btnEliminarPedido_Click);
+            this.btnEliminarPedido.MouseEnter += new System.EventHandler(this.btnEliminarPedido_MouseEnter);
+            this.btnEliminarPedido.MouseLeave += new System.EventHandler(this.btnEliminarPedido_MouseLeave);
+            // 
             // frmUtilitarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,6 +305,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.ClientSize = new System.Drawing.Size(1360, 694);
+            this.Controls.Add(this.btnEliminarPedido);
             this.Controls.Add(this.btnSalidaCajero);
             this.Controls.Add(this.btnOficina);
             this.Controls.Add(this.btnReabrirCaja);
@@ -317,5 +341,6 @@
         private System.Windows.Forms.Button btnReabrirCaja;
         private System.Windows.Forms.Button btnOficina;
         private System.Windows.Forms.Button btnSalidaCajero;
+        private System.Windows.Forms.Button btnEliminarPedido;
     }
 }

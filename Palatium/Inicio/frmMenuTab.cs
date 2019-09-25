@@ -254,6 +254,7 @@ namespace Palatium.Inicio
                 btnReportes.BackColor = Color.Blue;
                 lblEtiqueta.Text = "DESCONECTADO";
                 cambioEstado(false);
+                btnSincronizarSRI.Visible = false;
             }
         }
 

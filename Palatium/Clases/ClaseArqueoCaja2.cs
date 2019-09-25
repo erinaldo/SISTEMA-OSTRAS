@@ -979,12 +979,17 @@ namespace Palatium.Clases
                 sSql += "and CP.estado = 'A'" + Environment.NewLine;
                 sSql += "and DP.estado = 'A' INNER JOIN" + Environment.NewLine;
                 sSql += "pos_origen_orden O ON O.id_pos_origen_orden = CP.id_pos_origen_orden" + Environment.NewLine;
-                sSql += "and O.estado = 'A'" + Environment.NewLine;
+                sSql += "and O.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "cv403_facturas_pedidos FP ON CP.id_pedido = FP.id_pedido" + Environment.NewLine;
+                sSql += "and FP.estado = 'A' INNER JOIN" + Environment.NewLine;
+                sSql += "cv403_facturas F ON F.id_factura = FP.id_factura" + Environment.NewLine;
+                sSql += "and F.estado = 'A'" + Environment.NewLine;
                 sSql += "where O.genera_factura = 1" + Environment.NewLine;
                 sSql += "and CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and CP.id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "and CP.estado_orden = 'Pagada'" + Environment.NewLine;
-                sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada;
+                sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                sSql += "and F.idtipocomprobante = 1";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();

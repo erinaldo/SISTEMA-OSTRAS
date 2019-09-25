@@ -292,6 +292,19 @@
     <Compile Include="Cajero\frmRecuperarDinero.Designer.cs">
       <DependentUpon>frmRecuperarDinero.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cancelar Orden\ClaseEliminacionComanda.cs" />
+    <Compile Include="Cancelar Orden\frmEliminarComanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Orden\frmEliminarComanda.Designer.cs">
+      <DependentUpon>frmEliminarComanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cancelar Orden\frmMotivoEliminacionComanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Orden\frmMotivoEliminacionComanda.Designer.cs">
+      <DependentUpon>frmMotivoEliminacionComanda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clases\ClaseAbrirCajon.cs" />
     <Compile Include="Clases\ClaseFormasPagosRecargo.cs" />
     <Compile Include="Clases\ClaseImprimirFacturaNormal.cs" />
@@ -2165,6 +2178,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cajero\frmRecuperarDinero.resx">
       <DependentUpon>frmRecuperarDinero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Orden\frmEliminarComanda.resx">
+      <DependentUpon>frmEliminarComanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Orden\frmMotivoEliminacionComanda.resx">
+      <DependentUpon>frmMotivoEliminacionComanda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comida_Rapida\frmCobroRapidoTarjetas.resx">
       <DependentUpon>frmCobroRapidoTarjetas.cs</DependentUpon>

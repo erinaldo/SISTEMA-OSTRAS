@@ -216,7 +216,7 @@ namespace Palatium.Inicio
 
                     else
                     {
-                        int iConsultaJornada = recuperarJornada(Convert.ToInt32(dtConsulta.Rows[0]["orden"].ToString()));
+                        int iConsultaJornada = recuperarJornada(Convert.ToInt32(dtConsulta.Rows[0]["orden"].ToString()) + 1);
 
                         if (iConsultaJornada > 0)
                         {
@@ -243,7 +243,7 @@ namespace Palatium.Inicio
                 {
                     if (IBanderaCaja == 1)
                     {
-                        int iConsultaJornada = recuperarJornada(0);
+                        int iConsultaJornada = recuperarJornada(1);
 
                         if (iConsultaJornada > 0)
                         {
@@ -297,7 +297,7 @@ namespace Palatium.Inicio
                 sSql += "select id_pos_jornada" + Environment.NewLine;
                 sSql += "from pos_jornada" + Environment.NewLine;
                 sSql += "where estado = 'A'" + Environment.NewLine;
-                sSql += "and orden = " + iOrden_P + 1;
+                sSql += "and orden = " + iOrden_P;
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();

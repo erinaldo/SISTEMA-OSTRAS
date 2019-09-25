@@ -507,5 +507,33 @@ namespace Palatium.Inicio
                 ok.ShowDialog();
             }
         }
+
+        private void btnEliminarPedido_Click(object sender, EventArgs e)
+        {
+            llenarArregloMaximo();
+            ingresaBoton(btnEliminarPedido);
+
+            if (Program.iPuedeCobrar == 1)
+            {
+                Cancelar_Orden.frmEliminarComanda comanda = new Cancelar_Orden.frmEliminarComanda();
+                comanda.ShowDialog();
+            }
+
+            else
+            {
+                ok.LblMensaje.Text = "No tiene permisos para utilizar en esta opción.";
+                ok.ShowDialog();
+            }
+        }
+
+        private void btnEliminarPedido_MouseEnter(object sender, EventArgs e)
+        {
+            ingresaBoton(btnEliminarPedido);
+        }
+
+        private void btnEliminarPedido_MouseLeave(object sender, EventArgs e)
+        {
+            salidaBoton(btnEliminarPedido);
+        }
     }
 }

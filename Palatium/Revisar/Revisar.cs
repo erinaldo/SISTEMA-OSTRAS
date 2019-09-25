@@ -419,7 +419,7 @@ namespace Palatium.Revisar
                     sSql += "and CP.estado in ('A', 'N')" + Environment.NewLine;
                     sSql += "and O.estado = 'A'inner join" + Environment.NewLine;
                     sSql += "cv403_numero_cab_pedido as NP on NP.id_pedido = CP.id_pedido" + Environment.NewLine;
-                    sSql += "and NP.estado = 'A' left outer join" + Environment.NewLine;
+                    sSql += "and NP.estado in ('A', 'N') left outer join" + Environment.NewLine;
                     sSql += "pos_mesa as M on M.id_pos_mesa = CP.id_pos_mesa" + Environment.NewLine;
                     sSql += "and M.estado = 'A' inner join" + Environment.NewLine;
                     sSql += "pos_cajero as C on C.id_pos_cajero = CP.id_pos_cajero" + Environment.NewLine;
@@ -616,7 +616,7 @@ namespace Palatium.Revisar
                                         sSql += "where CP.id_pedido = DP.id_pedido" + Environment.NewLine;
                                         sSql += "and CP.id_pedido = " + iIdPedido + Environment.NewLine;
                                         sSql += "and CP.estado in ('A', 'N')" + Environment.NewLine;
-                                        sSql += "and DP.estado = 'A'";
+                                        sSql += "and DP.estado in ('A', 'N')";
 
                                         bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsultaMesa, sSql);
 
@@ -902,18 +902,7 @@ namespace Palatium.Revisar
             btnFecha.Text = sFechaActual.Substring(8, 2) + "/" + sFechaActual.Substring(5, 2) + "/" + sFechaActual.Substring(0, 4);
             pnlOrdenes.Controls.Clear();
             iOp = 1;
-
-
-            //using (VentanasMensajes.frmMensajeEspere espere = new VentanasMensajes.frmMensajeEspere())
-            //{
-            //    espere.AccionEjecutar = mostrarBotones;
-
-            //    if (espere.ShowDialog() != DialogResult.OK)
-            //    {
-            //        MessageBox.Show("ERROR");
-            //    }
-            //}
-
+            
             espere.AccionEjecutar = mostrarBotones;
             espere.ShowDialog();
 
