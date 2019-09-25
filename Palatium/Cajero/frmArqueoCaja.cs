@@ -1336,6 +1336,9 @@ namespace Palatium.Cajero
                         }
 
                         this.Close();
+
+                        Application.Exit();
+
                         return;
                     }
                 }

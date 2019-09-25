@@ -1409,7 +1409,7 @@ namespace Palatium.Pedidos
                  sSql += "idempresa, id_persona, fecha_pago, cg_moneda, valor," + Environment.NewLine;
                  sSql += "propina, cg_empresa, id_localidad, cg_cajero, fecha_ingreso," + Environment.NewLine;
                  sSql += "usuario_ingreso, terminal_ingreso, estado, " + Environment.NewLine;
-                 sSql += "numero_replica_trigger, numero_control_replica,cambio) " + Environment.NewLine;
+                 sSql += "numero_replica_trigger, numero_control_replica, cambio) " + Environment.NewLine;
                  sSql += "values(" + Environment.NewLine;
                  sSql += Program.iIdEmpresa + ", " + Program.iIdPersona + ", '" + sFecha_P + "', " + Program.iMoneda + "," + Environment.NewLine;
                  sSql += dTotal + ", " + Convert.ToDouble(dgvDetalleDeuda.Rows[3].Cells[1].Value) + ", " + Program.iCgEmpresa + "," + Environment.NewLine;

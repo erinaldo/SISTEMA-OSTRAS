@@ -33,6 +33,7 @@ namespace Palatium.Formularios
         int iIdManejaServicio;
         int iServicioConsulta;
         int iCuentaPorCobrar;
+        int iPagoAnticipado;
 
         public FInformacionPosOriOrd()
         {
@@ -255,6 +256,7 @@ namespace Palatium.Formularios
             chkDelivery.Checked = false;
             chkGeneraFactura.Checked = false;
             chkRepartidorExterno.Checked = false;
+            chkPagoAnticipado.Checked = false;
 
             llenarGrid(0);
         }
@@ -270,7 +272,7 @@ namespace Palatium.Formularios
                 sSql += "id_pos_origen_orden, presenta_opcion_delivery, genera_factura," + Environment.NewLine;
                 sSql += "repartidor_externo, isnull(imagen, '') imagen, id_pos_modo_delivery," + Environment.NewLine;
                 sSql += "isnull(id_pos_tipo_forma_cobro, 0), isnull(id_persona, 0), maneja_servicio," + Environment.NewLine;
-                sSql += "cuenta_por_cobrar" + Environment.NewLine;
+                sSql += "cuenta_por_cobrar, pago_anticipado" + Environment.NewLine;
                 sSql += "from pos_origen_orden" + Environment.NewLine;
                 sSql += "where estado = 'A'" + Environment.NewLine;
 
@@ -303,6 +305,7 @@ namespace Palatium.Formularios
                     dgvDatos.Columns[10].Visible = false;
                     dgvDatos.Columns[11].Visible = false;
                     dgvDatos.Columns[12].Visible = false;
+                    dgvDatos.Columns[13].Visible = false;
                 }
 
                 else
@@ -335,8 +338,8 @@ namespace Palatium.Formularios
                 sSql += "insert into pos_origen_orden (" + Environment.NewLine;
                 sSql += "codigo, descripcion, genera_factura, id_pos_modo_delivery," + Environment.NewLine;
                 sSql += "presenta_opcion_delivery, repartidor_externo, imagen, id_pos_tipo_forma_cobro," + Environment.NewLine;
-                sSql += "id_persona, maneja_servicio, cuenta_por_cobrar, estado, fecha_ingreso," + Environment.NewLine;
-                sSql += "usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                sSql += "id_persona, maneja_servicio, cuenta_por_cobrar, pago_anticipado," + Environment.NewLine;
+                sSql += "estado, fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
                 sSql += "values(" + Environment.NewLine;
                 sSql += "'" + txtCodigo.Text.Trim() + "', '" + txtDescripcion.Text.Trim() + "'," + Environment.NewLine;
                 sSql += iGeneraFactura + ", " + Convert.ToInt32(cmbModoDelivery.SelectedValue) + ", " + Environment.NewLine;
@@ -360,7 +363,7 @@ namespace Palatium.Formularios
                     }
                 }
 
-                sSql += iIdManejaServicio + ", " + iCuentaPorCobrar + ", 'A', GETDATE()," +  Environment.NewLine;
+                sSql += iIdManejaServicio + ", " + iCuentaPorCobrar + ", " + iPagoAnticipado + ", 'A', GETDATE()," +  Environment.NewLine;
                 sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
 
                 //EJECUTAR INSTRUCCION SQL
@@ -416,6 +419,7 @@ namespace Palatium.Formularios
                 sSql += "imagen = '" + txtRuta.Text.Trim() + "'," + Environment.NewLine;
                 sSql += "maneja_servicio = " + iIdManejaServicio + "," + Environment.NewLine;
                 sSql += "cuenta_por_cobrar = " + iCuentaPorCobrar + "," + Environment.NewLine;
+                sSql += "pago_anticipado = " + iPagoAnticipado + "," + Environment.NewLine;
 
                 if (iGeneraFactura == 1)
                 {
@@ -754,6 +758,16 @@ namespace Palatium.Formularios
                     iCuentaPorCobrar = 0;
                 }
 
+                if (chkPagoAnticipado.Checked == true)
+                {
+                    iPagoAnticipado = 1;
+                }
+
+                else
+                {
+                    iPagoAnticipado = 0;
+                }
+
                 if (btnNuevo.Text == "Guardar")
                 {
                     insertarRegistro();
@@ -814,7 +828,7 @@ namespace Palatium.Formularios
         private void btnExaminar_Click(object sender, EventArgs e)
         {
             OpenFileDialog abrir = new OpenFileDialog();
-            abrir.InitialDirectory = "c:\\";
+            //abrir.InitialDirectory = "c:\\";
             abrir.Filter = "Archivos imagen (*.jpg; *.png; *.jpeg)|*.jpg;*.png;*.jpeg";
             abrir.Title = "Seleccionar archivo";
 
@@ -920,6 +934,16 @@ namespace Palatium.Formularios
                 chkCuentaPorCobrar.Checked = false;
             }
 
+            if (Convert.ToInt32(dgvDatos.CurrentRow.Cells[13].Value.ToString()) == 1)
+            {
+                chkPagoAnticipado.Checked = true;
+            }
+
+            else
+            {
+                chkPagoAnticipado.Checked = false;
+            }
+
             txtDescripcion.Focus();
         }
 
@@ -935,6 +959,22 @@ namespace Palatium.Formularios
             {
                 dbAyudaPersona.limpiar();
                 grupoPago.Enabled = true;
+            }
+        }
+
+        private void chkCuentaPorCobrar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCuentaPorCobrar.Checked == true)
+            {
+                chkPagoAnticipado.Checked = false;
+            }
+        }
+
+        private void chkPagoAnticpado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPagoAnticipado.Checked == true)
+            {
+                chkCuentaPorCobrar.Checked = false;
             }
         }
 

@@ -433,6 +433,16 @@ namespace Palatium.Inicio
                     logo.Image = Image.FromFile(Program.sLogo);
                 }
             }
+
+            if (Program.iFacturacionElectronica == 1)
+            {
+                btnEditarFactura.Enabled = true;
+            }
+
+            else
+            {
+                btnEditarFactura.Enabled = false;
+            }
         }
 
         private void btnSalidaCajero_MouseEnter(object sender, EventArgs e)

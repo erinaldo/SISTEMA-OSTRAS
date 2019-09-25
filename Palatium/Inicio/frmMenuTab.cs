@@ -65,46 +65,84 @@ namespace Palatium.Inicio
         {
             btnRestaurante.Visible = ok;
             btnComedor.Visible = ok;
-            btnSincronizarSRI.Visible = ok;
             btnUtilitarios.Visible = ok;
-            btnRestaurante.Visible = ok;
-            btnReportes.Visible = ok;
+            //btnRestaurante.Visible = ok;
+            //btnReportes.Visible = ok;
             btnCerrarSesion.Visible = ok;
-            //btnInicio.Visible = !ok;
+
+            if (Program.iFacturacionElectronica == 1)
+            {
+                btnSincronizarSRI.Visible = true;
+            }
+
+            else
+            {
+                btnSincronizarSRI.Visible = false;
+            }
         }
 
         #endregion
 
         private void btnRestaurante_Click(object sender, EventArgs e)
         {
-            abrirFormularioHijo(new Inicio.frmInicioRestaurante(), 0);
-            btnRestaurante.BackColor = Color.FromArgb(0, 192, 0);
-            btnComedor.BackColor = Color.Blue;
-            btnUtilitarios.BackColor = Color.Blue;
-            btnSincronizarSRI.BackColor = Color.Blue;
-            btnReportes.BackColor = Color.Blue;
+            if (btnRestaurante.AccessibleDescription == "0")
+            {
+                abrirFormularioHijo(new Inicio.frmInicioRestaurante(), 0);
+                btnRestaurante.BackColor = Color.FromArgb(0, 192, 0);
+                btnComedor.BackColor = Color.Blue;
+                btnUtilitarios.BackColor = Color.Blue;
+                btnSincronizarSRI.BackColor = Color.Blue;
+                btnReportes.BackColor = Color.Blue;
+
+                btnInicio.AccessibleDescription = "0";
+                btnRestaurante.AccessibleDescription = "1";
+                btnComedor.AccessibleDescription = "0";
+                btnUtilitarios.AccessibleDescription = "0";
+                btnSincronizarSRI.AccessibleDescription = "0";
+                btnReportes.AccessibleDescription = "0";
+            }
         }
 
         private void btnUtilitarios_Click(object sender, EventArgs e)
         {
-            abrirFormularioHijo(new Inicio.frmUtilitarios(), 0);
-            btnRestaurante.BackColor = Color.Blue;
-            btnComedor.BackColor = Color.Blue;
-            btnUtilitarios.BackColor = Color.FromArgb(0, 192, 0);
-            btnSincronizarSRI.BackColor = Color.Blue;
-            btnReportes.BackColor = Color.Blue;
+            if (btnUtilitarios.AccessibleDescription == "0")
+            {
+                abrirFormularioHijo(new Inicio.frmUtilitarios(), 0);
+                btnRestaurante.BackColor = Color.Blue;
+                btnComedor.BackColor = Color.Blue;
+                btnUtilitarios.BackColor = Color.FromArgb(0, 192, 0);
+                btnSincronizarSRI.BackColor = Color.Blue;
+                btnReportes.BackColor = Color.Blue;
+
+                btnInicio.AccessibleDescription = "0";
+                btnRestaurante.AccessibleDescription = "0";
+                btnComedor.AccessibleDescription = "0";
+                btnUtilitarios.AccessibleDescription = "1";
+                btnSincronizarSRI.AccessibleDescription = "0";
+                btnReportes.AccessibleDescription = "0";
+            }
         }
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
             if (iVerFormulario == 1)
             {
-                abrirFormularioHijo(new Inicio.frmInicioPrograma(), 0);
-                btnRestaurante.BackColor = Color.Blue;
-                btnComedor.BackColor = Color.Blue;
-                btnUtilitarios.BackColor = Color.Blue;
-                btnSincronizarSRI.BackColor = Color.Blue;
-                btnReportes.BackColor = Color.Blue;
+                if (btnInicio.AccessibleDescription == "0")
+                {
+                    abrirFormularioHijo(new Inicio.frmInicioPrograma(), 0);
+                    btnRestaurante.BackColor = Color.Blue;
+                    btnComedor.BackColor = Color.Blue;
+                    btnUtilitarios.BackColor = Color.Blue;
+                    btnSincronizarSRI.BackColor = Color.Blue;
+                    btnReportes.BackColor = Color.Blue;
+
+                    btnInicio.AccessibleDescription = "1";
+                    btnRestaurante.AccessibleDescription = "0";
+                    btnComedor.AccessibleDescription = "0";
+                    btnUtilitarios.AccessibleDescription = "0";
+                    btnSincronizarSRI.AccessibleDescription = "0";
+                    btnReportes.AccessibleDescription = "0";
+                }
             }
 
             else
@@ -133,30 +171,60 @@ namespace Palatium.Inicio
 
         private void btnComedor_Click(object sender, EventArgs e)
         {
-            abrirFormularioHijo(new Inicio.frmInicioComedores(), 0);
-            btnRestaurante.BackColor = Color.Blue;
-            btnComedor.BackColor = Color.FromArgb(0, 192, 0);
-            btnUtilitarios.BackColor = Color.Blue;
-            btnSincronizarSRI.BackColor = Color.Blue;
-            btnReportes.BackColor = Color.Blue;
+            if (btnComedor.AccessibleDescription == "0")
+            {
+                abrirFormularioHijo(new Inicio.frmInicioComedores(), 0);
+                btnRestaurante.BackColor = Color.Blue;
+                btnComedor.BackColor = Color.FromArgb(0, 192, 0);
+                btnUtilitarios.BackColor = Color.Blue;
+                btnSincronizarSRI.BackColor = Color.Blue;
+                btnReportes.BackColor = Color.Blue;
+
+                btnInicio.AccessibleDescription = "0";
+                btnRestaurante.AccessibleDescription = "0";
+                btnComedor.AccessibleDescription = "1";
+                btnUtilitarios.AccessibleDescription = "0";
+                btnSincronizarSRI.AccessibleDescription = "0";
+                btnReportes.AccessibleDescription = "0";
+            }
         }
 
         private void btnSincronizarSRI_Click(object sender, EventArgs e)
         {
-            btnRestaurante.BackColor = Color.Blue;
-            btnComedor.BackColor = Color.Blue;
-            btnUtilitarios.BackColor = Color.Blue;
-            btnSincronizarSRI.BackColor = Color.FromArgb(0, 192, 0);
-            btnReportes.BackColor = Color.Blue;
+            if (btnSincronizarSRI.AccessibleDescription == "0")
+            {
+                btnRestaurante.BackColor = Color.Blue;
+                btnComedor.BackColor = Color.Blue;
+                btnUtilitarios.BackColor = Color.Blue;
+                btnSincronizarSRI.BackColor = Color.FromArgb(0, 192, 0);
+                btnReportes.BackColor = Color.Blue;
+
+                btnInicio.AccessibleDescription = "0";
+                btnRestaurante.AccessibleDescription = "0";
+                btnComedor.AccessibleDescription = "0";
+                btnUtilitarios.AccessibleDescription = "0";
+                btnSincronizarSRI.AccessibleDescription = "1";
+                btnReportes.AccessibleDescription = "0";
+            }
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
-            btnRestaurante.BackColor = Color.Blue;
-            btnComedor.BackColor = Color.Blue;
-            btnUtilitarios.BackColor = Color.Blue;
-            btnSincronizarSRI.BackColor = Color.Blue;
-            btnReportes.BackColor = Color.FromArgb(0, 192, 0);
+            if (btnReportes.AccessibleDescription == "0")
+            {
+                btnRestaurante.BackColor = Color.Blue;
+                btnComedor.BackColor = Color.Blue;
+                btnUtilitarios.BackColor = Color.Blue;
+                btnSincronizarSRI.BackColor = Color.Blue;
+                btnReportes.BackColor = Color.FromArgb(0, 192, 0);
+
+                btnInicio.AccessibleDescription = "0";
+                btnRestaurante.AccessibleDescription = "0";
+                btnComedor.AccessibleDescription = "0";
+                btnUtilitarios.AccessibleDescription = "0";
+                btnSincronizarSRI.AccessibleDescription = "0";
+                btnReportes.AccessibleDescription = "1";
+            }
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)

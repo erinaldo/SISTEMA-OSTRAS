@@ -152,7 +152,7 @@ namespace Palatium
         public static int iManejaSSL;
 
         //VERSION DEL PRODUCTO
-        public static string sVersionProducto = "3.0";
+        public static string sVersionProducto = "3.3";
 
         //VARIABLE PARA ACTIVAR TECLADO VIRTUAL
         public static int iActivaTeclado;

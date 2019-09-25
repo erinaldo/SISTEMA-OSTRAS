@@ -92,6 +92,9 @@ namespace Palatium.Comida_Rapida
         Decimal dbValorTotalRecalcular;
         Decimal dbSubtotalRecalcular;
         Decimal dbValorIVA;
+        Decimal dbValorGrid;
+        Decimal dbValorRecuperado;
+        Decimal dbCambio;
 
         public frmComandaComidaRapida(int iIdPosOrigenOrden_P, int iBanderaExpressTarjeta_P)
         {
@@ -1048,11 +1051,11 @@ namespace Palatium.Comida_Rapida
                 sSql += "idempresa, id_persona, fecha_pago, cg_moneda, valor," + Environment.NewLine;
                 sSql += "propina, cg_empresa, id_localidad, cg_cajero, fecha_ingreso," + Environment.NewLine;
                 sSql += "usuario_ingreso, terminal_ingreso, estado, " + Environment.NewLine;
-                sSql += "numero_replica_trigger, numero_control_replica,cambio) " + Environment.NewLine;
+                sSql += "numero_replica_trigger, numero_control_replica, cambio) " + Environment.NewLine;
                 sSql += "values(" + Environment.NewLine;
                 sSql += Program.iIdEmpresa + ", " + Program.iIdPersona + ", '" + sFecha + "', " + Program.iMoneda + "," + Environment.NewLine;
                 sSql += dTotalDebido + ", 0, " + Program.iCgEmpresa + ", " + Program.iIdLocalidad + ", 7799, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                sSql += "'" + Program.sDatosMaximo[1] + "', 'A' , 0, 0, 0)";
+                sSql += "'" + Program.sDatosMaximo[1] + "', 'A' , 0, 0, " + dbCambio + ")";
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
@@ -1192,7 +1195,7 @@ namespace Palatium.Comida_Rapida
                 sSql += "values(" + Environment.NewLine;
                 sSql += iIdPago + ", " + iCgTipoDocumentoCobro + ", 9999, '" + sFecha + "', " + Environment.NewLine;
                 sSql += Program.iMoneda + ", 1, " + dTotalDebido + ", " + iIdTipoFormaCobro + ", 'A', GETDATE()," + Environment.NewLine;
-                sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 0, 0, " + dTotalDebido + ")";
+                sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 0, 0, " + dbValorRecuperado + ")";
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
@@ -1504,7 +1507,7 @@ namespace Palatium.Comida_Rapida
 
                     if (notaVenta.DialogResult == DialogResult.OK)
                     {
-                        Cambiocs ok = new Cambiocs("$ " + Program.dCambioPantalla.ToString("N2"));
+                        Cambiocs ok = new Cambiocs("$ " + dbCambio.ToString("N2"));
                         ok.lblVerMensaje.Text = "NOTA DE ENTREGA GENERADA";
                         ok.ShowDialog();
                         notaVenta.Close();
@@ -1514,7 +1517,7 @@ namespace Palatium.Comida_Rapida
 
                 else
                 {
-                    Cambiocs ok = new Cambiocs("$ " + Program.dCambioPantalla.ToString("N2"));
+                    Cambiocs ok = new Cambiocs("$ " + dbCambio.ToString("N2"));
                     ok.lblVerMensaje.Text = "NOTA DE ENTREGA GENERADA";
                     ok.ShowDialog();
                     this.Close();
@@ -1673,8 +1676,19 @@ namespace Palatium.Comida_Rapida
 
             else
             {
-                iBanderaEfectivoTarjeta = 0;
-                crearComanda();
+                Efectivo efectivo = new Efectivo("0", dTotalDebido.ToString("N2"), "", "EFECTIVO");
+                efectivo.ShowDialog();
+
+                if (efectivo.DialogResult == DialogResult.OK)
+                {
+                    dbValorGrid = efectivo.dbValorGrid;
+                    dbValorRecuperado = efectivo.dbValorIngresado;
+                    dbCambio = dbValorRecuperado - dbValorGrid;
+                    efectivo.Close();
+
+                    iBanderaEfectivoTarjeta = 0;
+                    crearComanda();
+                }
             }
         }
 
@@ -1747,6 +1761,8 @@ namespace Palatium.Comida_Rapida
                         lblTotal.Text = "$ " + dTotalDebido.ToString("N2");
                     }
 
+                    dbValorRecuperado = dTotalDebido;
+                    dbCambio = 0;
                     cobro.Close();
                     crearComanda();
                 }

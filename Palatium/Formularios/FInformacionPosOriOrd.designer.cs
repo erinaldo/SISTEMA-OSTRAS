@@ -40,6 +40,7 @@
             this.btnAnular = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.grupoDatos = new System.Windows.Forms.GroupBox();
+            this.chkCuentaPorCobrar = new System.Windows.Forms.CheckBox();
             this.chkManejaServicio = new System.Windows.Forms.CheckBox();
             this.grupoPago = new System.Windows.Forms.GroupBox();
             this.dbAyudaPersona = new Controles.Auxiliares.DB_Ayuda();
@@ -63,7 +64,7 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblcodigoOriOrd = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.chkCuentaPorCobrar = new System.Windows.Forms.CheckBox();
+            this.chkPagoAnticipado = new System.Windows.Forms.CheckBox();
             this.tabCon_PosOriOrd.SuspendLayout();
             this.tabPag_PosOriOrd.SuspendLayout();
             this.Grb_listRePosOriOrd.SuspendLayout();
@@ -210,6 +211,7 @@
             // 
             // grupoDatos
             // 
+            this.grupoDatos.Controls.Add(this.chkPagoAnticipado);
             this.grupoDatos.Controls.Add(this.chkCuentaPorCobrar);
             this.grupoDatos.Controls.Add(this.chkManejaServicio);
             this.grupoDatos.Controls.Add(this.grupoPago);
@@ -237,6 +239,17 @@
             this.grupoDatos.TabIndex = 3;
             this.grupoDatos.TabStop = false;
             this.grupoDatos.Text = "Datos del Registro";
+            // 
+            // chkCuentaPorCobrar
+            // 
+            this.chkCuentaPorCobrar.AutoSize = true;
+            this.chkCuentaPorCobrar.Location = new System.Drawing.Point(188, 151);
+            this.chkCuentaPorCobrar.Name = "chkCuentaPorCobrar";
+            this.chkCuentaPorCobrar.Size = new System.Drawing.Size(112, 17);
+            this.chkCuentaPorCobrar.TabIndex = 35;
+            this.chkCuentaPorCobrar.Text = "Cuenta por Cobrar";
+            this.chkCuentaPorCobrar.UseVisualStyleBackColor = true;
+            this.chkCuentaPorCobrar.CheckedChanged += new System.EventHandler(this.chkCuentaPorCobrar_CheckedChanged);
             // 
             // chkManejaServicio
             // 
@@ -485,15 +498,16 @@
             this.txtCodigo.TabIndex = 1;
             this.txtCodigo.Leave += new System.EventHandler(this.Txt_CodigoPosOriOrd_Leave);
             // 
-            // chkCuentaPorCobrar
+            // chkPagoAnticipado
             // 
-            this.chkCuentaPorCobrar.AutoSize = true;
-            this.chkCuentaPorCobrar.Location = new System.Drawing.Point(188, 151);
-            this.chkCuentaPorCobrar.Name = "chkCuentaPorCobrar";
-            this.chkCuentaPorCobrar.Size = new System.Drawing.Size(112, 17);
-            this.chkCuentaPorCobrar.TabIndex = 35;
-            this.chkCuentaPorCobrar.Text = "Cuenta por Cobrar";
-            this.chkCuentaPorCobrar.UseVisualStyleBackColor = true;
+            this.chkPagoAnticipado.AutoSize = true;
+            this.chkPagoAnticipado.Location = new System.Drawing.Point(188, 174);
+            this.chkPagoAnticipado.Name = "chkPagoAnticipado";
+            this.chkPagoAnticipado.Size = new System.Drawing.Size(104, 17);
+            this.chkPagoAnticipado.TabIndex = 36;
+            this.chkPagoAnticipado.Text = "Pago Anticipado";
+            this.chkPagoAnticipado.UseVisualStyleBackColor = true;
+            this.chkPagoAnticipado.CheckedChanged += new System.EventHandler(this.chkPagoAnticpado_CheckedChanged);
             // 
             // FInformacionPosOriOrd
             // 
@@ -562,5 +576,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox chkManejaServicio;
         private System.Windows.Forms.CheckBox chkCuentaPorCobrar;
+        private System.Windows.Forms.CheckBox chkPagoAnticipado;
     }
 }

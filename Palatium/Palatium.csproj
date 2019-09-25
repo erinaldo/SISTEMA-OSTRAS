@@ -3134,6 +3134,7 @@
     <None Include="Resources\base_de_datos_nuevo.png" />
     <None Include="Resources\bodegas_nuevo.png" />
     <None Include="Resources\actualizar_mesas.png" />
+    <Content Include="icono_palatium.ico" />
     <Content Include="Pedidos\icono_pagar_almuerzo.ico" />
     <None Include="Resources\abrir_caja_inicial_menu.png" />
     <Content Include="Resources\buscar.png" />

@@ -153,6 +153,126 @@ namespace Palatium.Inicio
             }
         }
 
+        private void habilitarBotonesMenu()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select maneja_mesas, maneja_llevar, maneja_domicilio, maneja_menu_express, maneja_cortesia, " + Environment.NewLine;
+                sSql += "maneja_canjes, maneja_vale_funcionario, maneja_consumo_empleados" + Environment.NewLine;
+                sSql += "from pos_parametro_localidad" + Environment.NewLine;
+                sSql += "where estado = 'A'" + Environment.NewLine;
+                //sSql += "and id_localidad = " + Program.iIdLocalidad;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    if (dtConsulta.Rows.Count > 0)
+                    {
+                        //MESAS
+                        if (dtConsulta.Rows[0][0].ToString() == "1")
+                        {
+                            btnMesas.Enabled = true;
+                        }
+
+                        else
+                        {
+                            btnMesas.Enabled = false;
+                        }
+
+                        //LLEVAR
+                        if (dtConsulta.Rows[0][1].ToString() == "1")
+                        {
+                            btnLlevar.Enabled = true;
+                        }
+
+                        else
+                        {
+                            btnLlevar.Enabled = false;
+                        }
+
+                        //DOMICILIO
+                        if (dtConsulta.Rows[0][2].ToString() == "1")
+                        {
+                            btnDomicilios.Enabled = true;
+                            //btnDatosClientes.Enabled = true;
+                        }
+
+                        else
+                        {
+                            btnDomicilios.Enabled = false;
+                        }
+
+                        //CORTESIAS
+                        if (dtConsulta.Rows[0][4].ToString() == "1")
+                        {
+                            btnCortesias.Enabled = true;
+                        }
+
+                        else
+                        {
+                            btnCortesias.Enabled = false;
+                        }
+
+                        //CANJES
+                        if (dtConsulta.Rows[0][5].ToString() == "1")
+                        {
+                            btnCanjes.Enabled = true;
+                        }
+
+                        else
+                        {
+                            btnCanjes.Enabled = false;
+                        }
+
+                        //FUNCIONARIOS
+                        if (dtConsulta.Rows[0][6].ToString() == "1")
+                        {
+                            btnFuncionarios.Enabled = true;
+                        }
+
+                        else
+                        {
+                            btnFuncionarios.Enabled = false;
+                        }
+
+                        //CONSUMO DE EMPLEADOS
+                        if (dtConsulta.Rows[0][7].ToString() == "1")
+                        {
+                            btnConsumoEmpleados.Enabled = true;
+                        }
+
+                        else
+                        {
+                            btnConsumoEmpleados.Enabled = false;
+                        }
+                    }
+
+                    else
+                    {
+                        ok.LblMensaje.Text = "Ocurrió un problema en la consulta de los tipos tipos órdenes. Favor comuníquese con el administrador.";
+                        ok.ShowDialog();
+                    }
+                }
+
+                else
+                {
+                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.ShowDialog();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+            }
+        }
+
         #endregion
 
         private void btnRevisar_MouseEnter(object sender, EventArgs e)
@@ -530,6 +650,8 @@ namespace Palatium.Inicio
 
         private void frmInicioRestaurante_Load(object sender, EventArgs e)
         {
+            habilitarBotonesMenu();
+
             if (Program.sLogo != "")
             {
                 if (File.Exists(Program.sLogo))

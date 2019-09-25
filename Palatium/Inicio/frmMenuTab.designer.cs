@@ -93,16 +93,16 @@
             // 
             // btnSincronizarSRI
             // 
+            this.btnSincronizarSRI.AccessibleDescription = "0";
             this.btnSincronizarSRI.BackColor = System.Drawing.Color.Blue;
-            this.btnSincronizarSRI.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnSincronizarSRI.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnSincronizarSRI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnSincronizarSRI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSincronizarSRI.Font = new System.Drawing.Font("Maiandra GD", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSincronizarSRI.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSincronizarSRI.Location = new System.Drawing.Point(609, 0);
+            this.btnSincronizarSRI.Location = new System.Drawing.Point(600, 0);
             this.btnSincronizarSRI.Name = "btnSincronizarSRI";
-            this.btnSincronizarSRI.Size = new System.Drawing.Size(218, 55);
+            this.btnSincronizarSRI.Size = new System.Drawing.Size(220, 55);
             this.btnSincronizarSRI.TabIndex = 7;
             this.btnSincronizarSRI.Text = "Sincronización SRI";
             this.btnSincronizarSRI.UseVisualStyleBackColor = false;
@@ -111,16 +111,16 @@
             // 
             // btnUtilitarios
             // 
+            this.btnUtilitarios.AccessibleDescription = "0";
             this.btnUtilitarios.BackColor = System.Drawing.Color.Blue;
-            this.btnUtilitarios.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnUtilitarios.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnUtilitarios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnUtilitarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUtilitarios.Font = new System.Drawing.Font("Maiandra GD", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUtilitarios.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnUtilitarios.Location = new System.Drawing.Point(827, 0);
+            this.btnUtilitarios.Location = new System.Drawing.Point(450, 0);
             this.btnUtilitarios.Name = "btnUtilitarios";
-            this.btnUtilitarios.Size = new System.Drawing.Size(153, 55);
+            this.btnUtilitarios.Size = new System.Drawing.Size(150, 55);
             this.btnUtilitarios.TabIndex = 8;
             this.btnUtilitarios.Text = "Utilitarios";
             this.btnUtilitarios.UseVisualStyleBackColor = false;
@@ -129,6 +129,7 @@
             // 
             // btnReportes
             // 
+            this.btnReportes.AccessibleDescription = "0";
             this.btnReportes.BackColor = System.Drawing.Color.Blue;
             this.btnReportes.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnReportes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
@@ -136,9 +137,9 @@
             this.btnReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReportes.Font = new System.Drawing.Font("Maiandra GD", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReportes.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnReportes.Location = new System.Drawing.Point(980, 0);
+            this.btnReportes.Location = new System.Drawing.Point(982, 0);
             this.btnReportes.Name = "btnReportes";
-            this.btnReportes.Size = new System.Drawing.Size(242, 55);
+            this.btnReportes.Size = new System.Drawing.Size(240, 55);
             this.btnReportes.TabIndex = 9;
             this.btnReportes.Text = "Reportes Gerenciales";
             this.btnReportes.UseVisualStyleBackColor = false;
@@ -184,16 +185,16 @@
             // 
             // btnComedor
             // 
+            this.btnComedor.AccessibleDescription = "0";
             this.btnComedor.BackColor = System.Drawing.Color.Blue;
-            this.btnComedor.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnComedor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnComedor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnComedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnComedor.Font = new System.Drawing.Font("Maiandra GD", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComedor.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnComedor.Location = new System.Drawing.Point(306, 0);
+            this.btnComedor.Location = new System.Drawing.Point(300, 0);
             this.btnComedor.Name = "btnComedor";
-            this.btnComedor.Size = new System.Drawing.Size(153, 55);
+            this.btnComedor.Size = new System.Drawing.Size(150, 55);
             this.btnComedor.TabIndex = 6;
             this.btnComedor.Text = "Comedores";
             this.btnComedor.UseVisualStyleBackColor = false;
@@ -202,16 +203,16 @@
             // 
             // btnRestaurante
             // 
+            this.btnRestaurante.AccessibleDescription = "0";
             this.btnRestaurante.BackColor = System.Drawing.Color.Blue;
-            this.btnRestaurante.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRestaurante.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnRestaurante.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnRestaurante.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestaurante.Font = new System.Drawing.Font("Maiandra GD", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRestaurante.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRestaurante.Location = new System.Drawing.Point(153, 0);
+            this.btnRestaurante.Location = new System.Drawing.Point(150, 0);
             this.btnRestaurante.Name = "btnRestaurante";
-            this.btnRestaurante.Size = new System.Drawing.Size(153, 55);
+            this.btnRestaurante.Size = new System.Drawing.Size(150, 55);
             this.btnRestaurante.TabIndex = 5;
             this.btnRestaurante.Text = "Restaurantes";
             this.btnRestaurante.UseVisualStyleBackColor = false;
@@ -220,8 +221,8 @@
             // 
             // btnInicio
             // 
+            this.btnInicio.AccessibleDescription = "1";
             this.btnInicio.BackColor = System.Drawing.Color.Red;
-            this.btnInicio.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnInicio.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnInicio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnInicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -229,7 +230,7 @@
             this.btnInicio.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnInicio.Location = new System.Drawing.Point(0, 0);
             this.btnInicio.Name = "btnInicio";
-            this.btnInicio.Size = new System.Drawing.Size(153, 55);
+            this.btnInicio.Size = new System.Drawing.Size(150, 55);
             this.btnInicio.TabIndex = 2;
             this.btnInicio.Text = "INICIO";
             this.btnInicio.UseVisualStyleBackColor = false;
@@ -242,6 +243,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1360, 749);
             this.Controls.Add(this.pnlContenedor);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "frmMenuTab";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

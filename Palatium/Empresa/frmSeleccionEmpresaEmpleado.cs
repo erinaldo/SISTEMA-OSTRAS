@@ -240,7 +240,7 @@ namespace Palatium.Empresa
                         iCuentaEmpleados++;
                         iCuentaAyudaEmpleados++;
 
-                        if (j + 1 == 5)
+                        if (j + 1 == 7)
                         {
                             iPosXEmpleados = 0;
                             iPosYEmpleados += 105;

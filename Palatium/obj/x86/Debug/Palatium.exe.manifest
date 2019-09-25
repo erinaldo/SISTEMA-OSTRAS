@@ -324,17 +324,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Palatium.exe" size="12926976">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Palatium.exe" size="12930048">
       <assemblyIdentity name="Palatium" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iCRVP5+eMWXbTc3Gz/sMMDbN7eUr9lfpA94dmGdItEY=</dsig:DigestValue>
+        <dsig:DigestValue>bC1AHQVLSN2eSthSkRLbu4hU83c1TUZL+Wqw1KY3KIw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="icono_palatium.ico" size="57922">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>SsFjjYroZLA3VN7G7G0yTaNRKz/EzdPXue2vwgJHkeQ=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Palatium.exe.config" size="340">
     <hash>
       <dsig:Transforms>
