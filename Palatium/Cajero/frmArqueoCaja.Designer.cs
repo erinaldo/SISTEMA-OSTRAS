@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbLocalidades = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -40,6 +40,8 @@
             this.LblFecha = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtTarjetasAlmuerzos = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.txtCajaInicial = new System.Windows.Forms.TextBox();
             this.btnSalidas = new System.Windows.Forms.LinkLabel();
@@ -99,6 +101,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnVerReporte = new System.Windows.Forms.Button();
             this.btnAbrirCaja = new System.Windows.Forms.Button();
             this.btnListarVentas = new System.Windows.Forms.Button();
             this.btnDetallarVentas = new System.Windows.Forms.Button();
@@ -113,8 +116,6 @@
             this.btnRevisarCaja = new System.Windows.Forms.Button();
             this.TimerHora = new System.Windows.Forms.Timer(this.components);
             this.ttMensaje = new System.Windows.Forms.ToolTip(this.components);
-            this.txtTarjetasAlmuerzos = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarjetas)).BeginInit();
@@ -246,6 +247,30 @@
             this.groupBox2.Size = new System.Drawing.Size(715, 526);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // txtTarjetasAlmuerzos
+            // 
+            this.txtTarjetasAlmuerzos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.txtTarjetasAlmuerzos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTarjetasAlmuerzos.Location = new System.Drawing.Point(501, 259);
+            this.txtTarjetasAlmuerzos.Name = "txtTarjetasAlmuerzos";
+            this.txtTarjetasAlmuerzos.ReadOnly = true;
+            this.txtTarjetasAlmuerzos.Size = new System.Drawing.Size(196, 22);
+            this.txtTarjetasAlmuerzos.TabIndex = 39;
+            this.txtTarjetasAlmuerzos.Text = "0.00";
+            this.txtTarjetasAlmuerzos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ttMensaje.SetToolTip(this.txtTarjetasAlmuerzos, "La sumatoria del IVA es el resultado de los productos que paguen IVA.");
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label25.Location = new System.Drawing.Point(362, 262);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(127, 16);
+            this.label25.TabIndex = 38;
+            this.label25.Text = "Tarjetas Almuerzos:";
             // 
             // label24
             // 
@@ -393,8 +418,8 @@
             // 
             // txtValorPagoGrid
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle4;
             this.txtValorPagoGrid.Frozen = true;
             this.txtValorPagoGrid.HeaderText = "VALOR";
             this.txtValorPagoGrid.Name = "txtValorPagoGrid";
@@ -651,10 +676,10 @@
             // 
             // dataGridViewCheckBoxColumn1
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.NullValue = false;
-            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.NullValue = false;
+            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewCheckBoxColumn1.HeaderText = "";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.Width = 50;
@@ -668,8 +693,8 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn2.HeaderText = "VALOR";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -699,7 +724,8 @@
             this.txtImpuestoIVA.TabIndex = 28;
             this.txtImpuestoIVA.Text = "0.00";
             this.txtImpuestoIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.ttMensaje.SetToolTip(this.txtImpuestoIVA, "La sumatoria del IVA es el resultado de los productos que paguen IVA.");
+            this.ttMensaje.SetToolTip(this.txtImpuestoIVA, "La sumatoria del IVA es el resultado de los productos que paguen IVA y hayan gene" +
+        "rado factura.");
             // 
             // label15
             // 
@@ -708,9 +734,9 @@
             this.label15.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label15.Location = new System.Drawing.Point(362, 239);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(88, 16);
+            this.label15.Size = new System.Drawing.Size(105, 16);
             this.label15.TabIndex = 27;
-            this.label15.Text = "IVA Cobrado:";
+            this.label15.Text = "IVA en Facturas:";
             // 
             // groupBox3
             // 
@@ -940,6 +966,7 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.groupBox4.Controls.Add(this.btnVerReporte);
             this.groupBox4.Controls.Add(this.btnAbrirCaja);
             this.groupBox4.Controls.Add(this.btnListarVentas);
             this.groupBox4.Controls.Add(this.btnDetallarVentas);
@@ -957,6 +984,21 @@
             this.groupBox4.Size = new System.Drawing.Size(161, 571);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
+            // 
+            // btnVerReporte
+            // 
+            this.btnVerReporte.BackColor = System.Drawing.Color.White;
+            this.btnVerReporte.FlatAppearance.BorderSize = 2;
+            this.btnVerReporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVerReporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerReporte.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnVerReporte.Location = new System.Drawing.Point(10, 450);
+            this.btnVerReporte.Name = "btnVerReporte";
+            this.btnVerReporte.Size = new System.Drawing.Size(140, 26);
+            this.btnVerReporte.TabIndex = 12;
+            this.btnVerReporte.Text = "Ver Reporte Prueba";
+            this.btnVerReporte.UseVisualStyleBackColor = false;
+            this.btnVerReporte.Click += new System.EventHandler(this.btnVerReporte_Click);
             // 
             // btnAbrirCaja
             // 
@@ -1167,30 +1209,6 @@
             this.TimerHora.Interval = 1000;
             this.TimerHora.Tick += new System.EventHandler(this.TimerHora_Tick);
             // 
-            // txtTarjetasAlmuerzos
-            // 
-            this.txtTarjetasAlmuerzos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.txtTarjetasAlmuerzos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTarjetasAlmuerzos.Location = new System.Drawing.Point(501, 259);
-            this.txtTarjetasAlmuerzos.Name = "txtTarjetasAlmuerzos";
-            this.txtTarjetasAlmuerzos.ReadOnly = true;
-            this.txtTarjetasAlmuerzos.Size = new System.Drawing.Size(196, 22);
-            this.txtTarjetasAlmuerzos.TabIndex = 39;
-            this.txtTarjetasAlmuerzos.Text = "0.00";
-            this.txtTarjetasAlmuerzos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.ttMensaje.SetToolTip(this.txtTarjetasAlmuerzos, "La sumatoria del IVA es el resultado de los productos que paguen IVA.");
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label25.Location = new System.Drawing.Point(362, 262);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(127, 16);
-            this.label25.TabIndex = 38;
-            this.label25.Text = "Tarjetas Almuerzos:";
-            // 
             // frmResumenCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1311,5 +1329,6 @@
         private System.Windows.Forms.TextBox txtCajaInicial;
         private System.Windows.Forms.TextBox txtTarjetasAlmuerzos;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Button btnVerReporte;
     }
 }

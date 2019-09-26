@@ -151,7 +151,6 @@ namespace Palatium.ReportesTextBox
             catch (Exception ex)
             {
                 catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowInTaskbar = false;
                 catchMensaje.ShowDialog();
             }
         }

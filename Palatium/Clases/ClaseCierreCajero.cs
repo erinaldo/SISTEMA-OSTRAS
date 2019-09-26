@@ -48,6 +48,8 @@ namespace Palatium.Clases
         Decimal dbTotalCuentasPorCobrar;
         Decimal dbValorEmpresa_P;
         Decimal dbAhorroEmergencia;
+        Decimal dbTotalEntradasManuales;
+        Decimal dbTotalSalidasManuales;
 
         #region FUNCIONES DEL USUARIO PARA COMPLETAR EL CIERRE DE CAJERO
 
@@ -1067,6 +1069,60 @@ namespace Palatium.Clases
                 return "";
             }
         }
+        //FUNCION PARA OBTENER EL VALOR DE LA ENTRADAS Y SALIDAS MANUALES
+        private Decimal sumarEntradasSalidasManuales(int iOp)
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select isnull(sum(valor), 0) suma" + Environment.NewLine;
+                sSql += "from pos_movimiento_caja  " + Environment.NewLine;
+                sSql += "where estado = 'A' " + Environment.NewLine;
+                sSql += "and tipo_movimiento = " + iOp + Environment.NewLine;
+
+                if (iOp == 1)
+                {
+                    sSql += "and id_documento_pago is null" + Environment.NewLine;
+                }
+
+                sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
+                sSql += "and id_localidad = " + iIdLocalidad + Environment.NewLine;
+                sSql += "and fecha = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    if (dtConsulta.Rows.Count > 0)
+                    {
+                        return Convert.ToDecimal(dtConsulta.Rows[0][0].ToString());
+                    }
+
+                    else
+                    {
+                        return 0;
+                    }
+                }
+
+                else
+                {
+                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.ShowDialog();
+                    return 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return 0;
+            }
+        }
 
 
         #endregion
@@ -1319,14 +1375,15 @@ namespace Palatium.Clases
                 llenarCuentasCanceladas();
                 sTexto += ("TOTAL CUENTAS CANCELADAS: ".PadRight(31, ' ') + dSumaTotalCuentasAnuladas.ToString("N2").PadLeft(9, ' ')) + Environment.NewLine;
 
-                ////AQUI CUENTAS CLIENTE EMPRESARIAL
-                //sTexto += Environment.NewLine;
-                //string sCuentaCliente = cuentasClienteEmpresarial();
+                //AQUI LAS ENTRADAS Y SALIDAS MANUALES
 
-                //if ((sCuentaCliente != "ERROR") && (sCuentaCliente != ""))
-                //{
-                //    sTexto += sCuentaCliente;
-                //}
+                dbTotalEntradasManuales = sumarEntradasSalidasManuales(1);
+                dbTotalSalidasManuales = sumarEntradasSalidasManuales(0);
+
+                sTexto += Environment.NewLine;
+
+                sTexto += "ENTRADAS MANUALES: ".PadRight(30, ' ') + dbTotalEntradasManuales.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
+                sTexto += "SALIDAS MANUALES : ".PadRight(30, ' ') + dbTotalSalidasManuales.ToString("N2").PadLeft(10, ' ') + Environment.NewLine;
 
                 //AQUI AHORRO DE EMERGENCIA
                 sTexto += Environment.NewLine;

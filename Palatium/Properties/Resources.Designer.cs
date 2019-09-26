@@ -1603,6 +1603,16 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icono_agregar_grid {
+            get {
+                object obj = ResourceManager.GetObject("icono_agregar_grid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icono_anular_factura {
             get {
                 object obj = ResourceManager.GetObject("icono_anular_factura", resourceCulture);
@@ -1853,6 +1863,26 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icono_eliminar_grid {
+            get {
+                object obj = ResourceManager.GetObject("icono_eliminar_grid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_enviar_grid {
+            get {
+                object obj = ResourceManager.GetObject("icono_enviar_grid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icono_funcionarios {
             get {
                 object obj = ResourceManager.GetObject("icono_funcionarios", resourceCulture);
@@ -1926,6 +1956,16 @@ namespace Palatium.Properties {
         internal static System.Drawing.Bitmap icono_menu_empresa {
             get {
                 object obj = ResourceManager.GetObject("icono_menu_empresa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_menu_reportes_cierre_caja {
+            get {
+                object obj = ResourceManager.GetObject("icono_menu_reportes_cierre_caja", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

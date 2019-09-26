@@ -52,6 +52,8 @@
             this.submenuCrearEmpresa = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuCrearEmpleados = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuCrearRegistrosRapidos = new System.Windows.Forms.ToolStripMenuItem();
+            this.subMenuCrearRegistrosMasivos = new System.Windows.Forms.ToolStripMenuItem();
+            this.subMenuReportesCierreCaja = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ddlMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.categoríasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -177,7 +179,6 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.ddPalatiumContable = new System.Windows.Forms.ToolStripDropDownButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.subMenuCrearRegistrosMasivos = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -217,7 +218,8 @@
             this.toolStripMenuItem2,
             this.formasDePagoToolStripMenuItem,
             this.configuracionDeImpresorasToolStripMenuItem,
-            this.clienteEmpresarialToolStripMenuItem});
+            this.clienteEmpresarialToolStripMenuItem,
+            this.subMenuReportesCierreCaja});
             this.ddlConfiguracion.Image = global::Palatium.Properties.Resources.ajustes_nuevo;
             this.ddlConfiguracion.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ddlConfiguracion.Name = "ddlConfiguracion";
@@ -441,6 +443,24 @@
             this.submenuCrearRegistrosRapidos.Size = new System.Drawing.Size(213, 36);
             this.submenuCrearRegistrosRapidos.Text = "Crear Registros Rápidos";
             this.submenuCrearRegistrosRapidos.Click += new System.EventHandler(this.submenuCrearRegistrosRapidos_Click);
+            // 
+            // subMenuCrearRegistrosMasivos
+            // 
+            this.subMenuCrearRegistrosMasivos.Image = global::Palatium.Properties.Resources.icono_registro_masivo_personas;
+            this.subMenuCrearRegistrosMasivos.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.subMenuCrearRegistrosMasivos.Name = "subMenuCrearRegistrosMasivos";
+            this.subMenuCrearRegistrosMasivos.Size = new System.Drawing.Size(213, 36);
+            this.subMenuCrearRegistrosMasivos.Text = "Crear Registros Masivos";
+            this.subMenuCrearRegistrosMasivos.Click += new System.EventHandler(this.subMenuCrearRegistrosMasivos_Click);
+            // 
+            // subMenuReportesCierreCaja
+            // 
+            this.subMenuReportesCierreCaja.Image = global::Palatium.Properties.Resources.icono_menu_reportes_cierre_caja;
+            this.subMenuReportesCierreCaja.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.subMenuReportesCierreCaja.Name = "subMenuReportesCierreCaja";
+            this.subMenuReportesCierreCaja.Size = new System.Drawing.Size(250, 36);
+            this.subMenuReportesCierreCaja.Text = "Reportes de Cierre de Caja";
+            this.subMenuReportesCierreCaja.Click += new System.EventHandler(this.subMenuReportesCierreCaja_Click);
             // 
             // toolStripSeparator1
             // 
@@ -1648,15 +1668,6 @@
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // subMenuCrearRegistrosMasivos
-            // 
-            this.subMenuCrearRegistrosMasivos.Image = global::Palatium.Properties.Resources.icono_registro_masivo_personas;
-            this.subMenuCrearRegistrosMasivos.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.subMenuCrearRegistrosMasivos.Name = "subMenuCrearRegistrosMasivos";
-            this.subMenuCrearRegistrosMasivos.Size = new System.Drawing.Size(213, 36);
-            this.subMenuCrearRegistrosMasivos.Text = "Crear Registros Masivos";
-            this.subMenuCrearRegistrosMasivos.Click += new System.EventHandler(this.subMenuCrearRegistrosMasivos_Click);
-            // 
             // frmNuevoMenuConfiguracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1830,6 +1841,7 @@
         private System.Windows.Forms.ToolStripMenuItem submenuUnidadesReceta;
         private System.Windows.Forms.ToolStripMenuItem submenuEquivalenciasUnidades;
         private System.Windows.Forms.ToolStripMenuItem subMenuCrearRegistrosMasivos;
+        private System.Windows.Forms.ToolStripMenuItem subMenuReportesCierreCaja;
 
     }
 }

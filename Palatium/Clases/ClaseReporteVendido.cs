@@ -11,6 +11,8 @@ namespace Palatium.Clases
         ConexionBD.ConexionBD conexion = new ConexionBD.ConexionBD();
         VentanasMensajes.frmMensajeCatch catchMensaje = new VentanasMensajes.frmMensajeCatch();
 
+        Clases.ClaseReportes reporte = new ClaseReportes();
+
         DataTable dtConsulta;
         DataTable dtPagosDesglose;
         string sSql;
@@ -531,6 +533,11 @@ namespace Palatium.Clases
                 sContinuar = sContinuar + llenarPorDetalleTarjetaAlmuerzos();
             }
 
+            //AQUI SE INCRUSTA LAS VENTAS POR ORIGEN DE ORDEN DE FORMA TEMPORAL
+            sContinuar += "".PadLeft(40, '-') + Environment.NewLine;
+            sContinuar += "DETALLE DE VENTAS POR ORIGEN".PadLeft(34, ' ') + Environment.NewLine;
+            sContinuar += reporte.detalleVentasOrigen(sFecha, iIdLocalidad, Program.iJornadaRecuperada) + Environment.NewLine + Environment.NewLine;
+
             sContinuar = sContinuar + "*".PadRight(40, '*') + Environment.NewLine + Environment.NewLine;
             sContinuar = sContinuar + "TOTALES".PadRight(30, ' ') + dSuma.ToString("N2").PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
             sContinuar = sContinuar + "NOTA: EN EL TOTAL INCLUYE LOS VALORES DE" + Environment.NewLine;
@@ -855,7 +862,7 @@ namespace Palatium.Clases
                         //sTextoPagos += "IVA COBRADO    : " + (dbTotalOrdenes - (dbTotalOrdenes / (1 + (dbPorcentajeIva/100)))).ToString("N2").PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
                         sIvaCobrado = "0.00";
                         extraerIva();
-                        sTextoPagos += "IVA COBRADO    : " + sIvaCobrado.PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
+                        sTextoPagos += "IVA EN FACTURAS: " + sIvaCobrado.PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
 
                         //MOSTRAR VALORES EN CORTESIAS, VALES FUNCIONARIOS
                         //CONTAR LAS CORTESIA
@@ -1150,7 +1157,7 @@ namespace Palatium.Clases
             try
             {                
                 sSql = "";
-                sSql += "select ltrim(str(sum(DP.cantidad * DP.valor_iva), 10, 2)) suma" + Environment.NewLine;
+                sSql += "select ltrim(str(isnull(sum(DP.cantidad * DP.valor_iva), 0), 10, 2)) suma" + Environment.NewLine;
                 sSql += "from cv403_cab_pedidos CP INNER JOIN" + Environment.NewLine;
                 sSql += "cv403_det_pedidos DP ON CP.id_pedido = DP.id_pedido" + Environment.NewLine;
                 sSql += "and CP.estado = 'A'" + Environment.NewLine;

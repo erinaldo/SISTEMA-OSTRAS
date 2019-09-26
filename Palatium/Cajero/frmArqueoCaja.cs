@@ -1614,5 +1614,11 @@ namespace Palatium.Cajero
                 ingreso.Close();
             }
         }
+
+        private void btnVerReporte_Click(object sender, EventArgs e)
+        {
+            ReportesTextBox.frmReporteCierreCaja cierre = new ReportesTextBox.frmReporteCierreCaja(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), iJornada);
+            cierre.ShowDialog();
+        }
     }
 }

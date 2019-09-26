@@ -313,6 +313,7 @@
     <Compile Include="Clases\ClasePrecuentaEmpresa.cs" />
     <Compile Include="Clases\ClaseReporteMateriaPrima.cs" />
     <Compile Include="Clases\ClaseReportePropietario.cs" />
+    <Compile Include="Clases\ClaseReportes.cs" />
     <Compile Include="Clases_Factura_Electronica\ClaseImprimirFacturaElectronica.cs" />
     <Compile Include="Clases_Factura_Electronica\ClaseRIDE.cs" />
     <Compile Include="Comida_Rapida\frmCobroRapidoTarjetas.cs">
@@ -509,6 +510,12 @@
     </Compile>
     <Compile Include="Oficina\frmRegistrarMovimientos.Designer.cs">
       <DependentUpon>frmRegistrarMovimientos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Oficina\frmReportesCierre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Oficina\frmReportesCierre.Designer.cs">
+      <DependentUpon>frmReportesCierre.cs</DependentUpon>
     </Compile>
     <Compile Include="Pedidos\ClaseIngresarCobros.cs" />
     <Compile Include="Pedidos\ClasePagoCompleto.cs" />
@@ -888,6 +895,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>rptListaRecetas.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportesTextBox\frmReporteCierreCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportesTextBox\frmReporteCierreCaja.Designer.cs">
+      <DependentUpon>frmReporteCierreCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportesTextBox\frmReporteVentasLista.cs">
       <SubType>Form</SubType>
@@ -2281,6 +2294,9 @@
     <EmbeddedResource Include="Oficina\frmRegistrarMovimientos.resx">
       <DependentUpon>frmRegistrarMovimientos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Oficina\frmReportesCierre.resx">
+      <DependentUpon>frmReportesCierre.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pedidos\frmCambiarFormasCobros.resx">
       <DependentUpon>frmCambiarFormasCobros.cs</DependentUpon>
     </EmbeddedResource>
@@ -2836,6 +2852,9 @@
     <EmbeddedResource Include="Repartidor\frmAsignarRepartidor.resx">
       <DependentUpon>frmAsignarRepartidor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportesTextBox\frmReporteCierreCaja.resx">
+      <DependentUpon>frmReporteCierreCaja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportesTextBox\frmReporteVendido.resx">
       <DependentUpon>frmReporteVendido.cs</DependentUpon>
     </EmbeddedResource>
@@ -3309,6 +3328,10 @@
     <None Include="Resources\icono_boton_cambiar_factura.png" />
     <None Include="Resources\icono_boton_editar_datos_factura.png" />
     <None Include="Resources\icono_boton_reimpresion.png" />
+    <None Include="Resources\icono_enviar_grid.png" />
+    <None Include="Resources\icono_eliminar_grid.png" />
+    <None Include="Resources\icono_agregar_grid.png" />
+    <None Include="Resources\icono_menu_reportes_cierre_caja.png" />
     <Content Include="Resources\icono_sri_2.png" />
     <None Include="Resources\impresoras_menu.png" />
     <None Include="Resources\impresiones_nuevo.png" />

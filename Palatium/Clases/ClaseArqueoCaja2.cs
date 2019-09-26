@@ -499,7 +499,7 @@ namespace Palatium.Clases
                     sIvaCobrado = "0.00";
                     extraerIva();
                     //sTexto = sTexto + "I.V.A. Cobrado....:".PadRight(30, ' ') + (dbTotalCobrado - (dbTotalCobrado / (1 + (dbPorcentajeIva/100)))).ToString("N2").PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
-                    sTexto = sTexto + "I.V.A. Cobrado....:".PadRight(30, ' ') + sIvaCobrado.PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
+                    sTexto = sTexto + "IVA en Facturas...:".PadRight(30, ' ') + sIvaCobrado.PadLeft(10, ' ') + Environment.NewLine + Environment.NewLine;
                     sTexto = sTexto + "Personas Atendidas:".PadRight(30, ' ') + calcularTotalPersonas("01").ToString().PadLeft(10, ' ') + Environment.NewLine;
                     verRangoComandas();
                     verRangoFacturas();

@@ -722,5 +722,11 @@ namespace Palatium.Oficina
             Oficina.frmIngresoMasivoPersonal ingreso = new frmIngresoMasivoPersonal();
             verificarFormularios(ingreso, this);
         }
+
+        private void subMenuReportesCierreCaja_Click(object sender, EventArgs e)
+        {
+            Oficina.frmReportesCierre cierre = new Oficina.frmReportesCierre();
+            verificarFormularios(cierre, this);
+        }
     }
 }

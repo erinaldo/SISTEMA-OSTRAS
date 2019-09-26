@@ -118,7 +118,11 @@ namespace Palatium.Comida_Rapida
                 sSql += "and P.estado ='A'" + Environment.NewLine;
                 sSql += "and NP.estado = 'A'" + Environment.NewLine;
                 sSql += "where P.nivel = 2" + Environment.NewLine;
-                sSql += "and P.maneja_almuerzos = 1" + Environment.NewLine;
+
+                if (iBanderaExpressTarjeta == 1)
+                {
+                    sSql += "and P.maneja_almuerzos = 1" + Environment.NewLine;
+                }
                 sSql += "order by P.secuencia";
 
                 dtCategorias = new DataTable();
