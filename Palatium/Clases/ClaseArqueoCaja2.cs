@@ -640,7 +640,7 @@ namespace Palatium.Clases
                 sSql += "from cv403_cab_pedidos CP, cv403_numero_cab_pedido NP,  pos_vw_pedido_forma_pago FP" + Environment.NewLine;
                 sSql += "where CP.fecha_pedido = '" + sFecha + "'" + Environment.NewLine;
                 sSql += "and CP.id_pedido = NP.id_pedido" + Environment.NewLine;
-                sSql += "and CP.id_pedido = FP.id_pedido and CP.id_pos_origen_orden in (1,2,3)" + Environment.NewLine;
+                sSql += "and CP.id_pedido = FP.id_pedido" + Environment.NewLine;
                 sSql += "and CP.estado_orden= 'Pagada'" + Environment.NewLine;
                 sSql += "and FP.codigo in ('TC','TD')" + Environment.NewLine;
                 sSql += "and CP.id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
@@ -1023,5 +1023,6 @@ namespace Palatium.Clases
                 catchMensaje.ShowDialog();
             }
         }
+                
     }
 }

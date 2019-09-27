@@ -1299,14 +1299,17 @@ namespace Palatium.Cajero
 
                         conexion.GFun_Lo_Maneja_Transaccion(Program.G_TERMINA_TRANSACCION);
 
-                        ReportesTextBox.frmVerResumenCaja resumen = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()), iIdCierreCajero);
-                        resumen.ShowDialog();
+                        //ReportesTextBox.frmVerResumenCaja resumen = new ReportesTextBox.frmVerResumenCaja(1, sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()), iIdCierreCajero);
+                        //resumen.ShowDialog();
 
                         //ReportesTextBox.frmVerReportePropietario reporte = new ReportesTextBox.frmVerReportePropietario(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue));
                         //reporte.ShowDialog();
 
                         //ReportesTextBox.frmReporteVendido vendido = new ReportesTextBox.frmReporteVendido(sFecha, 1, Convert.ToInt32(cmbLocalidades.SelectedValue), Convert.ToDecimal(txtAhorroManual.Text.Trim()));
                         //vendido.ShowDialog();
+
+                        ReportesTextBox.frmReporteCierreCaja cierre = new ReportesTextBox.frmReporteCierreCaja(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), iJornada);
+                        cierre.ShowDialog();
 
                         if (iOp == 1)
                         {

@@ -21,8 +21,10 @@ namespace Palatium.ReportesTextBox
         Clases.ClaseReportes reporte = new Clases.ClaseReportes();
 
         string sSql;
+        string sCodigo;
 
         DataTable dtImprimir;
+        DataTable dtConsulta;
 
         bool bRespuesta;
 
@@ -35,12 +37,18 @@ namespace Palatium.ReportesTextBox
         int iCortarPapel;
         int iAbrirCajon;
         int iCantidadImpresiones;
+        int iIdPosCierreCajero;
 
         //VARIABLES DE CONFIGURACION DE LA IMPRESORA
         string sNombreImpresora;
         string sPuertoImpresora;
         string sIpImpresora;
         string sDescripcionImpresora;
+
+        Decimal dbAhorroEmergencia;
+        Decimal dbCajaInicial;
+        Decimal dbCajaFinal;
+        
 
         public frmReporteCierreCaja(string sFecha_P, int iIdLocalidad_P, int iIdJornada_P)
         {
@@ -119,7 +127,44 @@ namespace Palatium.ReportesTextBox
         {
             try
             {
-                sRetorno = reporte.detalleVentasOrigen(sFecha, iIdLocalidad, iIdJornada);
+                sRetorno = "";
+                
+                sSql = "";
+                sSql += "select * from pos_vw_reportes_por_localidad" + Environment.NewLine;
+                sSql += "where id_localidad = 1" + Environment.NewLine;
+                sSql += "order by orden";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                if (dtConsulta.Rows.Count == 0)
+                {
+                    ok.LblMensaje.Text = "No se encuentra configurado el reporte de cierre.";
+                    ok.ShowDialog();
+                    return;
+                }
+
+                sRetorno += reporte.encabezadoReporte(sFecha, iIdLocalidad, iIdJornada);
+                dbAhorroEmergencia = reporte.dbAhorroEmergencia;
+                dbCajaInicial = reporte.dbCajaInicial;
+                dbCajaFinal = reporte.dbCajaFinal;
+                iIdPosCierreCajero = reporte.iIdPosCierreCajero;
+
+                for (int i = 0; i < dtConsulta.Rows.Count; i++)
+                {
+                    sCodigo = dtConsulta.Rows[i]["codigo"].ToString();
+
+                    sRetorno += devolverReporte(sCodigo);
+                }
 
                 if (sRetorno == "")
                 {
@@ -128,9 +173,8 @@ namespace Palatium.ReportesTextBox
 
                 else
                 {
-                    txtReporte.Text = sRetorno;
+                    txtReporte.Text = sRetorno + Environment.NewLine + Environment.NewLine + ".";
 
-                    //if (iCerrar == 1)
                     if (Program.iVistaPreviaImpresiones == 1)
                     {
                         consultarImpresoraTipoOrden();
@@ -145,6 +189,78 @@ namespace Palatium.ReportesTextBox
             {
                 catchMensaje.LblMensaje.Text = ex.ToString();
                 catchMensaje.ShowDialog();
+            }
+        }
+
+        //FUNCION PARA CARGAR LOS REPORTES
+        private string devolverReporte(string sCodigo_P)
+        {
+            try
+            {
+                string sTexto = "";
+
+                if (sCodigo_P == "01")
+                {
+                    sTexto = reporte.resumenSistema(sFecha, iIdLocalidad, iIdJornada);
+                }
+
+                else if (sCodigo_P == "02")
+                {
+                    sTexto = reporte.pagosPrioritarios(sFecha, iIdLocalidad, iIdJornada);
+                }
+
+                else if (sCodigo_P == "03")
+                {
+                    sTexto = reporte.productosDespachados(sFecha, iIdLocalidad, iIdJornada);
+                }
+
+                else if (sCodigo_P == "04")
+                {
+                    sTexto = reporte.detalleVentasOrigen(sFecha, iIdLocalidad, iIdJornada);
+                }
+
+                else if (sCodigo_P == "05")
+                {
+                    sTexto = reporte.reporteCantidadPagos(sFecha, iIdLocalidad, iIdJornada);
+                }
+
+                else if (sCodigo_P == "06")
+                {
+                    sTexto = reporte.arqueoCaja(sFecha, iIdLocalidad, iIdJornada);
+                }
+
+                else if (sCodigo_P == "07")
+                {
+                    sTexto = reporte.ventasMesero(sFecha, iIdLocalidad, iIdJornada);
+                }
+
+                else if (sCodigo_P == "08")
+                {
+                    sTexto = reporte.llenarMovimientosAgrupados(1, sFecha, iIdLocalidad, iIdJornada);
+                }
+
+                else if (sCodigo_P == "09")
+                {
+                    sTexto = reporte.llenarMovimientosAgrupados(0, sFecha, iIdLocalidad, iIdJornada);
+                }
+
+                else if (sCodigo_P == "10")
+                {
+                    sTexto = reporte.ahorroEmergencia(sFecha, iIdLocalidad, iIdJornada, dbAhorroEmergencia);
+                }
+
+                else if (sCodigo_P == "11")
+                {
+                    sTexto = reporte.contarMonedas(iIdPosCierreCajero, iIdLocalidad, iIdJornada, dbCajaInicial, dbCajaFinal);
+                }
+
+
+                return sTexto;
+            }
+
+            catch (Exception ex)
+            {
+                return "ERROR";
             }
         }
 
@@ -170,3 +286,4 @@ namespace Palatium.ReportesTextBox
         }
     }
 }
+

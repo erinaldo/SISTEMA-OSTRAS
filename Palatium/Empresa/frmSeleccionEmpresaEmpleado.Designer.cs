@@ -72,7 +72,7 @@
             // 
             this.btnSiguienteEmpleado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnSiguienteEmpleado.Image = global::Palatium.Properties.Resources.derecha;
-            this.btnSiguienteEmpleado.Location = new System.Drawing.Point(1286, 618);
+            this.btnSiguienteEmpleado.Location = new System.Drawing.Point(1286, 82);
             this.btnSiguienteEmpleado.Name = "btnSiguienteEmpleado";
             this.btnSiguienteEmpleado.Size = new System.Drawing.Size(64, 55);
             this.btnSiguienteEmpleado.TabIndex = 115;
@@ -85,7 +85,7 @@
             this.btnAnteriorEmpleado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnAnteriorEmpleado.Enabled = false;
             this.btnAnteriorEmpleado.Image = global::Palatium.Properties.Resources.izquierda;
-            this.btnAnteriorEmpleado.Location = new System.Drawing.Point(1224, 618);
+            this.btnAnteriorEmpleado.Location = new System.Drawing.Point(1224, 82);
             this.btnAnteriorEmpleado.Name = "btnAnteriorEmpleado";
             this.btnAnteriorEmpleado.Size = new System.Drawing.Size(64, 55);
             this.btnAnteriorEmpleado.TabIndex = 114;
@@ -97,7 +97,7 @@
             // 
             this.btnSiguienteEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnSiguienteEmpresa.Image = global::Palatium.Properties.Resources.derecha;
-            this.btnSiguienteEmpresa.Location = new System.Drawing.Point(344, 619);
+            this.btnSiguienteEmpresa.Location = new System.Drawing.Point(344, 82);
             this.btnSiguienteEmpresa.Name = "btnSiguienteEmpresa";
             this.btnSiguienteEmpresa.Size = new System.Drawing.Size(64, 55);
             this.btnSiguienteEmpresa.TabIndex = 113;
@@ -109,7 +109,7 @@
             this.btnAnteriorEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnAnteriorEmpresa.Enabled = false;
             this.btnAnteriorEmpresa.Image = global::Palatium.Properties.Resources.izquierda;
-            this.btnAnteriorEmpresa.Location = new System.Drawing.Point(282, 619);
+            this.btnAnteriorEmpresa.Location = new System.Drawing.Point(282, 82);
             this.btnAnteriorEmpresa.Name = "btnAnteriorEmpresa";
             this.btnAnteriorEmpresa.Size = new System.Drawing.Size(64, 55);
             this.btnAnteriorEmpresa.TabIndex = 112;
@@ -138,7 +138,7 @@
             // pnlEmpleados
             // 
             this.pnlEmpleados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.pnlEmpleados.Location = new System.Drawing.Point(435, 72);
+            this.pnlEmpleados.Location = new System.Drawing.Point(435, 143);
             this.pnlEmpleados.Name = "pnlEmpleados";
             this.pnlEmpleados.Size = new System.Drawing.Size(915, 530);
             this.pnlEmpleados.TabIndex = 119;
@@ -146,7 +146,7 @@
             // pnlEmpresa
             // 
             this.pnlEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.pnlEmpresa.Location = new System.Drawing.Point(12, 72);
+            this.pnlEmpresa.Location = new System.Drawing.Point(12, 143);
             this.pnlEmpresa.Name = "pnlEmpresa";
             this.pnlEmpresa.Size = new System.Drawing.Size(396, 530);
             this.pnlEmpresa.TabIndex = 118;
@@ -154,7 +154,7 @@
             // txtFiltrarEmpresas
             // 
             this.txtFiltrarEmpresas.Font = new System.Drawing.Font("Maiandra GD", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFiltrarEmpresas.Location = new System.Drawing.Point(12, 638);
+            this.txtFiltrarEmpresas.Location = new System.Drawing.Point(12, 101);
             this.txtFiltrarEmpresas.Name = "txtFiltrarEmpresas";
             this.txtFiltrarEmpresas.Size = new System.Drawing.Size(246, 36);
             this.txtFiltrarEmpresas.TabIndex = 120;
@@ -165,7 +165,7 @@
             // txtFiltrarEmpleados
             // 
             this.txtFiltrarEmpleados.Font = new System.Drawing.Font("Maiandra GD", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFiltrarEmpleados.Location = new System.Drawing.Point(435, 637);
+            this.txtFiltrarEmpleados.Location = new System.Drawing.Point(435, 101);
             this.txtFiltrarEmpleados.Name = "txtFiltrarEmpleados";
             this.txtFiltrarEmpleados.Size = new System.Drawing.Size(246, 36);
             this.txtFiltrarEmpleados.TabIndex = 121;
@@ -177,7 +177,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Maiandra GD", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 618);
+            this.label1.Location = new System.Drawing.Point(12, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(164, 19);
             this.label1.TabIndex = 122;
@@ -187,7 +187,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Maiandra GD", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(435, 618);
+            this.label2.Location = new System.Drawing.Point(435, 82);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(180, 19);
             this.label2.TabIndex = 123;
@@ -200,15 +200,15 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SkyBlue;
             this.ClientSize = new System.Drawing.Size(1362, 741);
+            this.Controls.Add(this.txtFiltrarEmpleados);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtFiltrarEmpleados);
-            this.Controls.Add(this.txtFiltrarEmpresas);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.btnSiguienteEmpleado);
             this.Controls.Add(this.btnAnteriorEmpleado);
-            this.Controls.Add(this.btnSiguienteEmpresa);
             this.Controls.Add(this.btnAnteriorEmpresa);
+            this.Controls.Add(this.btnSiguienteEmpleado);
+            this.Controls.Add(this.btnSiguienteEmpresa);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.txtFiltrarEmpresas);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlEmpleados);
             this.Controls.Add(this.pnlEmpresa);

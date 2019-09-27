@@ -29,17 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAgregarReportes = new System.Windows.Forms.Button();
             this.cmbLocalidades = new System.Windows.Forms.ComboBox();
             this.lblEmpresa = new System.Windows.Forms.Label();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
-            this.id_pos_reportes_cierre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id_pos_reportes_cierre_por_localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id_localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.en_base = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grupoDatos = new System.Windows.Forms.GroupBox();
             this.btnEliminarLinea = new System.Windows.Forms.Button();
             this.btnNuevaLinea = new System.Windows.Forms.Button();
@@ -52,6 +47,12 @@
             this.ttMensaje = new System.Windows.Forms.ToolTip(this.components);
             this.grupoBotones = new System.Windows.Forms.GroupBox();
             this.btnQuitarSeleccion = new System.Windows.Forms.Button();
+            this.id_pos_reportes_cierre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_pos_reportes_cierre_por_localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.en_base = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.grupoDatos.SuspendLayout();
@@ -126,47 +127,6 @@
             this.dgvDatos.Size = new System.Drawing.Size(379, 239);
             this.dgvDatos.TabIndex = 11;
             this.dgvDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellContentClick);
-            // 
-            // id_pos_reportes_cierre
-            // 
-            this.id_pos_reportes_cierre.HeaderText = "ID_1";
-            this.id_pos_reportes_cierre.Name = "id_pos_reportes_cierre";
-            this.id_pos_reportes_cierre.ReadOnly = true;
-            this.id_pos_reportes_cierre.Visible = false;
-            // 
-            // id_pos_reportes_cierre_por_localidad
-            // 
-            this.id_pos_reportes_cierre_por_localidad.HeaderText = "ID_2";
-            this.id_pos_reportes_cierre_por_localidad.Name = "id_pos_reportes_cierre_por_localidad";
-            this.id_pos_reportes_cierre_por_localidad.ReadOnly = true;
-            this.id_pos_reportes_cierre_por_localidad.Visible = false;
-            // 
-            // id_localidad
-            // 
-            this.id_localidad.HeaderText = "ID LOCALIDAD";
-            this.id_localidad.Name = "id_localidad";
-            this.id_localidad.ReadOnly = true;
-            this.id_localidad.Visible = false;
-            // 
-            // descripcion
-            // 
-            this.descripcion.HeaderText = "NOMBRE DEL REPORTE";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            this.descripcion.Width = 250;
-            // 
-            // orden
-            // 
-            this.orden.HeaderText = "ORDEN";
-            this.orden.Name = "orden";
-            this.orden.ReadOnly = true;
-            // 
-            // en_base
-            // 
-            this.en_base.HeaderText = "EN BASE";
-            this.en_base.Name = "en_base";
-            this.en_base.ReadOnly = true;
-            this.en_base.Visible = false;
             // 
             // grupoDatos
             // 
@@ -301,6 +261,49 @@
             this.btnQuitarSeleccion.UseVisualStyleBackColor = false;
             this.btnQuitarSeleccion.Click += new System.EventHandler(this.btnQuitarSeleccion_Click);
             // 
+            // id_pos_reportes_cierre
+            // 
+            this.id_pos_reportes_cierre.HeaderText = "ID_1";
+            this.id_pos_reportes_cierre.Name = "id_pos_reportes_cierre";
+            this.id_pos_reportes_cierre.ReadOnly = true;
+            this.id_pos_reportes_cierre.Visible = false;
+            // 
+            // id_pos_reportes_cierre_por_localidad
+            // 
+            this.id_pos_reportes_cierre_por_localidad.HeaderText = "ID_2";
+            this.id_pos_reportes_cierre_por_localidad.Name = "id_pos_reportes_cierre_por_localidad";
+            this.id_pos_reportes_cierre_por_localidad.ReadOnly = true;
+            this.id_pos_reportes_cierre_por_localidad.Visible = false;
+            // 
+            // id_localidad
+            // 
+            this.id_localidad.HeaderText = "ID LOCALIDAD";
+            this.id_localidad.Name = "id_localidad";
+            this.id_localidad.ReadOnly = true;
+            this.id_localidad.Visible = false;
+            // 
+            // descripcion
+            // 
+            this.descripcion.HeaderText = "NOMBRE DEL REPORTE";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            this.descripcion.Width = 250;
+            // 
+            // orden
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.orden.DefaultCellStyle = dataGridViewCellStyle1;
+            this.orden.HeaderText = "ORDEN";
+            this.orden.Name = "orden";
+            this.orden.ReadOnly = true;
+            // 
+            // en_base
+            // 
+            this.en_base.HeaderText = "EN BASE";
+            this.en_base.Name = "en_base";
+            this.en_base.ReadOnly = true;
+            this.en_base.Visible = false;
+            // 
             // frmReportesCierre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -345,12 +348,12 @@
         private System.Windows.Forms.Button btnEliminarLinea;
         private System.Windows.Forms.GroupBox grupoBotones;
         private System.Windows.Forms.Button btnAgregarReportes;
+        private System.Windows.Forms.Button btnQuitarSeleccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_pos_reportes_cierre;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_pos_reportes_cierre_por_localidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_localidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn orden;
         private System.Windows.Forms.DataGridViewTextBoxColumn en_base;
-        private System.Windows.Forms.Button btnQuitarSeleccion;
     }
 }

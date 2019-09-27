@@ -1228,7 +1228,9 @@ namespace Palatium.Clases
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
+
                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
                 double total = 0;
                 if (bRespuesta == true)
                 {
@@ -1363,7 +1365,6 @@ namespace Palatium.Clases
                             sTexto += "MOTIVO DE CANCELACION DE TICKET:" + Environment.NewLine;
                             sTexto += dtConsulta.Rows[i][1].ToString().Trim() + Environment.NewLine + Environment.NewLine;
                         }
-
                     }
                 }
 
