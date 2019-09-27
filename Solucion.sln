@@ -5,11 +5,6 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palatium", "Palatium\Palatium.csproj", "{BF4B3CCB-1343-4318-864E-11ACF99F2CAD}"
 EndProject
-Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Palatium Rest", "Palatium Rest\Palatium Rest.isproj", "{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BF4B3CCB-1343-4318-864E-11ACF99F2CAD} = {BF4B3CCB-1343-4318-864E-11ACF99F2CAD}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|x86 = CD_ROM|x86
@@ -29,16 +24,6 @@ Global
 		{BF4B3CCB-1343-4318-864E-11ACF99F2CAD}.Release|x86.Build.0 = Release|x86
 		{BF4B3CCB-1343-4318-864E-11ACF99F2CAD}.SingleImage|x86.ActiveCfg = Release|x86
 		{BF4B3CCB-1343-4318-864E-11ACF99F2CAD}.SingleImage|x86.Build.0 = Release|x86
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.CD_ROM|x86.ActiveCfg = CD_ROM
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.CD_ROM|x86.Build.0 = CD_ROM
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.Debug|x86.ActiveCfg = DVD-5
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.Debug|x86.Build.0 = DVD-5
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.DVD-5|x86.ActiveCfg = DVD-5
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.DVD-5|x86.Build.0 = DVD-5
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.Release|x86.ActiveCfg = SingleImage
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.Release|x86.Build.0 = SingleImage
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.SingleImage|x86.ActiveCfg = SingleImage
-		{A7F497E6-A516-49E8-BB6F-B8BD24E19E45}.SingleImage|x86.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

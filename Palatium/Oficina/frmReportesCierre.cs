@@ -21,12 +21,14 @@ namespace Palatium.Oficina
         VentanasMensajes.frmMensajeNuevoSiNo NuevoSiNo = new VentanasMensajes.frmMensajeNuevoSiNo();
 
         string sSql;
+        string sOrden;
 
         DataTable dtConsulta;
 
         bool bRespuesta;
 
         int iIdPosReporteCierre;
+        int iIdLocalidad;
         int iBandera;
 
         public frmReportesCierre()
@@ -152,7 +154,92 @@ namespace Palatium.Oficina
                 catchMensaje.ShowDialog();
             }
         }
+        
+        //FUNCION PARA GUARDAR LOS CAMBIOS EN LA BASE DE DATOS
+        private void guardarRegistros()
+        {
+            try
+            {
+                if (!conexion.GFun_Lo_Maneja_Transaccion(Program.G_INICIA_TRANSACCION))
+                {
+                    ok.LblMensaje.Text = "Error al abrir transacción.";
+                    ok.ShowDialog();
+                    return;
+                }
 
+                sSql = "";
+                sSql += "update pos_reportes_cierre_por_localidad set" + Environment.NewLine;
+                sSql += "estado = 'E'," + Environment.NewLine;
+                sSql += "fecha_anula = GETDATE()," + Environment.NewLine;
+                sSql += "usuario_anula = '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                sSql += "terminal_anula = '" + Program.sDatosMaximo[1] + "'" + Environment.NewLine;
+                sSql += "where id_localidad = " + cmbLocalidades.SelectedValue;
+
+                //EJECUTAR LA INSTRUCCIÓN SQL
+                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                {
+                    conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION);
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                for (int i = 0; i < dgvDatos.Rows.Count; i++)
+                {
+                    iIdPosReporteCierre = Convert.ToInt32(dgvDatos.Rows[i].Cells[0].Value);
+                    iIdLocalidad = Convert.ToInt32(dgvDatos.Rows[i].Cells[2].Value);
+                    sOrden = dgvDatos.Rows[i].Cells[4].Value.ToString().Trim();
+
+                    sSql = "";
+                    sSql += "insert into pos_reportes_cierre_por_localidad (" + Environment.NewLine;
+                    sSql += "id_localidad, id_pos_reportes_cierre, orden, estado," + Environment.NewLine;
+                    sSql += "fecha_ingreso, usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                    sSql += "values (" + Environment.NewLine;
+                    sSql += iIdLocalidad + ", " + iIdPosReporteCierre + ", " + sOrden + ", 'A', GETDATE()," + Environment.NewLine;
+                    sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+
+                    //EJECUTAR LA INSTRUCCIÓN SQL
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION);
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return;
+                    }
+                }
+
+                conexion.GFun_Lo_Maneja_Transaccion(Program.G_TERMINA_TRANSACCION);
+
+                ok.LblMensaje.Text = "Registros ingresados éxitosamente.";
+                ok.ShowDialog();
+                limpiar();
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+            }
+        }
+
+        //FUNCION PARA LIMPIAR
+        private void limpiar()
+        {
+            dgvDatos.ClearSelection();
+            btnEliminarLinea.Visible = false;
+            btnNuevaLinea.Visible = true;
+            txtOrden.Clear();
+            cmbReportes.SelectedIndex = 0;
+
+            grupoDatos.Enabled = false;
+            grupoBotones.Enabled = false;
+
+            cmbLocalidades.Enabled = true;
+
+            llenarGrid();
+
+            cmbLocalidades.Focus();
+        }
 
         #endregion
 
@@ -278,20 +365,25 @@ namespace Palatium.Oficina
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            dgvDatos.ClearSelection();
-            btnEliminarLinea.Visible = false;
-            btnNuevaLinea.Visible = true;
-            txtOrden.Clear();
-            cmbReportes.SelectedIndex = 0;
+            limpiar();
+        }
 
-            grupoDatos.Enabled = false;
-            grupoBotones.Enabled = false;
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.Rows.Count == 0)
+            {
+                ok.LblMensaje.Text = "No hay registros para guardar.";
+                ok.ShowDialog();
+                return;
+            }
 
-            cmbLocalidades.Enabled = true;
+            NuevoSiNo.lblMensaje.Text = "¿Está seguro que desea guardar los registros?";
+            NuevoSiNo.ShowDialog();
 
-            llenarGrid();
-
-            cmbLocalidades.Focus();
+            if (NuevoSiNo.DialogResult == DialogResult.OK)
+            {
+                guardarRegistros();
+            }
         }
     }
 }

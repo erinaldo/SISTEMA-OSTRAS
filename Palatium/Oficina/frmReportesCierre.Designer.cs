@@ -275,6 +275,7 @@
             this.btnGuardar.TabIndex = 46;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // grupoBotones
             // 
