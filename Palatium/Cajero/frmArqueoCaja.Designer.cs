@@ -1149,6 +1149,7 @@
             this.BtnVistaArqueo.TabIndex = 3;
             this.BtnVistaArqueo.Text = "Vista Previa\r\nArqueo de Caja";
             this.BtnVistaArqueo.UseVisualStyleBackColor = false;
+            this.BtnVistaArqueo.Visible = false;
             this.BtnVistaArqueo.Click += new System.EventHandler(this.BtnVistaArqueo_Click);
             this.BtnVistaArqueo.MouseEnter += new System.EventHandler(this.BtnVistaArqueo_MouseEnter);
             this.BtnVistaArqueo.MouseLeave += new System.EventHandler(this.BtnVistaArqueo_MouseLeave);
@@ -1183,6 +1184,7 @@
             this.btnReimpresionTickets.TabIndex = 1;
             this.btnReimpresionTickets.Text = "Resumen de Caja\r\nCIerre de Cajero";
             this.btnReimpresionTickets.UseVisualStyleBackColor = false;
+            this.btnReimpresionTickets.Visible = false;
             this.btnReimpresionTickets.Click += new System.EventHandler(this.btnReimpresionTickets_Click);
             this.btnReimpresionTickets.MouseEnter += new System.EventHandler(this.btnReimpresionTickets_MouseEnter);
             this.btnReimpresionTickets.MouseLeave += new System.EventHandler(this.btnReimpresionTickets_MouseLeave);

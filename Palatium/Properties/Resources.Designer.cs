@@ -2023,6 +2023,16 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icono_reenviar_facturas {
+            get {
+                object obj = ResourceManager.GetObject("icono_reenviar_facturas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icono_registro_masivo_personas {
             get {
                 object obj = ResourceManager.GetObject("icono_registro_masivo_personas", resourceCulture);

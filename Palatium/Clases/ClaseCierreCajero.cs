@@ -475,7 +475,7 @@ namespace Palatium.Clases
             {
                 sSql = "";
                 sSql += "select CP.id_pedido, CP.cuenta, CP.estado_orden," + Environment.NewLine;
-                sSql += "c.motivo_cancelacion, CP.valor_cancelado" + Environment.NewLine;
+                sSql += "c.motivo_cancelacion, isnull(CP.valor_cancelado, 0) valor_cancelado" + Environment.NewLine;
                 sSql += "from cv403_cab_pedidos as CP, pos_cancelacion AS C" + Environment.NewLine;
                 sSql += "where C.id_pedido = CP.id_pedido" + Environment.NewLine;
                 sSql += "and CP.estado_orden = 'Cancelada'" + Environment.NewLine;

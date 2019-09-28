@@ -395,6 +395,18 @@
     <Compile Include="Empresa\frmSeleccionEmpresaEmpleado.Designer.cs">
       <DependentUpon>frmSeleccionEmpresaEmpleado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion_Electronica\frmGenerarEnviarFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Facturacion_Electronica\frmGenerarEnviarFactura.Designer.cs">
+      <DependentUpon>frmGenerarEnviarFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio\frmInicioFacturacionElectronica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio\frmInicioFacturacionElectronica.Designer.cs">
+      <DependentUpon>frmInicioFacturacionElectronica.cs</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion_Electronica\frmTipoAmbiente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2234,6 +2246,12 @@
     <EmbeddedResource Include="Empresa\frmSeleccionEmpresaEmpleado.resx">
       <DependentUpon>frmSeleccionEmpresaEmpleado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Facturacion_Electronica\frmGenerarEnviarFactura.resx">
+      <DependentUpon>frmGenerarEnviarFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inicio\frmInicioFacturacionElectronica.resx">
+      <DependentUpon>frmInicioFacturacionElectronica.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Facturacion_Electronica\frmTipoAmbiente.resx">
       <DependentUpon>frmTipoAmbiente.cs</DependentUpon>
     </EmbeddedResource>
@@ -3332,6 +3350,7 @@
     <None Include="Resources\icono_eliminar_grid.png" />
     <None Include="Resources\icono_agregar_grid.png" />
     <None Include="Resources\icono_menu_reportes_cierre_caja.png" />
+    <None Include="Resources\icono_reenviar_facturas.png" />
     <Content Include="Resources\icono_sri_2.png" />
     <None Include="Resources\impresoras_menu.png" />
     <None Include="Resources\impresiones_nuevo.png" />

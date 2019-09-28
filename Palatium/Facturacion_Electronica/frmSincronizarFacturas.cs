@@ -30,6 +30,8 @@ namespace Palatium.Facturacion_Electronica
         Clases_Factura_Electronica.ClaseGenerarRIDE ride = new Clases_Factura_Electronica.ClaseGenerarRIDE();
         Clases_Factura_Electronica.ClaseRIDE ride_2 = new Clases_Factura_Electronica.ClaseRIDE();
 
+        Clases.ClaseAbrirCajon abrir = new Clases.ClaseAbrirCajon();
+
         DataTable dtConsulta;
 
         XmlDocument xmlAut;
@@ -1267,6 +1269,17 @@ namespace Palatium.Facturacion_Electronica
             {
                 this.Close();
             }
+
+            if (Program.iPermitirAbrirCajon == 1)
+            {
+                if (e.KeyCode == Keys.F7)
+                {
+                    if (Program.iPuedeCobrar == 1)
+                    {
+                        abrir.consultarImpresoraAbrirCajon();
+                    }
+                }
+            }
         }
 
         private void btnInicial_Click(object sender, EventArgs e)
@@ -1660,11 +1673,6 @@ namespace Palatium.Facturacion_Electronica
         {
             ok.LblMensaje.Text = "Módulo en desarrollo.";
             ok.ShowDialog();
-        }
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void chkEnviarCorreos_CheckedChanged(object sender, EventArgs e)
