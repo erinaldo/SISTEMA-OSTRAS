@@ -998,7 +998,6 @@
             this.btnVerReporte.TabIndex = 12;
             this.btnVerReporte.Text = "Ver Reporte Prueba";
             this.btnVerReporte.UseVisualStyleBackColor = false;
-            this.btnVerReporte.Visible = false;
             this.btnVerReporte.Click += new System.EventHandler(this.btnVerReporte_Click);
             // 
             // btnAbrirCaja

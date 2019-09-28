@@ -354,7 +354,7 @@ namespace Palatium.Oficina
             else
             {
                 dgvDatos.Rows.Add(cmbReportes.SelectedValue, "0", cmbLocalidades.SelectedValue,
-                                      cmbLocalidades.Text.ToUpper(), txtOrden.Text.Trim(), "0");
+                                      cmbReportes.Text.ToUpper(), txtOrden.Text.Trim(), "0");
             }
 
             dgvDatos.ClearSelection();

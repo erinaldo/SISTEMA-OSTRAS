@@ -292,6 +292,12 @@
     <Compile Include="Cajero\frmRecuperarDinero.Designer.cs">
       <DependentUpon>frmRecuperarDinero.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cajero\frmRevisarCierres.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajero\frmRevisarCierres.Designer.cs">
+      <DependentUpon>frmRevisarCierres.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cancelar Orden\ClaseEliminacionComanda.cs" />
     <Compile Include="Cancelar Orden\frmEliminarComanda.cs">
       <SubType>Form</SubType>
@@ -517,6 +523,12 @@
       <DependentUpon>frmNuevoMenuConfiguracion.cs</DependentUpon>
     </Compile>
     <Compile Include="Areas\ClaseCombinarComandas.cs" />
+    <Compile Include="Oficina\frmOperadorTarjetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Oficina\frmOperadorTarjetas.Designer.cs">
+      <DependentUpon>frmOperadorTarjetas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Oficina\frmRegistrarMovimientos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -528,6 +540,12 @@
     </Compile>
     <Compile Include="Oficina\frmReportesCierre.Designer.cs">
       <DependentUpon>frmReportesCierre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Oficina\frmTipoTarjetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Oficina\frmTipoTarjetas.Designer.cs">
+      <DependentUpon>frmTipoTarjetas.cs</DependentUpon>
     </Compile>
     <Compile Include="Pedidos\ClaseIngresarCobros.cs" />
     <Compile Include="Pedidos\ClasePagoCompleto.cs" />
@@ -2204,6 +2222,9 @@
     <EmbeddedResource Include="Cajero\frmRecuperarDinero.resx">
       <DependentUpon>frmRecuperarDinero.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cajero\frmRevisarCierres.resx">
+      <DependentUpon>frmRevisarCierres.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cancelar Orden\frmEliminarComanda.resx">
       <DependentUpon>frmEliminarComanda.cs</DependentUpon>
     </EmbeddedResource>
@@ -2309,11 +2330,17 @@
     <EmbeddedResource Include="Oficina\frmNuevoMenuConfiguracion.resx">
       <DependentUpon>frmNuevoMenuConfiguracion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Oficina\frmOperadorTarjetas.resx">
+      <DependentUpon>frmOperadorTarjetas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Oficina\frmRegistrarMovimientos.resx">
       <DependentUpon>frmRegistrarMovimientos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Oficina\frmReportesCierre.resx">
       <DependentUpon>frmReportesCierre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Oficina\frmTipoTarjetas.resx">
+      <DependentUpon>frmTipoTarjetas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pedidos\frmCambiarFormasCobros.resx">
       <DependentUpon>frmCambiarFormasCobros.cs</DependentUpon>
@@ -3351,6 +3378,8 @@
     <None Include="Resources\icono_agregar_grid.png" />
     <None Include="Resources\icono_menu_reportes_cierre_caja.png" />
     <None Include="Resources\icono_reenviar_facturas.png" />
+    <None Include="Resources\icono_menu_operador_tarjeta.png" />
+    <None Include="Resources\icono_menu_tipo_tarjetas.png" />
     <Content Include="Resources\icono_sri_2.png" />
     <None Include="Resources\impresoras_menu.png" />
     <None Include="Resources\impresiones_nuevo.png" />

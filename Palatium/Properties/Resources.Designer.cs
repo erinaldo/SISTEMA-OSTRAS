@@ -1963,9 +1963,29 @@ namespace Palatium.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icono_menu_operador_tarjeta {
+            get {
+                object obj = ResourceManager.GetObject("icono_menu_operador_tarjeta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icono_menu_reportes_cierre_caja {
             get {
                 object obj = ResourceManager.GetObject("icono_menu_reportes_cierre_caja", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icono_menu_tipo_tarjetas {
+            get {
+                object obj = ResourceManager.GetObject("icono_menu_tipo_tarjetas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

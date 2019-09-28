@@ -45,6 +45,8 @@
             this.submenuMetodosPagos = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuFormasCobros = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuCobros = new System.Windows.Forms.ToolStripMenuItem();
+            this.subMenuoperadorTarjetas = new System.Windows.Forms.ToolStripMenuItem();
+            this.subMenuTiposTarjetas = new System.Windows.Forms.ToolStripMenuItem();
             this.configuracionDeImpresorasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuImpresoras = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuDestinoImpresion = new System.Windows.Forms.ToolStripMenuItem();
@@ -341,7 +343,9 @@
             this.formasDePagoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.submenuMetodosPagos,
             this.submenuFormasCobros,
-            this.submenuCobros});
+            this.submenuCobros,
+            this.subMenuoperadorTarjetas,
+            this.subMenuTiposTarjetas});
             this.formasDePagoToolStripMenuItem.Image = global::Palatium.Properties.Resources.formas_pago_nuevo;
             this.formasDePagoToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.formasDePagoToolStripMenuItem.Name = "formasDePagoToolStripMenuItem";
@@ -353,7 +357,7 @@
             this.submenuMetodosPagos.Image = global::Palatium.Properties.Resources.metodos_pago_menu;
             this.submenuMetodosPagos.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuMetodosPagos.Name = "submenuMetodosPagos";
-            this.submenuMetodosPagos.Size = new System.Drawing.Size(183, 36);
+            this.submenuMetodosPagos.Size = new System.Drawing.Size(201, 38);
             this.submenuMetodosPagos.Text = "Métodos de Pago";
             this.submenuMetodosPagos.Click += new System.EventHandler(this.submenuMetodosPagos_Click);
             // 
@@ -362,7 +366,7 @@
             this.submenuFormasCobros.Image = global::Palatium.Properties.Resources.formas_pagos_menu;
             this.submenuFormasCobros.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuFormasCobros.Name = "submenuFormasCobros";
-            this.submenuFormasCobros.Size = new System.Drawing.Size(183, 36);
+            this.submenuFormasCobros.Size = new System.Drawing.Size(201, 38);
             this.submenuFormasCobros.Text = "Formas de Cobro";
             this.submenuFormasCobros.Click += new System.EventHandler(this.submenuFormasCobros_Click);
             // 
@@ -371,9 +375,27 @@
             this.submenuCobros.Image = global::Palatium.Properties.Resources.cobros_menu;
             this.submenuCobros.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.submenuCobros.Name = "submenuCobros";
-            this.submenuCobros.Size = new System.Drawing.Size(183, 36);
+            this.submenuCobros.Size = new System.Drawing.Size(201, 38);
             this.submenuCobros.Text = "Cobros";
             this.submenuCobros.Click += new System.EventHandler(this.submenuCobros_Click);
+            // 
+            // subMenuoperadorTarjetas
+            // 
+            this.subMenuoperadorTarjetas.Image = global::Palatium.Properties.Resources.icono_menu_operador_tarjeta;
+            this.subMenuoperadorTarjetas.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.subMenuoperadorTarjetas.Name = "subMenuoperadorTarjetas";
+            this.subMenuoperadorTarjetas.Size = new System.Drawing.Size(201, 38);
+            this.subMenuoperadorTarjetas.Text = "Operador de Tarjetas";
+            this.subMenuoperadorTarjetas.Click += new System.EventHandler(this.subMenuoperadorTarjetas_Click);
+            // 
+            // subMenuTiposTarjetas
+            // 
+            this.subMenuTiposTarjetas.Image = global::Palatium.Properties.Resources.icono_menu_tipo_tarjetas;
+            this.subMenuTiposTarjetas.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.subMenuTiposTarjetas.Name = "subMenuTiposTarjetas";
+            this.subMenuTiposTarjetas.Size = new System.Drawing.Size(201, 38);
+            this.subMenuTiposTarjetas.Text = "Tipos de Tarjetas";
+            this.subMenuTiposTarjetas.Click += new System.EventHandler(this.subMenuTiposTarjetas_Click);
             // 
             // configuracionDeImpresorasToolStripMenuItem
             // 
@@ -1842,6 +1864,8 @@
         private System.Windows.Forms.ToolStripMenuItem submenuEquivalenciasUnidades;
         private System.Windows.Forms.ToolStripMenuItem subMenuCrearRegistrosMasivos;
         private System.Windows.Forms.ToolStripMenuItem subMenuReportesCierreCaja;
+        private System.Windows.Forms.ToolStripMenuItem subMenuoperadorTarjetas;
+        private System.Windows.Forms.ToolStripMenuItem subMenuTiposTarjetas;
 
     }
 }

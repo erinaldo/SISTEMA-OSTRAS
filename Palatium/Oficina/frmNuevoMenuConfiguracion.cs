@@ -728,5 +728,17 @@ namespace Palatium.Oficina
             Oficina.frmReportesCierre cierre = new Oficina.frmReportesCierre();
             verificarFormularios(cierre, this);
         }
+
+        private void subMenuoperadorTarjetas_Click(object sender, EventArgs e)
+        {
+            Oficina.frmOperadorTarjetas operador = new Oficina.frmOperadorTarjetas();
+            verificarFormularios(operador, this);
+        }
+
+        private void subMenuTiposTarjetas_Click(object sender, EventArgs e)
+        {
+            Oficina.frmTipoTarjetas tarjeta = new Oficina.frmTipoTarjetas();
+            verificarFormularios(tarjeta, this);
+        }
     }
 }
