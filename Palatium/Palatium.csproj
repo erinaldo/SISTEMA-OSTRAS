@@ -320,6 +320,7 @@
     <Compile Include="Clases\ClaseReporteMateriaPrima.cs" />
     <Compile Include="Clases\ClaseReportePropietario.cs" />
     <Compile Include="Clases\ClaseReportes.cs" />
+    <Compile Include="Clases\ClaseReportesAdicionales.cs" />
     <Compile Include="Clases_Factura_Electronica\ClaseImprimirFacturaElectronica.cs" />
     <Compile Include="Clases_Factura_Electronica\ClaseRIDE.cs" />
     <Compile Include="Comida_Rapida\frmCobroRapidoTarjetas.cs">

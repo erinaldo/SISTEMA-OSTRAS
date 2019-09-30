@@ -37,6 +37,7 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.grupoDatos = new System.Windows.Forms.GroupBox();
+            this.chkAlmuerzos = new System.Windows.Forms.CheckBox();
             this.chkOtros = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.chkMenuPos = new System.Windows.Forms.CheckBox();
@@ -62,7 +63,8 @@
             this.cmbPadre = new MisControles.ComboDatos();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkAlmuerzos = new System.Windows.Forms.CheckBox();
+            this.chkDetallarOrigen = new System.Windows.Forms.CheckBox();
+            this.chkDetalleIndependiente = new System.Windows.Forms.CheckBox();
             this.Grb_listReCajero.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoria)).BeginInit();
             this.Grb_opcioCategori.SuspendLayout();
@@ -108,6 +110,7 @@
             // 
             this.dgvCategoria.AllowUserToAddRows = false;
             this.dgvCategoria.AllowUserToDeleteRows = false;
+            this.dgvCategoria.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvCategoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCategoria.Location = new System.Drawing.Point(15, 54);
             this.dgvCategoria.Name = "dgvCategoria";
@@ -168,6 +171,8 @@
             // 
             // grupoDatos
             // 
+            this.grupoDatos.Controls.Add(this.chkDetalleIndependiente);
+            this.grupoDatos.Controls.Add(this.chkDetallarOrigen);
             this.grupoDatos.Controls.Add(this.chkAlmuerzos);
             this.grupoDatos.Controls.Add(this.chkOtros);
             this.grupoDatos.Controls.Add(this.label17);
@@ -197,12 +202,24 @@
             this.grupoDatos.TabStop = false;
             this.grupoDatos.Text = "Datos del Registro";
             // 
+            // chkAlmuerzos
+            // 
+            this.chkAlmuerzos.AutoSize = true;
+            this.chkAlmuerzos.Enabled = false;
+            this.chkAlmuerzos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAlmuerzos.Location = new System.Drawing.Point(173, 235);
+            this.chkAlmuerzos.Name = "chkAlmuerzos";
+            this.chkAlmuerzos.Size = new System.Drawing.Size(129, 19);
+            this.chkAlmuerzos.TabIndex = 52;
+            this.chkAlmuerzos.Text = "Maneja Almuerzos";
+            this.chkAlmuerzos.UseVisualStyleBackColor = true;
+            // 
             // chkOtros
             // 
             this.chkOtros.AutoSize = true;
             this.chkOtros.Enabled = false;
             this.chkOtros.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkOtros.Location = new System.Drawing.Point(173, 242);
+            this.chkOtros.Location = new System.Drawing.Point(173, 214);
             this.chkOtros.Name = "chkOtros";
             this.chkOtros.Size = new System.Drawing.Size(126, 19);
             this.chkOtros.TabIndex = 16;
@@ -225,7 +242,7 @@
             this.chkMenuPos.AutoSize = true;
             this.chkMenuPos.Enabled = false;
             this.chkMenuPos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkMenuPos.Location = new System.Drawing.Point(173, 200);
+            this.chkMenuPos.Location = new System.Drawing.Point(173, 172);
             this.chkMenuPos.Name = "chkMenuPos";
             this.chkMenuPos.Size = new System.Drawing.Size(82, 19);
             this.chkMenuPos.TabIndex = 14;
@@ -237,7 +254,7 @@
             this.chkTieneModifcador.AutoSize = true;
             this.chkTieneModifcador.Enabled = false;
             this.chkTieneModifcador.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkTieneModifcador.Location = new System.Drawing.Point(173, 221);
+            this.chkTieneModifcador.Location = new System.Drawing.Point(173, 193);
             this.chkTieneModifcador.Name = "chkTieneModifcador";
             this.chkTieneModifcador.Size = new System.Drawing.Size(108, 19);
             this.chkTieneModifcador.TabIndex = 15;
@@ -248,7 +265,7 @@
             // 
             this.chkTieneSubCategoria.AutoSize = true;
             this.chkTieneSubCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkTieneSubCategoria.Location = new System.Drawing.Point(15, 263);
+            this.chkTieneSubCategoria.Location = new System.Drawing.Point(15, 235);
             this.chkTieneSubCategoria.Name = "chkTieneSubCategoria";
             this.chkTieneSubCategoria.Size = new System.Drawing.Size(135, 19);
             this.chkTieneSubCategoria.TabIndex = 13;
@@ -261,7 +278,7 @@
             this.lblSecuencia.BackColor = System.Drawing.Color.Transparent;
             this.lblSecuencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSecuencia.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblSecuencia.Location = new System.Drawing.Point(13, 95);
+            this.lblSecuencia.Location = new System.Drawing.Point(13, 71);
             this.lblSecuencia.Name = "lblSecuencia";
             this.lblSecuencia.Size = new System.Drawing.Size(68, 15);
             this.lblSecuencia.TabIndex = 49;
@@ -269,7 +286,7 @@
             // 
             // txtSecuencia
             // 
-            this.txtSecuencia.Location = new System.Drawing.Point(120, 94);
+            this.txtSecuencia.Location = new System.Drawing.Point(120, 70);
             this.txtSecuencia.MaxLength = 3;
             this.txtSecuencia.Name = "txtSecuencia";
             this.txtSecuencia.Size = new System.Drawing.Size(63, 20);
@@ -280,7 +297,7 @@
             // 
             this.chkPagaIva.AutoSize = true;
             this.chkPagaIva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPagaIva.Location = new System.Drawing.Point(15, 242);
+            this.chkPagaIva.Location = new System.Drawing.Point(15, 214);
             this.chkPagaIva.Name = "chkPagaIva";
             this.chkPagaIva.Size = new System.Drawing.Size(73, 19);
             this.chkPagaIva.TabIndex = 12;
@@ -290,7 +307,7 @@
             // cmbConsumo
             // 
             this.cmbConsumo.FormattingEnabled = true;
-            this.cmbConsumo.Location = new System.Drawing.Point(120, 139);
+            this.cmbConsumo.Location = new System.Drawing.Point(120, 115);
             this.cmbConsumo.Name = "cmbConsumo";
             this.cmbConsumo.Size = new System.Drawing.Size(106, 21);
             this.cmbConsumo.TabIndex = 8;
@@ -298,7 +315,7 @@
             // cmbCompra
             // 
             this.cmbCompra.FormattingEnabled = true;
-            this.cmbCompra.Location = new System.Drawing.Point(120, 116);
+            this.cmbCompra.Location = new System.Drawing.Point(120, 92);
             this.cmbCompra.Name = "cmbCompra";
             this.cmbCompra.Size = new System.Drawing.Size(106, 21);
             this.cmbCompra.TabIndex = 7;
@@ -307,7 +324,7 @@
             // 
             this.chkPreModificable.AutoSize = true;
             this.chkPreModificable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPreModificable.Location = new System.Drawing.Point(15, 221);
+            this.chkPreModificable.Location = new System.Drawing.Point(15, 193);
             this.chkPreModificable.Name = "chkPreModificable";
             this.chkPreModificable.Size = new System.Drawing.Size(128, 19);
             this.chkPreModificable.TabIndex = 11;
@@ -318,7 +335,7 @@
             // 
             this.chkModificable.AutoSize = true;
             this.chkModificable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkModificable.Location = new System.Drawing.Point(15, 200);
+            this.chkModificable.Location = new System.Drawing.Point(15, 172);
             this.chkModificable.Name = "chkModificable";
             this.chkModificable.Size = new System.Drawing.Size(90, 19);
             this.chkModificable.TabIndex = 10;
@@ -331,7 +348,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(13, 141);
+            this.label1.Location = new System.Drawing.Point(13, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 15);
             this.label1.TabIndex = 15;
@@ -343,7 +360,7 @@
             this.lblUnidadCompra.BackColor = System.Drawing.Color.Transparent;
             this.lblUnidadCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnidadCompra.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblUnidadCompra.Location = new System.Drawing.Point(13, 118);
+            this.lblUnidadCompra.Location = new System.Drawing.Point(13, 94);
             this.lblUnidadCompra.Name = "lblUnidadCompra";
             this.lblUnidadCompra.Size = new System.Drawing.Size(97, 15);
             this.lblUnidadCompra.TabIndex = 13;
@@ -357,7 +374,7 @@
             this.cmbEstado.Items.AddRange(new object[] {
             "ACTIVO",
             "INACTIVO"});
-            this.cmbEstado.Location = new System.Drawing.Point(120, 161);
+            this.cmbEstado.Location = new System.Drawing.Point(120, 137);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(107, 21);
             this.cmbEstado.TabIndex = 9;
@@ -368,7 +385,7 @@
             this.lblEstaCajero.BackColor = System.Drawing.Color.Transparent;
             this.lblEstaCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstaCajero.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblEstaCajero.Location = new System.Drawing.Point(13, 163);
+            this.lblEstaCajero.Location = new System.Drawing.Point(13, 139);
             this.lblEstaCajero.Name = "lblEstaCajero";
             this.lblEstaCajero.Size = new System.Drawing.Size(48, 15);
             this.lblEstaCajero.TabIndex = 7;
@@ -391,9 +408,8 @@
             this.txtDescripcion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtDescripcion.Location = new System.Drawing.Point(121, 48);
             this.txtDescripcion.MaxLength = 200;
-            this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(200, 44);
+            this.txtDescripcion.Size = new System.Drawing.Size(200, 20);
             this.txtDescripcion.TabIndex = 5;
             // 
             // lblCodCategoria
@@ -470,17 +486,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opciones";
             // 
-            // chkAlmuerzos
+            // chkDetallarOrigen
             // 
-            this.chkAlmuerzos.AutoSize = true;
-            this.chkAlmuerzos.Enabled = false;
-            this.chkAlmuerzos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAlmuerzos.Location = new System.Drawing.Point(173, 263);
-            this.chkAlmuerzos.Name = "chkAlmuerzos";
-            this.chkAlmuerzos.Size = new System.Drawing.Size(129, 19);
-            this.chkAlmuerzos.TabIndex = 52;
-            this.chkAlmuerzos.Text = "Maneja Almuerzos";
-            this.chkAlmuerzos.UseVisualStyleBackColor = true;
+            this.chkDetallarOrigen.AutoSize = true;
+            this.chkDetallarOrigen.Enabled = false;
+            this.chkDetallarOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDetallarOrigen.Location = new System.Drawing.Point(173, 256);
+            this.chkDetallarOrigen.Name = "chkDetallarOrigen";
+            this.chkDetallarOrigen.Size = new System.Drawing.Size(130, 19);
+            this.chkDetallarOrigen.TabIndex = 53;
+            this.chkDetallarOrigen.Text = "Detallar por Origen";
+            this.chkDetallarOrigen.UseVisualStyleBackColor = true;
+            this.chkDetallarOrigen.CheckedChanged += new System.EventHandler(this.chkDetallarOrigen_CheckedChanged);
+            // 
+            // chkDetalleIndependiente
+            // 
+            this.chkDetalleIndependiente.AutoSize = true;
+            this.chkDetalleIndependiente.Enabled = false;
+            this.chkDetalleIndependiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDetalleIndependiente.Location = new System.Drawing.Point(15, 256);
+            this.chkDetalleIndependiente.Name = "chkDetalleIndependiente";
+            this.chkDetalleIndependiente.Size = new System.Drawing.Size(147, 19);
+            this.chkDetalleIndependiente.TabIndex = 54;
+            this.chkDetalleIndependiente.Text = "Detalle Independiente";
+            this.chkDetalleIndependiente.UseVisualStyleBackColor = true;
+            this.chkDetalleIndependiente.CheckedChanged += new System.EventHandler(this.chkDetalleIndependiente_CheckedChanged);
             // 
             // frmCategorias
             // 
@@ -547,5 +577,7 @@
         private System.Windows.Forms.CheckBox chkOtros;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkAlmuerzos;
+        private System.Windows.Forms.CheckBox chkDetallarOrigen;
+        private System.Windows.Forms.CheckBox chkDetalleIndependiente;
     }
 }

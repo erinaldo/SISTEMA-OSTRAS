@@ -1069,6 +1069,7 @@ namespace Palatium.Clases
                 return "";
             }
         }
+
         //FUNCION PARA OBTENER EL VALOR DE LA ENTRADAS Y SALIDAS MANUALES
         private Decimal sumarEntradasSalidasManuales(int iOp)
         {
@@ -1088,7 +1089,7 @@ namespace Palatium.Clases
                 sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada + Environment.NewLine;
                 sSql += "and id_localidad = " + iIdLocalidad + Environment.NewLine;
                 sSql += "and fecha = '" + sFecha + "'" + Environment.NewLine;
-                sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada;
+                //sSql += "and id_pos_jornada = " + Program.iJornadaRecuperada;
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();

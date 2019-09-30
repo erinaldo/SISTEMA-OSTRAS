@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbLocalidades = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -218,6 +218,7 @@
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.btnEntradas);
             this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.btnReimpresionTickets);
             this.groupBox2.Controls.Add(this.dgvTarjetas);
             this.groupBox2.Controls.Add(this.txtTotalCortesias);
             this.groupBox2.Controls.Add(this.groupBox5);
@@ -418,8 +419,8 @@
             // 
             // txtValorPagoGrid
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle4;
             this.txtValorPagoGrid.Frozen = true;
             this.txtValorPagoGrid.HeaderText = "VALOR";
             this.txtValorPagoGrid.Name = "txtValorPagoGrid";
@@ -676,10 +677,10 @@
             // 
             // dataGridViewCheckBoxColumn1
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.NullValue = false;
-            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.NullValue = false;
+            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewCheckBoxColumn1.HeaderText = "";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.Width = 50;
@@ -693,8 +694,8 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn2.HeaderText = "VALOR";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -977,7 +978,6 @@
             this.groupBox4.Controls.Add(this.btnContarDinero);
             this.groupBox4.Controls.Add(this.BtnVistaArqueo);
             this.groupBox4.Controls.Add(this.btnReporteVendido);
-            this.groupBox4.Controls.Add(this.btnReimpresionTickets);
             this.groupBox4.Controls.Add(this.btnRevisarCaja);
             this.groupBox4.Location = new System.Drawing.Point(733, 12);
             this.groupBox4.Name = "groupBox4";
@@ -992,12 +992,13 @@
             this.btnVerReporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVerReporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVerReporte.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnVerReporte.Location = new System.Drawing.Point(10, 450);
+            this.btnVerReporte.Location = new System.Drawing.Point(10, 54);
             this.btnVerReporte.Name = "btnVerReporte";
-            this.btnVerReporte.Size = new System.Drawing.Size(140, 26);
+            this.btnVerReporte.Size = new System.Drawing.Size(140, 44);
             this.btnVerReporte.TabIndex = 12;
-            this.btnVerReporte.Text = "Ver Reporte Prueba";
+            this.btnVerReporte.Text = "Cierre de Cajero";
             this.btnVerReporte.UseVisualStyleBackColor = false;
+            this.btnVerReporte.Visible = false;
             this.btnVerReporte.Click += new System.EventHandler(this.btnVerReporte_Click);
             // 
             // btnAbrirCaja
@@ -1022,12 +1023,13 @@
             this.btnListarVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListarVentas.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnListarVentas.Location = new System.Drawing.Point(10, 274);
+            this.btnListarVentas.Location = new System.Drawing.Point(10, 379);
             this.btnListarVentas.Name = "btnListarVentas";
             this.btnListarVentas.Size = new System.Drawing.Size(140, 44);
             this.btnListarVentas.TabIndex = 10;
             this.btnListarVentas.Text = "Listar Productos \r\ndel día";
             this.btnListarVentas.UseVisualStyleBackColor = false;
+            this.btnListarVentas.Visible = false;
             this.btnListarVentas.Click += new System.EventHandler(this.btnListarVentas_Click);
             this.btnListarVentas.MouseEnter += new System.EventHandler(this.btnListarVentas_MouseEnter);
             this.btnListarVentas.MouseLeave += new System.EventHandler(this.btnListarVentas_MouseLeave);
@@ -1039,7 +1041,7 @@
             this.btnDetallarVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDetallarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetallarVentas.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDetallarVentas.Location = new System.Drawing.Point(10, 318);
+            this.btnDetallarVentas.Location = new System.Drawing.Point(10, 140);
             this.btnDetallarVentas.Name = "btnDetallarVentas";
             this.btnDetallarVentas.Size = new System.Drawing.Size(140, 44);
             this.btnDetallarVentas.TabIndex = 9;
@@ -1056,7 +1058,7 @@
             this.btnVentasMesero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVentasMesero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVentasMesero.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnVentasMesero.Location = new System.Drawing.Point(10, 98);
+            this.btnVentasMesero.Location = new System.Drawing.Point(10, 97);
             this.btnVentasMesero.Name = "btnVentasMesero";
             this.btnVentasMesero.Size = new System.Drawing.Size(140, 44);
             this.btnVentasMesero.TabIndex = 8;
@@ -1073,7 +1075,7 @@
             this.BtnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnGuardar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.BtnGuardar.Location = new System.Drawing.Point(10, 54);
+            this.BtnGuardar.Location = new System.Drawing.Point(10, 226);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(140, 44);
             this.BtnGuardar.TabIndex = 7;
@@ -1090,12 +1092,13 @@
             this.btnListarMateriaPrima.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListarMateriaPrima.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListarMateriaPrima.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnListarMateriaPrima.Location = new System.Drawing.Point(10, 406);
+            this.btnListarMateriaPrima.Location = new System.Drawing.Point(10, 466);
             this.btnListarMateriaPrima.Name = "btnListarMateriaPrima";
             this.btnListarMateriaPrima.Size = new System.Drawing.Size(140, 44);
             this.btnListarMateriaPrima.TabIndex = 6;
             this.btnListarMateriaPrima.Text = "Materia Prima\r\nusada en el día";
             this.btnListarMateriaPrima.UseVisualStyleBackColor = false;
+            this.btnListarMateriaPrima.Visible = false;
             this.btnListarMateriaPrima.Click += new System.EventHandler(this.btnListarMateriaPrima_Click);
             this.btnListarMateriaPrima.MouseEnter += new System.EventHandler(this.btnListarMateriaPrima_MouseEnter);
             this.btnListarMateriaPrima.MouseLeave += new System.EventHandler(this.btnListarMateriaPrima_MouseLeave);
@@ -1107,13 +1110,14 @@
             this.btnEnviarInforme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEnviarInforme.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnviarInforme.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEnviarInforme.Location = new System.Drawing.Point(10, 362);
+            this.btnEnviarInforme.Location = new System.Drawing.Point(10, 422);
             this.btnEnviarInforme.Name = "btnEnviarInforme";
             this.btnEnviarInforme.Size = new System.Drawing.Size(140, 44);
             this.btnEnviarInforme.TabIndex = 5;
             this.btnEnviarInforme.Text = "Reporte para el Propietario";
             this.ttMensaje.SetToolTip(this.btnEnviarInforme, "Clic aquí para imprimir el reporte del propietario");
             this.btnEnviarInforme.UseVisualStyleBackColor = false;
+            this.btnEnviarInforme.Visible = false;
             this.btnEnviarInforme.Click += new System.EventHandler(this.btnEnviarInforme_Click);
             this.btnEnviarInforme.MouseEnter += new System.EventHandler(this.btnEnviarInforme_MouseEnter);
             this.btnEnviarInforme.MouseLeave += new System.EventHandler(this.btnEnviarInforme_MouseLeave);
@@ -1142,7 +1146,7 @@
             this.BtnVistaArqueo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnVistaArqueo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnVistaArqueo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.BtnVistaArqueo.Location = new System.Drawing.Point(10, 230);
+            this.BtnVistaArqueo.Location = new System.Drawing.Point(10, 336);
             this.BtnVistaArqueo.Name = "BtnVistaArqueo";
             this.BtnVistaArqueo.Size = new System.Drawing.Size(140, 44);
             this.BtnVistaArqueo.TabIndex = 3;
@@ -1160,12 +1164,13 @@
             this.btnReporteVendido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporteVendido.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReporteVendido.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnReporteVendido.Location = new System.Drawing.Point(10, 186);
+            this.btnReporteVendido.Location = new System.Drawing.Point(10, 293);
             this.btnReporteVendido.Name = "btnReporteVendido";
             this.btnReporteVendido.Size = new System.Drawing.Size(140, 44);
             this.btnReporteVendido.TabIndex = 2;
             this.btnReporteVendido.Text = "Reporte de lo Vendido";
             this.btnReporteVendido.UseVisualStyleBackColor = false;
+            this.btnReporteVendido.Visible = false;
             this.btnReporteVendido.Click += new System.EventHandler(this.btnReporteVendido_Click);
             this.btnReporteVendido.MouseEnter += new System.EventHandler(this.btnReporteVendido_MouseEnter);
             this.btnReporteVendido.MouseLeave += new System.EventHandler(this.btnReporteVendido_MouseLeave);
@@ -1177,7 +1182,7 @@
             this.btnReimpresionTickets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReimpresionTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReimpresionTickets.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnReimpresionTickets.Location = new System.Drawing.Point(10, 142);
+            this.btnReimpresionTickets.Location = new System.Drawing.Point(276, 306);
             this.btnReimpresionTickets.Name = "btnReimpresionTickets";
             this.btnReimpresionTickets.Size = new System.Drawing.Size(140, 44);
             this.btnReimpresionTickets.TabIndex = 1;
@@ -1195,7 +1200,7 @@
             this.btnRevisarCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRevisarCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRevisarCaja.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnRevisarCaja.Location = new System.Drawing.Point(10, 476);
+            this.btnRevisarCaja.Location = new System.Drawing.Point(10, 183);
             this.btnRevisarCaja.Name = "btnRevisarCaja";
             this.btnRevisarCaja.Size = new System.Drawing.Size(140, 44);
             this.btnRevisarCaja.TabIndex = 0;

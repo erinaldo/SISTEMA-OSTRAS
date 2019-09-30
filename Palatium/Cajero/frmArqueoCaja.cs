@@ -280,6 +280,18 @@ namespace Palatium.Cajero
                         txtCajaInicial.Text = Convert.ToDecimal(dtConsulta.Rows[0]["caja_inicial"].ToString()).ToString("N2");
                         dbCajaInicial = Convert.ToDecimal(dtConsulta.Rows[0]["caja_inicial"].ToString());
                         iIdCierreCajero = Convert.ToInt32(dtConsulta.Rows[0]["id_pos_cierre_cajero"].ToString());
+
+                        if (iIdCierreCajero == Program.iIdPosCierreCajero)
+                        {
+                            BtnGuardar.Visible = true;
+                            btnVerReporte.Visible = false;
+                        }
+
+                        else
+                        {
+                            BtnGuardar.Visible = false;
+                            btnVerReporte.Visible = true;
+                        }
                     }
 
                     else
@@ -287,6 +299,9 @@ namespace Palatium.Cajero
                         txtAhorroManual.Text = "0.00";
                         txtCajaInicial.Text = "0.00";
                         iIdCierreCajero = 0;
+
+                        BtnGuardar.Visible = true;
+                        btnVerReporte.Visible = false;
                     }
                 }
 
@@ -1599,7 +1614,7 @@ namespace Palatium.Cajero
                 {
                     sFecha = Convert.ToDateTime(calendario.txtFecha.Text).ToString("yyyy/MM/dd");
                     lblFechaCaja.Text = sFecha;
-                    iJornada = Program.iJornadaRecuperada;
+                    iJornada = Program.iJornadaRecuperada;                    
                     consultarEstadoCaja();
                     cargarValores();
                 }

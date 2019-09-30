@@ -19,6 +19,7 @@ namespace Palatium.ReportesTextBox
 
         Clases.ClaseCrearImpresion imprimir = new Clases.ClaseCrearImpresion();
         Clases.ClaseReportes reporte = new Clases.ClaseReportes();
+        Clases.ClaseReportesAdicionales reportes_2 = new Clases.ClaseReportesAdicionales();
 
         string sSql;
         string sCodigo;
@@ -252,6 +253,11 @@ namespace Palatium.ReportesTextBox
                 else if (sCodigo_P == "11")
                 {
                     sTexto = reporte.contarMonedas(iIdPosCierreCajero, iIdLocalidad, iIdJornada, dbCajaInicial, dbCajaFinal);
+                }
+
+                else if (sCodigo_P == "12")
+                {
+                    sTexto = reportes_2.crearReporte(sFecha, iIdLocalidad, iIdJornada, iIdPosCierreCajero);
                 }
 
 

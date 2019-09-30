@@ -38,6 +38,8 @@ namespace Palatium.Productos
         int iMenuPos;
         int iOtros;
         int iManejaAlmuerzos;
+        int iDetallarPorOrigen;
+        int iDetalleIndependiente;
 
         string sEstado;
         string sCodigoSeparado;
@@ -66,6 +68,8 @@ namespace Palatium.Productos
             dgvCategoria.Columns[9].Visible = ok;
             dgvCategoria.Columns[11].Visible = ok;
             dgvCategoria.Columns[12].Visible = ok;
+            dgvCategoria.Columns[13].Visible = ok;
+            dgvCategoria.Columns[14].Visible = ok;
 
             dgvCategoria.Columns[1].Width = 75;
             dgvCategoria.Columns[2].Width = 170;
@@ -89,6 +93,8 @@ namespace Palatium.Productos
             iMenuPos = 0;
             iOtros = 0;
             iManejaAlmuerzos = 0;
+            iDetallarPorOrigen = 0;
+            iDetalleIndependiente = 0;
 
             cmbCompra.SelectedIndex = 0;
             cmbConsumo.SelectedIndex = 0;
@@ -107,6 +113,8 @@ namespace Palatium.Productos
             chkTieneSubCategoria.Checked = false;
             chkMenuPos.Checked = false;
             chkAlmuerzos.Checked = false;
+            chkDetallarOrigen.Checked = false;
+            chkDetalleIndependiente.Checked = false;
             btnEliminar.Enabled = false;
             cmbPadre.Enabled = true;
 
@@ -127,6 +135,8 @@ namespace Palatium.Productos
             iMenuPos = 0;
             iOtros = 0;
             iManejaAlmuerzos = 0;
+            iDetallarPorOrigen = 0;
+            iDetalleIndependiente = 0;
 
             cmbEstado.SelectedIndex = 0;
             LLenarComboPadre();
@@ -147,6 +157,8 @@ namespace Palatium.Productos
             chkMenuPos.Checked = false;
             chkOtros.Checked = false;
             chkAlmuerzos.Checked = false;
+            chkDetallarOrigen.Checked = false;
+            chkDetalleIndependiente.Checked = false;
 
             btnEliminar.Enabled = false;
             cmbPadre.Enabled = true;
@@ -278,7 +290,8 @@ namespace Palatium.Productos
                 sSql += "select P.id_producto, P.codigo as CÓDIGO, NP.nombre as DESCRIPCIÓN," + Environment.NewLine;
                 sSql += "P.modificable as Modificable, P.precio_modificable, P.paga_iva," + Environment.NewLine;
                 sSql += "P.secuencia as SECUENCIA, P.modificador as Modificador, P.subcategoria, P.menu_pos," + Environment.NewLine;
-                sSql += "case P.estado when 'A' then 'ACTIVO' else 'INACTIVO' end ESTADO, P.otros, P.maneja_almuerzos" + Environment.NewLine;
+                sSql += "case P.estado when 'A' then 'ACTIVO' else 'INACTIVO' end ESTADO," + Environment.NewLine;
+                sSql += "P.otros, P.maneja_almuerzos, P.detalle_por_origen, P.detalle_independiente" + Environment.NewLine;
                 sSql += "from cv401_productos P, cv401_nombre_productos NP" + Environment.NewLine;
                 sSql += "where P.id_producto = NP.id_producto" + Environment.NewLine;
                 sSql += "and id_producto_padre in (" + Environment.NewLine;
@@ -290,10 +303,10 @@ namespace Palatium.Productos
 
                 if (op == 1)
                 {
-                    sSql = sSql + "and NP.nombre LIKE '%" + txtBuscarCategoria.Text.Trim() + "%'";
+                    sSql += "and NP.nombre LIKE '%" + txtBuscarCategoria.Text.Trim() + "%'";
                 }
 
-                sSql = sSql + "order by P.id_producto";
+                sSql += "order by P.id_producto";
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -396,13 +409,14 @@ namespace Palatium.Productos
                 sSql += "idempresa, codigo, id_producto_padre, estado, nivel, modificable," + Environment.NewLine;
                 sSql += "precio_modificable, paga_iva, secuencia, modificador, subcategoria," + Environment.NewLine;
                 sSql += "ultimo_nivel, otros, fecha_ingreso, usuario_ingreso, terminal_ingreso," + Environment.NewLine;
-                sSql += "menu_pos, maneja_almuerzos)" + Environment.NewLine;
+                sSql += "menu_pos, maneja_almuerzos, detalle_por_origen, detalle_independiente)" + Environment.NewLine;
                 sSql += "values (" + Environment.NewLine;
                 sSql += Convert.ToInt32(cmbEmpresa.SelectedValue) + ", '" + sValor + "', " + idPadre + ", 'A'," + Environment.NewLine;
                 sSql += iNivel + ", " + iModificable + ", " + iPrecioModificable + ", " + iPagaIva + "," + Environment.NewLine;
                 sSql += "'" + txtSecuencia.Text.Trim() + "', " + iModificador + ", " + iTieneSubCategoria + "," + Environment.NewLine;
                 sSql += iUltimo + ", " + iOtros + ", GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                sSql += "'" + Program.sDatosMaximo[1] + "', " + iMenuPos + ", " + iManejaAlmuerzos + ")";
+                sSql += "'" + Program.sDatosMaximo[1] + "', " + iMenuPos + ", " + iManejaAlmuerzos + ", " + Environment.NewLine;
+                sSql += iDetallarPorOrigen + ", " + iDetalleIndependiente + ")";
 
                 //sisque no me ejuta el query 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
@@ -530,7 +544,9 @@ namespace Palatium.Productos
                 sSql += "precio_modificable = " + iPrecioModificable + "," + Environment.NewLine;
                 sSql += "otros = " + iOtros + "," + Environment.NewLine;
                 sSql += "menu_pos = " + iMenuPos + "," + Environment.NewLine;
-                sSql += "maneja_almuerzos = " + iManejaAlmuerzos + Environment.NewLine;
+                sSql += "maneja_almuerzos = " + iManejaAlmuerzos + "," + Environment.NewLine;
+                sSql += "detalle_por_origen = " + iDetallarPorOrigen + "," + Environment.NewLine;
+                sSql += "detalle_independiente = " + iDetalleIndependiente + Environment.NewLine;
                 sSql += "where id_producto = " + iIdCategoria;
 
                 //SI NO SE EJECUTA LA INSTRUCCION SALTA A REVERSA 
@@ -800,6 +816,8 @@ namespace Palatium.Productos
                     chkTieneModifcador.Enabled = false;
                     chkOtros.Enabled = false;
                     chkAlmuerzos.Enabled = false;
+                    chkDetallarOrigen.Enabled = false;
+                    chkDetalleIndependiente.Enabled = false;
                 }
 
                 else
@@ -808,6 +826,8 @@ namespace Palatium.Productos
                     chkTieneModifcador.Enabled = true;
                     chkOtros.Enabled = true;
                     chkAlmuerzos.Enabled = true;
+                    chkDetallarOrigen.Enabled = true;
+                    chkDetalleIndependiente.Enabled = true;
                 }
 
                 txtCodigoCategoria.Focus();
@@ -891,6 +911,16 @@ namespace Palatium.Productos
                         iManejaAlmuerzos = 1;
                     else
                         iManejaAlmuerzos = 0;
+
+                    if (chkDetallarOrigen.Checked == true)
+                        iDetallarPorOrigen = 1;
+                    else
+                        iDetallarPorOrigen = 0;
+
+                    if (chkDetalleIndependiente.Checked == true)
+                        iDetalleIndependiente = 1;
+                    else
+                        iDetalleIndependiente = 0;
 
                     if (cmbEstado.Text == "ACTIVO")
                     {
@@ -1030,12 +1060,34 @@ namespace Palatium.Productos
                 chkAlmuerzos.Checked = false;
             }
 
+            if (dgvCategoria.CurrentRow.Cells[13].Value.ToString() == "1")
+            {
+                chkDetallarOrigen.Checked = true;
+            }
+
+            else
+            {
+                chkDetallarOrigen.Checked = false;
+            }
+
+            if (dgvCategoria.CurrentRow.Cells[14].Value.ToString() == "1")
+            {
+                chkDetalleIndependiente.Checked = true;
+            }
+
+            else
+            {
+                chkDetalleIndependiente.Checked = false;
+            }
+
             if (cmbPadre.SelectedValue.ToString() == "1")
             {
                 chkMenuPos.Enabled = false;
                 chkTieneModifcador.Enabled = false;
                 chkOtros.Enabled = false;
                 chkAlmuerzos.Enabled = false;
+                chkDetallarOrigen.Enabled = false;
+                chkDetalleIndependiente.Enabled = false;
             }
 
             else
@@ -1044,6 +1096,8 @@ namespace Palatium.Productos
                 chkTieneModifcador.Enabled = true;
                 chkOtros.Enabled = true;
                 chkAlmuerzos.Enabled = true;
+                chkDetallarOrigen.Enabled = true;
+                chkDetalleIndependiente.Enabled = true;
             }
 
             sSql = "";
@@ -1108,6 +1162,26 @@ namespace Palatium.Productos
         private void txtCodigoCategoria_KeyPress(object sender, KeyPressEventArgs e)
         {
             caracter.soloNumeros(e);
+        }
+
+        private void chkDetalleIndependiente_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkDetallarOrigen.Checked == true)
+            {
+                chkDetallarOrigen.CheckedChanged -= new EventHandler(chkDetallarOrigen_CheckedChanged);
+                chkDetallarOrigen.Checked = false;
+                chkDetallarOrigen.CheckedChanged += new EventHandler(chkDetallarOrigen_CheckedChanged);
+            }
+        }
+
+        private void chkDetallarOrigen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkDetalleIndependiente.Checked == true)
+            {
+                chkDetalleIndependiente.CheckedChanged -= new EventHandler(chkDetalleIndependiente_CheckedChanged);
+                chkDetalleIndependiente.Checked = false;
+                chkDetalleIndependiente.CheckedChanged += new EventHandler(chkDetalleIndependiente_CheckedChanged);
+            }
         }
 
     }
