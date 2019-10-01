@@ -468,5 +468,37 @@ namespace Palatium
                 this.DialogResult = DialogResult.OK;
             }
         }
+
+        private void rdbDatafast_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbDatafast.Checked == true)
+            {
+                rdbMedianet.Checked = false;
+            }
+        }
+
+        private void rdbMedianet_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbMedianet.Checked == true)
+            {
+                rdbDatafast.Checked = false;
+            }
+        }
+
+        private void rdbCredito_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbCredito.Checked == true)
+            {
+                rdbDebito.Checked = false;
+            }
+        }
+
+        private void rdbDebito_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbDebito.Checked == true)
+            {
+                rdbCredito.Checked = false;
+            }
+        }
     }
 }

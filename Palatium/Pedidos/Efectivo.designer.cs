@@ -57,6 +57,16 @@
             this.btnValorSugerido = new System.Windows.Forms.Button();
             this.btn20dolar = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.rdbDatafast = new System.Windows.Forms.RadioButton();
+            this.rdbMedianet = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.rdbDebito = new System.Windows.Forms.RadioButton();
+            this.rdbCredito = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtNumeroLote = new System.Windows.Forms.TextBox();
+            this.txtPropina = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -471,13 +481,141 @@
             this.btn20dolar.UseVisualStyleBackColor = false;
             this.btn20dolar.Click += new System.EventHandler(this.btn20dolar_Click);
             // 
+            // rdbDatafast
+            // 
+            this.rdbDatafast.AutoSize = true;
+            this.rdbDatafast.Checked = true;
+            this.rdbDatafast.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbDatafast.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rdbDatafast.Location = new System.Drawing.Point(250, 348);
+            this.rdbDatafast.Name = "rdbDatafast";
+            this.rdbDatafast.Size = new System.Drawing.Size(107, 22);
+            this.rdbDatafast.TabIndex = 78;
+            this.rdbDatafast.TabStop = true;
+            this.rdbDatafast.Text = "DATAFAST";
+            this.rdbDatafast.UseVisualStyleBackColor = true;
+            this.rdbDatafast.CheckedChanged += new System.EventHandler(this.rdbDatafast_CheckedChanged);
+            // 
+            // rdbMedianet
+            // 
+            this.rdbMedianet.AutoSize = true;
+            this.rdbMedianet.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbMedianet.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rdbMedianet.Location = new System.Drawing.Point(375, 348);
+            this.rdbMedianet.Name = "rdbMedianet";
+            this.rdbMedianet.Size = new System.Drawing.Size(110, 22);
+            this.rdbMedianet.TabIndex = 79;
+            this.rdbMedianet.Text = "MEDIANET";
+            this.rdbMedianet.UseVisualStyleBackColor = true;
+            this.rdbMedianet.CheckedChanged += new System.EventHandler(this.rdbMedianet_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.Location = new System.Drawing.Point(12, 350);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(199, 18);
+            this.label1.TabIndex = 80;
+            this.label1.Text = "OPERADOR DE TARJETA";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(12, 368);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(146, 18);
+            this.label2.TabIndex = 83;
+            this.label2.Text = "TIPO DE TARJETA";
+            // 
+            // rdbDebito
+            // 
+            this.rdbDebito.AutoSize = true;
+            this.rdbDebito.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbDebito.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rdbDebito.Location = new System.Drawing.Point(375, 366);
+            this.rdbDebito.Name = "rdbDebito";
+            this.rdbDebito.Size = new System.Drawing.Size(86, 22);
+            this.rdbDebito.TabIndex = 82;
+            this.rdbDebito.Text = "DÉBITO";
+            this.rdbDebito.UseVisualStyleBackColor = true;
+            this.rdbDebito.CheckedChanged += new System.EventHandler(this.rdbDebito_CheckedChanged);
+            // 
+            // rdbCredito
+            // 
+            this.rdbCredito.AutoSize = true;
+            this.rdbCredito.Checked = true;
+            this.rdbCredito.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbCredito.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rdbCredito.Location = new System.Drawing.Point(250, 366);
+            this.rdbCredito.Name = "rdbCredito";
+            this.rdbCredito.Size = new System.Drawing.Size(98, 22);
+            this.rdbCredito.TabIndex = 81;
+            this.rdbCredito.TabStop = true;
+            this.rdbCredito.Text = "CRÉDITO";
+            this.rdbCredito.UseVisualStyleBackColor = true;
+            this.rdbCredito.CheckedChanged += new System.EventHandler(this.rdbCredito_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label3.Location = new System.Drawing.Point(12, 403);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 18);
+            this.label3.TabIndex = 84;
+            this.label3.Text = "No. LOTE:";
+            // 
+            // txtNumeroLote
+            // 
+            this.txtNumeroLote.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold);
+            this.txtNumeroLote.Location = new System.Drawing.Point(100, 400);
+            this.txtNumeroLote.Name = "txtNumeroLote";
+            this.txtNumeroLote.Size = new System.Drawing.Size(139, 25);
+            this.txtNumeroLote.TabIndex = 85;
+            // 
+            // txtPropina
+            // 
+            this.txtPropina.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold);
+            this.txtPropina.Location = new System.Drawing.Point(420, 400);
+            this.txtPropina.Name = "txtPropina";
+            this.txtPropina.Size = new System.Drawing.Size(79, 25);
+            this.txtPropina.TabIndex = 87;
+            this.txtPropina.Text = "0";
+            this.txtPropina.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Maiandra GD", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(328, 403);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(86, 18);
+            this.label4.TabIndex = 86;
+            this.label4.Text = "PROPINA:";
+            // 
             // Efectivo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Teal;
-            this.ClientSize = new System.Drawing.Size(515, 343);
+            this.ClientSize = new System.Drawing.Size(515, 433);
+            this.Controls.Add(this.txtPropina);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtNumeroLote);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.rdbDebito);
+            this.Controls.Add(this.rdbCredito);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.rdbMedianet);
+            this.Controls.Add(this.rdbDatafast);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -494,6 +632,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -527,5 +666,15 @@
         private System.Windows.Forms.Button btn2dolar;
         private System.Windows.Forms.Button btn5dolar;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.RadioButton rdbDatafast;
+        private System.Windows.Forms.RadioButton rdbMedianet;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton rdbDebito;
+        private System.Windows.Forms.RadioButton rdbCredito;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtNumeroLote;
+        private System.Windows.Forms.TextBox txtPropina;
+        private System.Windows.Forms.Label label4;
     }
 }

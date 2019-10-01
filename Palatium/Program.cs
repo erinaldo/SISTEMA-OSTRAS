@@ -112,8 +112,8 @@ namespace Palatium
                     }
 
                     //Application.Run(new Cajero.frmRecuperarDinero());
-                    //Application.Run(new frmVerMenu());
-                    Application.Run(new Inicio.frmMenuTab());
+                    Application.Run(new frmVerMenu());
+                    //Application.Run(new Inicio.frmMenuTab());
                 }
 
                 else
