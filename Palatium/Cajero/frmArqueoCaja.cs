@@ -1638,5 +1638,11 @@ namespace Palatium.Cajero
             ReportesTextBox.frmReporteCierreCaja cierre = new ReportesTextBox.frmReporteCierreCaja(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), iJornada);
             cierre.ShowDialog();
         }
+
+        private void btnVistaPreviaCierre_Click(object sender, EventArgs e)
+        {
+            Cajero.frmVistaPreviaCierre vista = new frmVistaPreviaCierre(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), iJornada);
+            vista.ShowDialog();
+        }
     }
 }

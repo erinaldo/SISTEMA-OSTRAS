@@ -46,6 +46,7 @@ namespace Palatium.Pedidos
         string sPuntoEmision;
         string sClaveAcceso;
         string sCorreoElectronicoCF;
+        string sLoteRecuperado;
 
         long iMaximo;
 
@@ -98,6 +99,8 @@ namespace Palatium.Pedidos
         int iIdFormaPago_1;
         int iIdFormaPago_2;
         int iIdFormaPago_3;
+        int iConciliacion;
+        int iBanderaInsertarLote;
 
         Decimal dTotal;
         Decimal dSubtotal;
@@ -134,7 +137,7 @@ namespace Palatium.Pedidos
             try
             {
                 sSql = "";
-                sSql += "select FC.id_pos_tipo_forma_cobro, FC.codigo, FC.descripcion," + Environment.NewLine;
+                sSql += "select FC.id_pos_tipo_forma_cobro, MP.codigo, FC.descripcion," + Environment.NewLine;
                 sSql += "isnull(FC.imagen, '') imagen, MP.id_sri_forma_pago" + Environment.NewLine;
                 sSql += "from pos_tipo_forma_cobro FC INNER JOIN" + Environment.NewLine;
                 sSql += "pos_metodo_pago MP ON MP.id_pos_metodo_pago = FC.id_pos_metodo_pago" + Environment.NewLine;
@@ -274,14 +277,18 @@ namespace Palatium.Pedidos
 
             else
             {
-                Efectivo efectivo = new Efectivo(bpagar.Tag.ToString(), dgvDetalleDeuda.Rows[1].Cells[1].Value.ToString(), "", bpagar.Text.ToString());
+                Efectivo efectivo = new Efectivo(bpagar.Tag.ToString(), dgvDetalleDeuda.Rows[1].Cells[1].Value.ToString(), "", bpagar.Text.ToString(), bpagar.AccessibleName);
                 efectivo.ShowDialog();
 
                 if (efectivo.DialogResult == DialogResult.OK)
                 {
                     dbValorGrid = efectivo.dbValorGrid;
                     dbValorRecuperado = efectivo.dbValorIngresado;
+                    dbPropina = efectivo.dbValorPropina;
+                    sNumeroFactura = efectivo.sNumeroLote;
+                    iConciliacion = efectivo.iConciliacion;
                     dgvPagos.Rows.Add(efectivo.sIdPago, efectivo.sNombrePago, dbValorGrid.ToString("N2"), bpagar.AccessibleDescription);
+                    dgvDetalleDeuda.Rows[3].Cells[1].Value = dbPropina.ToString("N2");
                     dgvPagos.ClearSelection();
                     efectivo.Close();
                     recalcularValores();
@@ -1013,6 +1020,52 @@ namespace Palatium.Pedidos
                 catchMensaje.LblMensaje.Text = ex.ToString();
                 catchMensaje.ShowDialog();
                 return false;
+            }
+        }
+
+        //FUNCION PARA EXTRAER EL NUMERO DE LOTE
+        private void numeroLote()
+        {
+            try
+            {
+                sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
+
+                sSql = "";
+                sSql += "select lote" + Environment.NewLine;
+                sSql += "from pos_numero_lote" + Environment.NewLine;
+                sSql += "where id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and estado_lote = 'Abierta'" + Environment.NewLine;
+                sSql += "and fecha_apertura = '" + sFecha + "'" + Environment.NewLine;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                if (dtConsulta.Rows.Count == 0)
+                {
+                    sLoteRecuperado = "";
+                    iBanderaInsertarLote = 1;
+                }
+
+                else
+                {
+                    sLoteRecuperado = dtConsulta.Rows[0]["lote"].ToString().Trim();
+                    iBanderaInsertarLote = 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.Message;
+                catchMensaje.ShowDialog();
             }
         }
 

@@ -16,14 +16,23 @@ namespace Palatium
         VentanasMensajes.frmMensajeOK ok = new VentanasMensajes.frmMensajeOK();
         VentanasMensajes.frmMensajeCatch catchMensaje = new VentanasMensajes.frmMensajeCatch();
 
+        Clases.ClaseValidarCaracteres caracter = new Clases.ClaseValidarCaracteres();
+
         string sSql;        
         string saldo, total;
+        string sCodigo;
+        string sFecha;
+        string sLoteRecuperado;
+        string sNumeroLoteRecibir;
         public string sNombrePago;
         public string sIdPago;
+        public string sNumeroLote;
 
         float suma = 0.00f;
 
-        int id_pago;        
+        int id_pago;
+        int iBanderaInsertarLote;
+        public int iConciliacion;
 
         DataTable dtConsulta;   
 
@@ -31,13 +40,15 @@ namespace Palatium
         
         public Decimal dbValorGrid;
         public Decimal dbValorIngresado;
+        public Decimal dbValorPropina;
 
-        public Efectivo(string sIdPago_P, string saldo, string total, string nombre_pago)
+        public Efectivo(string sIdPago_P, string saldo, string total, string nombre_pago, string sCodigo_P)
         {
             this.sIdPago = sIdPago_P;
             this.saldo = string.Format("{0:0.00}", saldo);
             this.total = total;
             this.sNombrePago = nombre_pago;
+            this.sCodigo = sCodigo_P;
             InitializeComponent();
             btnValorSugerido.Text = string.Format("{0:0.00}", this.saldo);
         }
@@ -121,59 +132,6 @@ namespace Palatium
             return resultadox;
         }
 
-        private void abrirPropina()
-        {
-            //try
-            //{
-            //    PagoTarjetas efe = Owner as PagoTarjetas;
-            //    sSql = "";
-            //    sSql += "select lee_propina" + Environment.NewLine;
-            //    sSql += "from pos_tipo_forma_cobro" + Environment.NewLine;
-            //    sSql += "where id_pos_tipo_forma_cobro = " + Convert.ToInt32(origen) + Environment.NewLine;
-            //    sSql += "and estado = 'A'";
-
-            //    dtConsulta = new DataTable();
-            //    dtConsulta.Clear();
-
-            //    bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-            //    if (bRespuesta == true)
-            //    {
-            //        if (dtConsulta.Rows[0].ItemArray[0].ToString() == "1")
-            //        {
-            //            //ABRIR EL FORMULARIO DE LA PROPINA
-            //            Propina p = new Propina();
-            //            p.ShowDialog();
-
-            //            if (p.DialogResult == DialogResult.OK)
-            //            {
-            //                efe.lblPropina.Text = Program.dPropinas.ToString("N2");
-            //                this.Close();
-            //            }
-            //        }
-
-            //        else
-            //        {
-            //            //CERRAR EL FORMULARIO
-            //            this.DialogResult = DialogResult.OK;
-            //            this.Close();
-            //        }
-            //    }
-
-            //    else
-            //    {
-            //        ok.LblMensaje.Text = "Ocurrió un problema al realizar la transacción.";
-            //        ok.ShowDialog();
-            //    }
-            //}
-
-            //catch (Exception ex)
-            //{
-            //    catchMensaje.LblMensaje.Text = ex.ToString();
-            //    catchMensaje.ShowDialog();
-            //}
-        }
-
         //FUNCION PARA CONCATENAR
         private void concatenarValores(string sValor)
         {
@@ -225,26 +183,60 @@ namespace Palatium
         fin: { }
         }
 
+        //FUNCION PARA EXTRAER EL NUMERO DE LOTE
+        private void numeroLote(string sCodigo_P)
+        {
+            try
+            {
+                sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
+
+                sSql = "";
+                sSql += "select NL.lote" + Environment.NewLine;
+                sSql += "from pos_numero_lote NL INNER JOIN" + Environment.NewLine;
+                sSql += "pos_operador_tarjeta OP ON OP.id_pos_operador_tarjeta = NL.id_pos_operador_tarjeta" + Environment.NewLine;
+                sSql += "and NL.estado = 'A'" + Environment.NewLine;
+                sSql += "and OP.estado = 'A'" + Environment.NewLine;
+                sSql += "where NL.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and NL.estado_lote = 'Abierta'" + Environment.NewLine;
+                sSql += "and NL.fecha_apertura = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and OP.codigo = '" + sCodigo + "'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                if (dtConsulta.Rows.Count == 0)
+                {
+                    sLoteRecuperado = "";
+                    txtNumeroLote.Text = sLoteRecuperado;
+                    iBanderaInsertarLote = 1;
+                }
+
+                else
+                {
+                    sLoteRecuperado = dtConsulta.Rows[0]["lote"].ToString().Trim();
+                    txtNumeroLote.Text = sLoteRecuperado;
+                    iBanderaInsertarLote = 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.Message;
+                catchMensaje.ShowDialog();
+            }
+        }
+
         #endregion
 
-        private void button13_Click(object sender, EventArgs e)
-        {
-            txt_valor.Text = string.Format("{0:0.00}", btnValorSugerido.Text);
-
-            if (Convert.ToDouble(txt_valor.Text) <= Convert.ToDouble(btnValorSugerido.Text))
-            {
-                dbValorGrid = Convert.ToDecimal(txt_valor.Text);
-            }
-
-            else
-            {
-                dbValorGrid = Convert.ToDecimal(btnValorSugerido.Text);
-            }
-
-            dbValorIngresado = Convert.ToDecimal(txt_valor.Text);
-            abrirPropina();
-            this.DialogResult = DialogResult.OK;
-        }
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -270,6 +262,19 @@ namespace Palatium
         private void Efectivo_Load(object sender, EventArgs e)
         {
             cargarPrecios();
+
+            if ((sCodigo == "TC") || (sCodigo == "TD"))
+            {
+                iConciliacion = 1;
+                this.Size = new Size(535, 490);
+                numeroLote("01");
+            }
+
+            else
+            {
+                iConciliacion = 0;
+                this.Size = new Size(535, 383);
+            }
         }
 
         private void btn1dolar_Click(object sender, EventArgs e)
@@ -464,7 +469,8 @@ namespace Palatium
                 }
 
                 dbValorIngresado = Convert.ToDecimal(txt_valor.Text);
-                abrirPropina();
+                dbValorPropina = Convert.ToDecimal(txtPropina.Text.Trim());
+                sNumeroLote = txtNumeroLote.Text.Trim();
                 this.DialogResult = DialogResult.OK;
             }
         }
@@ -473,7 +479,15 @@ namespace Palatium
         {
             if (rdbDatafast.Checked == true)
             {
+                rdbMedianet.CheckedChanged -= new EventHandler(rdbMedianet_CheckedChanged);
+                rdbCredito.CheckedChanged -= new EventHandler(rdbCredito_CheckedChanged);
+                rdbDebito.CheckedChanged -= new EventHandler(rdbDebito_CheckedChanged);
                 rdbMedianet.Checked = false;
+                rdbMedianet.CheckedChanged += new EventHandler(rdbMedianet_CheckedChanged);
+                rdbCredito.CheckedChanged += new EventHandler(rdbCredito_CheckedChanged);
+                rdbDebito.CheckedChanged += new EventHandler(rdbDebito_CheckedChanged);
+
+                numeroLote("01");
             }
         }
 
@@ -481,7 +495,15 @@ namespace Palatium
         {
             if (rdbMedianet.Checked == true)
             {
+                rdbDatafast.CheckedChanged -= new EventHandler(rdbDatafast_CheckedChanged);
+                rdbCredito.CheckedChanged -= new EventHandler(rdbCredito_CheckedChanged);
+                rdbDebito.CheckedChanged -= new EventHandler(rdbDebito_CheckedChanged);
                 rdbDatafast.Checked = false;
+                rdbDatafast.CheckedChanged += new EventHandler(rdbDatafast_CheckedChanged);
+                rdbCredito.CheckedChanged += new EventHandler(rdbCredito_CheckedChanged);
+                rdbDebito.CheckedChanged += new EventHandler(rdbDebito_CheckedChanged);
+
+                numeroLote("02");
             }
         }
 
@@ -489,7 +511,13 @@ namespace Palatium
         {
             if (rdbCredito.Checked == true)
             {
+                rdbDebito.CheckedChanged -= new EventHandler(rdbDebito_CheckedChanged);
+                rdbDatafast.CheckedChanged -= new EventHandler(rdbDatafast_CheckedChanged);
+                rdbMedianet.CheckedChanged -= new EventHandler(rdbMedianet_CheckedChanged);
                 rdbDebito.Checked = false;
+                rdbDebito.CheckedChanged += new EventHandler(rdbDebito_CheckedChanged);
+                rdbDatafast.CheckedChanged += new EventHandler(rdbDatafast_CheckedChanged);
+                rdbMedianet.CheckedChanged += new EventHandler(rdbMedianet_CheckedChanged);
             }
         }
 
@@ -497,8 +525,39 @@ namespace Palatium
         {
             if (rdbDebito.Checked == true)
             {
+                rdbCredito.CheckedChanged -= new EventHandler(rdbCredito_CheckedChanged);
+                rdbDatafast.CheckedChanged -= new EventHandler(rdbDatafast_CheckedChanged);
+                rdbMedianet.CheckedChanged -= new EventHandler(rdbMedianet_CheckedChanged);
                 rdbCredito.Checked = false;
+                rdbCredito.CheckedChanged += new EventHandler(rdbCredito_CheckedChanged);
+                rdbDatafast.CheckedChanged += new EventHandler(rdbDatafast_CheckedChanged);
+                rdbMedianet.CheckedChanged += new EventHandler(rdbMedianet_CheckedChanged);
             }
+        }
+
+        private void txtPropina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            caracter.soloDecimales(sender, e, 2);
+        }
+
+        private void btnValorSugerido_Click(object sender, EventArgs e)
+        {
+            txt_valor.Text = string.Format("{0:0.00}", btnValorSugerido.Text);
+
+            if (Convert.ToDouble(txt_valor.Text) <= Convert.ToDouble(btnValorSugerido.Text))
+            {
+                dbValorGrid = Convert.ToDecimal(txt_valor.Text);
+            }
+
+            else
+            {
+                dbValorGrid = Convert.ToDecimal(btnValorSugerido.Text);
+            }
+
+            dbValorIngresado = Convert.ToDecimal(txt_valor.Text);
+            dbValorPropina = Convert.ToDecimal(txtPropina.Text.Trim());
+            sNumeroLote = txtNumeroLote.Text.Trim();
+            this.DialogResult = DialogResult.OK;
         }
     }
 }

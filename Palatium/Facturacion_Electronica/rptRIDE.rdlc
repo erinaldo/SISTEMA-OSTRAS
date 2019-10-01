@@ -13,7 +13,7 @@
                   <TextRun>
                     <Value>RUC:</Value>
                     <Style>
-                      <FontSize>15pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -45,7 +45,7 @@
                   <TextRun>
                     <Value>FACTURA:</Value>
                     <Style>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -144,7 +144,7 @@
                   <TextRun>
                     <Value>FECHA Y HORA DE AUTORIZACION</Value>
                     <Style>
-                      <FontSize>11pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -177,7 +177,7 @@
                   <TextRun>
                     <Value>AMBIENTE:</Value>
                     <Style>
-                      <FontSize>12pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -210,7 +210,7 @@
                   <TextRun>
                     <Value>EMISIÓN:</Value>
                     <Style>
-                      <FontSize>12pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -277,7 +277,7 @@
                   <TextRun>
                     <Value>=First(Fields!numeroruc.Value, "dsRide")</Value>
                     <Style>
-                      <FontSize>15pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -2078,6 +2078,9 @@
                   <TextRun>
                     <Value>=First(Fields!razonsocial.Value, "dsRide")</Value>
                     <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -2086,9 +2089,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>razonsocial</rd:DefaultName>
-            <Top>0.74401cm</Top>
+            <Top>0.45297cm</Top>
             <Left>0.29924cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.89104cm</Height>
             <Width>8.95583cm</Width>
             <ZIndex>4</ZIndex>
             <Style>

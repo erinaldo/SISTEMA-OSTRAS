@@ -1680,7 +1680,7 @@ namespace Palatium.Comida_Rapida
 
             else
             {
-                Efectivo efectivo = new Efectivo("0", dTotalDebido.ToString("N2"), "", "EFECTIVO");
+                Efectivo efectivo = new Efectivo("0", dTotalDebido.ToString("N2"), "", "EFECTIVO", "EF");
                 efectivo.ShowDialog();
 
                 if (efectivo.DialogResult == DialogResult.OK)

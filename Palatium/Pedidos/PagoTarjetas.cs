@@ -2746,7 +2746,7 @@ namespace Palatium
 
             else
             {
-                Efectivo formEfectivo = new Efectivo(bpagar.Tag.ToString(), lblSaldo.Text, total, bpagar.Text.ToString());
+                Efectivo formEfectivo = new Efectivo(bpagar.Tag.ToString(), lblSaldo.Text, total, bpagar.Text.ToString(), "EF");    //PARAMETROS ENVIADOS SOLO PARA QUITAR EL ERROR DE COMPILACION
                 AddOwnedForm(formEfectivo);
                 formEfectivo.ShowDialog();
 

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbLocalidades = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -46,11 +46,13 @@
             this.txtCajaInicial = new System.Windows.Forms.TextBox();
             this.btnSalidas = new System.Windows.Forms.LinkLabel();
             this.txtCobradoTransferencia = new System.Windows.Forms.TextBox();
+            this.btnListarMateriaPrima = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCuentasPorCobrar = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnEntradas = new System.Windows.Forms.LinkLabel();
             this.label13 = new System.Windows.Forms.Label();
+            this.btnReimpresionTickets = new System.Windows.Forms.Button();
             this.dgvTarjetas = new System.Windows.Forms.DataGridView();
             this.chkSelecciontarjeta = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.txtFormaPagoGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,18 +103,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnVistaPreviaCierre = new System.Windows.Forms.Button();
             this.btnVerReporte = new System.Windows.Forms.Button();
             this.btnAbrirCaja = new System.Windows.Forms.Button();
             this.btnListarVentas = new System.Windows.Forms.Button();
             this.btnDetallarVentas = new System.Windows.Forms.Button();
             this.btnVentasMesero = new System.Windows.Forms.Button();
             this.BtnGuardar = new System.Windows.Forms.Button();
-            this.btnListarMateriaPrima = new System.Windows.Forms.Button();
             this.btnEnviarInforme = new System.Windows.Forms.Button();
             this.btnContarDinero = new System.Windows.Forms.Button();
             this.BtnVistaArqueo = new System.Windows.Forms.Button();
             this.btnReporteVendido = new System.Windows.Forms.Button();
-            this.btnReimpresionTickets = new System.Windows.Forms.Button();
             this.btnRevisarCaja = new System.Windows.Forms.Button();
             this.TimerHora = new System.Windows.Forms.Timer(this.components);
             this.ttMensaje = new System.Windows.Forms.ToolTip(this.components);
@@ -213,6 +214,7 @@
             this.groupBox2.Controls.Add(this.txtCajaInicial);
             this.groupBox2.Controls.Add(this.btnSalidas);
             this.groupBox2.Controls.Add(this.txtCobradoTransferencia);
+            this.groupBox2.Controls.Add(this.btnListarMateriaPrima);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.txtCuentasPorCobrar);
             this.groupBox2.Controls.Add(this.label11);
@@ -322,6 +324,24 @@
             this.txtCobradoTransferencia.Text = "0.00";
             this.txtCobradoTransferencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // btnListarMateriaPrima
+            // 
+            this.btnListarMateriaPrima.BackColor = System.Drawing.Color.White;
+            this.btnListarMateriaPrima.FlatAppearance.BorderSize = 2;
+            this.btnListarMateriaPrima.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnListarMateriaPrima.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnListarMateriaPrima.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnListarMateriaPrima.Location = new System.Drawing.Point(225, 262);
+            this.btnListarMateriaPrima.Name = "btnListarMateriaPrima";
+            this.btnListarMateriaPrima.Size = new System.Drawing.Size(140, 44);
+            this.btnListarMateriaPrima.TabIndex = 6;
+            this.btnListarMateriaPrima.Text = "Materia Prima\r\nusada en el día";
+            this.btnListarMateriaPrima.UseVisualStyleBackColor = false;
+            this.btnListarMateriaPrima.Visible = false;
+            this.btnListarMateriaPrima.Click += new System.EventHandler(this.btnListarMateriaPrima_Click);
+            this.btnListarMateriaPrima.MouseEnter += new System.EventHandler(this.btnListarMateriaPrima_MouseEnter);
+            this.btnListarMateriaPrima.MouseLeave += new System.EventHandler(this.btnListarMateriaPrima_MouseLeave);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -381,6 +401,24 @@
             this.label13.TabIndex = 22;
             this.label13.Text = "Total en Cortesías:";
             // 
+            // btnReimpresionTickets
+            // 
+            this.btnReimpresionTickets.BackColor = System.Drawing.Color.White;
+            this.btnReimpresionTickets.FlatAppearance.BorderSize = 2;
+            this.btnReimpresionTickets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReimpresionTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReimpresionTickets.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnReimpresionTickets.Location = new System.Drawing.Point(276, 306);
+            this.btnReimpresionTickets.Name = "btnReimpresionTickets";
+            this.btnReimpresionTickets.Size = new System.Drawing.Size(140, 44);
+            this.btnReimpresionTickets.TabIndex = 1;
+            this.btnReimpresionTickets.Text = "Resumen de Caja\r\nCIerre de Cajero";
+            this.btnReimpresionTickets.UseVisualStyleBackColor = false;
+            this.btnReimpresionTickets.Visible = false;
+            this.btnReimpresionTickets.Click += new System.EventHandler(this.btnReimpresionTickets_Click);
+            this.btnReimpresionTickets.MouseEnter += new System.EventHandler(this.btnReimpresionTickets_MouseEnter);
+            this.btnReimpresionTickets.MouseLeave += new System.EventHandler(this.btnReimpresionTickets_MouseLeave);
+            // 
             // dgvTarjetas
             // 
             this.dgvTarjetas.AllowUserToAddRows = false;
@@ -419,8 +457,8 @@
             // 
             // txtValorPagoGrid
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.txtValorPagoGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.txtValorPagoGrid.Frozen = true;
             this.txtValorPagoGrid.HeaderText = "VALOR";
             this.txtValorPagoGrid.Name = "txtValorPagoGrid";
@@ -677,10 +715,10 @@
             // 
             // dataGridViewCheckBoxColumn1
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.NullValue = false;
-            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.NullValue = false;
+            this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewCheckBoxColumn1.HeaderText = "";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.Width = 50;
@@ -694,8 +732,8 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTextBoxColumn2.HeaderText = "VALOR";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -967,13 +1005,13 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.groupBox4.Controls.Add(this.btnVistaPreviaCierre);
             this.groupBox4.Controls.Add(this.btnVerReporte);
             this.groupBox4.Controls.Add(this.btnAbrirCaja);
             this.groupBox4.Controls.Add(this.btnListarVentas);
             this.groupBox4.Controls.Add(this.btnDetallarVentas);
             this.groupBox4.Controls.Add(this.btnVentasMesero);
             this.groupBox4.Controls.Add(this.BtnGuardar);
-            this.groupBox4.Controls.Add(this.btnListarMateriaPrima);
             this.groupBox4.Controls.Add(this.btnEnviarInforme);
             this.groupBox4.Controls.Add(this.btnContarDinero);
             this.groupBox4.Controls.Add(this.BtnVistaArqueo);
@@ -984,6 +1022,22 @@
             this.groupBox4.Size = new System.Drawing.Size(161, 571);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
+            // 
+            // btnVistaPreviaCierre
+            // 
+            this.btnVistaPreviaCierre.BackColor = System.Drawing.Color.White;
+            this.btnVistaPreviaCierre.FlatAppearance.BorderSize = 2;
+            this.btnVistaPreviaCierre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVistaPreviaCierre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVistaPreviaCierre.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnVistaPreviaCierre.Location = new System.Drawing.Point(10, 476);
+            this.btnVistaPreviaCierre.Name = "btnVistaPreviaCierre";
+            this.btnVistaPreviaCierre.Size = new System.Drawing.Size(140, 44);
+            this.btnVistaPreviaCierre.TabIndex = 40;
+            this.btnVistaPreviaCierre.Text = "Vista Previa del Cierre de Caja";
+            this.ttMensaje.SetToolTip(this.btnVistaPreviaCierre, "Clic aquí para mostrar el reporte de cierre");
+            this.btnVistaPreviaCierre.UseVisualStyleBackColor = false;
+            this.btnVistaPreviaCierre.Click += new System.EventHandler(this.btnVistaPreviaCierre_Click);
             // 
             // btnVerReporte
             // 
@@ -1085,24 +1139,6 @@
             this.BtnGuardar.MouseEnter += new System.EventHandler(this.BtnGuardar_MouseEnter);
             this.BtnGuardar.MouseLeave += new System.EventHandler(this.BtnGuardar_MouseLeave);
             // 
-            // btnListarMateriaPrima
-            // 
-            this.btnListarMateriaPrima.BackColor = System.Drawing.Color.White;
-            this.btnListarMateriaPrima.FlatAppearance.BorderSize = 2;
-            this.btnListarMateriaPrima.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnListarMateriaPrima.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnListarMateriaPrima.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnListarMateriaPrima.Location = new System.Drawing.Point(10, 466);
-            this.btnListarMateriaPrima.Name = "btnListarMateriaPrima";
-            this.btnListarMateriaPrima.Size = new System.Drawing.Size(140, 44);
-            this.btnListarMateriaPrima.TabIndex = 6;
-            this.btnListarMateriaPrima.Text = "Materia Prima\r\nusada en el día";
-            this.btnListarMateriaPrima.UseVisualStyleBackColor = false;
-            this.btnListarMateriaPrima.Visible = false;
-            this.btnListarMateriaPrima.Click += new System.EventHandler(this.btnListarMateriaPrima_Click);
-            this.btnListarMateriaPrima.MouseEnter += new System.EventHandler(this.btnListarMateriaPrima_MouseEnter);
-            this.btnListarMateriaPrima.MouseLeave += new System.EventHandler(this.btnListarMateriaPrima_MouseLeave);
-            // 
             // btnEnviarInforme
             // 
             this.btnEnviarInforme.BackColor = System.Drawing.Color.White;
@@ -1174,24 +1210,6 @@
             this.btnReporteVendido.Click += new System.EventHandler(this.btnReporteVendido_Click);
             this.btnReporteVendido.MouseEnter += new System.EventHandler(this.btnReporteVendido_MouseEnter);
             this.btnReporteVendido.MouseLeave += new System.EventHandler(this.btnReporteVendido_MouseLeave);
-            // 
-            // btnReimpresionTickets
-            // 
-            this.btnReimpresionTickets.BackColor = System.Drawing.Color.White;
-            this.btnReimpresionTickets.FlatAppearance.BorderSize = 2;
-            this.btnReimpresionTickets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReimpresionTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReimpresionTickets.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnReimpresionTickets.Location = new System.Drawing.Point(276, 306);
-            this.btnReimpresionTickets.Name = "btnReimpresionTickets";
-            this.btnReimpresionTickets.Size = new System.Drawing.Size(140, 44);
-            this.btnReimpresionTickets.TabIndex = 1;
-            this.btnReimpresionTickets.Text = "Resumen de Caja\r\nCIerre de Cajero";
-            this.btnReimpresionTickets.UseVisualStyleBackColor = false;
-            this.btnReimpresionTickets.Visible = false;
-            this.btnReimpresionTickets.Click += new System.EventHandler(this.btnReimpresionTickets_Click);
-            this.btnReimpresionTickets.MouseEnter += new System.EventHandler(this.btnReimpresionTickets_MouseEnter);
-            this.btnReimpresionTickets.MouseLeave += new System.EventHandler(this.btnReimpresionTickets_MouseLeave);
             // 
             // btnRevisarCaja
             // 
@@ -1337,5 +1355,6 @@
         private System.Windows.Forms.TextBox txtTarjetasAlmuerzos;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button btnVerReporte;
+        private System.Windows.Forms.Button btnVistaPreviaCierre;
     }
 }
