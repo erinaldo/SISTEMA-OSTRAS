@@ -121,12 +121,14 @@ namespace Palatium
                     VentanasMensajes.frmVerDatosConfig config = new VentanasMensajes.frmVerDatosConfig();
                     config.ShowDialog();
                     MessageBox.Show("No se pudo establecer la conexiòn.");
+                    Application.Exit();
                 }
             }
 
             else
             {
-                MessageBox.Show("No existe el archivo de configuraciòn en la ruta " + path + "\nConsulte con el administrador.");                
+                MessageBox.Show("No existe el archivo de configuraciòn en la ruta " + path + "\nConsulte con el administrador.");
+                Application.Exit();
             }                
         }
 
@@ -508,49 +510,7 @@ namespace Palatium
         public static int NUMERO_MESAS_ANCHO;
         //Constantes Orden
 
-        //ESTA VARIABLE LA REUTILIZAMOS PARA RENOMBRAR LA MESA CUANDO SE LA DIVIDE
-        //========================================================================
-        public static int ORD_NOMBRE_CLIENTE = 11;
-        //========================================================================
         
-        public static int ORD_TELEFONO_CLIENTE = 12;
-        public static int ORD_SECTOR_CLIENTE = 13;
-        public static int ORD_CALLE_PRINCIPAL_CLIENTE = 14;
-        public static int ORD_CALLE_SECUNDARIO_CLIENTE = 15;
-        public static int ORD_CALLE_NUMERO = 16;
-        public static int ORD_REFERENCIA_CLIENTE = 17;
-        public static int ORD_RECARGO = 18;
-        public static int ORD_ID_ORDEN_PADRE = 19;
-        public static int ORD_CIUDAD_CLIENTE = 20;
-        public static int ORD_MAIL_CLIENTE = 21;
-
-        //Constantes Detalle Orden
-        public static int DET_ORDEN_ID_ORDEN = 0;
-        public static int DET_ORDEN_CANTIDAD = 1;
-        public static int DET_ORDEN_NOMBRE_PRODUCTO = 2;
-        public static int DET_ORDEN_VALOR_PRODUCTO = 3;
-        public static int DET_ORDEN_VALOR_TOTAL = 4;
-        public static int DET_ORDEN_ID_DETALLE_ORDEN = 5;
-        public static int DET_ORDEN_ID_PRODUCTO = 6;
-
-        //Constantes Pagos
-        public static int PAGOS_ID_PAGOS = 0;
-        public static int PAGOS_ID_ORDEN = 1;
-        public static int PAGOS_FECHA = 2;
-        public static int PAGOS_TOTAL = 3;
-
-        //Constantes Detalle Pagos
-        public static int DETALLEPAGO_ID = 0;
-        public static int DETALLEPAGO_ID_PAGO = 1;
-        public static int DETALLEPAGO_ORIGEN = 2;
-        public static int DETALLEPAGO_VALOR = 3;
-
-        //Constante del largo del grid en el conteo resumen
-        public static int LARGO_GRID = 4;
-
-        //Constantes Formas Pago
-        public static int FORMASPAGO_ID = 0;
-        public static int FORMASPAGO_DESCRIPCION = 1;
 
         //Variable para controlar el codigo de reabrir Mesas
         public static int contadorDeLasMesas = 1;
@@ -580,14 +540,6 @@ namespace Palatium
 
         //Control De Mesas
         public static Button controlMesa;
-
-        //Datos Domicilio
-        public static string[,] DatosDomicilio = new string[,]{
-                { "1111", "Diaz", "Juan","juan@gmail.com","1873826475","la gasca","234","Alejandro de valdez","La gascaSector","estadio"},
-                { "2222", "Aguilar", "Luis","luis@gmail.com","9483774657","Amaguaña","884","Valdez de Alejandro","La gascaSector","estadio"},
-                { "3333", "Muñoz", "Juan","juan@gmail.com","1873826475","la gasca","234","Alejandro de valdez","La gascaSector","estadio"},
-                { "4444", "Correa", "Luis","luis@gmail.com","9483774657","Amaguaña","884","Valdez de Alejandro","La gascaSector","estadio"}
-            };
 
         //Dirección de Clientes
         public static string cedula;
@@ -627,7 +579,6 @@ namespace Palatium
         public static int iLeerMesero;
         public static int iImprimeOrden;
         public static int iManejaServicio;
-        public static double motorizado = 1.50;
 
         public static double factorPrecio = 1;
 
@@ -646,76 +597,11 @@ namespace Palatium
         public static string nombreMesero;
         #endregion
 
-
-        ///clientes
-        public static string Cli_telefono = "";
-        public static string Cli_cedula = "";
-        public static string Cli_sector = "";
-        public static string Cli_nombre = "";
-        public static string Cli_callePrincipal = "";
-        public static string Cli_secundaria = "";
-        public static string Cli_referencias = "";
-        public static string Cli_numero = "";
-        public static string Cli_apellido = "";
-        public static string Cli_correo = "";
-        public static string Cli_diudad = "";
-
-
         //Control indice detalle pedido
         public static int maximodetallePedido = 0;
         //Control indice detallePagos
         public static int maximodetallePagos = 0;
         //pagos
-
-
-        //=======================================================================
-        //MATRIZ PAGOS CON SUS CONSTANTES
-        public static string[,] pagos = new string[100, 4];
-
-
-
-        //=======================================================================
-        //MATRIZ DETALLE_PAGO CON SUS CONSTANTES
-        public static string[,] detallePago = new string[100, 4];
-        //public int 
-
-
-        //Domicilio (Fernando 10/03/2018)
-        //Valor de movilizacion a domicilio
-        public static string valorMovilizacion = "1.50";
-        public static string domicilio = "";
-        public static string interseccion = "";
-        public static string referencias = "";
-        public static string numero = "";
-        public static string sector = "";
-
-        //Nuevo número de Personas
-
-
-        public static double G_Dbl_total;
-        public static double G_Dbl_abono;
-        public static double G_Dbl_saldo;
-
-        //Areglo para guardar las formas de pago
-        public static string[,] formasPago;
-
-        //bandera
-        //public static int bandera;
-        //public static int ayudante;
-
-
-        //número de Orden
-        public static int nPedido = 0;
-        public static int nOrden = 1000;
-        public static int b = 1;
-        public static int controlPedido = 0;
-        public static int bandera2 = 0;
-
-        //Última Orden
-        public static int ultimaOrden;
-
-        public static int filas = 2, columnas = 10;
-
 
     }
 }

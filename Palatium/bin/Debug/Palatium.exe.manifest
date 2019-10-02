@@ -324,14 +324,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Palatium.exe" size="13433344">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Palatium.exe" size="13449728">
       <assemblyIdentity name="Palatium" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>l77YVKxC+MUbG0SMN2t6C5ZPjn80GVkf4ZgMYoau4/I=</dsig:DigestValue>
+        <dsig:DigestValue>5y/nBGdbRVUQa5D1ONkLVqpintKMpcotSFpmlu0wxvU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

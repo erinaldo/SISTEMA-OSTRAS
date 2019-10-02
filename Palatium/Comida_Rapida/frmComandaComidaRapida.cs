@@ -31,6 +31,7 @@ namespace Palatium.Comida_Rapida
         string sDescripcionFormaPago;
         string sEstablecimiento;
         string sPuntoEmision;
+        string sNumeroLote;
 
         long iMaximo;
 
@@ -82,6 +83,10 @@ namespace Palatium.Comida_Rapida
         int iBanderaEfectivoTarjeta;
         int iBanderaAplicaRecargo;
         int iBanderaExpressTarjeta;
+        int iConciliacion;
+        int iOperadorTarjeta;
+        int iTipoTarjeta;
+        int iBanderaInsertarLote;
 
         Decimal dIVA_P;
         Decimal dPrecioUnitario_P;
@@ -95,6 +100,7 @@ namespace Palatium.Comida_Rapida
         Decimal dbValorGrid;
         Decimal dbValorRecuperado;
         Decimal dbCambio;
+        Decimal dbPropina;
 
         public frmComandaComidaRapida(int iIdPosOrigenOrden_P, int iBanderaExpressTarjeta_P)
         {
@@ -1188,6 +1194,24 @@ namespace Palatium.Comida_Rapida
                 iIdFormaPago_1 = Convert.ToInt32(dtConsulta.Rows[0]["id_forma_pago"].ToString());
                 sDescripcionFormaPago = dtConsulta.Rows[0]["descripcion"].ToString();
 
+                if (iConciliacion == 1)
+                {
+                    int iRespuestaNumeroLote = contarNumeroLote(iOperadorTarjeta);
+
+                    if (iRespuestaNumeroLote == -1)
+                    {
+                        return false;
+                    }
+
+                    if (iRespuestaNumeroLote == 0)
+                    {
+                        if (insertarNumeroLote(sNumeroLote, iOperadorTarjeta) == false)
+                        {
+                            return false;
+                        }
+                    }
+                }
+
                 //INSERTAR EN LA TABLA CV403_DOCUMENTOS_PAGOS
                 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 sSql = "";
@@ -1195,11 +1219,22 @@ namespace Palatium.Comida_Rapida
                 sSql += "id_pago, cg_tipo_documento, numero_documento, fecha_vcto, " + Environment.NewLine;
                 sSql += "cg_moneda, cotizacion, valor, id_pos_tipo_forma_cobro," + Environment.NewLine;
                 sSql += "estado, fecha_ingreso, usuario_ingreso, terminal_ingreso," + Environment.NewLine;
-                sSql += "numero_replica_trigger, numero_control_replica, valor_recibido) " + Environment.NewLine;
+                sSql += "numero_replica_trigger, numero_control_replica, valor_recibido," + Environment.NewLine;
+                sSql += "lote_tarjeta, id_pos_operador_tarjeta, id_pos_tipo_tarjeta)" + Environment.NewLine;
                 sSql += "values(" + Environment.NewLine;
                 sSql += iIdPago + ", " + iCgTipoDocumentoCobro + ", 9999, '" + sFecha + "', " + Environment.NewLine;
                 sSql += Program.iMoneda + ", 1, " + dTotalDebido + ", " + iIdTipoFormaCobro + ", 'A', GETDATE()," + Environment.NewLine;
-                sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 0, 0, " + dbValorRecuperado + ")";
+                sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 0, 0, " + dbValorRecuperado + "," + Environment.NewLine;
+
+                if (iConciliacion == 1)
+                {
+                    sSql += "'" + sNumeroLote + "', " + iOperadorTarjeta + ", " + iTipoTarjeta + ")";
+                }
+
+                else
+                {
+                    sSql += "null, null, null)";
+                }
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
@@ -1536,6 +1571,81 @@ namespace Palatium.Comida_Rapida
             }
         }
 
+        //FUNCION PARA INSERTAR EL NUMERO DE LOTE EN LA TABLA POS_NUMERO_LOTE
+        private bool insertarNumeroLote(string sNumeroLote_P, int iOperadorTarjeta_P)
+        {
+            try
+            {
+                string sFecha_P = Program.sFechaSistema.ToString("yyyy-MM-dd");
+
+                sSql = "";
+                sSql += "insert into pos_numero_lote (" + Environment.NewLine;
+                sSql += "id_localidad, id_pos_jornada, id_pos_operador_tarjeta, lote," + Environment.NewLine;
+                sSql += "fecha_apertura, estado_lote, estado, fecha_ingreso," + Environment.NewLine;
+                sSql += "usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                sSql += "values (" + Environment.NewLine;
+                sSql += Program.iIdLocalidad + ", " + Program.iJORNADA + ", " + iOperadorTarjeta_P + ", ";
+                sSql += "'" + sNumeroLote_P + "', '" + sFecha_P + "', 'Abierta'," + Environment.NewLine;
+                sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+
+                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.Message;
+                catchMensaje.ShowDialog();
+                return false;
+            }
+        }
+
+        //FUNCION PARA CONTAR LOS NUMEROS DE LOTES
+        private int contarNumeroLote(int iOperadorTarjeta_P)
+        {
+            try
+            {
+                string sFecha_P = Program.sFechaSistema.ToString("yyyy-MM-dd");
+
+                sSql = "";
+                sSql += "select count(*) cuenta" + Environment.NewLine;
+                sSql += "from pos_numero_lote" + Environment.NewLine;
+                sSql += "where estado = 'A'" + Environment.NewLine;
+                sSql += "and id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and estado_lote = 'Abierta'" + Environment.NewLine;
+                sSql += "and fecha_apertura = '" + sFecha_P + "'" + Environment.NewLine;
+                sSql += "and id_pos_operador_tarjeta = " + iOperadorTarjeta_P + Environment.NewLine;
+                sSql += "and id_pos_jornada = " + Program.iJORNADA + Environment.NewLine;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return -1;
+                }
+
+                return Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return -1;
+            }
+        }
+
         #endregion
 
         private void frmComandaComidaRapida_Load(object sender, EventArgs e)
@@ -1758,6 +1868,14 @@ namespace Palatium.Comida_Rapida
                     dtRecargos = new DataTable();
                     dtRecargos = cobro.dtValores;
                     iIdTipoFormaCobro = cobro.iIdFormaPago;
+
+                    dbPropina = cobro.dbValorPropina;
+                    sNumeroLote = cobro.sNumeroLote;
+                    iConciliacion = cobro.iConciliacion;
+                    iOperadorTarjeta = cobro.iOperadorTarjeta;
+                    iTipoTarjeta = cobro.iTipoTarjeta;
+                    iBanderaInsertarLote = cobro.iBanderaInsertarLote;
+                    iConciliacion = 1;
                     
                     if (iBanderaAplicaRecargo == 1)
                     {

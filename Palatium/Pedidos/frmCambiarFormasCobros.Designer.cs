@@ -45,15 +45,20 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblTotal = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.pnlFormasCobros = new System.Windows.Forms.Panel();
+            this.btnGrabarPagos = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnRemoverPago = new System.Windows.Forms.Button();
             this.dgvPagos = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fpago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_sri = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlFormasCobros = new System.Windows.Forms.Panel();
-            this.btnGrabarPagos = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnRemoverPago = new System.Windows.Forms.Button();
+            this.conciliacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_operador_tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_tipo_tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numero_lote = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bandera_insertar_lote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleDeuda)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPagos)).BeginInit();
@@ -174,85 +179,6 @@
             this.label3.TabIndex = 22;
             this.label3.Text = "TOTAL:";
             // 
-            // dgvPagos
-            // 
-            this.dgvPagos.AllowUserToAddRows = false;
-            this.dgvPagos.AllowUserToDeleteRows = false;
-            this.dgvPagos.AllowUserToResizeColumns = false;
-            this.dgvPagos.AllowUserToResizeRows = false;
-            this.dgvPagos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvPagos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvPagos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvPagos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dgvPagos.ColumnHeadersHeight = 30;
-            this.dgvPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvPagos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.fpago,
-            this.valor,
-            this.id_sri});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPagos.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvPagos.EnableHeadersVisualStyles = false;
-            this.dgvPagos.GridColor = System.Drawing.SystemColors.ControlLight;
-            this.dgvPagos.Location = new System.Drawing.Point(368, 12);
-            this.dgvPagos.MultiSelect = false;
-            this.dgvPagos.Name = "dgvPagos";
-            this.dgvPagos.ReadOnly = true;
-            this.dgvPagos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvPagos.RowHeadersVisible = false;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPagos.RowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvPagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPagos.Size = new System.Drawing.Size(390, 280);
-            this.dgvPagos.TabIndex = 150;
-            // 
-            // ID
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Maiandra GD", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ID.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ID.FillWeight = 60.9137F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 53;
-            // 
-            // fpago
-            // 
-            this.fpago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Maiandra GD", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fpago.DefaultCellStyle = dataGridViewCellStyle6;
-            this.fpago.FillWeight = 168.8291F;
-            this.fpago.HeaderText = "FORMA DE PAGO";
-            this.fpago.Name = "fpago";
-            this.fpago.ReadOnly = true;
-            // 
-            // valor
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Maiandra GD", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.valor.DefaultCellStyle = dataGridViewCellStyle7;
-            this.valor.FillWeight = 70.25717F;
-            this.valor.HeaderText = "VALOR";
-            this.valor.Name = "valor";
-            this.valor.ReadOnly = true;
-            this.valor.Width = 62;
-            // 
-            // id_sri
-            // 
-            this.id_sri.HeaderText = "ID_SRI";
-            this.id_sri.Name = "id_sri";
-            this.id_sri.ReadOnly = true;
-            this.id_sri.Visible = false;
-            // 
             // pnlFormasCobros
             // 
             this.pnlFormasCobros.Location = new System.Drawing.Point(9, 87);
@@ -298,6 +224,125 @@
             this.btnRemoverPago.UseVisualStyleBackColor = false;
             this.btnRemoverPago.Click += new System.EventHandler(this.btnRemoverPago_Click);
             // 
+            // dgvPagos
+            // 
+            this.dgvPagos.AllowUserToAddRows = false;
+            this.dgvPagos.AllowUserToDeleteRows = false;
+            this.dgvPagos.AllowUserToResizeColumns = false;
+            this.dgvPagos.AllowUserToResizeRows = false;
+            this.dgvPagos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvPagos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvPagos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvPagos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvPagos.ColumnHeadersHeight = 30;
+            this.dgvPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvPagos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.fpago,
+            this.valor,
+            this.id_sri,
+            this.conciliacion,
+            this.id_operador_tarjeta,
+            this.id_tipo_tarjeta,
+            this.numero_lote,
+            this.bandera_insertar_lote});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPagos.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvPagos.EnableHeadersVisualStyles = false;
+            this.dgvPagos.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvPagos.Location = new System.Drawing.Point(368, 12);
+            this.dgvPagos.MultiSelect = false;
+            this.dgvPagos.Name = "dgvPagos";
+            this.dgvPagos.ReadOnly = true;
+            this.dgvPagos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvPagos.RowHeadersVisible = false;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPagos.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvPagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPagos.Size = new System.Drawing.Size(390, 280);
+            this.dgvPagos.TabIndex = 159;
+            // 
+            // ID
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Maiandra GD", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ID.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ID.FillWeight = 60.9137F;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 53;
+            // 
+            // fpago
+            // 
+            this.fpago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Maiandra GD", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fpago.DefaultCellStyle = dataGridViewCellStyle6;
+            this.fpago.FillWeight = 168.8291F;
+            this.fpago.HeaderText = "FORMA DE PAGO";
+            this.fpago.Name = "fpago";
+            this.fpago.ReadOnly = true;
+            // 
+            // valor
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Maiandra GD", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.valor.DefaultCellStyle = dataGridViewCellStyle7;
+            this.valor.FillWeight = 70.25717F;
+            this.valor.HeaderText = "VALOR";
+            this.valor.Name = "valor";
+            this.valor.ReadOnly = true;
+            this.valor.Width = 62;
+            // 
+            // id_sri
+            // 
+            this.id_sri.HeaderText = "ID_SRI";
+            this.id_sri.Name = "id_sri";
+            this.id_sri.ReadOnly = true;
+            this.id_sri.Visible = false;
+            // 
+            // conciliacion
+            // 
+            this.conciliacion.HeaderText = "CONCILIACION";
+            this.conciliacion.Name = "conciliacion";
+            this.conciliacion.ReadOnly = true;
+            this.conciliacion.Visible = false;
+            // 
+            // id_operador_tarjeta
+            // 
+            this.id_operador_tarjeta.HeaderText = "ID_OPERADOR_TARJETA";
+            this.id_operador_tarjeta.Name = "id_operador_tarjeta";
+            this.id_operador_tarjeta.ReadOnly = true;
+            this.id_operador_tarjeta.Visible = false;
+            // 
+            // id_tipo_tarjeta
+            // 
+            this.id_tipo_tarjeta.HeaderText = "ID_TIPO_TARJETA";
+            this.id_tipo_tarjeta.Name = "id_tipo_tarjeta";
+            this.id_tipo_tarjeta.ReadOnly = true;
+            this.id_tipo_tarjeta.Visible = false;
+            // 
+            // numero_lote
+            // 
+            this.numero_lote.HeaderText = "NUMERO_LOTE";
+            this.numero_lote.Name = "numero_lote";
+            this.numero_lote.ReadOnly = true;
+            this.numero_lote.Visible = false;
+            // 
+            // bandera_insertar_lote
+            // 
+            this.bandera_insertar_lote.HeaderText = "BANDERA INSERTAR LOTE";
+            this.bandera_insertar_lote.Name = "bandera_insertar_lote";
+            this.bandera_insertar_lote.ReadOnly = true;
+            this.bandera_insertar_lote.Visible = false;
+            // 
             // frmCambiarFormasCobros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -305,6 +350,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SkyBlue;
             this.ClientSize = new System.Drawing.Size(766, 519);
+            this.Controls.Add(this.dgvPagos);
             this.Controls.Add(this.btnRemoverPago);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnGrabarPagos);
@@ -312,7 +358,6 @@
             this.Controls.Add(this.btnAnterior);
             this.Controls.Add(this.dgvDetalleDeuda);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.dgvPagos);
             this.Controls.Add(this.pnlFormasCobros);
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -341,14 +386,19 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel pnlFormasCobros;
+        private System.Windows.Forms.Button btnGrabarPagos;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnRemoverPago;
         public System.Windows.Forms.DataGridView dgvPagos;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn fpago;
         private System.Windows.Forms.DataGridViewTextBoxColumn valor;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_sri;
-        private System.Windows.Forms.Panel pnlFormasCobros;
-        private System.Windows.Forms.Button btnGrabarPagos;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnRemoverPago;
+        private System.Windows.Forms.DataGridViewTextBoxColumn conciliacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_operador_tarjeta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_tipo_tarjeta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numero_lote;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bandera_insertar_lote;
     }
 }

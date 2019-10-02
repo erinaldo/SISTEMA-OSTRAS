@@ -1641,8 +1641,15 @@ namespace Palatium.Cajero
 
         private void btnVistaPreviaCierre_Click(object sender, EventArgs e)
         {
-            Cajero.frmVistaPreviaCierre vista = new frmVistaPreviaCierre(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), iJornada);
-            vista.ShowDialog();
+            Menú.frmCodigoAdministrador codigo = new Menú.frmCodigoAdministrador();
+            codigo.ShowDialog();
+
+            if (codigo.DialogResult == DialogResult.OK)
+            {
+                codigo.Close();
+                Cajero.frmVistaPreviaCierre vista = new frmVistaPreviaCierre(sFecha, Convert.ToInt32(cmbLocalidades.SelectedValue), iJornada);
+                vista.ShowDialog();
+            }
         }
     }
 }

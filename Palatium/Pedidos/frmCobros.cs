@@ -106,6 +106,8 @@ namespace Palatium.Pedidos
          int iIdFormaPago_3;
          int iConciliacion;
          int iBanderaInsertarLote;
+         int iOperadorTarjeta;
+         int iTipoTarjeta;
 
          Decimal dTotal;
          Decimal dSubtotal;
@@ -795,9 +797,16 @@ namespace Palatium.Pedidos
                      dbValorGrid = efectivo.dbValorGrid;
                      dbValorRecuperado = efectivo.dbValorIngresado;
                      dbPropina = efectivo.dbValorPropina;
-                     sNumeroFactura = efectivo.sNumeroLote;
+                     sNumeroLote = efectivo.sNumeroLote;
                      iConciliacion = efectivo.iConciliacion;
-                     dgvPagos.Rows.Add(efectivo.sIdPago, efectivo.sNombrePago, dbValorGrid.ToString("N2"), bpagar.AccessibleDescription);
+                     iOperadorTarjeta = efectivo.iOperadorTarjeta;
+                     iTipoTarjeta = efectivo.iTipoTarjeta;
+                     iBanderaInsertarLote = efectivo.iBanderaInsertarLote;
+                     
+                     dgvPagos.Rows.Add(efectivo.sIdPago, efectivo.sNombrePago, dbValorGrid.ToString("N2"),
+                                       bpagar.AccessibleDescription, iConciliacion.ToString(), iOperadorTarjeta.ToString(),
+                                       iTipoTarjeta.ToString(), sNumeroLote, iBanderaInsertarLote.ToString());
+                     
                      dgvDetalleDeuda.Rows[3].Cells[1].Value = dbPropina.ToString("N2");
                      dgvPagos.ClearSelection();
                      efectivo.Close();
@@ -1136,12 +1145,30 @@ namespace Palatium.Pedidos
 
                  for (int i = 0; i < dtConsulta.Rows.Count; ++i)
                  {
+                     string sCodigo_R = dtComanda.Rows[i]["codigo"].ToString().Trim().ToUpper();
+                     
+                     if ((sCodigo_R == "TD") || (sCodigo_R == "TC"))
+                     {
+                         iConciliacion = 1;
+                     }
+
+                     else
+                     {
+                         iConciliacion = 0;
+                     }
+
                      dgvPagos.Rows.Add();
                      dgvPagos.Rows[i].Cells["id"].Value = dtConsulta.Rows[i]["id_pos_tipo_forma_cobro"].ToString();
                      dgvPagos.Rows[i].Cells["fpago"].Value = dtConsulta.Rows[i]["descripcion"].ToString();
                      dValor = Convert.ToDecimal(dtConsulta.Rows[i]["valor"].ToString());
                      dgvPagos.Rows[i].Cells["valor"].Value = dValor.ToString("N2");
                      dgvPagos.Rows[i].Cells["id_sri"].Value = dtConsulta.Rows[i]["id_sri_forma_pago"].ToString();
+                     dgvPagos.Rows[i].Cells["conciliacion"].Value = iConciliacion.ToString();
+                     dgvPagos.Rows[i].Cells["id_operador_tarjeta"].Value = dtConsulta.Rows[i]["id_pos_operador_tarjeta"].ToString();
+                     dgvPagos.Rows[i].Cells["id_tipo_tarjeta"].Value = dtConsulta.Rows[i]["id_pos_tipo_tarjeta"].ToString();
+                     dgvPagos.Rows[i].Cells["numero_lote"].Value = dtConsulta.Rows[i]["lote_tarjeta"].ToString();
+                     dgvPagos.Rows[i].Cells["bandera_insertar_lote"].Value = "1";
+                     
                      num += dValor;
                  }
 
@@ -1506,29 +1533,60 @@ namespace Palatium.Pedidos
                      }
 
                      iCgTipoDocumento = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                     iConciliacion = Convert.ToInt32(dgvPagos.Rows[i].Cells[4].Value.ToString());
+                     iOperadorTarjeta = Convert.ToInt32(dgvPagos.Rows[i].Cells[5].Value.ToString());
+                     iTipoTarjeta = Convert.ToInt32(dgvPagos.Rows[i].Cells[6].Value.ToString());
+                     iBanderaInsertarLote = Convert.ToInt32(dgvPagos.Rows[i].Cells[8].Value.ToString());
+                     sNumeroLote = dgvPagos.Rows[i].Cells[7].Value.ToString();
+
+                     int iRespuestaNumeroLote = contarNumeroLote(iOperadorTarjeta);
+
+                     if (iRespuestaNumeroLote == -1)
+                     {
+                         goto reversa;
+                     }
+
+                     if (iRespuestaNumeroLote == 0)
+                     {
+                         if (insertarNumeroLote(sNumeroLote, iOperadorTarjeta) == false)
+                         {
+                             goto reversa;
+                         }
+                     }
 
                      sSql = "";
                      sSql += "insert into cv403_documentos_pagos (" + Environment.NewLine;
                      sSql += "id_pago, cg_tipo_documento, numero_documento, fecha_vcto, " + Environment.NewLine;
                      sSql += "cg_moneda, cotizacion, valor, id_pos_tipo_forma_cobro," + Environment.NewLine;
                      sSql += "estado, fecha_ingreso, usuario_ingreso, terminal_ingreso," + Environment.NewLine;
-                     sSql += "numero_replica_trigger, numero_control_replica, valor_recibido) " + Environment.NewLine;
+                     sSql += "numero_replica_trigger, numero_control_replica, valor_recibido," + Environment.NewLine;
+                     sSql += "lote_tarjeta, id_pos_operador_tarjeta, id_pos_tipo_tarjeta)" + Environment.NewLine;
                      sSql += "values(" + Environment.NewLine;
-                     sSql += iIdPago + ", " + iCgTipoDocumento + ", 9999, '" + sFecha_P + "', " + Environment.NewLine;
-                     sSql += Program.iMoneda + ", 1, " + Convert.ToDouble(dgvPagos.Rows[i].Cells[2].Value) + "," + Environment.NewLine;
+                     sSql += iIdPago + ", " + iCgTipoDocumento + ", 9999, '" + sFechaCorta + "', " + Environment.NewLine;
+                     sSql += Program.iMoneda + ", 1, " + Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + "," + Environment.NewLine;
                      sSql += Convert.ToInt32(dgvPagos.Rows[i].Cells[0].Value) + ", 'A', GETDATE()," + Environment.NewLine;
                      sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 1, 0,";
-                     
+
                      if (Convert.ToInt32(dgvPagos.Rows[i].Cells[0].Value) == 1)
                      {
-                         sSql += (Convert.ToDouble(dgvPagos.Rows[i].Cells[2].Value) + Convert.ToDouble(dgvDetalleDeuda.Rows[2].Cells[1].Value));
+                         sSql += (Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + dbCambio) + ", ";
                      }
-                     
+
                      else
                      {
-                         sSql += "null";
+                         sSql += "null, ";
                      }
-                     
+
+                     if (iConciliacion == 1)
+                     {
+                         sSql += "'" + sNumeroLote + "', " + iOperadorTarjeta + ", " + iTipoTarjeta;
+                     }
+
+                     else
+                     {
+                         sSql += "null, null, null";
+                     }
+
                      sSql += ")";
                      
                      if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
@@ -2035,91 +2093,91 @@ namespace Palatium.Pedidos
                      }
                  }
 
-                 dbCambio = Convert.ToDecimal(this.dgvDetalleDeuda.Rows[2].Cells[1].Value.ToString());
-                 dbPropina = Convert.ToDecimal(this.dgvDetalleDeuda.Rows[3].Cells[1].Value.ToString());
+                 dbCambio = Convert.ToDecimal(dgvDetalleDeuda.Rows[2].Cells[1].Value.ToString());
+                 dbPropina = Convert.ToDecimal(dgvDetalleDeuda.Rows[3].Cells[1].Value.ToString());
+
+                 sSql = "";
+                 sSql += "insert into cv403_pagos (" + Environment.NewLine;
+                 sSql += "idempresa, id_persona, fecha_pago, cg_moneda, valor," + Environment.NewLine;
+                 sSql += "propina, cg_empresa, id_localidad, cg_cajero, fecha_ingreso," + Environment.NewLine;
+                 sSql += "usuario_ingreso, terminal_ingreso, estado, " + Environment.NewLine;
+                 sSql += "numero_replica_trigger, numero_control_replica, cambio) " + Environment.NewLine;
+                 sSql += "values(" + Environment.NewLine;
+                 sSql += Program.iIdEmpresa + ", " + iIdPersona + ", '" + sFechaCorta + "', " + Program.iMoneda + "," + Environment.NewLine;
+                 sSql += dTotal + ", " + Convert.ToDouble(dgvDetalleDeuda.Rows[3].Cells[1].Value) + ", " + Program.iCgEmpresa + "," + Environment.NewLine;
+                 sSql += Program.iIdLocalidad + ", 7799, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                 sSql += "'" + Program.sDatosMaximo[1] + "', 'A' , 1, 0, " + dbCambio + ")";
+
+                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
+
+                 dtConsulta = new DataTable();
+                 dtConsulta.Clear();
+                 sTabla = "cv403_pagos";
+                 sCampo = "id_pago";
+                 iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
+
+                 if (iMaximo == -1)
+                 {
+                     ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
+                     ok.ShowDialog();
+                     return false;
+                 }
+
+                 iIdPago = Convert.ToInt32(iMaximo);
+
+                 sSql = "";
+                 sSql += "select numero_pago" + Environment.NewLine;
+                 sSql += "from tp_localidades_impresoras" + Environment.NewLine;
+                 sSql += "where id_localidad = " + Program.iIdLocalidad;
+
+                 dtConsulta = new DataTable();
+                 dtConsulta.Clear();
+
+                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                 if (bRespuesta == false)
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
+
+                 iNumeroPago = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+
+                 sSql = "";
+                 sSql += "insert into cv403_numeros_pagos (" + Environment.NewLine;
+                 sSql += "id_pago, serie, numero_pago, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
+                 sSql += "terminal_ingreso, estado, numero_replica_trigger, numero_control_replica)" + Environment.NewLine;
+                 sSql += "values(" + Environment.NewLine;
+                 sSql += iIdPago + ", 'A', " + (object)iNumeroPago + ", GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                 sSql += "'" + Program.sDatosMaximo[1] + "', 'A', 1, 0)";
+
+                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
+
+                 sSql = "";
+                 sSql += "update tp_localidades_impresoras set" + Environment.NewLine;
+                 sSql += "numero_pago = numero_pago + 1" + Environment.NewLine;
+                 sSql += "where id_localidad = " + Program.iIdLocalidad;
+
+                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
 
                  for (int i = 0; i < dgvPagos.Rows.Count; ++i)
                  {
-                     sSql = "";
-                     sSql += "insert into cv403_pagos (" + Environment.NewLine;
-                     sSql += "idempresa, id_persona, fecha_pago, cg_moneda, valor," + Environment.NewLine;
-                     sSql += "propina, cg_empresa, id_localidad, cg_cajero, fecha_ingreso," + Environment.NewLine;
-                     sSql += "usuario_ingreso, terminal_ingreso, estado, " + Environment.NewLine;
-                     sSql += "numero_replica_trigger, numero_control_replica, cambio) " + Environment.NewLine;
-                     sSql += "values(" + Environment.NewLine;
-                     sSql += Program.iIdEmpresa + ", " + iIdPersona + ", '" + sFechaCorta + "', " + Program.iMoneda + "," + Environment.NewLine;
-                     sSql += Convert.ToDecimal(dgvPagos.Rows[i].Cells["valor"].Value.ToString()) + ", " + dbPropina + ", " + Program.iCgEmpresa + "," + Environment.NewLine;
-                     sSql += Program.iIdLocalidad + ", 7799, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                     sSql += "'" + Program.sDatosMaximo[1] + "', 'A' , 1, 0, " + dbCambio + ")";
-                     
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-
-                     dtConsulta = new DataTable();
-                     dtConsulta.Clear();
-                     sTabla = "cv403_pagos";
-                     sCampo = "id_pago";
-                     iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
-
-                     if (iMaximo == -1)
-                     {
-                         ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                         ok.ShowDialog();
-                         return false;
-                     }
-
-                     iIdPago = Convert.ToInt32(iMaximo);
-
-                     sSql = "";
-                     sSql += "select numero_pago" + Environment.NewLine;
-                     sSql += "from tp_localidades_impresoras" + Environment.NewLine;
-                     sSql += "where id_localidad = " + Program.iIdLocalidad;
-
-                     dtConsulta = new DataTable();
-                     dtConsulta.Clear();
-
-                     bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-                     if (bRespuesta == false)
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-
-                     iNumeroPago = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-
-                     sSql = "";
-                     sSql += "insert into cv403_numeros_pagos (" + Environment.NewLine;
-                     sSql += "id_pago, serie, numero_pago, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
-                     sSql += "terminal_ingreso, estado, numero_replica_trigger, numero_control_replica)" + Environment.NewLine;
-                     sSql += "values(" + Environment.NewLine;
-                     sSql += iIdPago + ", 'A', " + (object)iNumeroPago + ", GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                     sSql += "'" + Program.sDatosMaximo[1] + "', 'A', 1, 0)";
-
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-
-                     sSql = "";
-                     sSql += "update tp_localidades_impresoras set" + Environment.NewLine;
-                     sSql += "numero_pago = numero_pago + 1" + Environment.NewLine;
-                     sSql += "where id_localidad = " + Program.iIdLocalidad;
-
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-
                      sSql = "";
                      sSql += "select cg_tipo_documento" + Environment.NewLine;
                      sSql += "from pos_tipo_forma_cobro " + Environment.NewLine;
@@ -2138,26 +2196,58 @@ namespace Palatium.Pedidos
                      }
 
                      iCgTipoDocumento = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                     iConciliacion = Convert.ToInt32(dgvPagos.Rows[i].Cells[4].Value.ToString());
+                     iOperadorTarjeta = Convert.ToInt32(dgvPagos.Rows[i].Cells[5].Value.ToString());
+                     iTipoTarjeta = Convert.ToInt32(dgvPagos.Rows[i].Cells[6].Value.ToString());
+                     iBanderaInsertarLote = Convert.ToInt32(dgvPagos.Rows[i].Cells[8].Value.ToString());
+                     sNumeroLote = dgvPagos.Rows[i].Cells[7].Value.ToString();
+
+                     int iRespuestaNumeroLote = contarNumeroLote(iOperadorTarjeta);
+
+                     if (iRespuestaNumeroLote == -1)
+                     {
+                         return false;
+                     }
+
+                     if (iRespuestaNumeroLote == 0)
+                     {
+                         if (insertarNumeroLote(sNumeroLote, iOperadorTarjeta) == false)
+                         {
+                             return false;
+                         }
+                     }
 
                      sSql = "";
                      sSql += "insert into cv403_documentos_pagos (" + Environment.NewLine;
                      sSql += "id_pago, cg_tipo_documento, numero_documento, fecha_vcto, " + Environment.NewLine;
                      sSql += "cg_moneda, cotizacion, valor, id_pos_tipo_forma_cobro," + Environment.NewLine;
                      sSql += "estado, fecha_ingreso, usuario_ingreso, terminal_ingreso," + Environment.NewLine;
-                     sSql += "numero_replica_trigger, numero_control_replica, valor_recibido) " + Environment.NewLine;
+                     sSql += "numero_replica_trigger, numero_control_replica, valor_recibido," + Environment.NewLine;
+                     sSql += "lote_tarjeta, id_pos_operador_tarjeta, id_pos_tipo_tarjeta)" + Environment.NewLine;
                      sSql += "values(" + Environment.NewLine;
-                     sSql += (object)iIdPago + ", " + (object)iCgTipoDocumento + ", 9999, '" + sFechaCorta + "', " + Environment.NewLine;
-                     sSql += (object)Program.iMoneda + ", 1, " + (object)Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + "," + Environment.NewLine;
-                     sSql += (object)Convert.ToInt32(dgvPagos.Rows[i].Cells[0].Value) + ", 'A', GETDATE()," + Environment.NewLine;
+                     sSql += iIdPago + ", " + iCgTipoDocumento + ", 9999, '" + sFechaCorta + "', " + Environment.NewLine;
+                     sSql += Program.iMoneda + ", 1, " + Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + "," + Environment.NewLine;
+                     sSql += Convert.ToInt32(dgvPagos.Rows[i].Cells[0].Value) + ", 'A', GETDATE()," + Environment.NewLine;
                      sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 1, 0,";
 
                      if (Convert.ToInt32(dgvPagos.Rows[i].Cells[0].Value) == 1)
                      {
-                         sSql += (string)(object)(Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + dbCambio);
+                         sSql += (Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + dbCambio) + ", ";
                      }
+
                      else
                      {
-                         sSql += "null";
+                         sSql += "null, ";
+                     }
+
+                     if (iConciliacion == 1)
+                     {
+                         sSql += "'" + sNumeroLote + "', " + iOperadorTarjeta + ", " + iTipoTarjeta;
+                     }
+
+                     else
+                     {
+                         sSql += "null, null, null";
                      }
 
                      sSql += ")";
@@ -2392,89 +2482,89 @@ namespace Palatium.Pedidos
                  dbCambio = Convert.ToDecimal(dgvDetalleDeuda.Rows[2].Cells[1].Value.ToString());
                  dbPropina = Convert.ToDecimal(dgvDetalleDeuda.Rows[3].Cells[1].Value.ToString());
 
-                 for (int i = 0; i < dgvPagos.Rows.Count; i++)
+                 sSql = "";
+                 sSql += "insert into cv403_pagos (" + Environment.NewLine;
+                 sSql += "idempresa, id_persona, fecha_pago, cg_moneda, valor," + Environment.NewLine;
+                 sSql += "propina, cg_empresa, id_localidad, cg_cajero, fecha_ingreso," + Environment.NewLine;
+                 sSql += "usuario_ingreso, terminal_ingreso, estado, " + Environment.NewLine;
+                 sSql += "numero_replica_trigger, numero_control_replica,cambio) " + Environment.NewLine;
+                 sSql += "values(" + Environment.NewLine;
+                 sSql += Program.iIdEmpresa + ", " + iIdPersona + ", '" + sFecha_P + "', " + Program.iMoneda + "," + Environment.NewLine;
+                 sSql += dTotal + ", " + Convert.ToDouble(dgvDetalleDeuda.Rows[3].Cells[1].Value) + ", " + Program.iCgEmpresa + "," + Environment.NewLine;
+                 sSql += Program.iIdLocalidad + ", 7799, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                 sSql += "'" + Program.sDatosMaximo[1] + "', 'A' , 1, 0, " + dbCambio + ")";
+
+                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                  {
-                     sSql = "";
-                     sSql += "insert into cv403_pagos (" + Environment.NewLine;
-                     sSql += "idempresa, id_persona, fecha_pago, cg_moneda, valor," + Environment.NewLine;
-                     sSql += "propina, cg_empresa, id_localidad, cg_cajero, fecha_ingreso," + Environment.NewLine;
-                     sSql += "usuario_ingreso, terminal_ingreso, estado, " + Environment.NewLine;
-                     sSql += "numero_replica_trigger, numero_control_replica,cambio) " + Environment.NewLine;
-                     sSql += "values(" + Environment.NewLine;
-                     sSql += Program.iIdEmpresa + ", " + iIdPersona + ", '" + sFecha_P + "', " + Program.iMoneda + "," + Environment.NewLine;
-                     sSql += Convert.ToDecimal(dgvPagos.Rows[i].Cells["valor"].Value.ToString()) + ", " + dbPropina + ", " + Program.iCgEmpresa + "," + Environment.NewLine;
-                     sSql += Program.iIdLocalidad + ", 7799, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                     sSql += "'" + Program.sDatosMaximo[1] + "', 'A' , 1, 0, " + dbCambio + ")";
-                     
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
 
-                     dtConsulta = new DataTable();
-                     dtConsulta.Clear();
-                     sTabla = "cv403_pagos";
-                     sCampo = "id_pago";
+                 dtConsulta = new DataTable();
+                 dtConsulta.Clear();
+                 sTabla = "cv403_pagos";
+                 sCampo = "id_pago";
 
-                     iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
+                 iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
 
-                     if (iMaximo == -1)
-                     {
-                         ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                         ok.ShowDialog();
-                         return false;
-                     }
+                 if (iMaximo == -1)
+                 {
+                     ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
+                     ok.ShowDialog();
+                     return false;
+                 }
 
-                     iIdPago = Convert.ToInt32(iMaximo);
+                 iIdPago = Convert.ToInt32(iMaximo);
 
-                     sSql = "";
-                     sSql += "select numero_pago" + Environment.NewLine;
-                     sSql += "from tp_localidades_impresoras" + Environment.NewLine;
-                     sSql += "where id_localidad = " + Program.iIdLocalidad;
+                 sSql = "";
+                 sSql += "select numero_pago" + Environment.NewLine;
+                 sSql += "from tp_localidades_impresoras" + Environment.NewLine;
+                 sSql += "where id_localidad = " + Program.iIdLocalidad;
 
-                     dtConsulta = new DataTable();
-                     dtConsulta.Clear();
+                 dtConsulta = new DataTable();
+                 dtConsulta.Clear();
 
-                     bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
 
-                     if (bRespuesta == false)
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
+                 if (bRespuesta == false)
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
 
-                     iNumeroPago = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                 iNumeroPago = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
 
-                     sSql = "";
-                     sSql += "insert into cv403_numeros_pagos (" + Environment.NewLine;
-                     sSql += "id_pago, serie, numero_pago, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
-                     sSql += "terminal_ingreso, estado, numero_replica_trigger, numero_control_replica)" + Environment.NewLine;
-                     sSql += "values(" + Environment.NewLine;
-                     sSql += iIdPago + ", 'A', " + iNumeroPago + ", GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                     sSql += "'" + Program.sDatosMaximo[1] + "', 'A', 1, 0)";
+                 sSql = "";
+                 sSql += "insert into cv403_numeros_pagos (" + Environment.NewLine;
+                 sSql += "id_pago, serie, numero_pago, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
+                 sSql += "terminal_ingreso, estado, numero_replica_trigger, numero_control_replica)" + Environment.NewLine;
+                 sSql += "values(" + Environment.NewLine;
+                 sSql += iIdPago + ", 'A', " + iNumeroPago + ", GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                 sSql += "'" + Program.sDatosMaximo[1] + "', 'A', 1, 0)";
 
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
+                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
 
-                     sSql = "";
-                     sSql += "update tp_localidades_impresoras set" + Environment.NewLine;
-                     sSql += "numero_pago = numero_pago + 1" + Environment.NewLine;
-                     sSql += "where id_localidad = " + Program.iIdLocalidad;
+                 sSql = "";
+                 sSql += "update tp_localidades_impresoras set" + Environment.NewLine;
+                 sSql += "numero_pago = numero_pago + 1" + Environment.NewLine;
+                 sSql += "where id_localidad = " + Program.iIdLocalidad;
 
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
+                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
 
+                 for (int i = 0; i < dgvPagos.Rows.Count; i++)
+                 {          
                      sSql = "";
                      sSql += "select cg_tipo_documento" + Environment.NewLine;
                      sSql += "from pos_tipo_forma_cobro " + Environment.NewLine;
@@ -2493,27 +2583,58 @@ namespace Palatium.Pedidos
                      }
 
                      iCgTipoDocumento = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                     iConciliacion = Convert.ToInt32(dgvPagos.Rows[i].Cells[4].Value.ToString());
+                     iOperadorTarjeta = Convert.ToInt32(dgvPagos.Rows[i].Cells[5].Value.ToString());
+                     iTipoTarjeta = Convert.ToInt32(dgvPagos.Rows[i].Cells[6].Value.ToString());
+                     iBanderaInsertarLote = Convert.ToInt32(dgvPagos.Rows[i].Cells[8].Value.ToString());
+                     sNumeroLote = dgvPagos.Rows[i].Cells[7].Value.ToString();
+
+                     int iRespuestaNumeroLote = contarNumeroLote(iOperadorTarjeta);
+
+                     if (iRespuestaNumeroLote == -1)
+                     {
+                         return false;
+                     }
+
+                     if (iRespuestaNumeroLote == 0)
+                     {
+                         if (insertarNumeroLote(sNumeroLote, iOperadorTarjeta) == false)
+                         {
+                             return false;
+                         }
+                     }
 
                      sSql = "";
                      sSql += "insert into cv403_documentos_pagos (" + Environment.NewLine;
                      sSql += "id_pago, cg_tipo_documento, numero_documento, fecha_vcto, " + Environment.NewLine;
                      sSql += "cg_moneda, cotizacion, valor, id_pos_tipo_forma_cobro," + Environment.NewLine;
                      sSql += "estado, fecha_ingreso, usuario_ingreso, terminal_ingreso," + Environment.NewLine;
-                     sSql += "numero_replica_trigger, numero_control_replica, valor_recibido) " + Environment.NewLine;
+                     sSql += "numero_replica_trigger, numero_control_replica, valor_recibido," + Environment.NewLine;
+                     sSql += "lote_tarjeta, id_pos_operador_tarjeta, id_pos_tipo_tarjeta)" + Environment.NewLine;
                      sSql += "values(" + Environment.NewLine;
-                     sSql += iIdPago + ", " + iCgTipoDocumento + ", 9999, '" + sFecha_P + "', " + Environment.NewLine;
+                     sSql += iIdPago + ", " + iCgTipoDocumento + ", 9999, '" + sFechaCorta + "', " + Environment.NewLine;
                      sSql += Program.iMoneda + ", 1, " + Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + "," + Environment.NewLine;
                      sSql += Convert.ToInt32(dgvPagos.Rows[i].Cells[0].Value) + ", 'A', GETDATE()," + Environment.NewLine;
                      sSql += "'" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "', 1, 0,";
 
                      if (Convert.ToInt32(dgvPagos.Rows[i].Cells[0].Value) == 1)
                      {
-                         sSql += Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + dbCambio;
+                         sSql += (Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + dbCambio) + ", ";
                      }
 
                      else
                      {
-                         sSql += "null";
+                         sSql += "null, ";
+                     }
+
+                     if (iConciliacion == 1)
+                     {
+                         sSql += "'" + sNumeroLote + "', " + iOperadorTarjeta + ", " + iTipoTarjeta;
+                     }
+
+                     else
+                     {
+                         sSql += "null, null, null";
                      }
 
                      sSql += ")";
@@ -2634,7 +2755,7 @@ namespace Palatium.Pedidos
                      conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION);
                      return;
                  }
-
+                 
                  if (insertarPagos() == false)
                  {
                      conexion.GFun_Lo_Maneja_Transaccion(Program.G_REVERSA_TRANSACCION);
@@ -2645,10 +2766,10 @@ namespace Palatium.Pedidos
                  {
                      if (iBanderaGeneraFactura == 0)
                      {
-                         sSql = sSql + "update cv403_cab_pedidos set" + Environment.NewLine;
-                         sSql = sSql + "estado_orden = 'Pagada'," + Environment.NewLine;
-                         sSql = sSql + "id_persona = " + iIdPersona + Environment.NewLine;
-                         sSql = sSql + "where id_pedido = " + sIdOrden;
+                         sSql += "update cv403_cab_pedidos set" + Environment.NewLine;
+                         sSql += "estado_orden = 'Pagada'," + Environment.NewLine;
+                         sSql += "id_persona = " + iIdPersona + Environment.NewLine;
+                         sSql += "where id_pedido = " + sIdOrden;
 
                          if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                          {
@@ -2869,90 +2990,91 @@ namespace Palatium.Pedidos
                  dbCambio = Convert.ToDecimal(dgvDetalleDeuda.Rows[2].Cells[1].Value.ToString());
                  dbPropina = Convert.ToDecimal(dgvDetalleDeuda.Rows[3].Cells[1].Value.ToString());
 
-                 for (int i = 0; i < dgvPagos.Rows.Count; i++)
+                 //INSERTAR EN LA TABLA CV403_PAGOS
+                 sSql = "";
+                 sSql += "insert into cv403_pagos (" + Environment.NewLine;
+                 sSql += "idempresa, id_persona, fecha_pago, cg_moneda, valor," + Environment.NewLine;
+                 sSql += "propina, cg_empresa, id_localidad, cg_cajero, fecha_ingreso," + Environment.NewLine;
+                 sSql += "usuario_ingreso, terminal_ingreso, estado, " + Environment.NewLine;
+                 sSql += "numero_replica_trigger, numero_control_replica,cambio) " + Environment.NewLine;
+                 sSql += "values(" + Environment.NewLine;
+                 sSql += Program.iIdEmpresa + ", " + iIdPersona + ", '" + sFechaCorta + "', " + Program.iMoneda + "," + Environment.NewLine;
+                 sSql += dTotal + ", " + Convert.ToDouble(dgvDetalleDeuda.Rows[3].Cells[1].Value) + ", " + Program.iCgEmpresa + "," + Environment.NewLine;
+                 sSql += Program.iIdLocalidad + ", 7799, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                 sSql += "'" + Program.sDatosMaximo[1] + "', 'A' , 1, 0, " + dbCambio + ")";
+
+                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                  {
-                     sSql = "";
-                     sSql += "insert into cv403_pagos (" + Environment.NewLine;
-                     sSql += "idempresa, id_persona, fecha_pago, cg_moneda, valor," + Environment.NewLine;
-                     sSql += "propina, cg_empresa, id_localidad, cg_cajero, fecha_ingreso," + Environment.NewLine;
-                     sSql += "usuario_ingreso, terminal_ingreso, estado, " + Environment.NewLine;
-                     sSql += "numero_replica_trigger, numero_control_replica,cambio) " + Environment.NewLine;
-                     sSql += "values(" + Environment.NewLine;
-                     sSql += Program.iIdEmpresa + ", " + iIdPersona + ", '" + sFechaCorta + "', " + Program.iMoneda + "," + Environment.NewLine;
-                     sSql += Convert.ToDecimal(dgvPagos.Rows[i].Cells["valor"].Value.ToString()) + ", " + dbPropina + ", " + Program.iCgEmpresa + "," + Environment.NewLine;
-                     sSql += Program.iIdLocalidad + ", 7799, GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                     sSql += "'" + Program.sDatosMaximo[1] + "', 'A' , 1, 0, " + dbCambio + ")";
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
 
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
+                 dtConsulta = new DataTable();
+                 dtConsulta.Clear();
 
-                     dtConsulta = new DataTable();
-                     dtConsulta.Clear();
+                 sTabla = "cv403_pagos";
+                 sCampo = "id_pago";
 
-                     sTabla = "cv403_pagos";
-                     sCampo = "id_pago";
+                 iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
 
-                     iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
+                 if (iMaximo == -1)
+                 {
+                     ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
+                     ok.ShowDialog();
+                     return false;
+                 }
 
-                     if (iMaximo == -1)
-                     {
-                         ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                         ok.ShowDialog();
-                         return false;
-                     }
+                 iIdPago = Convert.ToInt32(iMaximo);
 
-                     iIdPago = Convert.ToInt32(iMaximo);
+                 sSql = "";
+                 sSql += "select numero_pago" + Environment.NewLine;
+                 sSql += "from tp_localidades_impresoras" + Environment.NewLine;
+                 sSql += "where id_localidad = " + Program.iIdLocalidad;
 
-                     sSql = "";
-                     sSql += "select numero_pago" + Environment.NewLine;
-                     sSql += "from tp_localidades_impresoras" + Environment.NewLine;
-                     sSql += "where id_localidad = " + Program.iIdLocalidad;
+                 dtConsulta = new DataTable();
+                 dtConsulta.Clear();
 
-                     dtConsulta = new DataTable();
-                     dtConsulta.Clear();
+                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
 
-                     bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+                 if (bRespuesta == false)
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
 
-                     if (bRespuesta == false)
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
+                 iNumeroPago = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
 
-                     iNumeroPago = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                 sSql = "";
+                 sSql += "insert into cv403_numeros_pagos (" + Environment.NewLine;
+                 sSql += "id_pago, serie, numero_pago, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
+                 sSql += "terminal_ingreso, estado, numero_replica_trigger, numero_control_replica)" + Environment.NewLine;
+                 sSql += "values(" + Environment.NewLine;
+                 sSql += iIdPago + ", 'A', " + iNumeroPago + ", GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                 sSql += "'" + Program.sDatosMaximo[1] + "', 'A', 1, 0)";
 
-                     sSql = "";
-                     sSql += "insert into cv403_numeros_pagos (" + Environment.NewLine;
-                     sSql += "id_pago, serie, numero_pago, fecha_ingreso, usuario_ingreso," + Environment.NewLine;
-                     sSql += "terminal_ingreso, estado, numero_replica_trigger, numero_control_replica)" + Environment.NewLine;
-                     sSql += "values(" + Environment.NewLine;
-                     sSql += iIdPago + ", 'A', " + iNumeroPago + ", GETDATE(), '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                     sSql += "'" + Program.sDatosMaximo[1] + "', 'A', 1, 0)";
+                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
 
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
+                 sSql = "";
+                 sSql += "update tp_localidades_impresoras set" + Environment.NewLine;
+                 sSql += "numero_pago = numero_pago + 1" + Environment.NewLine;
+                 sSql += "where id_localidad = " + Program.iIdLocalidad;
 
-                     sSql = "";
-                     sSql += "update tp_localidades_impresoras set" + Environment.NewLine;
-                     sSql += "numero_pago = numero_pago + 1" + Environment.NewLine;
-                     sSql += "where id_localidad = " + Program.iIdLocalidad;
+                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                 {
+                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                     catchMensaje.ShowDialog();
+                     return false;
+                 }
 
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-
+                 for (int i = 0; i < dgvPagos.Rows.Count; i++)
+                 {           
                      sSql = "";
                      sSql += "select cg_tipo_documento" + Environment.NewLine;
                      sSql += "from pos_tipo_forma_cobro " + Environment.NewLine;
@@ -2971,13 +3093,34 @@ namespace Palatium.Pedidos
                      }
 
                      iCgTipoDocumento = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                     iConciliacion = Convert.ToInt32(dgvPagos.Rows[i].Cells[4].Value.ToString());
+                     iOperadorTarjeta = Convert.ToInt32(dgvPagos.Rows[i].Cells[5].Value.ToString());
+                     iTipoTarjeta = Convert.ToInt32(dgvPagos.Rows[i].Cells[6].Value.ToString());
+                     iBanderaInsertarLote = Convert.ToInt32(dgvPagos.Rows[i].Cells[8].Value.ToString());
+                     sNumeroLote = dgvPagos.Rows[i].Cells[7].Value.ToString();
+
+                     int iRespuestaNumeroLote = contarNumeroLote(iOperadorTarjeta);
+
+                     if (iRespuestaNumeroLote == -1)
+                     {
+                         return false;
+                     }
+
+                     if (iRespuestaNumeroLote == 0)
+                     {
+                         if (insertarNumeroLote(sNumeroLote, iOperadorTarjeta) == false)
+                         {
+                             return false;
+                         }
+                     }
 
                      sSql = "";
                      sSql += "insert into cv403_documentos_pagos (" + Environment.NewLine;
                      sSql += "id_pago, cg_tipo_documento, numero_documento, fecha_vcto, " + Environment.NewLine;
                      sSql += "cg_moneda, cotizacion, valor, id_pos_tipo_forma_cobro," + Environment.NewLine;
                      sSql += "estado, fecha_ingreso, usuario_ingreso, terminal_ingreso," + Environment.NewLine;
-                     sSql += "numero_replica_trigger, numero_control_replica, valor_recibido) " + Environment.NewLine;
+                     sSql += "numero_replica_trigger, numero_control_replica, valor_recibido," + Environment.NewLine;
+                     sSql += "lote_tarjeta, id_pos_operador_tarjeta, id_pos_tipo_tarjeta)" + Environment.NewLine;
                      sSql += "values(" + Environment.NewLine;
                      sSql += iIdPago + ", " + iCgTipoDocumento + ", 9999, '" + sFechaCorta + "', " + Environment.NewLine;
                      sSql += Program.iMoneda + ", 1, " + Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + "," + Environment.NewLine;
@@ -2986,12 +3129,22 @@ namespace Palatium.Pedidos
 
                      if (Convert.ToInt32(dgvPagos.Rows[i].Cells[0].Value) == 1)
                      {
-                         sSql += (Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + dbCambio);
+                         sSql += (Convert.ToDecimal(dgvPagos.Rows[i].Cells[2].Value) + dbCambio) + ", ";
                      }
 
                      else
                      {
-                         sSql += "null";
+                         sSql += "null, ";
+                     }
+
+                     if (iConciliacion == 1)
+                     {      
+                         sSql += "'" + sNumeroLote + "', " + iOperadorTarjeta + ", " + iTipoTarjeta;
+                     }
+
+                     else
+                     {
+                         sSql += "null, null, null";
                      }
 
                      sSql += ")";
@@ -3415,7 +3568,6 @@ namespace Palatium.Pedidos
              //FIN CALVE ACCESO
          }
 
-        //FUNCION PARA EL MODULO 11
         //FUNCION PARA EL DIGITO VERIFICADOR MODULO 11
         private string sDigitoVerificarModulo11(string sClaveAcceso)
         {
@@ -3444,6 +3596,46 @@ namespace Palatium.Pedidos
             //sClaveAcceso = sClaveAcceso + Convert.ToString(suma);
 
             return suma.ToString();
+        }
+
+        //FUNCION PARA CONTAR LOS NUMEROS DE LOTES
+        private int contarNumeroLote(int iOperadorTarjeta_P)
+        {
+            try
+            {
+                string sFecha_P = Program.sFechaSistema.ToString("yyyy-MM-dd");
+
+                sSql = "";
+                sSql += "select count(*) cuenta" + Environment.NewLine;
+                sSql += "from pos_numero_lote" + Environment.NewLine;
+                sSql += "where estado = 'A'" + Environment.NewLine;
+                sSql += "and id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and estado_lote = 'Abierta'" + Environment.NewLine;
+                sSql += "and fecha_apertura = '" + sFecha_P + "'" + Environment.NewLine;
+                sSql += "and id_pos_operador_tarjeta = " + iOperadorTarjeta_P + Environment.NewLine;
+                sSql += "and id_pos_jornada = " + Program.iJORNADA + Environment.NewLine;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return -1;
+                }
+
+                return Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return -1;
+            }
         }
 
         //FUNCION PARA CREAR UN DATATABLE
@@ -3961,6 +4153,41 @@ namespace Palatium.Pedidos
                  catchMensaje.ShowDialog();
                  return false;
              }
+         }
+
+        //FUNCION PARA INSERTAR EL NUMERO DE LOTE EN LA TABLA POS_NUMERO_LOTE
+        private bool insertarNumeroLote(string sNumeroLote_P, int iOperadorTarjeta_P)
+         {
+            try
+            {
+                string sFecha_P = Program.sFechaSistema.ToString("yyyy-MM-dd");
+
+                sSql = "";
+                sSql += "insert into pos_numero_lote (" + Environment.NewLine;
+                sSql += "id_localidad, id_pos_jornada, id_pos_operador_tarjeta, lote," + Environment.NewLine;
+                sSql += "fecha_apertura, estado_lote, estado, fecha_ingreso," + Environment.NewLine;
+                sSql += "usuario_ingreso, terminal_ingreso)" + Environment.NewLine;
+                sSql += "values (" + Environment.NewLine;
+                sSql += Program.iIdLocalidad + ", " + Program.iJORNADA + ", " + iOperadorTarjeta_P + ", ";
+                sSql += "'" + sNumeroLote_P + "', '" + sFecha_P + "', 'Abierta'," + Environment.NewLine;
+                sSql += "'A', GETDATE(), '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+
+                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.Message;
+                catchMensaje.ShowDialog();
+                return false;
+            }
          }
 
         ////FUNCION PARA EXTRAER EL NUMERO DE LOTE

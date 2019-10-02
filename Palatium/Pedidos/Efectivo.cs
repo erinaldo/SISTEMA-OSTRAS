@@ -31,8 +31,10 @@ namespace Palatium
         float suma = 0.00f;
 
         int id_pago;
-        int iBanderaInsertarLote;
+        public int iBanderaInsertarLote;
         public int iConciliacion;
+        public int iOperadorTarjeta;
+        public int iTipoTarjeta;
 
         DataTable dtConsulta;   
 
@@ -199,7 +201,8 @@ namespace Palatium
                 sSql += "where NL.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
                 sSql += "and NL.estado_lote = 'Abierta'" + Environment.NewLine;
                 sSql += "and NL.fecha_apertura = '" + sFecha + "'" + Environment.NewLine;
-                sSql += "and OP.codigo = '" + sCodigo + "'";
+                sSql += "and OP.codigo = '" + sCodigo_P + "'" + Environment.NewLine;
+                sSql += "and NL.id_pos_jornada = " + Program.iJORNADA;
 
                 dtConsulta = new DataTable();
                 dtConsulta.Clear();
@@ -225,6 +228,80 @@ namespace Palatium
                     sLoteRecuperado = dtConsulta.Rows[0]["lote"].ToString().Trim();
                     txtNumeroLote.Text = sLoteRecuperado;
                     iBanderaInsertarLote = 0;
+                    txtNumeroLote.ReadOnly = true;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.Message;
+                catchMensaje.ShowDialog();
+            }
+        }
+
+        //FUNCION PARA ASIGNAR LOS IDENTIFICADORES A LOS RADIO BUTTON
+        private void valoresIdentificadores()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select id_pos_operador_tarjeta, datafast, medianet" + Environment.NewLine;
+                sSql += "from pos_operador_tarjeta" + Environment.NewLine;
+                sSql += "where estado = 'A'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                for (int i = 0; i < dtConsulta.Rows.Count; i++)
+                {
+                    if (Convert.ToInt32(dtConsulta.Rows[i]["datafast"].ToString()) == 1)
+                    {
+                        rdbDatafast.Tag = dtConsulta.Rows[i]["id_pos_operador_tarjeta"].ToString();
+                    }
+
+                    else if (Convert.ToInt32(dtConsulta.Rows[i]["medianet"].ToString()) == 1)
+                    {
+                        rdbMedianet.Tag = dtConsulta.Rows[i]["id_pos_operador_tarjeta"].ToString();
+                    }
+                }
+
+                sSql = "";
+                sSql += "select id_pos_tipo_tarjeta, credito, debito" + Environment.NewLine;
+                sSql += "from pos_tipo_tarjeta" + Environment.NewLine;
+                sSql += "where estado = 'A'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                for (int i = 0; i < dtConsulta.Rows.Count; i++)
+                {
+                    if (Convert.ToInt32(dtConsulta.Rows[i]["credito"].ToString()) == 1)
+                    {
+                        rdbCredito.Tag = dtConsulta.Rows[i]["id_pos_tipo_tarjeta"].ToString();
+                    }
+
+                    else if (Convert.ToInt32(dtConsulta.Rows[i]["debito"].ToString()) == 1)
+                    {
+                        rdbDebito.Tag = dtConsulta.Rows[i]["id_pos_tipo_tarjeta"].ToString();
+                    }
                 }
             }
 
@@ -262,6 +339,7 @@ namespace Palatium
         private void Efectivo_Load(object sender, EventArgs e)
         {
             cargarPrecios();
+            valoresIdentificadores();
 
             if ((sCodigo == "TC") || (sCodigo == "TD"))
             {
@@ -452,12 +530,22 @@ namespace Palatium
             if (txt_valor.Text == "")
             {
                 ok.LblMensaje.Text = "Ingrese valor.";
-                ok.ShowInTaskbar = false;
                 ok.ShowDialog();
             }
 
             else
             {
+                if (iConciliacion == 1)
+                {
+                    if (txtNumeroLote.Text.Trim() == "")
+                    {
+                        ok.LblMensaje.Text = "Ingrese el número de lote.";
+                        ok.ShowDialog();
+                        txtNumeroLote.Focus();
+                        return;
+                    }
+                }
+
                 if (Convert.ToDouble(txt_valor.Text) <= Convert.ToDouble(btnValorSugerido.Text))
                 {
                     dbValorGrid = Convert.ToDecimal(txt_valor.Text);
@@ -471,6 +559,27 @@ namespace Palatium
                 dbValorIngresado = Convert.ToDecimal(txt_valor.Text);
                 dbValorPropina = Convert.ToDecimal(txtPropina.Text.Trim());
                 sNumeroLote = txtNumeroLote.Text.Trim();
+
+                if (rdbDatafast.Checked == true)
+                {
+                    iOperadorTarjeta = Convert.ToInt32(rdbDatafast.Tag);
+                }
+
+                else
+                {
+                    iOperadorTarjeta = Convert.ToInt32(rdbMedianet.Tag);
+                }
+
+                if (rdbCredito.Checked == true)
+                {
+                    iTipoTarjeta = Convert.ToInt32(rdbCredito.Tag);
+                }
+
+                else
+                {
+                    iTipoTarjeta = Convert.ToInt32(rdbDebito.Tag);
+                }
+
                 this.DialogResult = DialogResult.OK;
             }
         }
@@ -488,6 +597,7 @@ namespace Palatium
                 rdbDebito.CheckedChanged += new EventHandler(rdbDebito_CheckedChanged);
 
                 numeroLote("01");
+                iOperadorTarjeta = Convert.ToInt32(rdbDatafast.Tag);
             }
         }
 
@@ -504,6 +614,7 @@ namespace Palatium
                 rdbDebito.CheckedChanged += new EventHandler(rdbDebito_CheckedChanged);
 
                 numeroLote("02");
+                iOperadorTarjeta = Convert.ToInt32(rdbMedianet.Tag);
             }
         }
 
@@ -518,6 +629,8 @@ namespace Palatium
                 rdbDebito.CheckedChanged += new EventHandler(rdbDebito_CheckedChanged);
                 rdbDatafast.CheckedChanged += new EventHandler(rdbDatafast_CheckedChanged);
                 rdbMedianet.CheckedChanged += new EventHandler(rdbMedianet_CheckedChanged);
+
+                iTipoTarjeta = Convert.ToInt32(rdbCredito.Tag);
             }
         }
 
@@ -532,6 +645,8 @@ namespace Palatium
                 rdbCredito.CheckedChanged += new EventHandler(rdbCredito_CheckedChanged);
                 rdbDatafast.CheckedChanged += new EventHandler(rdbDatafast_CheckedChanged);
                 rdbMedianet.CheckedChanged += new EventHandler(rdbMedianet_CheckedChanged);
+
+                iTipoTarjeta = Convert.ToInt32(rdbDebito.Tag);
             }
         }
 
@@ -543,6 +658,17 @@ namespace Palatium
         private void btnValorSugerido_Click(object sender, EventArgs e)
         {
             txt_valor.Text = string.Format("{0:0.00}", btnValorSugerido.Text);
+
+            if (iConciliacion == 1)
+            {
+                if (txtNumeroLote.Text.Trim() == "")
+                {
+                    ok.LblMensaje.Text = "Ingrese el número de lote.";
+                    ok.ShowDialog();
+                    txtNumeroLote.Focus();
+                    return;
+                }
+            }
 
             if (Convert.ToDouble(txt_valor.Text) <= Convert.ToDouble(btnValorSugerido.Text))
             {
@@ -557,6 +683,27 @@ namespace Palatium
             dbValorIngresado = Convert.ToDecimal(txt_valor.Text);
             dbValorPropina = Convert.ToDecimal(txtPropina.Text.Trim());
             sNumeroLote = txtNumeroLote.Text.Trim();
+
+            if (rdbDatafast.Checked == true)
+            {
+                iOperadorTarjeta = Convert.ToInt32(rdbDatafast.Tag);
+            }
+
+            else
+            {
+                iOperadorTarjeta = Convert.ToInt32(rdbMedianet.Tag);
+            }
+
+            if (rdbCredito.Checked == true)
+            {
+                iTipoTarjeta = Convert.ToInt32(rdbCredito.Tag);
+            }
+
+            else
+            {
+                iTipoTarjeta = Convert.ToInt32(rdbDebito.Tag);
+            }
+
             this.DialogResult = DialogResult.OK;
         }
     }

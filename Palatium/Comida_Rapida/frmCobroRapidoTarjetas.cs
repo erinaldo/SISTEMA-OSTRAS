@@ -22,6 +22,9 @@ namespace Palatium.Comida_Rapida
         Clases.ClaseAbrirCajon abrir = new Clases.ClaseAbrirCajon();
 
         string sSql;
+        string sLoteRecuperado;
+        string sFecha;
+        public string sNumeroLote;
 
         bool bRespuesta;
 
@@ -33,6 +36,11 @@ namespace Palatium.Comida_Rapida
         int iCuentaAyudaFormasPagos;
         int iPosXFormasPagos;
         int iPosYFormasPagos;
+        public int iBanderaInsertarLote;
+        public int iConciliacion;
+        public int iOperadorTarjeta;
+        public int iTipoTarjeta;
+
         public int iBanderaRecargo;
         public int iIdFormaPago;
 
@@ -41,6 +49,7 @@ namespace Palatium.Comida_Rapida
 
         public Decimal dbPagar;
         Decimal dbPagarAuxiliar;
+        public Decimal dbValorPropina;
 
         public frmCobroRapidoTarjetas(Decimal dbPagar_P, DataTable dtValores_P)
         {
@@ -266,6 +275,132 @@ namespace Palatium.Comida_Rapida
             }
         }
 
+        //FUNCION PARA ASIGNAR LOS IDENTIFICADORES A LOS RADIO BUTTON
+        private void valoresIdentificadores()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select id_pos_operador_tarjeta, datafast, medianet" + Environment.NewLine;
+                sSql += "from pos_operador_tarjeta" + Environment.NewLine;
+                sSql += "where estado = 'A'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                for (int i = 0; i < dtConsulta.Rows.Count; i++)
+                {
+                    if (Convert.ToInt32(dtConsulta.Rows[i]["datafast"].ToString()) == 1)
+                    {
+                        rdbDatafast.Tag = dtConsulta.Rows[i]["id_pos_operador_tarjeta"].ToString();
+                    }
+
+                    else if (Convert.ToInt32(dtConsulta.Rows[i]["medianet"].ToString()) == 1)
+                    {
+                        rdbMedianet.Tag = dtConsulta.Rows[i]["id_pos_operador_tarjeta"].ToString();
+                    }
+                }
+
+                sSql = "";
+                sSql += "select id_pos_tipo_tarjeta, credito, debito" + Environment.NewLine;
+                sSql += "from pos_tipo_tarjeta" + Environment.NewLine;
+                sSql += "where estado = 'A'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                for (int i = 0; i < dtConsulta.Rows.Count; i++)
+                {
+                    if (Convert.ToInt32(dtConsulta.Rows[i]["credito"].ToString()) == 1)
+                    {
+                        rdbCredito.Tag = dtConsulta.Rows[i]["id_pos_tipo_tarjeta"].ToString();
+                    }
+
+                    else if (Convert.ToInt32(dtConsulta.Rows[i]["debito"].ToString()) == 1)
+                    {
+                        rdbDebito.Tag = dtConsulta.Rows[i]["id_pos_tipo_tarjeta"].ToString();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.Message;
+                catchMensaje.ShowDialog();
+            }
+        }
+
+        //FUNCION PARA EXTRAER EL NUMERO DE LOTE
+        private void numeroLote(string sCodigo_P)
+        {
+            try
+            {
+                sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
+
+                sSql = "";
+                sSql += "select NL.lote" + Environment.NewLine;
+                sSql += "from pos_numero_lote NL INNER JOIN" + Environment.NewLine;
+                sSql += "pos_operador_tarjeta OP ON OP.id_pos_operador_tarjeta = NL.id_pos_operador_tarjeta" + Environment.NewLine;
+                sSql += "and NL.estado = 'A'" + Environment.NewLine;
+                sSql += "and OP.estado = 'A'" + Environment.NewLine;
+                sSql += "where NL.id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and NL.estado_lote = 'Abierta'" + Environment.NewLine;
+                sSql += "and NL.fecha_apertura = '" + sFecha + "'" + Environment.NewLine;
+                sSql += "and OP.codigo = '" + sCodigo_P + "'" + Environment.NewLine;
+                sSql += "and NL.id_pos_jornada = " + Program.iJORNADA;
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return;
+                }
+
+                if (dtConsulta.Rows.Count == 0)
+                {
+                    sLoteRecuperado = "";
+                    txtNumeroLote.Text = sLoteRecuperado;
+                    iBanderaInsertarLote = 1;
+                }
+
+                else
+                {
+                    sLoteRecuperado = dtConsulta.Rows[0]["lote"].ToString().Trim();
+                    txtNumeroLote.Text = sLoteRecuperado;
+                    txtNumeroLote.ReadOnly = true;
+                    iBanderaInsertarLote = 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.Message;
+                catchMensaje.ShowDialog();
+            }
+        }
 
         #endregion
 
@@ -274,6 +409,8 @@ namespace Palatium.Comida_Rapida
             lblTotal.Text = dbPagar.ToString("N2");
             cargarFormasPagosRecargo();
             verificaValorRecargo();
+            valoresIdentificadores();
+            numeroLote("01");
         }
 
         private void btnRemoverPago_Click(object sender, EventArgs e)
@@ -346,7 +483,97 @@ namespace Palatium.Comida_Rapida
             else
             {
                 iIdFormaPago = Convert.ToInt32(dgvPagos.Rows[0].Cells[0].Value);
+
+                dbValorPropina = Convert.ToDecimal(txtPropina.Text.Trim());
+                sNumeroLote = txtNumeroLote.Text.Trim();
+
+                if (rdbDatafast.Checked == true)
+                {
+                    iOperadorTarjeta = Convert.ToInt32(rdbDatafast.Tag);
+                }
+
+                else
+                {
+                    iOperadorTarjeta = Convert.ToInt32(rdbMedianet.Tag);
+                }
+
+                if (rdbCredito.Checked == true)
+                {
+                    iTipoTarjeta = Convert.ToInt32(rdbCredito.Tag);
+                }
+
+                else
+                {
+                    iTipoTarjeta = Convert.ToInt32(rdbDebito.Tag);
+                }
+
                 this.DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void rdbDatafast_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbDatafast.Checked == true)
+            {
+                rdbMedianet.CheckedChanged -= new EventHandler(rdbMedianet_CheckedChanged);
+                rdbCredito.CheckedChanged -= new EventHandler(rdbCredito_CheckedChanged);
+                rdbDebito.CheckedChanged -= new EventHandler(rdbDebito_CheckedChanged);
+                rdbMedianet.Checked = false;
+                rdbMedianet.CheckedChanged += new EventHandler(rdbMedianet_CheckedChanged);
+                rdbCredito.CheckedChanged += new EventHandler(rdbCredito_CheckedChanged);
+                rdbDebito.CheckedChanged += new EventHandler(rdbDebito_CheckedChanged);
+
+                numeroLote("01");
+                iOperadorTarjeta = Convert.ToInt32(rdbDatafast.Tag);
+            }
+        }
+
+        private void rdbMedianet_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbMedianet.Checked == true)
+            {
+                rdbDatafast.CheckedChanged -= new EventHandler(rdbDatafast_CheckedChanged);
+                rdbCredito.CheckedChanged -= new EventHandler(rdbCredito_CheckedChanged);
+                rdbDebito.CheckedChanged -= new EventHandler(rdbDebito_CheckedChanged);
+                rdbDatafast.Checked = false;
+                rdbDatafast.CheckedChanged += new EventHandler(rdbDatafast_CheckedChanged);
+                rdbCredito.CheckedChanged += new EventHandler(rdbCredito_CheckedChanged);
+                rdbDebito.CheckedChanged += new EventHandler(rdbDebito_CheckedChanged);
+
+                numeroLote("02");
+                iOperadorTarjeta = Convert.ToInt32(rdbMedianet.Tag);
+            }
+        }
+
+        private void rdbCredito_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbCredito.Checked == true)
+            {
+                rdbDebito.CheckedChanged -= new EventHandler(rdbDebito_CheckedChanged);
+                rdbDatafast.CheckedChanged -= new EventHandler(rdbDatafast_CheckedChanged);
+                rdbMedianet.CheckedChanged -= new EventHandler(rdbMedianet_CheckedChanged);
+                rdbDebito.Checked = false;
+                rdbDebito.CheckedChanged += new EventHandler(rdbDebito_CheckedChanged);
+                rdbDatafast.CheckedChanged += new EventHandler(rdbDatafast_CheckedChanged);
+                rdbMedianet.CheckedChanged += new EventHandler(rdbMedianet_CheckedChanged);
+
+                iTipoTarjeta = Convert.ToInt32(rdbCredito.Tag);
+            }
+        }
+
+        private void rdbDebito_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbDebito.Checked == true)
+            {
+                rdbCredito.CheckedChanged -= new EventHandler(rdbCredito_CheckedChanged);
+                rdbDatafast.CheckedChanged -= new EventHandler(rdbDatafast_CheckedChanged);
+                rdbMedianet.CheckedChanged -= new EventHandler(rdbMedianet_CheckedChanged);
+                rdbCredito.Checked = false;
+                rdbCredito.CheckedChanged += new EventHandler(rdbCredito_CheckedChanged);
+                rdbDatafast.CheckedChanged += new EventHandler(rdbDatafast_CheckedChanged);
+                rdbMedianet.CheckedChanged += new EventHandler(rdbMedianet_CheckedChanged);
+
+                iTipoTarjeta = Convert.ToInt32(rdbDebito.Tag);
             }
         }
     }
