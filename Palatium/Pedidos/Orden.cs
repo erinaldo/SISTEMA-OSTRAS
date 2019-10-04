@@ -34,6 +34,7 @@ namespace Palatium
         DataTable dtItems;
         DataTable dtSubReceta;
         DataTable dtReceta;
+        DataTable dtLocalidad;
 
         Cursor cursor;
 
@@ -92,8 +93,11 @@ namespace Palatium
         int iIdMovimientoStock;
         int iCgClienteProveedor_Sub;
         int iCgTipoMovimiento_Sub;
+        int iIdLocalidadBodega;
+        int iValorActualMovimiento;
+        int iIdCabeceraMovimiento;
         
-        int[] iRespuesta;
+        //int[] iRespuesta;
 
         Int32 iIdCliente;
 
@@ -111,6 +115,7 @@ namespace Palatium
         string sAsignarNombreMesa = "";
         string sPagaIva_P;
         string sNombreProducto_P;
+        string sCodigoClaseProducto;
 
         string sGuardarComentario;
         string sAnio;
@@ -120,6 +125,7 @@ namespace Palatium
         string sMesCorto;
         string sNombreSubReceta;
         string sReferenciaExterna_Sub;
+        string sNumeroMovimientoSecuencial;
         
         long iMaximo;
 
@@ -153,7 +159,7 @@ namespace Palatium
         double dServicio;
         double valPorcentajeDescuento;
         double dbCantidad;
-        double dbValorActual;
+        
         double dValorDescuento;
         double dbCantidadRecalcular;
         double dbPrecioRecalcular;
@@ -330,8 +336,8 @@ namespace Palatium
                                 break;
                             }
 
-                            boton1[i, j].Tag = h;
-                            boton1[i, j].AccessibleName = items.items[h].iCodigo;
+                            boton1[i, j].Tag = items.items[h].iCodigo;
+                            boton1[i, j].AccessibleName = items.items[h].iCodigoTipoProducto;
                             boton1[i, j].AccessibleDescription = items.items[h].iPagaIva;
                             boton1[i, j].BackColor = Color.FromArgb(255, 255, 128);
 
@@ -439,10 +445,10 @@ namespace Palatium
                             boton5[i, j].Top = i * 80;
                             boton5[i, j].Left = j * 130;
                             boton5[i, j].Visible = true;
-                            boton5[i, j].Tag = h;
+                            boton5[i, j].Tag = items.items[h].iCodigo;
                             boton5[i, j].BackColor = Color.FromArgb(255, 146, 36);
                             boton5[i, j].Text = items.items[h].iDescripcion;
-                            boton5[i, j].AccessibleName = items.items[h].iCodigo;
+                            boton5[i, j].AccessibleName = items.items[h].iCodigoTipoProducto;
                             boton5[i, j].AccessibleDescription = items.items[h].iPagaIva;
                             boton5[i, j].Font = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
 
@@ -511,7 +517,7 @@ namespace Palatium
                 botonSel1 = sender as Button;
                 btn_mitad.BackColor = Color.FromName("DeepSkyBlue");
 
-                precios = new Clases.ClasePreciosItems(Convert.ToInt32(botonSel1.AccessibleName));
+                precios = new Clases.ClasePreciosItems(Convert.ToInt32(botonSel1.Tag));
 
 
                 subindice1 = int.Parse(botonSel.Tag.ToString());
@@ -555,7 +561,8 @@ namespace Palatium
                             sNombreProducto_P = botonSel1.Text.ToString().Trim();
                             dgvPedido.Rows[x].Cells["cantidad"].Value = 1;
                             dgvPedido.Rows[x].Cells["guardada"].Value = 0;
-                            dgvPedido.Rows[x].Cells["idProducto"].Value = items.items[subindice].iCodigo;
+                            //dgvPedido.Rows[x].Cells["idProducto"].Value = items.items[subindice].iCodigo;
+                            dgvPedido.Rows[x].Cells["idProducto"].Value = botonSel1.Tag.ToString();
                             dgvPedido.Rows[x].Cells["cortesia"].Value = 0;
                             dgvPedido.Rows[x].Cells["motivoCortesia"].Value = "";
                             dgvPedido.Rows[x].Cells["cancelar"].Value = 0;
@@ -566,6 +573,7 @@ namespace Palatium
                             dgvPedido.Rows[x].Cells["colIdOrden"].Value = "";
                             sPagaIva_P = botonSel1.AccessibleDescription.ToString().Trim();
                             dgvPedido.Rows[x].Cells["pagaIva"].Value = sPagaIva_P;
+                            dgvPedido.Rows[x].Cells["tipoProducto"].Value = botonSel1.AccessibleName.ToString();
                             
                             if (sPagaIva_P == "1")
                             {
@@ -606,7 +614,7 @@ namespace Palatium
                             if (Program.factorPrecio != 1)
                             {
                                 cantidad = float.Parse("0.5");
-                                dgvPedido.Rows.Insert((dgvPedido.Rows.Count - 1), 0, 0.5, botonSel1.Text.ToString().Trim(), precios.precios[0].sPreciosItems, (cantidad * valoru * Program.factorPrecio).ToString("N2"), 1, 0, items.items[subindice].iCodigo, 0, "", 0, "", "", iVersionImpresionComanda.ToString(), "", "");
+                                dgvPedido.Rows.Insert((dgvPedido.Rows.Count - 1), 0, 0.5, botonSel1.Text.ToString().Trim(), precios.precios[0].sPreciosItems, (cantidad * valoru * Program.factorPrecio).ToString("N2"), 1, 0, botonSel1.Tag.ToString(), 0, "", 0, "", "", iVersionImpresionComanda.ToString(), "", "", botonSel1.AccessibleName.ToString());
                                 cantidad = 0.5f;
 
                                 Program.factorPrecio = 1;
@@ -615,7 +623,7 @@ namespace Palatium
                             else
                             {
                                 cantidad = float.Parse("1");
-                                dgvPedido.Rows.Insert((dgvPedido.Rows.Count - 1), 0, 1, botonSel1.Text.ToString().Trim(), precios.precios[0].sPreciosItems, (cantidad * valoru * Program.factorPrecio).ToString("N2"), 1, 0, items.items[subindice].iCodigo, 0, "", 0, "", "", iVersionImpresionComanda.ToString(), "", "");
+                                dgvPedido.Rows.Insert((dgvPedido.Rows.Count - 1), 0, 1, botonSel1.Text.ToString().Trim(), precios.precios[0].sPreciosItems, (cantidad * valoru * Program.factorPrecio).ToString("N2"), 1, 0, botonSel1.Tag.ToString(), 0, "", 0, "", "", iVersionImpresionComanda.ToString(), "", "", botonSel1.AccessibleName.ToString());
 
                             }
                         }
@@ -672,161 +680,115 @@ namespace Palatium
 
         #endregion
 
-        #region NUEVAS FUNCIONES DE LA RECETA
+        #region FUNCION PARA CREAR UN EGRESO DE PRODUCTO TERMINADO
 
-        //FUNCION PARA CONSULTAR EL ID DE LA RECETA POR PRODUCTO
-        private int obteneridReceta(int iIdProducto_P)
+        //FUNCION PARA RECUPERAR LOS DATOS DE LA LOCALIDAD
+        private bool recuperarDatosLocalidad()
         {
             try
             {
                 sSql = "";
-                sSql += "select isnull(id_pos_receta, 0) id_pos_receta" + Environment.NewLine;
-                sSql += "from cv401_productos" + Environment.NewLine;
-                sSql += "where id_producto = " + iIdProducto_P + Environment.NewLine;
-                sSql += "and estado = 'A'" + Environment.NewLine;
+                sSql += "select * from tp_localidades" + Environment.NewLine;
+                sSql += "where estado = 'A'" + Environment.NewLine;
+                sSql += "and id_localidad = " + Program.iIdLocalidad;
 
-                dtConsulta = new DataTable();
-                dtConsulta.Clear();
+                dtLocalidad = new DataTable();
+                dtLocalidad.Clear();
 
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtLocalidad, sSql);
 
-                if (bRespuesta == true)
+                if (bRespuesta == false)
                 {
-                    if (dtConsulta.Rows.Count > 0)
-                    {
-                        return Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-                    }
-
-                    else
-                    {
-                        return 0;
-                    }
-                }
-
-                else
-                {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
-                    return -1;
+                    return false;
                 }
-                
-            }
 
-            catch(Exception ex)
-            {
-                catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowDialog();
-                return -1;
-            }
-        }
-
-        //FUNCION PAEA OBTENER DATOS DE ID_AUXILIAR, MOTIVMO_MOVIMIENTO, ID_PERSONA
-        private int[] buscarDatos()
-        {
-
-            int[] iRespuesta = new int[3];
-            iRespuesta[0] = 0;
-            iRespuesta[1] = 0;
-            iRespuesta[2] = 0;
-
-            sSql = "";
-            sSql += "select id_responsable, id_auxiliar, cg_motivo_movimiento_bodega" + Environment.NewLine;
-            sSql += "from tp_localidades" + Environment.NewLine;
-            sSql += "where id_localidad = " + Program.iIdLocalidad;
-
-            DataTable dtAyuda = new DataTable();
-            dtAyuda.Clear();
-            if (conexion.GFun_Lo_Busca_Registro(dtAyuda, sSql) == true)
-            {
-                if (dtAyuda.Rows.Count > 0)
-                {
-                    iRespuesta[0] = Convert.ToInt32(dtAyuda.Rows[0][0].ToString());
-                    iRespuesta[1] = Convert.ToInt32(dtAyuda.Rows[0][1].ToString());
-                    iRespuesta[2] = Convert.ToInt32(dtAyuda.Rows[0][2].ToString());
-                }
-            }
-
-            return iRespuesta;
-
-        }
-
-        //FUNCION PARA OBTENER EL ID DE LA BODEGA
-        private int obtenerIdBodega(int iIdLocalidad)
-        {
-            try
-            {
+                //AQUI SE RECUPERA LA LOCALIDAD INSUMO
                 sSql = "";
                 sSql += "select id_localidad_insumo" + Environment.NewLine;
                 sSql += "from tp_localidades" + Environment.NewLine;
-                sSql += "where id_localidad = " + iIdLocalidad + Environment.NewLine;
+                sSql += "where id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
                 sSql += "and estado = 'A'";
 
                 DataTable dtConsulta = new DataTable();
                 dtConsulta.Clear();
 
-                if (conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql) == true)
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
                 {
-                    if (dtConsulta.Rows.Count > 0)
-                    {
-                        int iIdLocalidadBodega = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
 
-                        sSql = "";
-                        sSql += "select id_bodega from tp_localidades" + Environment.NewLine;
-                        sSql += "where id_localidad = " + iIdLocalidadBodega + Environment.NewLine;
-                        sSql += "and estado = 'A'";
-
-                        DataTable dtAyuda = new DataTable();
-                        dtAyuda.Clear();
-                        bRespuesta = conexion.GFun_Lo_Busca_Registro(dtAyuda, sSql);
-
-                        if (bRespuesta == true)
-                        {
-                            if (dtAyuda.Rows.Count > 0)
-                            {
-                                return Convert.ToInt32(dtAyuda.Rows[0][0].ToString());
-                            }
-
-                            else
-                            {
-                                return 0;
-                            }
-                        }
-
-                        else
-                        {
-                            return 0;
-                        }
-                    }
-
-                    else
-                    {
-                        return 0;
-                    }
+                if (dtConsulta.Rows.Count == 0)
+                {
+                    iIdLocalidadBodega = 0;
                 }
 
                 else
                 {
-                    return 0;
+                    iIdLocalidadBodega = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
                 }
+
+                return true;
             }
 
             catch (Exception ex)
             {
                 catchMensaje.LblMensaje.Text = ex.ToString();
                 catchMensaje.ShowDialog();
-                return 0;
+                return false;
+
             }
         }
 
-        //Función para obtener cg_cliente_proveedor
-        private int obtenerCgClienteProveedor()
+        //FUNCION PARA CREAR EL NUMERO DE MOVIMIENTO
+        private bool devuelveCorrelativo(string sTipoMovimiento, int iIdBodega, string sAnio, string sMes, string sCodigoCorrelativo)
         {
             try
             {
+                iValorActualMovimiento = 0;
+                sCodigo = "";
+                sAnioCorto = sAnio.Substring(2, 2);
+
+                if (sMes.Substring(0, 1) == "0")
+                {
+                    sMesCorto = sMes.Substring(1, 1);
+                }
+
+                else
+                {
+                    sMesCorto = sMes;
+                }
+
                 sSql = "";
-                sSql += "select correlativo from tp_codigos" + Environment.NewLine;
-                sSql += "where tabla = 'SYS$00642'" + Environment.NewLine;
-                sSql += "and codigo = '02'" + Environment.NewLine;
+                sSql += "select codigo from cv402_bodegas" + Environment.NewLine;
+                sSql += "where id_bodega = " + iIdBodega;
+
+                dtConsulta = new DataTable();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                sCodigo = dtConsulta.Rows[0][0].ToString();
+
+                string sReferencia;
+
+                sReferencia = sTipoMovimiento + sCodigo + "_" + sAnio + "_" + sMesCorto + "_" + Program.iCgEmpresa;
+
+                sSql = "";
+                sSql += "select valor_actual from tp_correlativos" + Environment.NewLine;
+                sSql += "where referencia = '" + sReferencia + "'" + Environment.NewLine;
+                sSql += "and codigo_correlativo = '" + sCodigoCorrelativo + "'" + Environment.NewLine;
                 sSql += "and estado = 'A'";
 
                 dtConsulta = new DataTable();
@@ -834,82 +796,92 @@ namespace Palatium
 
                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
 
-                if (bRespuesta == true)
+                if (bRespuesta == false)
                 {
-                    if (dtConsulta.Rows.Count > 0)
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                if (dtConsulta.Rows.Count == 0)
+                {
+                    int iCorrelativo;
+
+                    sSql = "";
+                    sSql += "select correlativo from tp_codigos" + Environment.NewLine;
+                    sSql += "where codigo = 'BD'" + Environment.NewLine;
+                    sSql += "and tabla = 'SYS$00022'";
+
+                    dtConsulta = new DataTable();
+                    dtConsulta.Clear();
+
+                    bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                    if (bRespuesta == false)
                     {
-                        return Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
                     }
 
-                    else
+                    iCorrelativo = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+
+                    iValorActualMovimiento = 1;
+                    string sFechaDesde = sAnio + "-01-01";
+                    string sFechaHasta = sAnio + "-12-31";
+                    string sValido_desde = Convert.ToDateTime(sFechaDesde).ToString("yyyy-MM-dd");
+                    string sValido_hasta = Convert.ToDateTime(sFechaHasta).ToString("yyyy-MM-dd");
+
+                    sSql = "";
+                    sSql += "insert into tp_correlativos (" + Environment.NewLine;
+                    sSql += "cg_sistema, codigo_correlativo, referencia, valido_desde," + Environment.NewLine;
+                    sSql += "valido_hasta, valor_actual, desde, hasta, estado, origen_dato," + Environment.NewLine;
+                    sSql += "numero_replica_trigger, estado_replica, numero_control_replica)" + Environment.NewLine;
+                    sSql += "values(" + Environment.NewLine;
+                    sSql += iCorrelativo + ",'" + sCodigoCorrelativo + "','" + sReferencia + "'," + Environment.NewLine;
+                    sSql += "'" + sFechaDesde + "','" + sFechaHasta + "', " + (iValorActualMovimiento + 1) + "," + Environment.NewLine;
+                    sSql += "0, 0, 'A', 1," + (iValorActualMovimiento + 1).ToString("N0") + ", 0, 0)";
+
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        return 0;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
                     }
                 }
 
                 else
                 {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return -1;
+                    iValorActualMovimiento = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+
+                    sSql = "";
+                    sSql += "update tp_correlativos set" + Environment.NewLine;
+                    sSql += "valor_actual = " + (iValorActualMovimiento + 1) + Environment.NewLine;
+                    sSql += "where referencia = '" + sReferencia + "'";
+
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
                 }
+
+                sNumeroMovimientoSecuencial = sTipoMovimiento + sCodigo + sAnioCorto + sMes + iValorActualMovimiento.ToString().PadLeft(4, '0');
+
+                return true;
             }
 
             catch (Exception ex)
             {
                 catchMensaje.LblMensaje.Text = ex.ToString();
                 catchMensaje.ShowDialog();
-                return 0;
+                return false;
             }
         }
 
-        //Función para obtener tipo de movimiento
-        private int obtenerCorrelativoTipoMovimiento()
-        {
-            try
-            {
-                sSql = "";
-                sSql += "select correlativo from tp_codigos" + Environment.NewLine;
-                sSql += "where tabla = 'SYS$00648'" + Environment.NewLine;
-                sSql += "and codigo = 'EMP'" + Environment.NewLine;
-                sSql += "and estado = 'A'";
-
-                dtConsulta = new DataTable();
-                dtConsulta.Clear();
-
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-                if (bRespuesta == true)
-                {
-                    if (dtConsulta.Rows.Count > 0)
-                    {
-                        return Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-                    }
-
-                    else
-                    {
-                        return 0;
-                    }
-                }
-
-                else
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return -1;
-                }
-            }
-
-            catch (Exception ex)
-            {
-                catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowDialog();
-                return -1;
-            }
-        }    
-        
-        //FUNCION PARA ELIMINAR LOS MOVIMIENTOS PARA ACTUALIZAR LA ORDEN
-        private bool eliminarMovimientos(int iIdPedido_P)
+        //FUNCION PARA ELIMINAR LOS MOVIMIENTOS DE BODEGA
+        private bool eliminarMovimientosBodega(int iIdPedido_P)
         {
             try
             {
@@ -962,11 +934,11 @@ namespace Palatium
                         return false;
                     }
                 }
-                
+
                 return true;
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 catchMensaje.LblMensaje.Text = ex.ToString();
                 catchMensaje.ShowDialog();
@@ -974,184 +946,42 @@ namespace Palatium
             }
         }
 
-        //FUNCION  PARA CREAR EL NUMERO DE MOVIMIENTO
-        private string devuelveCorrelativo(string sTipoMovimiento, int iIdBodega, string sAnio, string sMes, string sCodigoCorrelativo)
-        {
-            dbValorActual = 0;
-            sCodigo = "";
-            sAnioCorto = sAnio.Substring(2, 2);
-
-            if (sMes.Substring(0, 1) == "0")
-            {
-                sMesCorto = sMes.Substring(1, 1);
-            }
-
-            else
-            {
-                sMesCorto = sMes;
-            }
-
-            sSql = "";
-            sSql += "select codigo from cv402_bodegas" + Environment.NewLine;
-            sSql += "where id_bodega = " + iIdBodega;
-
-            dtConsulta = new DataTable();
-
-            bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-            if (bRespuesta == true)
-            {
-                if (dtConsulta.Rows.Count > 0)
-                {
-                    sCodigo = dtConsulta.Rows[0][0].ToString();
-                }
-            }
-
-            else
-            {
-                return "Error";
-            }
-
-            string sReferencia;
-
-            sReferencia = sTipoMovimiento + sCodigo + "_" + sAnio + "_" + sMesCorto + "_" + Program.iCgEmpresa;
-
-            sSql = "";
-            sSql += "select valor_actual from tp_correlativos" + Environment.NewLine;
-            sSql += "where referencia = '" + sReferencia + "'" + Environment.NewLine;
-            sSql += "and codigo_correlativo = '" + sCodigoCorrelativo + "'";
-
-            dtConsulta = new DataTable();
-            bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-            if (bRespuesta == true)
-            {
-                if (dtConsulta.Rows.Count > 0)
-                {
-                    dbValorActual = Convert.ToDouble(dtConsulta.Rows[0][0].ToString());
-
-                    sSql = "";
-                    sSql += "update tp_correlativos set" + Environment.NewLine;
-                    sSql += "valor_actual =  " + (dbValorActual + 1) + Environment.NewLine;
-                    sSql += "where referencia = '" + sReferencia + "'";
-
-                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                    {
-                        //hara el rolBAck
-                        return "Error";
-                    }
-
-                    return sTipoMovimiento + sCodigo + sAnioCorto + sMes + dbValorActual.ToString("N0").PadLeft(4, '0');
-
-                }
-
-                else
-                {
-                    int iCorrelativo = 4979;
-                    dbValorActual = 1;
-
-                    sSql = "";
-                    sSql += "select correlativo from tp_codigos" + Environment.NewLine;
-                    sSql += "where codigo = 'BD'" + Environment.NewLine;
-                    sSql += "and tabla = 'SYS$00022'";
-
-                    dtConsulta = new DataTable();
-                    dtConsulta.Clear();
-                    bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-                    if (bRespuesta == true)
-                    {
-                        if (dtConsulta.Rows.Count > 0)
-                        {
-                            iCorrelativo = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-                        }
-                    }
-                    else
-                        return "Error";
-
-                    string sFechaDesde = sAnio + "-01-01";
-                    string sFechaHasta = sAnio + "-12-31";
-                    string sValido_desde = Convert.ToDateTime(sFechaDesde).ToString("yyyy-MM-dd");
-                    string sValido_hasta = Convert.ToDateTime(sFechaHasta).ToString("yyyy-MM-dd");
-
-                    sSql = "";
-                    sSql += "insert into tp_correlativos (" + Environment.NewLine;
-                    sSql += "cg_sistema, codigo_correlativo, referencia, valido_desde," + Environment.NewLine;
-                    sSql += "valido_hasta, valor_actual, desde, hasta, estado, origen_dato," + Environment.NewLine;
-                    sSql += "numero_replica_trigger, estado_replica, numero_control_replica)" + Environment.NewLine;
-                    sSql += "values(" + Environment.NewLine;
-                    sSql += iCorrelativo + ",'" + sCodigoCorrelativo + "','" + sReferencia + "'," + Environment.NewLine;
-                    sSql += "'" + sFechaDesde + "','" + sFechaHasta + "', " + (dbValorActual + 1) + "," + Environment.NewLine;
-                    sSql += "0, 0, 'A', 1," + (dbValorActual + 1).ToString("N0") + ", 0, 0)";
-
-                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                    {
-                        //hara el rolBAck
-                        return "Error";
-                    }
-
-                    return sTipoMovimiento + sCodigo + sAnioCorto + sMes + dbValorActual.ToString("N0").PadLeft(4, '0');
-
-                }
-            }
-            else
-            {
-                return "Error";
-            }
-        }
-
-        //FUNCION PARA INSERTAR EL EGRERO
-        private bool crearEgreso(string sReferenciaExterna_P, int iCgClienteProveedor_P, int iCgTipoMovimiento_P, 
-                                 int iIdPosReceta_P, int iIdProducto_P, double dbCantidad_P)
+        //FUNCION PARA INSERTAR LOS MOVIMIENTOS DE PRODUCTO TERMINADO
+        private bool insertarMovimientoProductoNoProcesado(Decimal dbCantidad_P)
         {
             try
             {
                 string sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
-                sAnio = sFecha.Substring(0, 4);
-                sMes = sFecha.Substring(5, 2);                
+                sAnio = Program.sFechaSistema.ToString("yyyy");
+                sMes = Program.sFechaSistema.ToString("MM");
+                int iIdBodega_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_bodega"].ToString());
 
-                if ((iBanderaDescargaStock == 1) && (iIdPosReceta_P == 0))
-                {
-                    sSql = "";
-                    sSql += "insert Into cv402_movimientos_bodega (" + Environment.NewLine;
-                    sSql += "id_producto, id_movimiento_bodega, cg_unidad_compra, cantidad, estado)" + Environment.NewLine;
-                    sSql += "Values (" + Environment.NewLine;
-                    sSql += iIdProducto_P + ", " + iIdMovimientoStock + ", 546," + (dbCantidad_P * -1) + ", 'A')";
-
-                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                    {
-                        catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                        catchMensaje.ShowDialog();
-                        return false;
-                    }
-
-                    goto retornar;
-                }
-
-                string sNumeroMovimiento = devuelveCorrelativo("EG", iIdBodega, sAnio, sMes, "MOV");
-
-                if (sNumeroMovimiento == "Error")
+                if (devuelveCorrelativo("EG", iIdBodega_P, sAnio, sMes, "MOV") == false)
                 {
                     return false;
                 }
-
-                if (iIdPosReceta_P == 0)
-                {
-                    sReferenciaExterna_P = "ITEMS - ORDEN " + txt_Orden.Text.Trim();
-                }
+                
+                int iCgClienteProveedor_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_cliente_proveedor_PT"].ToString());
+                int iCgTipoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_tipo_movimiento_PT"].ToString());
+                int iCgMotivoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_motivo_movimiento_bodega"].ToString());
+                int iIdAuxiliarSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_auxiliar_salida_PT"].ToString());
+                int iIdPersonaSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_persona_salida_PT"].ToString());
+                string sReferenciaExterna_P = "ITEMS - ORDEN " + txt_Orden.Text.Trim();
 
                 sSql = "";
                 sSql += "insert into cv402_cabecera_movimientos (" + Environment.NewLine;
-                sSql += "idempresa,cg_empresa, id_localidad, id_bodega, cg_cliente_proveedor," + Environment.NewLine;
+                sSql += "idempresa, cg_empresa, id_localidad, id_bodega, cg_cliente_proveedor," + Environment.NewLine;
                 sSql += "cg_tipo_movimiento, numero_movimiento, fecha, cg_moneda_base," + Environment.NewLine;
                 sSql += "referencia_externa, externo, estado, terminal_creacion, fecha_creacion," + Environment.NewLine;
                 sSql += "fecha_ingreso, usuario_ingreso, id_pedido, cg_motivo_movimiento_bodega, orden_trabajo, orden_diseno," + Environment.NewLine;
                 sSql += "Nota_Entrega, Observacion, id_auxiliar, id_persona, usuario_creacion, terminal_ingreso)" + Environment.NewLine;
                 sSql += "values (" + Environment.NewLine;
-                sSql += Program.iIdEmpresa + ", " + Program.iCgEmpresa + ", " + Program.iIdLocalidad + ", " + iIdBodega + "," + Environment.NewLine;
-                sSql += iCgClienteProveedor_P + ", " + iCgTipoMovimiento_P + ", '" + sNumeroMovimiento + "'," + Environment.NewLine;
+                sSql += Program.iIdEmpresa + ", " + Program.iCgEmpresa + ", " + Program.iIdLocalidad + ", " + iIdBodega_P + "," + Environment.NewLine;
+                sSql += iCgClienteProveedor_P + ", " + iCgTipoMovimiento_P + ", '" + sNumeroMovimientoSecuencial + "'," + Environment.NewLine;
                 sSql += "'" + sFecha + "', " + Program.iMoneda + ", '" + sReferenciaExterna_P + "'," + Environment.NewLine;
                 sSql += "1, 'A', '" + Program.sDatosMaximo[1] + "', '" + sFecha + "', GETDATE()," + Environment.NewLine;
-                sSql += "'" + Program.sDatosMaximo[0] + "', " + iIdPedido + ", " + iRespuesta[2] + ", '', '', '', '', " + iRespuesta[1] + ", " + Environment.NewLine;
-                sSql += iRespuesta[0] + ", '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+                sSql += "'" + Program.sDatosMaximo[0] + "', " + iIdPedido + ", " + iCgMotivoMovimiento_P + ", '', '', '', '', " + iIdAuxiliarSalida_P + ", " + Environment.NewLine;
+                sSql += iIdPersonaSalida_P + ", '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
@@ -1160,352 +990,25 @@ namespace Palatium
                     return false;
                 }
 
-                //OBTENER EL MÁXIMO DE LA CABECERA
-                int iMaximo_P = 0;
+                sCampo = "id_movimiento_bodega";
+                sTabla = "cv402_cabecera_movimientos";
 
-                sSql = "";
-                sSql += "select max(Id_Movimiento_Bodega) New_Codigo" + Environment.NewLine;
-                sSql += "from cv402_cabecera_movimientos" + Environment.NewLine;
-                sSql += "where estado = 'A'";
+                iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
 
-                dtConsulta = new DataTable();
-                dtConsulta.Clear();
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-                if (bRespuesta == true)
+                if (iMaximo == -1)
                 {
-                    if (dtConsulta.Rows.Count > 0)
-                    {
-                        iMaximo_P = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-                    }
-
-                    else
-                    {
-                        catchMensaje.LblMensaje.Text = "No se pudo obtener el identificador de la tabla cv402_cabecera_movimientos";
-                        catchMensaje.ShowDialog();
-                        return false;
-                    }
-                }
-
-                else
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
+                    ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
+                    ok.ShowDialog();
                     return false;
                 }
 
-
-                /* VARIABLE IRECETAINSUMO
-                    ESTA VARIABLE PERMITE VERIFICAR SI ES RECETA O UN ITEM PARA DESCARGAR 
-                    1 - MANEJA RECETA
-                    0 - MANEJA INSUMO
-                */
-
-                if (iIdPosReceta_P != 0)
-                {
-                    iCgClienteProveedor_Sub = iCgClienteProveedor_P;
-                    iCgTipoMovimiento_Sub = iCgTipoMovimiento_P;
-                    sReferenciaExterna_Sub = sReferenciaExterna_P;
-
-                    if (insertarComponentesReceta(iIdPosReceta_P, iMaximo_P, dbCantidad_P) == false)
-                    {
-                        return false;
-                    }
-                }
-
-                else
-                {
-                    sSql = "";
-                    sSql += "insert Into cv402_movimientos_bodega (" + Environment.NewLine;
-                    sSql += "id_producto, id_movimiento_bodega, cg_unidad_compra, cantidad, estado)" + Environment.NewLine;
-                    sSql += "Values (" + Environment.NewLine;
-                    sSql += iIdProducto_P + ", " + iMaximo_P + ", 546," + (dbCantidad_P * -1) + ", 'A')";
-
-                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                    {
-                        catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                        catchMensaje.ShowDialog();
-                        return false;
-                    }
-
-                    iBanderaDescargaStock = 1;
-                    iIdMovimientoStock = iMaximo_P;
-                }
-
-                retornar: { }
-                return true;
-            }
-
-            catch (Exception ex)
-            {
-                catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowDialog();
-                return false;
-            }
-        }
-
-        //FUNCION PARA INSERTAR LOS DATOS DE LA RECETA EN LOS MOVIMIENTOS DE BODEGA
-        private bool insertarComponentesReceta(int iIdPosReceta_P, int iIdMovimientoBodega_P, double dbCantidadPedida_P)
-        {
-            try
-            {
-                sSql = "";
-                sSql += "select id_producto, cantidad_bruta" + Environment.NewLine;
-                sSql += "from pos_detalle_receta" + Environment.NewLine;
-                sSql += "where id_pos_receta = " + iIdPosReceta_P + Environment.NewLine;
-                sSql += "and estado = 'A'";
-
-                dtReceta = new DataTable();
-                dtReceta.Clear();
-
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtReceta, sSql);
-
-                if (bRespuesta == false)
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return false;
-                }
-
-                for (int i = 0; i < dtReceta.Rows.Count; i++)
-                {                    
-                    int iIdProducto_R = Convert.ToInt32(dtReceta.Rows[i][0].ToString());
-                    double dbCantidad_R = Convert.ToDouble(dtReceta.Rows[i][1].ToString());
-                    iIdPosSubReceta = 0;
-                    
-                    //VARIABLE PARA COCNSULTAR SI TIENE SUBRECETA
-                    int iSubReceta_R = consultarSubReceta(iIdProducto_R);                    
-
-                    if (iSubReceta_R == 0)
-                    {
-                        sSql = "";
-                        sSql += "insert into cv402_movimientos_bodega (" + Environment.NewLine;
-                        sSql += "id_producto, id_movimiento_bodega, cg_unidad_compra, cantidad, estado)" + Environment.NewLine;
-                        sSql += "Values (" + Environment.NewLine;
-                        sSql += iIdProducto_R + ", " + iIdMovimientoBodega_P + ", 546," + (dbCantidad_R * dbCantidadPedida_P * -1) + ", 'A')";
-
-                        if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                        {
-                            catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                            catchMensaje.ShowDialog();
-                            return false;
-                        }
-                    }
-
-                    else if (iSubReceta_R == 1)
-                    {
-                        if (insertarComponentesSubReceta(iIdPosSubReceta, iIdMovimientoBodega_P, dbCantidadPedida_P) == false)
-                        {
-                            return false;
-                        }
-                    }
-                }
-
-                return true;
-            }
-
-            catch (Exception ex)
-            {
-                catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowDialog();
-                return false;
-            }
-        }
-
-        //FUNCION PARA VERIFICAR SI EL ITEM TIENE SUBRECETA
-        private int consultarSubReceta(int iIdProducto_P)
-        {
-            try
-            {
-                sSql = "";
-                sSql += "select TR.complementaria, R.id_pos_receta, R.descripcion" + Environment.NewLine;
-                sSql += "from cv401_productos P, pos_receta R," + Environment.NewLine;
-                sSql += "pos_tipo_receta TR" + Environment.NewLine;
-                sSql += "where P.id_pos_receta = R.id_pos_receta" + Environment.NewLine;
-                sSql += "and R.id_pos_tipo_receta = TR.id_pos_tipo_receta" + Environment.NewLine;
-                sSql += "and P.estado = 'A'" + Environment.NewLine;
-                sSql += "and R.estado = 'A'" + Environment.NewLine;
-                sSql += "and TR.estado = 'A'" + Environment.NewLine;
-                sSql += "and P.id_producto = " + iIdProducto_P;
-
-                dtSubReceta = new DataTable();
-                dtSubReceta.Clear();
-
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtSubReceta, sSql);
-
-                if (bRespuesta == true)
-                {
-                    if (dtSubReceta.Rows.Count > 0)
-                    {
-                        iIdPosSubReceta = Convert.ToInt32(dtSubReceta.Rows[0][1].ToString());
-                        sNombreSubReceta = dtSubReceta.Rows[0][2].ToString().ToUpper();
-                        return Convert.ToInt32(dtSubReceta.Rows[0][0].ToString());
-                    }
-
-                    else
-                    {
-                        return 0;
-                    }
-                }
-
-                else
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return -1;
-                }
-            }
-
-            catch (Exception ex)
-            {
-                catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowDialog();
-                return -1;
-            }
-        }
-
-        //FUNCION PARA INSERTAR LOS ITEMS DE LA SUBRECETA
-        private bool insertarComponentesSubReceta(int iIdPosSubReceta_P, int iIdMovimientoBodega_P, double dbCantidadPedida_P)
-        {
-            try
-            {
-                string sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
-                sAnio = sFecha.Substring(0, 4);
-                sMes = sFecha.Substring(5, 2);
-
-                string sNumeroMovimiento_R = devuelveCorrelativo("EG", iIdBodega, sAnio, sMes, "MOV");
-
-                if (sNumeroMovimiento_R == "Error")
-                {
-                    return false;
-                }
-
-                int iIdMaximoCabMov = crearCabeceraMovimiento(sNumeroMovimiento_R, iCgClienteProveedor_Sub, iCgTipoMovimiento_Sub, sNombreSubReceta + " - " + sReferenciaExterna_Sub);
-
-                if (iIdMaximoCabMov  == -1)
-                {
-                    return false;
-                }
-
-                sSql = "";
-                sSql += "select id_producto, cantidad_bruta" + Environment.NewLine;
-                sSql += "from pos_detalle_receta" + Environment.NewLine;
-                sSql += "where id_pos_receta = " + iIdPosSubReceta_P + Environment.NewLine;
-                sSql += "and estado = 'A'";
-
-                dtSubReceta = new DataTable();
-                dtSubReceta.Clear();
-
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtSubReceta, sSql);
-
-                if (bRespuesta == false)
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return false;
-                }
+                iIdCabeceraMovimiento = Convert.ToInt32(iMaximo);
                 
-                for (int i = 0; i < dtSubReceta.Rows.Count; i++)
-                {
-                    int iIdProducto_R = Convert.ToInt32(dtSubReceta.Rows[i][0].ToString());
-                    double dbCantidad_R = Convert.ToDouble(dtSubReceta.Rows[i][1].ToString());
-                    iIdPosSubReceta = 0;
-
-                    if (crearMovimientosBodega(iIdProducto_R, iIdMaximoCabMov, dbCantidad_R, dbCantidadPedida_P) == false)
-                    {
-                        return false;
-                    }                    
-                }
-
-                return true;
-            }
-
-            catch (Exception ex)
-            {
-                catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowDialog();
-                return false;
-            }
-        }
-
-        //FUNCION PARA INSERTAR LA CABECERA Y RECUPERAR EL ID DEL MOVIMIENTO
-        private int crearCabeceraMovimiento(string sNumeroMovimiento_P, int iCgClienteProveedor_P, int iCgTipoMovimiento_P, string sReferenciaExterna_P)
-        {
-            try
-            {
-                string sFecha_R = Program.sFechaSistema.ToString("yyyy-MM-dd");
-
                 sSql = "";
-                sSql += "insert into cv402_cabecera_movimientos (" + Environment.NewLine;
-                sSql += "idempresa,cg_empresa, id_localidad, id_bodega, cg_cliente_proveedor," + Environment.NewLine;
-                sSql += "cg_tipo_movimiento, numero_movimiento, fecha, cg_moneda_base," + Environment.NewLine;
-                sSql += "referencia_externa, externo, estado, terminal_creacion, fecha_creacion," + Environment.NewLine;
-                sSql += "fecha_ingreso, usuario_ingreso, id_pedido, cg_motivo_movimiento_bodega, orden_trabajo, orden_diseno," + Environment.NewLine;
-                sSql += "Nota_Entrega, Observacion, id_auxiliar, id_persona, usuario_creacion, terminal_ingreso)" + Environment.NewLine;
-                sSql += "values (" + Environment.NewLine;
-                sSql += Program.iIdEmpresa + ", " + Program.iCgEmpresa + ", " + Program.iIdLocalidad + ", " + iIdBodega + "," + Environment.NewLine;
-                sSql += iCgClienteProveedor_P + ", " + iCgTipoMovimiento_P + ", '" + sNumeroMovimiento_P + "'," + Environment.NewLine;
-                sSql += "'" + sFecha_R + "', " + Program.iMoneda + ", '" + sReferenciaExterna_P + "'," + Environment.NewLine;
-                sSql += "1, 'A', '" + Program.sDatosMaximo[1] + "', '" + sFecha + "', GETDATE()," + Environment.NewLine;
-                sSql += "'" + Program.sDatosMaximo[0] + "', " + iIdPedido + ", " + iRespuesta[2] + ", '', '', '', '', " + iRespuesta[1] + ", " + Environment.NewLine;
-                sSql += iRespuesta[0] + ", '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
-
-                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return -1;
-                }
-
-                //OBTENER EL MÁXIMO DE LA CABECERA
-                sSql = "";
-                sSql += "select max(Id_Movimiento_Bodega) New_Codigo" + Environment.NewLine;
-                sSql += "from cv402_cabecera_movimientos" + Environment.NewLine;
-                sSql += "where estado = 'A'";
-
-                dtConsulta = new DataTable();
-                dtConsulta.Clear();
-                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-                if (bRespuesta == true)
-                {
-                    if (dtConsulta.Rows.Count > 0)
-                    {
-                        return Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-                    }
-
-                    else
-                    {
-                        catchMensaje.LblMensaje.Text = "No se pudo obtener el identificador de la tabla cv402_cabecera_movimientos";
-                        catchMensaje.ShowDialog();
-                        return -1;
-                    }
-                }
-
-                else
-                {
-                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                    catchMensaje.ShowDialog();
-                    return -1;
-                }
-            }
-
-            catch(Exception ex)
-            {
-                catchMensaje.LblMensaje.Text = ex.ToString();
-                catchMensaje.ShowDialog();
-                return -1;
-            }
-        }
-
-        //FUNCION PARA INSERTAR EL DETALLE DEL MOVIMIENTO
-        private bool crearMovimientosBodega(int iIdProducto_R, int iIdMovimientoBodega_P, double dbCantidad_R, double dbCantidadPedida_P)
-        {
-            try
-            {
-                sSql = "";
-                sSql += "insert into cv402_movimientos_bodega (" + Environment.NewLine;
+                sSql += "insert Into cv402_movimientos_bodega (" + Environment.NewLine;
                 sSql += "id_producto, id_movimiento_bodega, cg_unidad_compra, cantidad, estado)" + Environment.NewLine;
                 sSql += "Values (" + Environment.NewLine;
-                sSql += iIdProducto_R + ", " + iIdMovimientoBodega_P + ", 546," + (dbCantidad_R * dbCantidadPedida_P * -1) + ", 'A')";
+                sSql += iIdProducto_P + ", " + iIdCabeceraMovimiento + ", 546," + (dbCantidad_P * -1) + ", 'A')";
 
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
@@ -1524,6 +1027,8 @@ namespace Palatium
                 return false;
             }
         }
+
+
 
         #endregion
 
@@ -1560,7 +1065,7 @@ namespace Palatium
 
                 else
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                 }
 
@@ -1598,7 +1103,7 @@ namespace Palatium
 
                 else
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                 }
             }
@@ -1642,7 +1147,7 @@ namespace Palatium
                 }
                 else
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     this.Close();
                 }
@@ -1798,6 +1303,8 @@ namespace Palatium
 
                         sPagaIva_P = dtConsulta.Rows[i][17].ToString();
                         dgvPedido[16, x].Value = sPagaIva_P;
+
+                        dgvPedido[17, x].Value = dtConsulta.Rows[i]["codigo"].ToString();
 
                         if (sPagaIva_P == "1")
                         {
@@ -1999,7 +1506,7 @@ namespace Palatium
                     //EJECUTA LA INSTRUCCION DE ACTUALIZACION (ELIMINACION)
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         return false;
                     }
@@ -2016,7 +1523,7 @@ namespace Palatium
                     //EJECUTA LA INSTRUCCION DE ACTUALIZACION (ELIMINACION)
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         return false;
                     }
@@ -2033,7 +1540,7 @@ namespace Palatium
                     //EJECUTA LA INSTRUCCION DE ACTUALIZACION (ELIMINACION)
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         return false;
                     }
@@ -2050,7 +1557,7 @@ namespace Palatium
                     //EJECUTA LA INSTRUCCION DE ACTUALIZACION (ELIMINACION)
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         return false;
                     }
@@ -2125,7 +1632,7 @@ namespace Palatium
 
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         goto reversa;
                     }
@@ -2222,7 +1729,7 @@ namespace Palatium
 
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         goto reversa;
                     }
@@ -2254,6 +1761,15 @@ namespace Palatium
         {
             try
             {
+                //ACTUALIZACION
+                //FECHA: 2019-10-04
+                //ELIMINACION DE MOVIMIENTOS DE BODEGA
+
+                if (eliminarMovimientosBodega(iIdPedido) == false)
+                {
+                    return false;
+                }
+
                 //QUERY PARA ACTUALIZAR LA ORDEN EN CASO DE QUE SOLICITEN CONSUMO DE ALIMENTOS
                 sSql = "";
                 sSql += "update cv403_cab_pedidos set" + Environment.NewLine;                
@@ -2279,7 +1795,7 @@ namespace Palatium
                 //EJECUCIÓN DE INSTRUCCION SQL
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -2294,7 +1810,7 @@ namespace Palatium
                 //EJECUCION DE INSTRUCCION SQL
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -2309,21 +1825,21 @@ namespace Palatium
                 //EJECUCION DE INSTRUCCION SQL
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
 
                 //RECORRER EL DATAGRID EN CASO DE QUE EL SISTEMA ESTÉ HABILITADO PARA DESCARGAR EL INVENTARIO
-                if (Program.iUsarReceta == 1)
-                {
-                    //FUNCIONES PARA LA BODEGA
-                    //--------------------------------------------------------------------------------
-                    if (eliminarMovimientos(iIdPedido) == false)
-                    {
-                        return false;
-                    }
-                }
+                //if (Program.iUsarReceta == 1)
+                //{
+                //    //FUNCIONES PARA LA BODEGA
+                //    //--------------------------------------------------------------------------------
+                //    if (eliminarMovimientos(iIdPedido) == false)
+                //    {
+                //        return false;
+                //    }
+                //}
                 //--------------------------------------------------------------------------------
 
                 //QUERY PARA BUSCAR LOS DETALLES DE LOS ITEMS DEL PEDIDO Y PONERLOS EN ESTADO 'E'
@@ -2361,7 +1877,7 @@ namespace Palatium
                             //EJECUCION DE INSTRUCCION SQL
                             if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                             {
-                                catchMensaje.LblMensaje.Text = sSql;
+                                catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                                 catchMensaje.ShowDialog();
                                 return false;
                             }
@@ -2371,7 +1887,7 @@ namespace Palatium
 
                 else
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -2403,7 +1919,7 @@ namespace Palatium
                         //EJECUCION DE INSTRUCCION SQL
                         if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                         {
-                            catchMensaje.LblMensaje.Text = sSql;
+                            catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                             catchMensaje.ShowDialog();
                             return false;
                         }
@@ -2412,7 +1928,7 @@ namespace Palatium
 
                 else
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -2435,6 +1951,7 @@ namespace Palatium
                     iSecuenciaImpresion = Convert.ToInt32(dgvPedido.Rows[i].Cells["colSecuenciaImpresion"].Value);
                     dValorDescuento = Convert.ToDouble(dgvPedido.Rows[i].Cells["guardada"].Value);
                     sPagaIva_P = dgvPedido.Rows[i].Cells["pagaIva"].Value.ToString();
+                    sCodigoClaseProducto = dgvPedido.Rows[i].Cells["tipoProducto"].Value.ToString();
                     dServicio = 0;
 
                     //ACTUALIZACION DE CODIGO PARA RECALCULAR EL PORCENTAJE DE SERVICIO
@@ -2567,9 +2084,24 @@ namespace Palatium
                     //EJECUCION DE INSTRUCCION SQL
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         return false;
+                    }
+
+                    //ACTUALIZACION
+                    //FECHA: 2019-10-04
+                    //OBJETIVO: IMPLEMENTAR EL DESCARGO DE PRODUCTOS NO PROCESADOS DE INVENTARIO
+
+                    if (sCodigoClaseProducto.Trim() == "02")
+                    {
+                        if (Program.iDescargarProductosNoProcesados == 1)
+                        {
+                            if (insertarMovimientoProductoNoProcesado(Convert.ToDecimal(dCantidad_P)) == false)
+                            {
+                                return false;
+                            }
+                        }
                     }
 
                     iBandera2 = 0;
@@ -2636,7 +2168,7 @@ namespace Palatium
                             //EJECUCION DE INSTRUCCION SQL
                             if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                             {
-                                catchMensaje.LblMensaje.Text = sSql;
+                                catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                                 catchMensaje.ShowDialog();
                                 return false;
                             }
@@ -2645,53 +2177,53 @@ namespace Palatium
                 }
 
 
-                //RECORRER EL DATAGRID EN CASO DE QUE EL SISTEMA ESTÉ HABILITADO PARA DESCARGAR EL INVENTARIO
-                if (Program.iUsarReceta == 1)
-                {
-                    iIdBodega = obtenerIdBodega(Program.iIdLocalidad);
+                ////RECORRER EL DATAGRID EN CASO DE QUE EL SISTEMA ESTÉ HABILITADO PARA DESCARGAR EL INVENTARIO
+                //if (Program.iUsarReceta == 1)
+                //{
+                //    iIdBodega = obtenerIdBodega(Program.iIdLocalidad);
 
-                    if (iIdBodega == 0)
-                    {
-                        goto continuar_proceso;
-                    }
+                //    if (iIdBodega == 0)
+                //    {
+                //        goto continuar_proceso;
+                //    }
 
-                    iCgClienteProveedor = obtenerCgClienteProveedor();
-                    iTipoMovimiento = obtenerCorrelativoTipoMovimiento();
+                //    iCgClienteProveedor = obtenerCgClienteProveedor();
+                //    iTipoMovimiento = obtenerCorrelativoTipoMovimiento();
 
-                    if (iCgClienteProveedor == 0 || iTipoMovimiento == 0)
-                    {
-                        goto continuar_proceso;
-                    }
+                //    if (iCgClienteProveedor == 0 || iTipoMovimiento == 0)
+                //    {
+                //        goto continuar_proceso;
+                //    }
 
-                    iRespuesta = buscarDatos();
+                //    iRespuesta = buscarDatos();
 
-                    if (iRespuesta[0] == 0)
-                    {
-                        goto continuar_proceso;
-                    }
+                //    if (iRespuesta[0] == 0)
+                //    {
+                //        goto continuar_proceso;
+                //    }
 
-                    for (int i = 0; i < dgvPedido.Rows.Count; i++)
-                    {
-                        string sNombreProducto_P = dgvPedido.Rows[i].Cells["producto"].Value.ToString().Trim();
-                        iIdProducto_P = Convert.ToInt32(dgvPedido.Rows[i].Cells["idProducto"].Value);
-                        dCantidad_P = Convert.ToDouble(dgvPedido.Rows[i].Cells["cantidad"].Value);
-                        iIdPosReceta = obteneridReceta(iIdProducto_P);
+                //    for (int i = 0; i < dgvPedido.Rows.Count; i++)
+                //    {
+                //        string sNombreProducto_P = dgvPedido.Rows[i].Cells["producto"].Value.ToString().Trim();
+                //        iIdProducto_P = Convert.ToInt32(dgvPedido.Rows[i].Cells["idProducto"].Value);
+                //        dCantidad_P = Convert.ToDouble(dgvPedido.Rows[i].Cells["cantidad"].Value);
+                //        iIdPosReceta = obteneridReceta(iIdProducto_P);
 
-                        if (iIdPosReceta == -1)
-                        {
-                            return false;
-                        }
+                //        if (iIdPosReceta == -1)
+                //        {
+                //            return false;
+                //        }
 
-                        else
-                        {
-                            if (crearEgreso(sNombreProducto_P + " - ORDEN " + txt_Orden.Text.Trim(), iCgClienteProveedor,
-                                        iTipoMovimiento, iIdPosReceta, iIdProducto_P, dCantidad_P) == false)
-                            {
-                                return false;
-                            }
-                        }
-                    }
-                }
+                //        else
+                //        {
+                //            if (crearEgreso(sNombreProducto_P + " - ORDEN " + txt_Orden.Text.Trim(), iCgClienteProveedor,
+                //                        iTipoMovimiento, iIdPosReceta, iIdProducto_P, dCantidad_P) == false)
+                //            {
+                //                return false;
+                //            }
+                //        }
+                //    }
+                //}
 
                 iIdMovimientoStock = 0;
                 iBanderaDescargaStock = 0;
@@ -2713,7 +2245,7 @@ namespace Palatium
                     //EJECUCION DE INSTRUCCION SQL
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         return false;
                     }
@@ -2731,7 +2263,7 @@ namespace Palatium
                 //EJECUCION DE INSTRUCCION SQL
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -2762,7 +2294,7 @@ namespace Palatium
                 //EJECUCION DE INSTRUCCION SQL
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -2926,7 +2458,7 @@ namespace Palatium
                 //EJECUCION DE INSTRUCCION SQL
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -2949,7 +2481,7 @@ namespace Palatium
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
                     //EJECUCION DE INSTRUCCION SQL
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -2995,7 +2527,7 @@ namespace Palatium
 
                 else
                 {
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }                    
@@ -3009,7 +2541,7 @@ namespace Palatium
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
                     //EJECUCION DE INSTRUCCION SQL
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -3027,7 +2559,7 @@ namespace Palatium
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
                     //EJECUCION DE INSTRUCCION SQL
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -3066,7 +2598,7 @@ namespace Palatium
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
                     //EJECUCION DE INSTRUCCION SQL
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -3106,7 +2638,7 @@ namespace Palatium
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
                     //EJECUCION DE INSTRUCCION SQL
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -3148,7 +2680,7 @@ namespace Palatium
                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                 {
                     //EJECUCION DE INSTRUCCION SQL
-                    catchMensaje.LblMensaje.Text = sSql;
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                     catchMensaje.ShowDialog();
                     return false;
                 }
@@ -3168,6 +2700,7 @@ namespace Palatium
                     iSecuenciaImpresion = Convert.ToInt32(dgvPedido.Rows[i].Cells["colSecuenciaImpresion"].Value);
                     dValorDescuento = Convert.ToDouble(dgvPedido.Rows[i].Cells["guardada"].Value);
                     sPagaIva_P = dgvPedido.Rows[i].Cells["pagaIva"].Value.ToString();
+                    sCodigoClaseProducto = dgvPedido.Rows[i].Cells["tipoProducto"].Value.ToString();
                     dServicio = 0;
 
                     //ACTUALIZACION DE CODIGO PARA RECALCULAR EL PORCENTAJE DE SERVICIO
@@ -3301,10 +2834,26 @@ namespace Palatium
                     //FUNCION PARA EJECUTAR LA INSTRUCCION SQL
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         return false;
                     }
+
+                    //ACTUALIZACION
+                    //FECHA: 2019-10-04
+                    //OBJETIVO: IMPLEMENTAR EL DESCARGO DE PRODUCTOS NO PROCESADOS DE INVENTARIO
+
+                    if (sCodigoClaseProducto.Trim() == "02")
+                    {
+                        if (Program.iDescargarProductosNoProcesados == 1)
+                        {
+                            if (insertarMovimientoProductoNoProcesado(Convert.ToDecimal(dCantidad_P)) == false)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+
 
                     iBandera2 = 0;
                     iCuenta = 0;
@@ -3368,7 +2917,7 @@ namespace Palatium
                             //EJECUTA SQL
                             if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                             {
-                                catchMensaje.LblMensaje.Text = sSql;
+                                catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                                 catchMensaje.ShowDialog();
                                 return false;
                             }
@@ -3387,59 +2936,59 @@ namespace Palatium
                     //EJECUCION DE INSTRUCCION SQL
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         return false;
                     }
                 }
 
-                //RECORRER EL DATAGRID EN CASO DE QUE EL SISTEMA ESTÉ HABILITADO PARA DESCARGAR EL INVENTARIO
-                if (Program.iUsarReceta == 1)
-                {
-                    iIdBodega = obtenerIdBodega(Program.iIdLocalidad);
+                ////RECORRER EL DATAGRID EN CASO DE QUE EL SISTEMA ESTÉ HABILITADO PARA DESCARGAR EL INVENTARIO
+                //if (Program.iUsarReceta == 1)
+                //{
+                //    iIdBodega = obtenerIdBodega(Program.iIdLocalidad);
 
-                    if (iIdBodega == 0)
-                    {
-                        goto continuar_proceso;
-                    }
+                //    if (iIdBodega == 0)
+                //    {
+                //        goto continuar_proceso;
+                //    }
 
-                    iCgClienteProveedor = obtenerCgClienteProveedor();
-                    iTipoMovimiento = obtenerCorrelativoTipoMovimiento();
+                //    iCgClienteProveedor = obtenerCgClienteProveedor();
+                //    iTipoMovimiento = obtenerCorrelativoTipoMovimiento();
 
-                    if (iCgClienteProveedor == 0 || iTipoMovimiento == 0)
-                    {
-                        goto continuar_proceso;
-                    }
+                //    if (iCgClienteProveedor == 0 || iTipoMovimiento == 0)
+                //    {
+                //        goto continuar_proceso;
+                //    }
 
-                    iRespuesta = buscarDatos();
+                //    iRespuesta = buscarDatos();
 
-                    if (iRespuesta[0] == 0)
-                    {
-                        goto continuar_proceso;
-                    }
+                //    if (iRespuesta[0] == 0)
+                //    {
+                //        goto continuar_proceso;
+                //    }
 
-                    for (int i = 0; i < dgvPedido.Rows.Count; i++)
-                    {
-                        string sNombreProducto_P = dgvPedido.Rows[i].Cells["producto"].Value.ToString().Trim();
-                        iIdProducto_P = Convert.ToInt32(dgvPedido.Rows[i].Cells["idProducto"].Value);
-                        dCantidad_P = Convert.ToDouble(dgvPedido.Rows[i].Cells["cantidad"].Value);
-                        iIdPosReceta = obteneridReceta(iIdProducto_P);
+                //    for (int i = 0; i < dgvPedido.Rows.Count; i++)
+                //    {
+                //        string sNombreProducto_P = dgvPedido.Rows[i].Cells["producto"].Value.ToString().Trim();
+                //        iIdProducto_P = Convert.ToInt32(dgvPedido.Rows[i].Cells["idProducto"].Value);
+                //        dCantidad_P = Convert.ToDouble(dgvPedido.Rows[i].Cells["cantidad"].Value);
+                //        iIdPosReceta = obteneridReceta(iIdProducto_P);
 
-                        if (iIdPosReceta == -1)
-                        {
-                            return false;
-                        }
+                //        if (iIdPosReceta == -1)
+                //        {
+                //            return false;
+                //        }
 
-                        else
-                        {
-                            if (crearEgreso(sNombreProducto_P + " - ORDEN " + iNumeroPedidoOrden.ToString(), iCgClienteProveedor, 
-                                        iTipoMovimiento, iIdPosReceta, iIdProducto_P, dCantidad_P) == false)
-                            {
-                                return false;
-                            }
-                        }
-                    }
-                }
+                //        else
+                //        {
+                //            if (crearEgreso(sNombreProducto_P + " - ORDEN " + iNumeroPedidoOrden.ToString(), iCgClienteProveedor, 
+                //                        iTipoMovimiento, iIdPosReceta, iIdProducto_P, dCantidad_P) == false)
+                //            {
+                //                return false;
+                //            }
+                //        }
+                //    }
+                //}
 
                 iIdMovimientoStock = 0;
                 iBanderaDescargaStock = 0;
@@ -3459,7 +3008,7 @@ namespace Palatium
                     //EJECUCION DE INSTRUCCION SQL
                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
                     {
-                        catchMensaje.LblMensaje.Text = sSql;
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
                         catchMensaje.ShowDialog();
                         return false;
                     }
@@ -3601,6 +3150,12 @@ namespace Palatium
                 else
                 {
                     iNumeroPersonas = Convert.ToInt32(txt_numeropersonas.Text);
+                }
+
+                //AQUI CONSULTAMOS LOS VALORES DE LA TABLA TP_LOCALIDADES
+                if (recuperarDatosLocalidad() == false)
+                {
+                    goto fin;
                 }
 
                 //INICIAMOS UNA NUEVA TRANSACCION

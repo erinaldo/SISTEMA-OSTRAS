@@ -50,6 +50,7 @@ namespace Palatium.Bodega
         int iIdProveedor;
         int iIdPersona;
         int iIdOficina;
+        int iCgTipoMovimiento;
 
         string sFechaInsertar;
         string sReferenciaInsertar;
@@ -102,7 +103,7 @@ namespace Palatium.Bodega
                                     string sCodigoCorrelativo_P, int iMotivo_P, int iIdProveedor_P,
                                     int iIdPersona_P, int iIdOficina_P, string sFechaInsertar_P, string sReferenciaInsertar_P,
                                     string sNotaPedido_P, string sFacturaCompra_P, string sNotaEntrega_P, string sComentarios_P,
-                                    string sIva_P, string sDescuento_P, DataGridView dgvDatos_P)
+                                    string sIva_P, string sDescuento_P, DataGridView dgvDatos_P, int iCgTipoMovimiento_P)
         {
             try
             {
@@ -126,6 +127,7 @@ namespace Palatium.Bodega
                 this.sIva = sIva_P;
                 this.sDescuento = sDescuento_P;
                 this.dgvDatos = dgvDatos_P;
+                this.iCgTipoMovimiento = iCgTipoMovimiento_P;
 
                 //INICIA TRANSACCIÓN
                 if (iniciaTransaccion() == false)
@@ -318,7 +320,7 @@ namespace Palatium.Bodega
                 sSql += "PORCENTAJE_DESCUENTO)" + Environment.NewLine;
                 sSql += "Values (" + Environment.NewLine;
                 sSql += Program.iCgEmpresa + ", " + Program.iIdEmpresa + ", " + iIdBodega + "," + Environment.NewLine;
-                sSql += "8000, " + iMotivo + ", 6162, " + iIdProveedor + "," + Environment.NewLine;
+                sSql += iCgTipoMovimiento + ", " + iMotivo + ", 6162, " + iIdProveedor + "," + Environment.NewLine;
                 sSql += iIdPersona + ", " + iIdOficina + ", '" + sFechaInsertar + "'," + Environment.NewLine;
                 sSql += Program.iMoneda + ", '" + sReferenciaInsertar + "', '" + sNotaPedido + "'," + Environment.NewLine;
                 sSql += "'" + sFacturaCompra + "', '" + sNotaEntrega + "', '" + sComentarios + "'," + Environment.NewLine;
@@ -480,7 +482,7 @@ namespace Palatium.Bodega
                                     int iIdPersona_P, int iIdOficina_P, string sFechaInsertar_P, string sComentarios_P,
                                     string sOrdenFabricacion_P, string sOrdenDisenio_P, string sNotaEntrega_P, 
                                     int iBandera_P, int iActualizar_P, int iIdNumeroMovimiento_P, string sNumeroMovimiento_P, 
-                                    int iEliminar_P, DataGridView dgvDatos_P)
+                                    int iEliminar_P, DataGridView dgvDatos_P, int iCgTipoMovimiento_P)
         {
             try
             {
@@ -504,6 +506,7 @@ namespace Palatium.Bodega
                 this.iIdNumeroMovimiento = iIdNumeroMovimiento_P;
                 this.iEliminar = iEliminar_P;
                 this.dgvDatos = dgvDatos_P;
+                this.iCgTipoMovimiento = iCgTipoMovimiento_P;
 
                 //INICIA TRANSACCIÓN
                 if (iniciaTransaccion() == false)
@@ -593,7 +596,7 @@ namespace Palatium.Bodega
                 sSql += "usuario_ingreso, terminal_ingreso, ESTADO )" + Environment.NewLine;
                 sSql += "Values (" + Environment.NewLine;
                 sSql += Program.iCgEmpresa + ", " + Program.iIdEmpresa + ", " + iIdBodega + "," + Environment.NewLine;
-                sSql += "7999, " + iMotivo + ", 6162, " + iIdProveedor + "," + Environment.NewLine;
+                sSql += iCgTipoMovimiento + ", " + iMotivo + ", 6162, " + iIdProveedor + "," + Environment.NewLine;
                 sSql += iIdPersona + ", " + iIdOficina + ", '" + sFechaInsertar + "'," + Environment.NewLine;
                 sSql += Program.iMoneda + ", '" + sComentarios + "', '" + sOrdenFabricacion + "'," + Environment.NewLine;
                 sSql += "'" + sOrdenDisenio + "', '" + sNotaEntrega + "', '" + sComentarios + "'," + Environment.NewLine;

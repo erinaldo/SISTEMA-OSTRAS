@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbLocalidad = new System.Windows.Forms.ComboBox();
+            this.chkNoProcesados = new System.Windows.Forms.CheckBox();
+            this.chkUsarRecetas = new System.Windows.Forms.CheckBox();
             this.chkAbrirCajon = new System.Windows.Forms.CheckBox();
             this.chkEjecutarImpresiones = new System.Windows.Forms.CheckBox();
             this.dBAyudaVendedor = new Controles.Auxiliares.DB_Ayuda();
@@ -86,9 +89,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.txtMontoMaximo = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.chkNoProcesados = new System.Windows.Forms.CheckBox();
-            this.chkUsarRecetas = new System.Windows.Forms.CheckBox();
-            this.cmbLocalidad = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.grupoOpciones.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -149,6 +149,39 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros de la Localidad";
+            // 
+            // cmbLocalidad
+            // 
+            this.cmbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLocalidad.FormattingEnabled = true;
+            this.cmbLocalidad.Location = new System.Drawing.Point(167, 34);
+            this.cmbLocalidad.Name = "cmbLocalidad";
+            this.cmbLocalidad.Size = new System.Drawing.Size(288, 23);
+            this.cmbLocalidad.TabIndex = 80;
+            // 
+            // chkNoProcesados
+            // 
+            this.chkNoProcesados.AutoSize = true;
+            this.chkNoProcesados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkNoProcesados.Location = new System.Drawing.Point(510, 372);
+            this.chkNoProcesados.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chkNoProcesados.Name = "chkNoProcesados";
+            this.chkNoProcesados.Size = new System.Drawing.Size(226, 19);
+            this.chkNoProcesados.TabIndex = 58;
+            this.chkNoProcesados.Text = "Descargar Productos no Procesados";
+            this.chkNoProcesados.UseVisualStyleBackColor = true;
+            // 
+            // chkUsarRecetas
+            // 
+            this.chkUsarRecetas.AutoSize = true;
+            this.chkUsarRecetas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkUsarRecetas.Location = new System.Drawing.Point(510, 347);
+            this.chkUsarRecetas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chkUsarRecetas.Name = "chkUsarRecetas";
+            this.chkUsarRecetas.Size = new System.Drawing.Size(213, 19);
+            this.chkUsarRecetas.TabIndex = 57;
+            this.chkUsarRecetas.Text = "Descargar Ingredientes de Receta";
+            this.chkUsarRecetas.UseVisualStyleBackColor = true;
             // 
             // chkAbrirCajon
             // 
@@ -820,39 +853,6 @@
             this.label23.Size = new System.Drawing.Size(137, 30);
             this.label23.TabIndex = 44;
             this.label23.Text = "Monto Máximo para\r\nRecargo de Tarjetas";
-            // 
-            // chkNoProcesados
-            // 
-            this.chkNoProcesados.AutoSize = true;
-            this.chkNoProcesados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkNoProcesados.Location = new System.Drawing.Point(510, 372);
-            this.chkNoProcesados.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.chkNoProcesados.Name = "chkNoProcesados";
-            this.chkNoProcesados.Size = new System.Drawing.Size(219, 19);
-            this.chkNoProcesados.TabIndex = 58;
-            this.chkNoProcesados.Text = "Dscargar Productos no Procesados";
-            this.chkNoProcesados.UseVisualStyleBackColor = true;
-            // 
-            // chkUsarRecetas
-            // 
-            this.chkUsarRecetas.AutoSize = true;
-            this.chkUsarRecetas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUsarRecetas.Location = new System.Drawing.Point(510, 347);
-            this.chkUsarRecetas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.chkUsarRecetas.Name = "chkUsarRecetas";
-            this.chkUsarRecetas.Size = new System.Drawing.Size(213, 19);
-            this.chkUsarRecetas.TabIndex = 57;
-            this.chkUsarRecetas.Text = "Descargar Ingredientes de Receta";
-            this.chkUsarRecetas.UseVisualStyleBackColor = true;
-            // 
-            // cmbLocalidad
-            // 
-            this.cmbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLocalidad.FormattingEnabled = true;
-            this.cmbLocalidad.Location = new System.Drawing.Point(167, 34);
-            this.cmbLocalidad.Name = "cmbLocalidad";
-            this.cmbLocalidad.Size = new System.Drawing.Size(288, 23);
-            this.cmbLocalidad.TabIndex = 80;
             // 
             // frmParametrosLocalidad
             // 

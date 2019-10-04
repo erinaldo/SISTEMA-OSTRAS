@@ -215,6 +215,12 @@ namespace Palatium
         //VARIABLE PARA PERMITIR ABRIR EL CAJÓN DE DINERO
         public static int iPermitirAbrirCajon;
 
+        //VARIABLE PARA LA EJECUCION DE DESCARGA DE RECETAS
+        public static int iDescargarReceta;
+
+        //VARIABLE PARA LA EJECUCION DE DESCARGA DE PRODUCTOS NO PROCESADOS
+        public static int iDescargarProductosNoProcesados;
+
         //VARIBALE QUE PERMITE APLICAR RECARGO A TARJETAS
         public static int iAplicaRecargoTarjeta;
         public static decimal dbPorcentajeRecargoTarjeta;

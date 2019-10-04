@@ -61,23 +61,6 @@
             this.lblTipo = new System.Windows.Forms.Label();
             this.lblTipoOrden = new System.Windows.Forms.Label();
             this.dgvPedido = new System.Windows.Forms.DataGridView();
-            this.guardada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valuni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cortesia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.motivoCortesia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cancelar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.motivoCancelacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIdMascara = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSecuenciaImpresion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrdenamiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIdOrden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pagaIva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txt_subtotal_descuento = new System.Windows.Forms.RichTextBox();
             this.lblSubtotalDescuento = new System.Windows.Forms.Label();
             this.lblPorcentajeDescuento = new System.Windows.Forms.Label();
@@ -109,9 +92,27 @@
             this.panelItemsSubcategoria = new System.Windows.Forms.Panel();
             this.pnlProductos = new System.Windows.Forms.Panel();
             this.ttMensaje = new System.Windows.Forms.ToolTip(this.components);
+            this.btnAsignarCliente = new System.Windows.Forms.Button();
             this.txtSubtotalCero = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnAsignarCliente = new System.Windows.Forms.Button();
+            this.guardada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valuni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cortesia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.motivoCortesia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cancelar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.motivoCancelacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIdMascara = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSecuenciaImpresion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrdenamiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIdOrden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pagaIva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlCategorias.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedido)).BeginInit();
             this.pnlReOrden.SuspendLayout();
@@ -502,7 +503,8 @@
             this.colSecuenciaImpresion,
             this.colOrdenamiento,
             this.colIdOrden,
-            this.pagaIva});
+            this.pagaIva,
+            this.tipoProducto});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -525,132 +527,6 @@
             this.dgvPedido.Size = new System.Drawing.Size(303, 331);
             this.dgvPedido.TabIndex = 91;
             this.dgvPedido.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedido_CellDoubleClick);
-            // 
-            // guardada
-            // 
-            this.guardada.HeaderText = "GUARDADA";
-            this.guardada.Name = "guardada";
-            this.guardada.ReadOnly = true;
-            this.guardada.Visible = false;
-            // 
-            // cantidad
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.cantidad.DefaultCellStyle = dataGridViewCellStyle1;
-            this.cantidad.FillWeight = 60.9137F;
-            this.cantidad.HeaderText = "CANT.";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            this.cantidad.Width = 53;
-            // 
-            // producto
-            // 
-            this.producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.producto.FillWeight = 168.8291F;
-            this.producto.HeaderText = "PRODUCTO";
-            this.producto.Name = "producto";
-            this.producto.ReadOnly = true;
-            // 
-            // valuni
-            // 
-            this.valuni.HeaderText = "V. UNITARIO";
-            this.valuni.Name = "valuni";
-            this.valuni.ReadOnly = true;
-            this.valuni.Visible = false;
-            // 
-            // valor
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.valor.DefaultCellStyle = dataGridViewCellStyle2;
-            this.valor.FillWeight = 70.25717F;
-            this.valor.HeaderText = "VALOR";
-            this.valor.Name = "valor";
-            this.valor.ReadOnly = true;
-            this.valor.Width = 62;
-            // 
-            // cod
-            // 
-            this.cod.HeaderText = "COD";
-            this.cod.Name = "cod";
-            this.cod.ReadOnly = true;
-            this.cod.Visible = false;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // idProducto
-            // 
-            this.idProducto.HeaderText = "Id del Producto";
-            this.idProducto.Name = "idProducto";
-            this.idProducto.ReadOnly = true;
-            this.idProducto.Visible = false;
-            // 
-            // cortesia
-            // 
-            this.cortesia.HeaderText = "Cortesia";
-            this.cortesia.Name = "cortesia";
-            this.cortesia.ReadOnly = true;
-            this.cortesia.Visible = false;
-            // 
-            // motivoCortesia
-            // 
-            this.motivoCortesia.HeaderText = "motivo Cortesia";
-            this.motivoCortesia.Name = "motivoCortesia";
-            this.motivoCortesia.ReadOnly = true;
-            this.motivoCortesia.Visible = false;
-            // 
-            // cancelar
-            // 
-            this.cancelar.HeaderText = "Cancelar Producto";
-            this.cancelar.Name = "cancelar";
-            this.cancelar.ReadOnly = true;
-            this.cancelar.Visible = false;
-            // 
-            // motivoCancelacion
-            // 
-            this.motivoCancelacion.HeaderText = "Motivo Cancelacion";
-            this.motivoCancelacion.Name = "motivoCancelacion";
-            this.motivoCancelacion.ReadOnly = true;
-            this.motivoCancelacion.Visible = false;
-            // 
-            // colIdMascara
-            // 
-            this.colIdMascara.HeaderText = "Mascara";
-            this.colIdMascara.Name = "colIdMascara";
-            this.colIdMascara.ReadOnly = true;
-            this.colIdMascara.Visible = false;
-            // 
-            // colSecuenciaImpresion
-            // 
-            this.colSecuenciaImpresion.HeaderText = "Secuencia";
-            this.colSecuenciaImpresion.Name = "colSecuenciaImpresion";
-            this.colSecuenciaImpresion.ReadOnly = true;
-            this.colSecuenciaImpresion.Visible = false;
-            // 
-            // colOrdenamiento
-            // 
-            this.colOrdenamiento.HeaderText = "Ordenamiento";
-            this.colOrdenamiento.Name = "colOrdenamiento";
-            this.colOrdenamiento.ReadOnly = true;
-            this.colOrdenamiento.Visible = false;
-            // 
-            // colIdOrden
-            // 
-            this.colIdOrden.HeaderText = "IdOrden";
-            this.colIdOrden.Name = "colIdOrden";
-            this.colIdOrden.ReadOnly = true;
-            this.colIdOrden.Visible = false;
-            // 
-            // pagaIva
-            // 
-            this.pagaIva.HeaderText = "PAGA IVA";
-            this.pagaIva.Name = "pagaIva";
-            this.pagaIva.ReadOnly = true;
-            this.pagaIva.Visible = false;
             // 
             // txt_subtotal_descuento
             // 
@@ -1009,6 +885,21 @@
             this.pnlProductos.Size = new System.Drawing.Size(729, 488);
             this.pnlProductos.TabIndex = 11;
             // 
+            // btnAsignarCliente
+            // 
+            this.btnAsignarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnAsignarCliente.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAsignarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAsignarCliente.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAsignarCliente.Location = new System.Drawing.Point(376, 9);
+            this.btnAsignarCliente.Name = "btnAsignarCliente";
+            this.btnAsignarCliente.Size = new System.Drawing.Size(133, 38);
+            this.btnAsignarCliente.TabIndex = 114;
+            this.btnAsignarCliente.Text = "Asignar Cliente";
+            this.ttMensaje.SetToolTip(this.btnAsignarCliente, "Clic aquí para cambiar de mesa");
+            this.btnAsignarCliente.UseVisualStyleBackColor = false;
+            this.btnAsignarCliente.Visible = false;
+            // 
             // txtSubtotalCero
             // 
             this.txtSubtotalCero.BackColor = System.Drawing.SystemColors.Info;
@@ -1032,20 +923,137 @@
             this.label8.TabIndex = 112;
             this.label8.Text = "SUBTOTAL 0%";
             // 
-            // btnAsignarCliente
+            // guardada
             // 
-            this.btnAsignarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnAsignarCliente.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAsignarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAsignarCliente.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAsignarCliente.Location = new System.Drawing.Point(376, 9);
-            this.btnAsignarCliente.Name = "btnAsignarCliente";
-            this.btnAsignarCliente.Size = new System.Drawing.Size(133, 38);
-            this.btnAsignarCliente.TabIndex = 114;
-            this.btnAsignarCliente.Text = "Asignar Cliente";
-            this.ttMensaje.SetToolTip(this.btnAsignarCliente, "Clic aquí para cambiar de mesa");
-            this.btnAsignarCliente.UseVisualStyleBackColor = false;
-            this.btnAsignarCliente.Visible = false;
+            this.guardada.HeaderText = "GUARDADA";
+            this.guardada.Name = "guardada";
+            this.guardada.ReadOnly = true;
+            this.guardada.Visible = false;
+            // 
+            // cantidad
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cantidad.DefaultCellStyle = dataGridViewCellStyle1;
+            this.cantidad.FillWeight = 60.9137F;
+            this.cantidad.HeaderText = "CANT.";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            this.cantidad.Width = 53;
+            // 
+            // producto
+            // 
+            this.producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.producto.FillWeight = 168.8291F;
+            this.producto.HeaderText = "PRODUCTO";
+            this.producto.Name = "producto";
+            this.producto.ReadOnly = true;
+            // 
+            // valuni
+            // 
+            this.valuni.HeaderText = "V. UNITARIO";
+            this.valuni.Name = "valuni";
+            this.valuni.ReadOnly = true;
+            this.valuni.Visible = false;
+            // 
+            // valor
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.valor.DefaultCellStyle = dataGridViewCellStyle2;
+            this.valor.FillWeight = 70.25717F;
+            this.valor.HeaderText = "VALOR";
+            this.valor.Name = "valor";
+            this.valor.ReadOnly = true;
+            this.valor.Width = 62;
+            // 
+            // cod
+            // 
+            this.cod.HeaderText = "COD";
+            this.cod.Name = "cod";
+            this.cod.ReadOnly = true;
+            this.cod.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // idProducto
+            // 
+            this.idProducto.HeaderText = "Id del Producto";
+            this.idProducto.Name = "idProducto";
+            this.idProducto.ReadOnly = true;
+            this.idProducto.Visible = false;
+            // 
+            // cortesia
+            // 
+            this.cortesia.HeaderText = "Cortesia";
+            this.cortesia.Name = "cortesia";
+            this.cortesia.ReadOnly = true;
+            this.cortesia.Visible = false;
+            // 
+            // motivoCortesia
+            // 
+            this.motivoCortesia.HeaderText = "motivo Cortesia";
+            this.motivoCortesia.Name = "motivoCortesia";
+            this.motivoCortesia.ReadOnly = true;
+            this.motivoCortesia.Visible = false;
+            // 
+            // cancelar
+            // 
+            this.cancelar.HeaderText = "Cancelar Producto";
+            this.cancelar.Name = "cancelar";
+            this.cancelar.ReadOnly = true;
+            this.cancelar.Visible = false;
+            // 
+            // motivoCancelacion
+            // 
+            this.motivoCancelacion.HeaderText = "Motivo Cancelacion";
+            this.motivoCancelacion.Name = "motivoCancelacion";
+            this.motivoCancelacion.ReadOnly = true;
+            this.motivoCancelacion.Visible = false;
+            // 
+            // colIdMascara
+            // 
+            this.colIdMascara.HeaderText = "Mascara";
+            this.colIdMascara.Name = "colIdMascara";
+            this.colIdMascara.ReadOnly = true;
+            this.colIdMascara.Visible = false;
+            // 
+            // colSecuenciaImpresion
+            // 
+            this.colSecuenciaImpresion.HeaderText = "Secuencia";
+            this.colSecuenciaImpresion.Name = "colSecuenciaImpresion";
+            this.colSecuenciaImpresion.ReadOnly = true;
+            this.colSecuenciaImpresion.Visible = false;
+            // 
+            // colOrdenamiento
+            // 
+            this.colOrdenamiento.HeaderText = "Ordenamiento";
+            this.colOrdenamiento.Name = "colOrdenamiento";
+            this.colOrdenamiento.ReadOnly = true;
+            this.colOrdenamiento.Visible = false;
+            // 
+            // colIdOrden
+            // 
+            this.colIdOrden.HeaderText = "IdOrden";
+            this.colIdOrden.Name = "colIdOrden";
+            this.colIdOrden.ReadOnly = true;
+            this.colIdOrden.Visible = false;
+            // 
+            // pagaIva
+            // 
+            this.pagaIva.HeaderText = "PAGA IVA";
+            this.pagaIva.Name = "pagaIva";
+            this.pagaIva.ReadOnly = true;
+            this.pagaIva.Visible = false;
+            // 
+            // tipoProducto
+            // 
+            this.tipoProducto.HeaderText = "TIPO PRODUCTO";
+            this.tipoProducto.Name = "tipoProducto";
+            this.tipoProducto.ReadOnly = true;
             // 
             // Orden
             // 
@@ -1187,6 +1195,7 @@
         private System.Windows.Forms.ToolTip ttMensaje;
         public System.Windows.Forms.RichTextBox txtSubtotalCero;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnAsignarCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn guardada;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn producto;
@@ -1204,7 +1213,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrdenamiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdOrden;
         private System.Windows.Forms.DataGridViewTextBoxColumn pagaIva;
-        private System.Windows.Forms.Button btnAsignarCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipoProducto;
 
     }
 }

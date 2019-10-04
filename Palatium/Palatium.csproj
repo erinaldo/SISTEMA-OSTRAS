@@ -196,6 +196,12 @@
     <Compile Include="Bodega\frmAyudaProductosMovimientoBodega.Designer.cs">
       <DependentUpon>frmAyudaProductosMovimientoBodega.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bodega\frmAyudaProductoTerminado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bodega\frmAyudaProductoTerminado.Designer.cs">
+      <DependentUpon>frmAyudaProductoTerminado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bodega\frmAyudaProveedores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,11 +238,17 @@
     <Compile Include="Bodega\frmDevolucionEgreso.Designer.cs">
       <DependentUpon>frmDevolucionEgreso.cs</DependentUpon>
     </Compile>
-    <Compile Include="Bodega\frmEgresoBodega.cs">
+    <Compile Include="Bodega\frmEgresoMateriaPrima.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Bodega\frmEgresoBodega.Designer.cs">
-      <DependentUpon>frmEgresoBodega.cs</DependentUpon>
+    <Compile Include="Bodega\frmEgresoMateriaPrima.Designer.cs">
+      <DependentUpon>frmEgresoMateriaPrima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bodega\frmEgresoProductoTerminado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bodega\frmEgresoProductoTerminado.Designer.cs">
+      <DependentUpon>frmEgresoProductoTerminado.cs</DependentUpon>
     </Compile>
     <Compile Include="Bodega\frmExistenciasAunaFecha.cs">
       <SubType>Form</SubType>
@@ -250,11 +262,17 @@
     <Compile Include="Bodega\frmExistenciasRangodeFechas.Designer.cs">
       <DependentUpon>frmExistenciasRangodeFechas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Bodega\frmIngresoBodega.cs">
+    <Compile Include="Bodega\frmIngresoMateriaPrima.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Bodega\frmIngresoBodega.Designer.cs">
-      <DependentUpon>frmIngresoBodega.cs</DependentUpon>
+    <Compile Include="Bodega\frmIngresoMateriaPrima.Designer.cs">
+      <DependentUpon>frmIngresoMateriaPrima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bodega\frmIngresoProductoTerminado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bodega\frmIngresoProductoTerminado.Designer.cs">
+      <DependentUpon>frmIngresoProductoTerminado.cs</DependentUpon>
     </Compile>
     <Compile Include="Bodega\frmKardexPorBodega.cs">
       <SubType>Form</SubType>
@@ -349,6 +367,12 @@
     </Compile>
     <Compile Include="ControlesNuevos\BotonCircular.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlesNuevos\DbAyuda_Nuevo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesNuevos\DbAyuda_Nuevo.Designer.cs">
+      <DependentUpon>DbAyuda_Nuevo.cs</DependentUpon>
     </Compile>
     <Compile Include="DashBoard\frmDashBoard.cs">
       <SubType>Form</SubType>
@@ -2181,6 +2205,9 @@
     <EmbeddedResource Include="Bodega\frmAyudaProductosMovimientoBodega.resx">
       <DependentUpon>frmAyudaProductosMovimientoBodega.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Bodega\frmAyudaProductoTerminado.resx">
+      <DependentUpon>frmAyudaProductoTerminado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Bodega\frmAyudaProveedores.resx">
       <DependentUpon>frmAyudaProveedores.cs</DependentUpon>
     </EmbeddedResource>
@@ -2199,8 +2226,11 @@
     <EmbeddedResource Include="Bodega\frmDevolucionEgreso.resx">
       <DependentUpon>frmDevolucionEgreso.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bodega\frmEgresoBodega.resx">
-      <DependentUpon>frmEgresoBodega.cs</DependentUpon>
+    <EmbeddedResource Include="Bodega\frmEgresoMateriaPrima.resx">
+      <DependentUpon>frmEgresoMateriaPrima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bodega\frmEgresoProductoTerminado.resx">
+      <DependentUpon>frmEgresoProductoTerminado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Bodega\frmExistenciasAunaFecha.resx">
       <DependentUpon>frmExistenciasAunaFecha.cs</DependentUpon>
@@ -2208,8 +2238,11 @@
     <EmbeddedResource Include="Bodega\frmExistenciasRangodeFechas.resx">
       <DependentUpon>frmExistenciasRangodeFechas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bodega\frmIngresoBodega.resx">
-      <DependentUpon>frmIngresoBodega.cs</DependentUpon>
+    <EmbeddedResource Include="Bodega\frmIngresoMateriaPrima.resx">
+      <DependentUpon>frmIngresoMateriaPrima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bodega\frmIngresoProductoTerminado.resx">
+      <DependentUpon>frmIngresoProductoTerminado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Bodega\frmKardexPorBodega.resx">
       <DependentUpon>frmKardexPorBodega.cs</DependentUpon>
@@ -2249,6 +2282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comida_Rapida\frmComandaPrueba.resx">
       <DependentUpon>frmComandaPrueba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesNuevos\DbAyuda_Nuevo.resx">
+      <DependentUpon>DbAyuda_Nuevo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DashBoard\frmDashBoard.resx">
       <DependentUpon>frmDashBoard.cs</DependentUpon>

@@ -31,13 +31,13 @@
             this.Btn_Salir = new System.Windows.Forms.Button();
             this.Btn_Aceptar = new System.Windows.Forms.Button();
             this.dgv_Datos = new System.Windows.Forms.DataGridView();
-            this.Numero = new System.Windows.Forms.Label();
-            this.TxtBusqueda = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paga_iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numero = new System.Windows.Forms.Label();
+            this.TxtBusqueda = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Datos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,32 +81,6 @@
             this.dgv_Datos.TabIndex = 15;
             this.dgv_Datos.DoubleClick += new System.EventHandler(this.dgv_Datos_DoubleClick);
             // 
-            // Numero
-            // 
-            this.Numero.AutoSize = true;
-            this.Numero.Location = new System.Drawing.Point(140, 19);
-            this.Numero.Name = "Numero";
-            this.Numero.Size = new System.Drawing.Size(49, 13);
-            this.Numero.TabIndex = 14;
-            this.Numero.Text = "CÓDIGO";
-            // 
-            // TxtBusqueda
-            // 
-            this.TxtBusqueda.Location = new System.Drawing.Point(8, 39);
-            this.TxtBusqueda.Name = "TxtBusqueda";
-            this.TxtBusqueda.Size = new System.Drawing.Size(480, 20);
-            this.TxtBusqueda.TabIndex = 13;
-            this.TxtBusqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBusqueda_KeyPress);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Búsqueda basada en ...";
-            // 
             // codigo
             // 
             this.codigo.HeaderText = "Código";
@@ -134,6 +108,32 @@
             this.paga_iva.ReadOnly = true;
             this.paga_iva.Visible = false;
             // 
+            // Numero
+            // 
+            this.Numero.AutoSize = true;
+            this.Numero.Location = new System.Drawing.Point(140, 19);
+            this.Numero.Name = "Numero";
+            this.Numero.Size = new System.Drawing.Size(49, 13);
+            this.Numero.TabIndex = 14;
+            this.Numero.Text = "CÓDIGO";
+            // 
+            // TxtBusqueda
+            // 
+            this.TxtBusqueda.Location = new System.Drawing.Point(8, 39);
+            this.TxtBusqueda.Name = "TxtBusqueda";
+            this.TxtBusqueda.Size = new System.Drawing.Size(480, 20);
+            this.TxtBusqueda.TabIndex = 13;
+            this.TxtBusqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBusqueda_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Búsqueda basada en ...";
+            // 
             // frmAyudaProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -150,7 +150,7 @@
             this.MinimizeBox = false;
             this.Name = "frmAyudaProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAyudaProductos";
+            this.Text = "Búsqueda de Productos";
             this.Load += new System.EventHandler(this.frmAyudaProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Datos)).EndInit();
             this.ResumeLayout(false);

@@ -437,6 +437,26 @@ namespace Palatium.Parametros
                         {
                             chkAbrirCajon.Checked = true;
                         }
+
+                        //DESCARGAR RECETA
+                        if (dtConsulta.Rows[0]["descarga_receta"].ToString() == "0")
+                        {
+                            chkUsarRecetas.Checked = false;
+                        }
+                        else
+                        {
+                            chkUsarRecetas.Checked = true;
+                        }
+
+                        //DESCARGAR PRODUCTOS TERMINADOS
+                        if (dtConsulta.Rows[0]["descarga_no_procesados"].ToString() == "0")
+                        {
+                            chkNoProcesados.Checked = false;
+                        }
+                        else
+                        {
+                            chkNoProcesados.Checked = true;
+                        }
                         
                         bActualizar = true;
                     }

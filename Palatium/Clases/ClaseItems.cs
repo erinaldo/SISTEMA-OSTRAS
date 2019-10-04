@@ -17,6 +17,8 @@ namespace Palatium.Clases
         public string iDescripcion { get; set; }
         public string iPagaIva { get; set; }
 
+        public string iCodigoTipoProducto { get; set; }
+
         public ClaseItems[] items;
         public Int32 cuenta;
         public string sCodigo_padre;
@@ -39,31 +41,37 @@ namespace Palatium.Clases
             if (iNivel == 3)
             {
                 sSqlQuery = "";
-                sSqlQuery = sSqlQuery + "select count(*) cuenta" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "from cv401_productos P,cv401_nombre_productos NP" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "where P.id_producto = NP.id_producto" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.id_producto_padre in" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "(select id_producto from cv401_productos where codigo ='" + sCodigo_padre + "')" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.nivel = " + iNivel + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.estado ='A'" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and NP.estado='A'" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.subcategoria = 0" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.modificador = 0" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.ultimo_nivel = 1";
+                sSqlQuery += "select count(*) cuenta" + Environment.NewLine;
+                sSqlQuery += "from cv401_productos P,cv401_nombre_productos NP, pos_clase_producto CP" + Environment.NewLine;
+                sSqlQuery += "where P.id_producto = NP.id_producto" + Environment.NewLine;
+                sSqlQuery += "and CP.id_pos_clase_producto = P.id_pos_clase_producto" + Environment.NewLine;
+                sSqlQuery += "and P.id_producto_padre in" + Environment.NewLine;
+                sSqlQuery += "(select id_producto from cv401_productos where codigo ='" + sCodigo_padre + "')" + Environment.NewLine;
+                sSqlQuery += "and P.nivel = " + iNivel + Environment.NewLine;
+                sSqlQuery += "and P.estado ='A'" + Environment.NewLine;
+                sSqlQuery += "and NP.estado='A'" + Environment.NewLine;
+                sSqlQuery += "and CP.estado = 'A'" + Environment.NewLine;
+                sSqlQuery += "and P.subcategoria = 0" + Environment.NewLine;
+                sSqlQuery += "and P.modificador = 0" + Environment.NewLine;
+                sSqlQuery += "and P.ultimo_nivel = 1";
             }
 
             else 
             {
                 sSqlQuery = "";
-                sSqlQuery = sSqlQuery + "select count(*) cuenta" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "from cv401_productos P,cv401_nombre_productos NP" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "where P.id_producto = NP.id_producto and P.id_producto_padre in" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "(select id_producto from cv401_productos where codigo ='" + sCodigo_padre + "')" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.nivel = " + iNivel + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.estado ='A'" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and NP.estado='A'" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.subcategoria = 0" + Environment.NewLine;
-                sSqlQuery = sSqlQuery + "and P.modificador = 0";
+                sSqlQuery += "select count(*) cuenta" + Environment.NewLine;
+                sSqlQuery += "from cv401_productos P,cv401_nombre_productos NP, pos_clase_producto CP" + Environment.NewLine;
+                sSqlQuery += "where P.id_producto = NP.id_producto" + Environment.NewLine;
+                sSqlQuery += "and CP.id_pos_clase_producto = P.id_pos_clase_producto" + Environment.NewLine;
+                sSqlQuery += "where P.id_producto = NP.id_producto" + Environment.NewLine;
+                sSqlQuery += "and P.id_producto_padre in" + Environment.NewLine;
+                sSqlQuery += "(select id_producto from cv401_productos where codigo ='" + sCodigo_padre + "')" + Environment.NewLine;
+                sSqlQuery += "and P.nivel = " + iNivel + Environment.NewLine;
+                sSqlQuery += "and P.estado ='A'" + Environment.NewLine;
+                sSqlQuery += "and NP.estado='A'" + Environment.NewLine;
+                sSqlQuery += "and CP.estado = 'A'" + Environment.NewLine;
+                sSqlQuery += "and P.subcategoria = 0" + Environment.NewLine;
+                sSqlQuery += "and P.modificador = 0";
             }
 
             
@@ -82,32 +90,37 @@ namespace Palatium.Clases
                     if (iNivel == 3)
                     {
                         sSqlQuery = "";
-                        sSqlQuery = sSqlQuery + "select P.id_Producto, NP.nombre as Nombre, P.paga_iva" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "from cv401_productos P,cv401_nombre_productos NP " + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "where P.id_Producto = NP.id_Producto" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.id_Producto_padre in " + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "(select id_Producto from cv401_productos where codigo ='" + sCodigo_padre + "') " + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.nivel = " + iNivel + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.estado ='A'" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and NP.estado='A'" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.subcategoria = 0" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.modificador = 0" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.ultimo_nivel = 1" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "order by secuencia";
+                        sSqlQuery += "select P.id_Producto, NP.nombre as Nombre, P.paga_iva, CP.codigo" + Environment.NewLine;
+                        sSqlQuery += "from cv401_productos P,cv401_nombre_productos NP, pos_clase_producto CP" + Environment.NewLine;
+                        sSqlQuery += "where P.id_producto = NP.id_producto" + Environment.NewLine;
+                        sSqlQuery += "and CP.id_pos_clase_producto = P.id_pos_clase_producto" + Environment.NewLine;
+                        sSqlQuery += "and P.id_Producto_padre in " + Environment.NewLine;
+                        sSqlQuery += "(select id_Producto from cv401_productos where codigo ='" + sCodigo_padre + "') " + Environment.NewLine;
+                        sSqlQuery += "and P.nivel = " + iNivel + Environment.NewLine;
+                        sSqlQuery += "and P.estado ='A'" + Environment.NewLine;
+                        sSqlQuery += "and NP.estado='A'" + Environment.NewLine;
+                        sSqlQuery += "and CP.estado = 'A'" + Environment.NewLine;
+                        sSqlQuery += "and P.subcategoria = 0" + Environment.NewLine;
+                        sSqlQuery += "and P.modificador = 0" + Environment.NewLine;
+                        sSqlQuery += "and P.ultimo_nivel = 1" + Environment.NewLine;
+                        sSqlQuery += "order by secuencia";
                     }
                     else
                     {
                         sSqlQuery = "";
-                        sSqlQuery = sSqlQuery + "select P.id_Producto, NP.nombre as Nombre, P.paga_iva" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "from cv401_productos P,cv401_nombre_productos NP " + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "where P.id_Producto = NP.id_Producto and P.id_Producto_padre in " + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "(select id_Producto from cv401_productos where codigo ='" + sCodigo_padre + "') " + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.nivel = " + iNivel + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.estado ='A'" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and NP.estado='A'" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.subcategoria = 0" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "and P.modificador = 0" + Environment.NewLine;
-                        sSqlQuery = sSqlQuery + "order by secuencia";
+                        sSqlQuery += "select P.id_Producto, NP.nombre as Nombre, P.paga_iva, CP.codigo" + Environment.NewLine;
+                        sSqlQuery += "from cv401_productos P,cv401_nombre_productos NP, pos_clase_producto CP" + Environment.NewLine;
+                        sSqlQuery += "where P.id_producto = NP.id_producto" + Environment.NewLine;
+                        sSqlQuery += "and CP.id_pos_clase_producto = P.id_pos_clase_producto" + Environment.NewLine;
+                        sSqlQuery += "and P.id_Producto_padre in " + Environment.NewLine;
+                        sSqlQuery += "(select id_Producto from cv401_productos where codigo ='" + sCodigo_padre + "') " + Environment.NewLine;
+                        sSqlQuery += "and P.nivel = " + iNivel + Environment.NewLine;
+                        sSqlQuery += "and P.estado ='A'" + Environment.NewLine;
+                        sSqlQuery += "and NP.estado='A'" + Environment.NewLine;
+                        sSqlQuery += "and CP.estado = 'A'" + Environment.NewLine;
+                        sSqlQuery += "and P.subcategoria = 0" + Environment.NewLine;
+                        sSqlQuery += "and P.modificador = 0" + Environment.NewLine;
+                        sSqlQuery += "order by secuencia";
                     }                    
 
                     DataTable ayuda = new DataTable();
@@ -123,6 +136,7 @@ namespace Palatium.Clases
                             objItems.iCodigo = ayuda.Rows[i][0].ToString();
                             objItems.iDescripcion = ayuda.Rows[i][1].ToString();
                             objItems.iPagaIva = ayuda.Rows[i][2].ToString();
+                            objItems.iCodigoTipoProducto = ayuda.Rows[i][3].ToString();
                             items[i] = objItems;
                         }
 

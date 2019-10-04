@@ -424,13 +424,13 @@ namespace Palatium.Oficina
 
         private void submenuIngresoBodega_Click(object sender, EventArgs e)
         {
-            Bodega.frmIngresoBodega ingresos = new Bodega.frmIngresoBodega();
+            Bodega.frmIngresoMateriaPrima ingresos = new Bodega.frmIngresoMateriaPrima();
             verificarFormularios(ingresos, this);
         }
 
         private void submenuEgresoBodega_Click(object sender, EventArgs e)
         {
-            Bodega.frmEgresoBodega egresos = new Bodega.frmEgresoBodega();
+            Bodega.frmEgresoMateriaPrima egresos = new Bodega.frmEgresoMateriaPrima();
             verificarFormularios(egresos, this);
         }
 
@@ -739,6 +739,18 @@ namespace Palatium.Oficina
         {
             Oficina.frmTipoTarjetas tarjeta = new Oficina.frmTipoTarjetas();
             verificarFormularios(tarjeta, this);
+        }
+
+        private void submenuIngresoPT_Click(object sender, EventArgs e)
+        {
+            Bodega.frmIngresoProductoTerminado ingreso = new Bodega.frmIngresoProductoTerminado();
+            verificarFormularios(ingreso, this);
+        }
+
+        private void submenuEgresoPT_Click(object sender, EventArgs e)
+        {
+            Bodega.frmEgresoProductoTerminado egreso = new Bodega.frmEgresoProductoTerminado();
+            verificarFormularios(egreso, this);
         }
     }
 }

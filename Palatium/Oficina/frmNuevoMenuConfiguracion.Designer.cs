@@ -133,6 +133,9 @@
             this.materiaPrimaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuIngresoBodega = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuEgresoBodega = new System.Windows.Forms.ToolStripMenuItem();
+            this.productoTerminadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.submenuIngresoPT = new System.Windows.Forms.ToolStripMenuItem();
+            this.submenuEgresoPT = new System.Windows.Forms.ToolStripMenuItem();
             this.transferenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuDespachoEntreBodegas = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1161,6 +1164,7 @@
             this.ddlBodega.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bodegasToolStripMenuItem,
             this.materiaPrimaToolStripMenuItem,
+            this.productoTerminadoToolStripMenuItem,
             this.transferenciasToolStripMenuItem,
             this.reportesToolStripMenuItem});
             this.ddlBodega.Image = global::Palatium.Properties.Resources.bodega_nuevo;
@@ -1178,7 +1182,7 @@
             this.bodegasToolStripMenuItem.Image = global::Palatium.Properties.Resources.bodegas_nuevo;
             this.bodegasToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.bodegasToolStripMenuItem.Name = "bodegasToolStripMenuItem";
-            this.bodegasToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
+            this.bodegasToolStripMenuItem.Size = new System.Drawing.Size(196, 36);
             this.bodegasToolStripMenuItem.Text = "Bodegas";
             // 
             // submenuDefinicionCorta
@@ -1207,7 +1211,7 @@
             this.materiaPrimaToolStripMenuItem.Image = global::Palatium.Properties.Resources.materia_prima_nuevo;
             this.materiaPrimaToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.materiaPrimaToolStripMenuItem.Name = "materiaPrimaToolStripMenuItem";
-            this.materiaPrimaToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
+            this.materiaPrimaToolStripMenuItem.Size = new System.Drawing.Size(196, 36);
             this.materiaPrimaToolStripMenuItem.Text = "Materia Prima";
             // 
             // submenuIngresoBodega
@@ -1228,6 +1232,33 @@
             this.submenuEgresoBodega.Text = "Egresos";
             this.submenuEgresoBodega.Click += new System.EventHandler(this.submenuEgresoBodega_Click);
             // 
+            // productoTerminadoToolStripMenuItem
+            // 
+            this.productoTerminadoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.submenuIngresoPT,
+            this.submenuEgresoPT});
+            this.productoTerminadoToolStripMenuItem.Name = "productoTerminadoToolStripMenuItem";
+            this.productoTerminadoToolStripMenuItem.Size = new System.Drawing.Size(196, 36);
+            this.productoTerminadoToolStripMenuItem.Text = "Producto Terminado";
+            // 
+            // submenuIngresoPT
+            // 
+            this.submenuIngresoPT.Image = global::Palatium.Properties.Resources.ingreso_materia_prima_menu;
+            this.submenuIngresoPT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.submenuIngresoPT.Name = "submenuIngresoPT";
+            this.submenuIngresoPT.Size = new System.Drawing.Size(179, 36);
+            this.submenuIngresoPT.Text = "Ingresos";
+            this.submenuIngresoPT.Click += new System.EventHandler(this.submenuIngresoPT_Click);
+            // 
+            // submenuEgresoPT
+            // 
+            this.submenuEgresoPT.Image = global::Palatium.Properties.Resources.egreso_materia_prima_menu;
+            this.submenuEgresoPT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.submenuEgresoPT.Name = "submenuEgresoPT";
+            this.submenuEgresoPT.Size = new System.Drawing.Size(179, 36);
+            this.submenuEgresoPT.Text = "Egresos";
+            this.submenuEgresoPT.Click += new System.EventHandler(this.submenuEgresoPT_Click);
+            // 
             // transferenciasToolStripMenuItem
             // 
             this.transferenciasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1235,7 +1266,7 @@
             this.transferenciasToolStripMenuItem.Image = global::Palatium.Properties.Resources.transferencias_nuevo;
             this.transferenciasToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.transferenciasToolStripMenuItem.Name = "transferenciasToolStripMenuItem";
-            this.transferenciasToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
+            this.transferenciasToolStripMenuItem.Size = new System.Drawing.Size(196, 36);
             this.transferenciasToolStripMenuItem.Text = "Transferencias";
             // 
             // submenuDespachoEntreBodegas
@@ -1260,7 +1291,7 @@
             this.reportesToolStripMenuItem.Image = global::Palatium.Properties.Resources.informe_bodega_nuevo;
             this.reportesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(196, 36);
             this.reportesToolStripMenuItem.Text = "Reportes";
             // 
             // submenuReporteMovimientosBodega
@@ -1866,6 +1897,9 @@
         private System.Windows.Forms.ToolStripMenuItem subMenuReportesCierreCaja;
         private System.Windows.Forms.ToolStripMenuItem subMenuoperadorTarjetas;
         private System.Windows.Forms.ToolStripMenuItem subMenuTiposTarjetas;
+        private System.Windows.Forms.ToolStripMenuItem productoTerminadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem submenuIngresoPT;
+        private System.Windows.Forms.ToolStripMenuItem submenuEgresoPT;
 
     }
 }
