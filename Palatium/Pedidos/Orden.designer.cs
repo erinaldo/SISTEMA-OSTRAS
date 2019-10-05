@@ -723,6 +723,7 @@
             this.btn_pesonas.Name = "btn_pesonas";
             this.btn_pesonas.Size = new System.Drawing.Size(169, 39);
             this.btn_pesonas.TabIndex = 46;
+            this.btn_pesonas.Tag = "";
             this.btn_pesonas.Text = "Cambiar N°. Personas";
             this.ttMensaje.SetToolTip(this.btn_pesonas, "Clic aquí para cambiar el número de personas en la mesa seleccionada");
             this.btn_pesonas.UseVisualStyleBackColor = false;
@@ -1054,6 +1055,7 @@
             this.tipoProducto.HeaderText = "TIPO PRODUCTO";
             this.tipoProducto.Name = "tipoProducto";
             this.tipoProducto.ReadOnly = true;
+            this.tipoProducto.Visible = false;
             // 
             // Orden
             // 
