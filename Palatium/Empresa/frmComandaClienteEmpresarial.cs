@@ -40,6 +40,7 @@ namespace Palatium.Empresa
         string sAnio;
         string sMes;
         string sCodigoClaseProducto;
+        string sNombreSubReceta;
 
         long iMaximo;
 
@@ -52,6 +53,8 @@ namespace Palatium.Empresa
         DataTable dtCategorias;
         DataTable dtProductos;
         DataTable dtLocalidad;
+        DataTable dtReceta;
+        DataTable dtSubReceta;
 
         int iPosXProductos;
         int iPosYProductos;
@@ -75,6 +78,9 @@ namespace Palatium.Empresa
         int iIdCabeceraMovimiento;
         int iIdLocalidadBodega;
         int iValorActualMovimiento;
+        int iIdBodegaInsumos;
+        int iIdPosReceta;
+        int iIdPosSubReceta;
         
         Decimal dPrecioUnitario_P;
         Decimal dCantidad_P;
@@ -96,355 +102,720 @@ namespace Palatium.Empresa
            InitializeComponent();
         }
 
-         #region FUNCION PARA CREAR UN EGRESO DE PRODUCTO TERMINADO
-
-         //FUNCION PARA RECUPERAR LOS DATOS DE LA LOCALIDAD
-         private bool recuperarDatosLocalidad()
-         {
-             try
-             {
-                 sSql = "";
-                 sSql += "select * from tp_localidades" + Environment.NewLine;
-                 sSql += "where estado = 'A'" + Environment.NewLine;
-                 sSql += "and id_localidad = " + Program.iIdLocalidad;
-
-                 dtLocalidad = new DataTable();
-                 dtLocalidad.Clear();
-
-                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtLocalidad, sSql);
-
-                 if (bRespuesta == false)
-                 {
-                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                     catchMensaje.ShowDialog();
-                     return false;
-                 }
-
-                 //AQUI SE RECUPERA LA LOCALIDAD INSUMO
-                 sSql = "";
-                 sSql += "select id_localidad_insumo" + Environment.NewLine;
-                 sSql += "from tp_localidades" + Environment.NewLine;
-                 sSql += "where id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
-                 sSql += "and estado = 'A'";
-
-                 DataTable dtConsulta = new DataTable();
-                 dtConsulta.Clear();
-
-                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-                 if (bRespuesta == false)
-                 {
-                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                     catchMensaje.ShowDialog();
-                     return false;
-                 }
-
-                 if (dtConsulta.Rows.Count == 0)
-                 {
-                     iIdLocalidadBodega = 0;
-                 }
-
-                 else
-                 {
-                     iIdLocalidadBodega = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-                 }
-
-                 return true;
-             }
-
-             catch (Exception ex)
-             {
-                 catchMensaje.LblMensaje.Text = ex.ToString();
-                 catchMensaje.ShowDialog();
-                 return false;
-
-             }
-         }
-
-         //FUNCION PARA CREAR EL NUMERO DE MOVIMIENTO
-         private bool devuelveCorrelativo(string sTipoMovimiento, int iIdBodega, string sAnio, string sMes, string sCodigoCorrelativo)
-         {
-             try
-             {
-                 iValorActualMovimiento = 0;
-                 sCodigo = "";
-                 sAnioCorto = sAnio.Substring(2, 2);
-
-                 if (sMes.Substring(0, 1) == "0")
-                 {
-                     sMesCorto = sMes.Substring(1, 1);
-                 }
-
-                 else
-                 {
-                     sMesCorto = sMes;
-                 }
-
-                 sSql = "";
-                 sSql += "select codigo from cv402_bodegas" + Environment.NewLine;
-                 sSql += "where id_bodega = " + iIdBodega;
-
-                 dtConsulta = new DataTable();
-
-                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-                 if (bRespuesta == false)
-                 {
-                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                     catchMensaje.ShowDialog();
-                     return false;
-                 }
-
-                 sCodigo = dtConsulta.Rows[0][0].ToString();
-
-                 string sReferencia;
-
-                 sReferencia = sTipoMovimiento + sCodigo + "_" + sAnio + "_" + sMesCorto + "_" + Program.iCgEmpresa;
-
-                 sSql = "";
-                 sSql += "select valor_actual from tp_correlativos" + Environment.NewLine;
-                 sSql += "where referencia = '" + sReferencia + "'" + Environment.NewLine;
-                 sSql += "and codigo_correlativo = '" + sCodigoCorrelativo + "'" + Environment.NewLine;
-                 sSql += "and estado = 'A'";
-
-                 dtConsulta = new DataTable();
-                 dtConsulta.Clear();
-
-                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-                 if (bRespuesta == false)
-                 {
-                     catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                     catchMensaje.ShowDialog();
-                     return false;
-                 }
-
-                 if (dtConsulta.Rows.Count == 0)
-                 {
-                     int iCorrelativo;
-
-                     sSql = "";
-                     sSql += "select correlativo from tp_codigos" + Environment.NewLine;
-                     sSql += "where codigo = 'BD'" + Environment.NewLine;
-                     sSql += "and tabla = 'SYS$00022'";
-
-                     dtConsulta = new DataTable();
-                     dtConsulta.Clear();
-
-                     bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-                     if (bRespuesta == false)
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-
-                     iCorrelativo = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-
-                     iValorActualMovimiento = 1;
-                     string sFechaDesde = sAnio + "-01-01";
-                     string sFechaHasta = sAnio + "-12-31";
-                     string sValido_desde = Convert.ToDateTime(sFechaDesde).ToString("yyyy-MM-dd");
-                     string sValido_hasta = Convert.ToDateTime(sFechaHasta).ToString("yyyy-MM-dd");
-
-                     sSql = "";
-                     sSql += "insert into tp_correlativos (" + Environment.NewLine;
-                     sSql += "cg_sistema, codigo_correlativo, referencia, valido_desde," + Environment.NewLine;
-                     sSql += "valido_hasta, valor_actual, desde, hasta, estado, origen_dato," + Environment.NewLine;
-                     sSql += "numero_replica_trigger, estado_replica, numero_control_replica)" + Environment.NewLine;
-                     sSql += "values(" + Environment.NewLine;
-                     sSql += iCorrelativo + ",'" + sCodigoCorrelativo + "','" + sReferencia + "'," + Environment.NewLine;
-                     sSql += "'" + sFechaDesde + "','" + sFechaHasta + "', " + (iValorActualMovimiento + 1) + "," + Environment.NewLine;
-                     sSql += "0, 0, 'A', 1," + (iValorActualMovimiento + 1).ToString("N0") + ", 0, 0)";
-
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-                 }
-
-                 else
-                 {
-                     iValorActualMovimiento = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
-
-                     sSql = "";
-                     sSql += "update tp_correlativos set" + Environment.NewLine;
-                     sSql += "valor_actual = " + (iValorActualMovimiento + 1) + Environment.NewLine;
-                     sSql += "where referencia = '" + sReferencia + "'";
-
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-                 }
-
-                 sNumeroMovimientoSecuencial = sTipoMovimiento + sCodigo + sAnioCorto + sMes + iValorActualMovimiento.ToString().PadLeft(4, '0');
-
-                 return true;
-             }
-
-             catch (Exception ex)
-             {
-                 catchMensaje.LblMensaje.Text = ex.ToString();
-                 catchMensaje.ShowDialog();
-                 return false;
-             }
-         }
-
-         //FUNCION PARA ELIMINAR LOS MOVIMIENTOS DE BODEGA
-         private bool eliminarMovimientosBodega(int iIdPedido_P)
-         {
-             try
-             {
-                 sSql = "";
-                 sSql += "select id_movimiento_bodega" + Environment.NewLine;
-                 sSql += "from cv402_cabecera_movimientos" + Environment.NewLine;
-                 sSql += "where id_pedido = " + iIdPedido_P + Environment.NewLine;
-                 sSql += "and estado = 'A'";
-
-                 dtConsulta = new DataTable();
-                 dtConsulta.Clear();
-
-                 bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
-
-                 if (bRespuesta == false)
-                 {
-                     catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCION:" + Environment.NewLine + sSql;
-                     catchMensaje.ShowDialog();
-                     return false;
-                 }
-
-                 for (int i = 0; i < dtConsulta.Rows.Count; i++)
-                 {
-                     int iIdRegistroMovimiento = Convert.ToInt32(dtConsulta.Rows[i][0].ToString());
-
-                     sSql = "";
-                     sSql += "update cv402_cabecera_movimientos set" + Environment.NewLine;
-                     sSql += "estado = 'E'," + Environment.NewLine;
-                     sSql += "fecha_anula = GETDATE()," + Environment.NewLine;
-                     sSql += "usuario_anula = '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
-                     sSql += "terminal_anula = '" + Program.sDatosMaximo[1] + "'" + Environment.NewLine;
-                     sSql += "where Id_Movimiento_Bodega=" + iIdRegistroMovimiento;
-
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-
-                     sSql = "";
-                     sSql += "update cv402_movimientos_bodega set" + Environment.NewLine;
-                     sSql += "estado = 'E'" + Environment.NewLine;
-                     sSql += "where Id_Movimiento_Bodega=" + iIdRegistroMovimiento;
-
-                     if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                     {
-                         catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                         catchMensaje.ShowDialog();
-                         return false;
-                     }
-                 }
-
-                 return true;
-             }
-
-             catch (Exception ex)
-             {
-                 catchMensaje.LblMensaje.Text = ex.ToString();
-                 catchMensaje.ShowDialog();
-                 return false;
-             }
-         }
-
-         //FUNCION PARA INSERTAR LOS MOVIMIENTOS DE PRODUCTO TERMINADO
-         private bool insertarMovimientoProductoNoProcesado(Decimal dbCantidad_P)
-         {
-             try
-             {
-                 string sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
-                 sAnio = Program.sFechaSistema.ToString("yyyy");
-                 sMes = Program.sFechaSistema.ToString("MM");
-                 int iIdBodega_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_bodega"].ToString());
-
-                 if (devuelveCorrelativo("EG", iIdBodega_P, sAnio, sMes, "MOV") == false)
-                 {
-                     return false;
-                 }
-
-                 int iCgClienteProveedor_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_cliente_proveedor_PT"].ToString());
-                 int iCgTipoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_tipo_movimiento_PT"].ToString());
-                 int iCgMotivoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_motivo_movimiento_bodega"].ToString());
-                 int iIdAuxiliarSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_auxiliar_salida_PT"].ToString());
-                 int iIdPersonaSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_persona_salida_PT"].ToString());
-                 string sReferenciaExterna_P = "ITEMS - ORDEN " + iNumeroPedidoOrden.ToString().Trim();
-
-                 sSql = "";
-                 sSql += "insert into cv402_cabecera_movimientos (" + Environment.NewLine;
-                 sSql += "idempresa, cg_empresa, id_localidad, id_bodega, cg_cliente_proveedor," + Environment.NewLine;
-                 sSql += "cg_tipo_movimiento, numero_movimiento, fecha, cg_moneda_base," + Environment.NewLine;
-                 sSql += "referencia_externa, externo, estado, terminal_creacion, fecha_creacion," + Environment.NewLine;
-                 sSql += "fecha_ingreso, usuario_ingreso, id_pedido, cg_motivo_movimiento_bodega, orden_trabajo, orden_diseno," + Environment.NewLine;
-                 sSql += "Nota_Entrega, Observacion, id_auxiliar, id_persona, usuario_creacion, terminal_ingreso)" + Environment.NewLine;
-                 sSql += "values (" + Environment.NewLine;
-                 sSql += Program.iIdEmpresa + ", " + Program.iCgEmpresa + ", " + Program.iIdLocalidad + ", " + iIdBodega_P + "," + Environment.NewLine;
-                 sSql += iCgClienteProveedor_P + ", " + iCgTipoMovimiento_P + ", '" + sNumeroMovimientoSecuencial + "'," + Environment.NewLine;
-                 sSql += "'" + sFecha + "', " + Program.iMoneda + ", '" + sReferenciaExterna_P + "'," + Environment.NewLine;
-                 sSql += "1, 'A', '" + Program.sDatosMaximo[1] + "', '" + sFecha + "', GETDATE()," + Environment.NewLine;
-                 sSql += "'" + Program.sDatosMaximo[0] + "', " + iIdPedido + ", " + iCgMotivoMovimiento_P + ", '', '', '', '', " + iIdAuxiliarSalida_P + ", " + Environment.NewLine;
-                 sSql += iIdPersonaSalida_P + ", '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
-
-                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                 {
-                     catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                     catchMensaje.ShowDialog();
-                     return false;
-                 }
-
-                 sCampo = "id_movimiento_bodega";
-                 sTabla = "cv402_cabecera_movimientos";
-
-                 iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
-
-                 if (iMaximo == -1)
-                 {
-                     ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
-                     ok.ShowDialog();
-                     return false;
-                 }
-
-                 iIdCabeceraMovimiento = Convert.ToInt32(iMaximo);
-
-                 sSql = "";
-                 sSql += "insert Into cv402_movimientos_bodega (" + Environment.NewLine;
-                 sSql += "id_producto, id_movimiento_bodega, cg_unidad_compra, cantidad, estado)" + Environment.NewLine;
-                 sSql += "Values (" + Environment.NewLine;
-                 sSql += iIdProducto_P + ", " + iIdCabeceraMovimiento + ", 546," + (dbCantidad_P * -1) + ", 'A')";
-
-                 if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
-                 {
-                     catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
-                     catchMensaje.ShowDialog();
-                     return false;
-                 }
-
-                 return true;
-             }
-
-             catch (Exception ex)
-             {
-                 catchMensaje.LblMensaje.Text = ex.ToString();
-                 catchMensaje.ShowDialog();
-                 return false;
-             }
-         }
-
-         #endregion
+        #region FUNCION PARA CREAR UN EGRESO DE PRODUCTO TERMINADO
+
+        //FUNCION PARA RECUPERAR LOS DATOS DE LA LOCALIDAD
+        private bool recuperarDatosLocalidad()
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select * from tp_localidades" + Environment.NewLine;
+                sSql += "where estado = 'A'" + Environment.NewLine;
+                sSql += "and id_localidad = " + Program.iIdLocalidad;
+
+                dtLocalidad = new DataTable();
+                dtLocalidad.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtLocalidad, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                //AQUI SE RECUPERA LA LOCALIDAD INSUMO
+                sSql = "";
+                sSql += "select id_localidad_insumo" + Environment.NewLine;
+                sSql += "from tp_localidades" + Environment.NewLine;
+                sSql += "where id_localidad = " + Program.iIdLocalidad + Environment.NewLine;
+                sSql += "and estado = 'A'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                if (dtConsulta.Rows.Count == 0)
+                {
+                    iIdLocalidadBodega = 0;
+                }
+
+                else
+                {
+                    iIdLocalidadBodega = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                }
+
+                //AQUI SE RECUPERA EL ID DE LA BODEGA DE INSUMOS
+                sSql = "";
+                sSql += "select id_bodega" + Environment.NewLine;
+                sSql += "from tp_localidades" + Environment.NewLine;
+                sSql += "where id_localidad = " + iIdLocalidadBodega + Environment.NewLine;
+                sSql += "and estado = 'A'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                if (dtConsulta.Rows.Count == 0)
+                {
+                    iIdBodegaInsumos = 0;
+                }
+
+                else
+                {
+                    iIdBodegaInsumos = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+                }
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return false;
+
+            }
+        }
+
+        //FUNCION PARA CREAR EL NUMERO DE MOVIMIENTO
+        private bool devuelveCorrelativo(string sTipoMovimiento, int iIdBodega, string sAnio, string sMes, string sCodigoCorrelativo)
+        {
+            try
+            {
+                iValorActualMovimiento = 0;
+                sCodigo = "";
+                sAnioCorto = sAnio.Substring(2, 2);
+
+                if (sMes.Substring(0, 1) == "0")
+                {
+                    sMesCorto = sMes.Substring(1, 1);
+                }
+
+                else
+                {
+                    sMesCorto = sMes;
+                }
+
+                sSql = "";
+                sSql += "select codigo from cv402_bodegas" + Environment.NewLine;
+                sSql += "where id_bodega = " + iIdBodega;
+
+                dtConsulta = new DataTable();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                sCodigo = dtConsulta.Rows[0][0].ToString();
+
+                string sReferencia;
+
+                sReferencia = sTipoMovimiento + sCodigo + "_" + sAnio + "_" + sMesCorto + "_" + Program.iCgEmpresa;
+
+                sSql = "";
+                sSql += "select valor_actual from tp_correlativos" + Environment.NewLine;
+                sSql += "where referencia = '" + sReferencia + "'" + Environment.NewLine;
+                sSql += "and codigo_correlativo = '" + sCodigoCorrelativo + "'" + Environment.NewLine;
+                sSql += "and estado = 'A'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                if (dtConsulta.Rows.Count == 0)
+                {
+                    int iCorrelativo;
+
+                    sSql = "";
+                    sSql += "select correlativo from tp_codigos" + Environment.NewLine;
+                    sSql += "where codigo = 'BD'" + Environment.NewLine;
+                    sSql += "and tabla = 'SYS$00022'";
+
+                    dtConsulta = new DataTable();
+                    dtConsulta.Clear();
+
+                    bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                    if (bRespuesta == false)
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
+
+                    iCorrelativo = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+
+                    iValorActualMovimiento = 1;
+                    string sFechaDesde = sAnio + "-01-01";
+                    string sFechaHasta = sAnio + "-12-31";
+                    string sValido_desde = Convert.ToDateTime(sFechaDesde).ToString("yyyy-MM-dd");
+                    string sValido_hasta = Convert.ToDateTime(sFechaHasta).ToString("yyyy-MM-dd");
+
+                    sSql = "";
+                    sSql += "insert into tp_correlativos (" + Environment.NewLine;
+                    sSql += "cg_sistema, codigo_correlativo, referencia, valido_desde," + Environment.NewLine;
+                    sSql += "valido_hasta, valor_actual, desde, hasta, estado, origen_dato," + Environment.NewLine;
+                    sSql += "numero_replica_trigger, estado_replica, numero_control_replica)" + Environment.NewLine;
+                    sSql += "values(" + Environment.NewLine;
+                    sSql += iCorrelativo + ",'" + sCodigoCorrelativo + "','" + sReferencia + "'," + Environment.NewLine;
+                    sSql += "'" + sFechaDesde + "','" + sFechaHasta + "', " + (iValorActualMovimiento + 1) + "," + Environment.NewLine;
+                    sSql += "0, 0, 'A', 1," + (iValorActualMovimiento + 1).ToString("N0") + ", 0, 0)";
+
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
+                }
+
+                else
+                {
+                    iValorActualMovimiento = Convert.ToInt32(dtConsulta.Rows[0][0].ToString());
+
+                    sSql = "";
+                    sSql += "update tp_correlativos set" + Environment.NewLine;
+                    sSql += "valor_actual = " + (iValorActualMovimiento + 1) + Environment.NewLine;
+                    sSql += "where referencia = '" + sReferencia + "'";
+
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
+                }
+
+                sNumeroMovimientoSecuencial = sTipoMovimiento + sCodigo + sAnioCorto + sMes + iValorActualMovimiento.ToString().PadLeft(4, '0');
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return false;
+            }
+        }
+
+        //FUNCION PARA ELIMINAR LOS MOVIMIENTOS DE BODEGA
+        private bool eliminarMovimientosBodega(int iIdPedido_P)
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select id_movimiento_bodega" + Environment.NewLine;
+                sSql += "from cv402_cabecera_movimientos" + Environment.NewLine;
+                sSql += "where id_pedido = " + iIdPedido_P + Environment.NewLine;
+                sSql += "and estado = 'A'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCION:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                for (int i = 0; i < dtConsulta.Rows.Count; i++)
+                {
+                    int iIdRegistroMovimiento = Convert.ToInt32(dtConsulta.Rows[i][0].ToString());
+
+                    sSql = "";
+                    sSql += "update cv402_cabecera_movimientos set" + Environment.NewLine;
+                    sSql += "estado = 'E'," + Environment.NewLine;
+                    sSql += "fecha_anula = GETDATE()," + Environment.NewLine;
+                    sSql += "usuario_anula = '" + Program.sDatosMaximo[0] + "'," + Environment.NewLine;
+                    sSql += "terminal_anula = '" + Program.sDatosMaximo[1] + "'" + Environment.NewLine;
+                    sSql += "where Id_Movimiento_Bodega=" + iIdRegistroMovimiento;
+
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
+
+                    sSql = "";
+                    sSql += "update cv402_movimientos_bodega set" + Environment.NewLine;
+                    sSql += "estado = 'E'" + Environment.NewLine;
+                    sSql += "where Id_Movimiento_Bodega=" + iIdRegistroMovimiento;
+
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return false;
+            }
+        }
+
+        //FUNCION PARA INSERTAR LOS MOVIMIENTOS DE PRODUCTO TERMINADO
+        private bool insertarMovimientoProductoNoProcesado(Decimal dbCantidad_P)
+        {
+            try
+            {
+                string sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
+                sAnio = Program.sFechaSistema.ToString("yyyy");
+                sMes = Program.sFechaSistema.ToString("MM");
+                int iIdBodega_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_bodega"].ToString());
+
+                if (devuelveCorrelativo("EG", iIdBodega_P, sAnio, sMes, "MOV") == false)
+                {
+                    return false;
+                }
+
+                int iCgClienteProveedor_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_cliente_proveedor_PT"].ToString());
+                int iCgTipoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_tipo_movimiento_PT"].ToString());
+                int iCgMotivoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_motivo_movimiento_bodega"].ToString());
+                int iIdAuxiliarSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_auxiliar_salida_PT"].ToString());
+                int iIdPersonaSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_persona_salida_PT"].ToString());
+                string sReferenciaExterna_P = "ITEMS - ORDEN " + iNumeroPedidoOrden.ToString();
+
+                sSql = "";
+                sSql += "insert into cv402_cabecera_movimientos (" + Environment.NewLine;
+                sSql += "idempresa, cg_empresa, id_localidad, id_bodega, cg_cliente_proveedor," + Environment.NewLine;
+                sSql += "cg_tipo_movimiento, numero_movimiento, fecha, cg_moneda_base," + Environment.NewLine;
+                sSql += "referencia_externa, externo, estado, terminal_creacion, fecha_creacion," + Environment.NewLine;
+                sSql += "fecha_ingreso, usuario_ingreso, id_pedido, cg_motivo_movimiento_bodega, orden_trabajo, orden_diseno," + Environment.NewLine;
+                sSql += "Nota_Entrega, Observacion, id_auxiliar, id_persona, usuario_creacion, terminal_ingreso)" + Environment.NewLine;
+                sSql += "values (" + Environment.NewLine;
+                sSql += Program.iIdEmpresa + ", " + Program.iCgEmpresa + ", " + Program.iIdLocalidad + ", " + iIdBodega_P + "," + Environment.NewLine;
+                sSql += iCgClienteProveedor_P + ", " + iCgTipoMovimiento_P + ", '" + sNumeroMovimientoSecuencial + "'," + Environment.NewLine;
+                sSql += "'" + sFecha + "', " + Program.iMoneda + ", '" + sReferenciaExterna_P + "'," + Environment.NewLine;
+                sSql += "1, 'A', '" + Program.sDatosMaximo[1] + "', '" + sFecha + "', GETDATE()," + Environment.NewLine;
+                sSql += "'" + Program.sDatosMaximo[0] + "', " + iIdPedido + ", " + iCgMotivoMovimiento_P + ", '', '', '', '', " + iIdAuxiliarSalida_P + ", " + Environment.NewLine;
+                sSql += iIdPersonaSalida_P + ", '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+
+                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                sCampo = "id_movimiento_bodega";
+                sTabla = "cv402_cabecera_movimientos";
+
+                iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
+
+                if (iMaximo == -1)
+                {
+                    ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
+                    ok.ShowDialog();
+                    return false;
+                }
+
+                iIdCabeceraMovimiento = Convert.ToInt32(iMaximo);
+
+                sSql = "";
+                sSql += "insert Into cv402_movimientos_bodega (" + Environment.NewLine;
+                sSql += "id_producto, id_movimiento_bodega, cg_unidad_compra, cantidad, estado)" + Environment.NewLine;
+                sSql += "Values (" + Environment.NewLine;
+                sSql += iIdProducto_P + ", " + iIdCabeceraMovimiento + ", 546," + (dbCantidad_P * -1) + ", 'A')";
+
+                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region FUNCIONES CREAR UN EGRESO DE MATERIA PRIMA
+
+        //FUNCION PARA OBTENER EL ID DE LA RECETA
+        private bool consultarIdReceta(int iIdProducto_P, Decimal dbCantidadProductos_P, string sNombreProducto_P)
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select isnull(id_pos_receta, 0) id_pos_receta" + Environment.NewLine;
+                sSql += "from cv401_productos" + Environment.NewLine;
+                sSql += "where id_producto = " + iIdProducto_P + Environment.NewLine;
+                sSql += "and estado = 'A'";
+
+                dtConsulta = new DataTable();
+                dtConsulta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtConsulta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                iIdPosReceta = Convert.ToInt32(dtConsulta.Rows[0]["id_pos_receta"].ToString());
+
+                if (iIdPosReceta == 0)
+                {
+                    return true;
+                }
+
+                sSql = "";
+                sSql += "select * from pos_detalle_receta" + Environment.NewLine;
+                sSql += "where id_pos_receta = " + iIdPosReceta + Environment.NewLine;
+                sSql += "and estado = 'A'";
+
+                dtReceta = new DataTable();
+                dtReceta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtReceta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA SIGUIENTE INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                if (dtReceta.Rows.Count == 0)
+                {
+                    return true;
+                }
+
+                //INSERTAR UNA CABECERA MOVIMIENTO PARA EL ITEM
+                //-------------------------------------------------------------------------------------------------------------
+
+                string sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
+                sAnio = Program.sFechaSistema.ToString("yyyy");
+                sMes = Program.sFechaSistema.ToString("MM");
+
+                if (devuelveCorrelativo("EG", iIdBodegaInsumos, sAnio, sMes, "MOV") == false)
+                {
+                    return false;
+                }
+
+                int iCgClienteProveedor_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_cliente_proveedor_receta"].ToString());
+                int iCgTipoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_tipo_movimiento_receta"].ToString());
+                int iCgMotivoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_motivo_movimiento_bodega_receta"].ToString());
+                int iIdAuxiliarSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_auxiliar_salida_receta"].ToString());
+                int iIdPersonaSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_persona_salida_receta"].ToString());
+                string sReferenciaExterna_P = sNombreProducto_P + " - ORDEN " + iNumeroPedidoOrden.ToString();
+
+                string sNumeroMovimientoSecuencialOriginal = sNumeroMovimientoSecuencial;
+
+                sSql = "";
+                sSql += "insert into cv402_cabecera_movimientos (" + Environment.NewLine;
+                sSql += "idempresa, cg_empresa, id_localidad, id_bodega, cg_cliente_proveedor," + Environment.NewLine;
+                sSql += "cg_tipo_movimiento, numero_movimiento, fecha, cg_moneda_base," + Environment.NewLine;
+                sSql += "referencia_externa, externo, estado, terminal_creacion, fecha_creacion," + Environment.NewLine;
+                sSql += "fecha_ingreso, usuario_ingreso, id_pedido, cg_motivo_movimiento_bodega, orden_trabajo, orden_diseno," + Environment.NewLine;
+                sSql += "Nota_Entrega, Observacion, id_auxiliar, id_persona, usuario_creacion, terminal_ingreso)" + Environment.NewLine;
+                sSql += "values (" + Environment.NewLine;
+                sSql += Program.iIdEmpresa + ", " + Program.iCgEmpresa + ", " + iIdLocalidadBodega + ", " + iIdBodegaInsumos + "," + Environment.NewLine;
+                sSql += iCgClienteProveedor_P + ", " + iCgTipoMovimiento_P + ", '" + sNumeroMovimientoSecuencialOriginal + "'," + Environment.NewLine;
+                sSql += "'" + sFecha + "', " + Program.iMoneda + ", '" + sReferenciaExterna_P + "'," + Environment.NewLine;
+                sSql += "1, 'A', '" + Program.sDatosMaximo[1] + "', '" + sFecha + "', GETDATE()," + Environment.NewLine;
+                sSql += "'" + Program.sDatosMaximo[0] + "', " + iIdPedido + ", " + iCgMotivoMovimiento_P + ", '', '', '', '', " + iIdAuxiliarSalida_P + ", " + Environment.NewLine;
+                sSql += iIdPersonaSalida_P + ", '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+
+                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                sCampo = "id_movimiento_bodega";
+                sTabla = "cv402_cabecera_movimientos";
+
+                iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
+
+                if (iMaximo == -1)
+                {
+                    ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
+                    ok.ShowDialog();
+                    return false;
+                }
+
+                iIdCabeceraMovimiento = Convert.ToInt32(iMaximo);
+
+                //RECORRER EL GRID DE LOS INGREDIENTES DE LA RECETA
+                //-------------------------------------------------------------------------------------------------------------
+
+                for (int i = 0; i < dtReceta.Rows.Count; i++)
+                {
+                    int iIdProducto_R = Convert.ToInt32(dtReceta.Rows[i]["id_producto"].ToString());
+                    Decimal dbCantidadMateriaPrima_R = Convert.ToDecimal(dtReceta.Rows[i]["cantidad_bruta"].ToString());
+                    iIdPosSubReceta = 0;
+
+                    //VARIABLE PARA COCNSULTAR SI TIENE SUBRECETA
+                    int iSubReceta_R = consultarSubReceta(iIdProducto_R);
+
+                    if (iSubReceta_R == -1)
+                    {
+                        return false;
+                    }
+
+                    if (iSubReceta_R == 0)
+                    {
+                        sSql = "";
+                        sSql += "insert into cv402_movimientos_bodega (" + Environment.NewLine;
+                        sSql += "id_producto, id_movimiento_bodega, cg_unidad_compra, cantidad, estado)" + Environment.NewLine;
+                        sSql += "Values (" + Environment.NewLine;
+                        sSql += iIdProducto_R + ", " + iIdCabeceraMovimiento + ", 546," + (dbCantidadMateriaPrima_R * dbCantidadProductos_P * -1) + ", 'A')";
+
+                        if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                        {
+                            catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                            catchMensaje.ShowDialog();
+                            return false;
+                        }
+                    }
+
+                    else
+                    {
+                        if (insertarComponentesSubReceta(iSubReceta_R, dbCantidadProductos_P, sNombreProducto_P) == false)
+                        {
+                            return false;
+                        }
+                    }
+
+                }
+
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return false;
+            }
+        }
+
+        //FUNCION PARA VERIFICAR SI EL ITEM TIENE SUBRECETA
+        private int consultarSubReceta(int iIdProducto_P)
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select TR.complementaria, R.id_pos_receta, R.descripcion" + Environment.NewLine;
+                sSql += "from cv401_productos P, pos_receta R," + Environment.NewLine;
+                sSql += "pos_tipo_receta TR" + Environment.NewLine;
+                sSql += "where P.id_pos_receta = R.id_pos_receta" + Environment.NewLine;
+                sSql += "and R.id_pos_tipo_receta = TR.id_pos_tipo_receta" + Environment.NewLine;
+                sSql += "and P.estado = 'A'" + Environment.NewLine;
+                sSql += "and R.estado = 'A'" + Environment.NewLine;
+                sSql += "and TR.estado = 'A'" + Environment.NewLine;
+                sSql += "and P.id_producto = " + iIdProducto_P;
+
+                dtSubReceta = new DataTable();
+                dtSubReceta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtSubReceta, sSql);
+
+                if (bRespuesta == true)
+                {
+                    if (dtSubReceta.Rows.Count > 0)
+                    {
+                        iIdPosSubReceta = Convert.ToInt32(dtSubReceta.Rows[0][1].ToString());
+                        sNombreSubReceta = dtSubReceta.Rows[0][2].ToString().ToUpper();
+                        return Convert.ToInt32(dtSubReceta.Rows[0][0].ToString());
+                    }
+
+                    else
+                    {
+                        return 0;
+                    }
+                }
+
+                else
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return -1;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return -1;
+            }
+        }
+
+        //FUNCION PARA INSERTAR LOS ITEMS DE LA SUBRECETA
+        private bool insertarComponentesSubReceta(int iIdPosSubReceta_P, Decimal dbCantidadPedida_P, string sNombreProducto_P)
+        {
+            try
+            {
+                sSql = "";
+                sSql += "select id_producto, cantidad_bruta" + Environment.NewLine;
+                sSql += "from pos_detalle_receta" + Environment.NewLine;
+                sSql += "where id_pos_receta = " + iIdPosSubReceta_P + Environment.NewLine;
+                sSql += "and estado = 'A'";
+
+                dtSubReceta = new DataTable();
+                dtSubReceta.Clear();
+
+                bRespuesta = conexion.GFun_Lo_Busca_Registro(dtSubReceta, sSql);
+
+                if (bRespuesta == false)
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                if (dtSubReceta.Rows.Count == 0)
+                {
+                    return true;
+                }
+
+                //INSERTAR UNA CABECERA MOVIMIENTO PARA EL ITEM
+                //-------------------------------------------------------------------------------------------------------------
+
+                string sFecha = Program.sFechaSistema.ToString("yyyy/MM/dd");
+                sAnio = Program.sFechaSistema.ToString("yyyy");
+                sMes = Program.sFechaSistema.ToString("MM");
+
+                if (devuelveCorrelativo("EG", iIdBodegaInsumos, sAnio, sMes, "MOV") == false)
+                {
+                    return false;
+                }
+
+                int iCgClienteProveedor_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_cliente_proveedor_receta"].ToString());
+                int iCgTipoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_tipo_movimiento_receta"].ToString());
+                int iCgMotivoMovimiento_P = Convert.ToInt32(dtLocalidad.Rows[0]["cg_motivo_movimiento_bodega_receta"].ToString());
+                int iIdAuxiliarSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_auxiliar_salida_receta"].ToString());
+                int iIdPersonaSalida_P = Convert.ToInt32(dtLocalidad.Rows[0]["id_persona_salida_receta"].ToString());
+                string sReferenciaExterna_P = sNombreProducto_P + " - ORDEN " + iNumeroPedidoOrden.ToString();
+
+                sSql = "";
+                sSql += "insert into cv402_cabecera_movimientos (" + Environment.NewLine;
+                sSql += "idempresa, cg_empresa, id_localidad, id_bodega, cg_cliente_proveedor," + Environment.NewLine;
+                sSql += "cg_tipo_movimiento, numero_movimiento, fecha, cg_moneda_base," + Environment.NewLine;
+                sSql += "referencia_externa, externo, estado, terminal_creacion, fecha_creacion," + Environment.NewLine;
+                sSql += "fecha_ingreso, usuario_ingreso, id_pedido, cg_motivo_movimiento_bodega, orden_trabajo, orden_diseno," + Environment.NewLine;
+                sSql += "Nota_Entrega, Observacion, id_auxiliar, id_persona, usuario_creacion, terminal_ingreso)" + Environment.NewLine;
+                sSql += "values (" + Environment.NewLine;
+                sSql += Program.iIdEmpresa + ", " + Program.iCgEmpresa + ", " + iIdLocalidadBodega + ", " + iIdBodegaInsumos + "," + Environment.NewLine;
+                sSql += iCgClienteProveedor_P + ", " + iCgTipoMovimiento_P + ", '" + sNumeroMovimientoSecuencial + "'," + Environment.NewLine;
+                sSql += "'" + sFecha + "', " + Program.iMoneda + ", '" + sReferenciaExterna_P + "'," + Environment.NewLine;
+                sSql += "1, 'A', '" + Program.sDatosMaximo[1] + "', '" + sFecha + "', GETDATE()," + Environment.NewLine;
+                sSql += "'" + Program.sDatosMaximo[0] + "', " + iIdPedido + ", " + iCgMotivoMovimiento_P + ", '', '', '', '', " + iIdAuxiliarSalida_P + ", " + Environment.NewLine;
+                sSql += iIdPersonaSalida_P + ", '" + Program.sDatosMaximo[0] + "', '" + Program.sDatosMaximo[1] + "')";
+
+                if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                {
+                    catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                    catchMensaje.ShowDialog();
+                    return false;
+                }
+
+                sCampo = "id_movimiento_bodega";
+                sTabla = "cv402_cabecera_movimientos";
+
+                iMaximo = conexion.GFun_Ln_Saca_Maximo_ID(sTabla, sCampo, "", Program.sDatosMaximo);
+
+                if (iMaximo == -1)
+                {
+                    ok.LblMensaje.Text = "No se pudo obtener el codigo de la tabla " + sTabla;
+                    ok.ShowDialog();
+                    return false;
+                }
+
+                int iIdCabeceraMovimientoSubReceta = Convert.ToInt32(iMaximo);
+
+                //RECORRER EL GRID DE LOS INGREDIENTES DE LA RECETA
+                //-------------------------------------------------------------------------------------------------------------
+
+                for (int i = 0; i < dtSubReceta.Rows.Count; i++)
+                {
+                    int iIdProducto_R = Convert.ToInt32(dtSubReceta.Rows[i]["id_producto"].ToString());
+                    Decimal dbCantidadMateriaPrima_R = Convert.ToDecimal(dtSubReceta.Rows[i]["cantidad_bruta"].ToString());
+
+                    sSql = "";
+                    sSql += "insert into cv402_movimientos_bodega (" + Environment.NewLine;
+                    sSql += "id_producto, id_movimiento_bodega, cg_unidad_compra, cantidad, estado)" + Environment.NewLine;
+                    sSql += "Values (" + Environment.NewLine;
+                    sSql += iIdProducto_R + ", " + iIdCabeceraMovimientoSubReceta + ", 546," + (dbCantidadMateriaPrima_R * dbCantidadPedida_P * -1) + ", 'A')";
+
+                    if (!conexion.GFun_Lo_Ejecuta_SQL(sSql))
+                    {
+                        catchMensaje.LblMensaje.Text = "ERROR EN LA INSTRUCCIÓN:" + Environment.NewLine + sSql;
+                        catchMensaje.ShowDialog();
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                catchMensaje.LblMensaje.Text = ex.ToString();
+                catchMensaje.ShowDialog();
+                return false;
+            }
+        }
+
+        #endregion
 
         #region FUNCIONES EL USUARIO
 
@@ -1129,6 +1500,7 @@ namespace Palatium.Empresa
                      dCantidad_P = Convert.ToDecimal(dgvPedido.Rows[i].Cells["cantidad"].Value);
                      sPagaIva_P = dgvPedido.Rows[i].Cells["pagaIva"].Value.ToString();
                      sCodigoClaseProducto = dgvPedido.Rows[i].Cells["tipoProducto"].Value.ToString();
+                     sNombreProducto_P = dgvPedido.Rows[i].Cells["producto"].Value.ToString();
 
                      if (sPagaIva_P == "1")
                      {
@@ -1170,6 +1542,21 @@ namespace Palatium.Empresa
                          if (Program.iDescargarProductosNoProcesados == 1)
                          {
                              if (insertarMovimientoProductoNoProcesado(Convert.ToDecimal(dCantidad_P)) == false)
+                             {
+                                 goto reversa;
+                             }
+                         }
+                     }
+
+                     //ACTUALIZACION
+                     //FECHA: 2019-10-05
+                     //OBJETIVO: IMPLEMENTAR EL DESCARGO DE PRODUCTOS POR MATERIA PRIMA
+
+                     if (sCodigoClaseProducto.Trim() == "03")
+                     {
+                         if (Program.iDescargarReceta == 1)
+                         {
+                             if (consultarIdReceta(iIdProducto_P, Convert.ToDecimal(dCantidad_P), sNombreProducto_P) == false)
                              {
                                  goto reversa;
                              }

@@ -89,6 +89,11 @@
             this.label20 = new System.Windows.Forms.Label();
             this.txtMontoMaximo = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.chkManejaPromotor = new System.Windows.Forms.CheckBox();
+            this.dBAyudaPromotor = new Controles.Auxiliares.DB_Ayuda();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnLimpiarPromotor = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.grupoOpciones.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -98,6 +103,11 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.groupBox1.Controls.Add(this.dBAyudaPromotor);
+            this.groupBox1.Controls.Add(this.label24);
+            this.groupBox1.Controls.Add(this.btnLimpiarPromotor);
+            this.groupBox1.Controls.Add(this.label25);
+            this.groupBox1.Controls.Add(this.chkManejaPromotor);
             this.groupBox1.Controls.Add(this.cmbLocalidad);
             this.groupBox1.Controls.Add(this.chkNoProcesados);
             this.groupBox1.Controls.Add(this.chkUsarRecetas);
@@ -163,7 +173,7 @@
             // 
             this.chkNoProcesados.AutoSize = true;
             this.chkNoProcesados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkNoProcesados.Location = new System.Drawing.Point(510, 372);
+            this.chkNoProcesados.Location = new System.Drawing.Point(523, 343);
             this.chkNoProcesados.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkNoProcesados.Name = "chkNoProcesados";
             this.chkNoProcesados.Size = new System.Drawing.Size(226, 19);
@@ -175,7 +185,7 @@
             // 
             this.chkUsarRecetas.AutoSize = true;
             this.chkUsarRecetas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUsarRecetas.Location = new System.Drawing.Point(510, 347);
+            this.chkUsarRecetas.Location = new System.Drawing.Point(523, 322);
             this.chkUsarRecetas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkUsarRecetas.Name = "chkUsarRecetas";
             this.chkUsarRecetas.Size = new System.Drawing.Size(213, 19);
@@ -187,7 +197,7 @@
             // 
             this.chkAbrirCajon.AutoSize = true;
             this.chkAbrirCajon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAbrirCajon.Location = new System.Drawing.Point(510, 322);
+            this.chkAbrirCajon.Location = new System.Drawing.Point(523, 301);
             this.chkAbrirCajon.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkAbrirCajon.Name = "chkAbrirCajon";
             this.chkAbrirCajon.Size = new System.Drawing.Size(202, 19);
@@ -199,7 +209,7 @@
             // 
             this.chkEjecutarImpresiones.AutoSize = true;
             this.chkEjecutarImpresiones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkEjecutarImpresiones.Location = new System.Drawing.Point(510, 297);
+            this.chkEjecutarImpresiones.Location = new System.Drawing.Point(523, 280);
             this.chkEjecutarImpresiones.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkEjecutarImpresiones.Name = "chkEjecutarImpresiones";
             this.chkEjecutarImpresiones.Size = new System.Drawing.Size(142, 19);
@@ -211,7 +221,7 @@
             // 
             this.dBAyudaVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.dBAyudaVendedor.iId = 0;
-            this.dBAyudaVendedor.Location = new System.Drawing.Point(167, 173);
+            this.dBAyudaVendedor.Location = new System.Drawing.Point(167, 202);
             this.dBAyudaVendedor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dBAyudaVendedor.Name = "dBAyudaVendedor";
             this.dBAyudaVendedor.sCodigo = null;
@@ -223,7 +233,7 @@
             // 
             this.dBAyudaConsumidorFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.dBAyudaConsumidorFinal.iId = 0;
-            this.dBAyudaConsumidorFinal.Location = new System.Drawing.Point(167, 145);
+            this.dBAyudaConsumidorFinal.Location = new System.Drawing.Point(167, 174);
             this.dBAyudaConsumidorFinal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dBAyudaConsumidorFinal.Name = "dBAyudaConsumidorFinal";
             this.dBAyudaConsumidorFinal.sCodigo = null;
@@ -271,7 +281,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(143, 337);
+            this.label21.Location = new System.Drawing.Point(143, 368);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(12, 15);
@@ -282,7 +292,7 @@
             // 
             this.cmbImpresoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbImpresoras.FormattingEnabled = true;
-            this.cmbImpresoras.Location = new System.Drawing.Point(167, 334);
+            this.cmbImpresoras.Location = new System.Drawing.Point(167, 365);
             this.cmbImpresoras.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbImpresoras.Name = "cmbImpresoras";
             this.cmbImpresoras.Size = new System.Drawing.Size(241, 23);
@@ -292,7 +302,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(28, 337);
+            this.label22.Location = new System.Drawing.Point(28, 368);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(119, 15);
@@ -303,7 +313,7 @@
             // 
             this.chkImprimeDatosFactura.AutoSize = true;
             this.chkImprimeDatosFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkImprimeDatosFactura.Location = new System.Drawing.Point(510, 257);
+            this.chkImprimeDatosFactura.Location = new System.Drawing.Point(523, 244);
             this.chkImprimeDatosFactura.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkImprimeDatosFactura.Name = "chkImprimeDatosFactura";
             this.chkImprimeDatosFactura.Size = new System.Drawing.Size(210, 34);
@@ -315,7 +325,7 @@
             // 
             this.chkJornada.AutoSize = true;
             this.chkJornada.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkJornada.Location = new System.Drawing.Point(510, 232);
+            this.chkJornada.Location = new System.Drawing.Point(219, 244);
             this.chkJornada.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkJornada.Name = "chkJornada";
             this.chkJornada.Size = new System.Drawing.Size(122, 19);
@@ -327,7 +337,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(143, 178);
+            this.label17.Location = new System.Drawing.Point(143, 207);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(12, 15);
@@ -338,7 +348,7 @@
             // 
             this.btnLimpiarVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiarVendedor.ForeColor = System.Drawing.Color.Red;
-            this.btnLimpiarVendedor.Location = new System.Drawing.Point(705, 173);
+            this.btnLimpiarVendedor.Location = new System.Drawing.Point(705, 202);
             this.btnLimpiarVendedor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLimpiarVendedor.Name = "btnLimpiarVendedor";
             this.btnLimpiarVendedor.Size = new System.Drawing.Size(28, 25);
@@ -350,7 +360,7 @@
             // label18
             // 
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(28, 173);
+            this.label18.Location = new System.Drawing.Point(28, 202);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(107, 36);
@@ -361,7 +371,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(143, 150);
+            this.label15.Location = new System.Drawing.Point(143, 179);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(12, 15);
@@ -372,7 +382,7 @@
             // 
             this.btnEliminarCF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarCF.ForeColor = System.Drawing.Color.Red;
-            this.btnEliminarCF.Location = new System.Drawing.Point(705, 145);
+            this.btnEliminarCF.Location = new System.Drawing.Point(705, 174);
             this.btnEliminarCF.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEliminarCF.Name = "btnEliminarCF";
             this.btnEliminarCF.Size = new System.Drawing.Size(28, 25);
@@ -385,7 +395,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(28, 150);
+            this.label16.Location = new System.Drawing.Point(28, 179);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(71, 15);
@@ -396,7 +406,7 @@
             // 
             this.chkCocina.AutoSize = true;
             this.chkCocina.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkCocina.Location = new System.Drawing.Point(510, 207);
+            this.chkCocina.Location = new System.Drawing.Point(29, 244);
             this.chkCocina.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkCocina.Name = "chkCocina";
             this.chkCocina.Size = new System.Drawing.Size(167, 19);
@@ -408,7 +418,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(143, 308);
+            this.label13.Location = new System.Drawing.Point(143, 339);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(12, 15);
@@ -419,7 +429,7 @@
             // 
             this.cmbFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFactura.FormattingEnabled = true;
-            this.cmbFactura.Location = new System.Drawing.Point(167, 305);
+            this.cmbFactura.Location = new System.Drawing.Point(167, 336);
             this.cmbFactura.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbFactura.Name = "cmbFactura";
             this.cmbFactura.Size = new System.Drawing.Size(241, 23);
@@ -429,7 +439,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(28, 308);
+            this.label14.Location = new System.Drawing.Point(28, 339);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(100, 15);
@@ -440,7 +450,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(143, 279);
+            this.label11.Location = new System.Drawing.Point(143, 310);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(12, 15);
@@ -451,7 +461,7 @@
             // 
             this.cmbPrecuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPrecuenta.FormattingEnabled = true;
-            this.cmbPrecuenta.Location = new System.Drawing.Point(167, 276);
+            this.cmbPrecuenta.Location = new System.Drawing.Point(167, 307);
             this.cmbPrecuenta.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbPrecuenta.Name = "cmbPrecuenta";
             this.cmbPrecuenta.Size = new System.Drawing.Size(241, 23);
@@ -461,7 +471,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(28, 279);
+            this.label12.Location = new System.Drawing.Point(28, 310);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(115, 15);
@@ -472,7 +482,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(143, 250);
+            this.label6.Location = new System.Drawing.Point(143, 281);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(12, 15);
@@ -566,7 +576,7 @@
             // 
             this.cmbMoneda.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMoneda.FormattingEnabled = true;
-            this.cmbMoneda.Location = new System.Drawing.Point(167, 247);
+            this.cmbMoneda.Location = new System.Drawing.Point(167, 278);
             this.cmbMoneda.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbMoneda.Name = "cmbMoneda";
             this.cmbMoneda.Size = new System.Drawing.Size(241, 23);
@@ -576,7 +586,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(28, 250);
+            this.label5.Location = new System.Drawing.Point(28, 281);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 15);
@@ -854,6 +864,64 @@
             this.label23.TabIndex = 44;
             this.label23.Text = "Monto Máximo para\r\nRecargo de Tarjetas";
             // 
+            // chkManejaPromotor
+            // 
+            this.chkManejaPromotor.AutoSize = true;
+            this.chkManejaPromotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkManejaPromotor.Location = new System.Drawing.Point(368, 244);
+            this.chkManejaPromotor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chkManejaPromotor.Name = "chkManejaPromotor";
+            this.chkManejaPromotor.Size = new System.Drawing.Size(122, 19);
+            this.chkManejaPromotor.TabIndex = 81;
+            this.chkManejaPromotor.Text = "Maneja Promotor";
+            this.chkManejaPromotor.UseVisualStyleBackColor = true;
+            // 
+            // dBAyudaPromotor
+            // 
+            this.dBAyudaPromotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.dBAyudaPromotor.iId = 0;
+            this.dBAyudaPromotor.Location = new System.Drawing.Point(167, 147);
+            this.dBAyudaPromotor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dBAyudaPromotor.Name = "dBAyudaPromotor";
+            this.dBAyudaPromotor.sCodigo = null;
+            this.dBAyudaPromotor.Size = new System.Drawing.Size(538, 22);
+            this.dBAyudaPromotor.sNombre = null;
+            this.dBAyudaPromotor.TabIndex = 85;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(143, 152);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(12, 15);
+            this.label24.TabIndex = 84;
+            this.label24.Text = "*";
+            // 
+            // btnLimpiarPromotor
+            // 
+            this.btnLimpiarPromotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiarPromotor.ForeColor = System.Drawing.Color.Red;
+            this.btnLimpiarPromotor.Location = new System.Drawing.Point(705, 144);
+            this.btnLimpiarPromotor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnLimpiarPromotor.Name = "btnLimpiarPromotor";
+            this.btnLimpiarPromotor.Size = new System.Drawing.Size(28, 25);
+            this.btnLimpiarPromotor.TabIndex = 83;
+            this.btnLimpiarPromotor.Text = "X";
+            this.btnLimpiarPromotor.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(28, 152);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(61, 15);
+            this.label25.TabIndex = 82;
+            this.label25.Text = "Promotor:";
+            // 
             // frmParametrosLocalidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -949,5 +1017,10 @@
         private System.Windows.Forms.CheckBox chkNoProcesados;
         private System.Windows.Forms.CheckBox chkUsarRecetas;
         private System.Windows.Forms.ComboBox cmbLocalidad;
+        private System.Windows.Forms.CheckBox chkManejaPromotor;
+        private Controles.Auxiliares.DB_Ayuda dBAyudaPromotor;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button btnLimpiarPromotor;
+        private System.Windows.Forms.Label label25;
     }
 }

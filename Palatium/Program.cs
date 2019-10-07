@@ -16,6 +16,7 @@ namespace Palatium
         /// </summary>
         [STAThread]
         static void Main()
+        //static void Main(string []args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -38,7 +39,9 @@ namespace Palatium
             VentanasMensajes.frmMensajeCatch catchMensaje = new VentanasMensajes.frmMensajeCatch();
             string sMensaje;
             
+            
             string path = "C:\\palatium\\config.ini";
+            //string path = args[0];
 
             if (File.Exists(path))
             {
@@ -220,6 +223,10 @@ namespace Palatium
 
         //VARIABLE PARA LA EJECUCION DE DESCARGA DE PRODUCTOS NO PROCESADOS
         public static int iDescargarProductosNoProcesados;
+
+        //VARIABLES PARA EL USO DE PROMOTORES
+        public static int iManejaPromotor;
+        public static int iIdPosPromotor;
 
         //VARIBALE QUE PERMITE APLICAR RECARGO A TARJETAS
         public static int iAplicaRecargoTarjeta;

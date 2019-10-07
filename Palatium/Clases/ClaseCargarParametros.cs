@@ -123,7 +123,8 @@ namespace Palatium.Clases
                 sSql += "PL.id_producto_anula, PL.valor_precio_anula, PL.clave_acceso_admin," + Environment.NewLine;
                 sSql += "isnull(PL.id_pos_impresora, 0), isnull(PL.ejecutar_impresion, 0) ejecutar_impresion," + Environment.NewLine;
                 sSql += "isnull(PL.permitir_abrir_cajon, 0) permitir_abrir_cajon, isnull(PL.valor_maximo_recargo, 0) valor_maximo_recargo," + Environment.NewLine;
-                sSql += "isnull(PL.descarga_receta, 0) descarga_receta, isnull(PL.descarga_no_procesados, 0) descarga_no_procesados" + Environment.NewLine;
+                sSql += "isnull(PL.descarga_receta, 0) descarga_receta, isnull(PL.descarga_no_procesados, 0) descarga_no_procesados," + Environment.NewLine;
+                sSql += "PL.maneja_promotor, PL.id_pos_promotor" + Environment.NewLine;
                 sSql += "from pos_parametro_localidad PL, pos_mesero M, pos_cajero C, tp_vw_ciudad VC" + Environment.NewLine;
                 sSql += "where M.id_pos_mesero = PL.id_pos_mesero" + Environment.NewLine;
                 sSql += "and C.id_pos_cajero = PL.id_pos_cajero" + Environment.NewLine;
@@ -167,6 +168,8 @@ namespace Palatium.Clases
                         Program.dbValorMaximoRecargoTarjetas = Convert.ToDecimal(dtConsulta.Rows[0]["valor_maximo_recargo"].ToString());
                         Program.iDescargarReceta = Convert.ToInt32(dtConsulta.Rows[0]["descarga_receta"].ToString());
                         Program.iDescargarProductosNoProcesados = Convert.ToInt32(dtConsulta.Rows[0]["descarga_no_procesados"].ToString());
+                        Program.iManejaPromotor = Convert.ToInt32(dtConsulta.Rows[0]["maneja_promotor"].ToString());
+                        Program.iIdPosPromotor = Convert.ToInt32(dtConsulta.Rows[0]["id_pos_promotor"].ToString());
                         return "";
                     }
 
